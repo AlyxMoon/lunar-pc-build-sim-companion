@@ -12,6 +12,14 @@ export default {
   components: {
     Navbar,
   },
+
+  created () {
+    if (sessionStorage.redirect) {
+      const redirect = sessionStorage.redirect
+      delete sessionStorage.redirect
+      this.$router.push(redirect)
+    }
+  },
 }
 </script>
 
