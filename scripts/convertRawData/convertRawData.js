@@ -15,7 +15,9 @@ const partCategories = [
 ]
 
 const convertRawData = raw => {
-  const [headers, ...rows] = raw.split('\n').map(line => line.trim().split(','))
+  const [headers, ...rows] = raw.trim()
+    .split('\n')
+    .map(line => line.trim().split(','))
 
   return rows.map(row => {
     const formatted = {}
