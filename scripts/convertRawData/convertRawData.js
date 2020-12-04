@@ -31,7 +31,12 @@ const convertRawData = raw => {
 }
 
 const main = async () => {
-  const finalDirectory = path.join(__dirname, '../../src/assets/data/parts')
+  const dataDirectory = path.join(__dirname, '../../src/assets/data')
+  const finalDirectory = path.join(dataDirectory, 'parts')
+
+  if (!fs.existsSync(dataDirectory)) {
+    await promisify(fs.mkdir)(dataDirectory)
+  }
   if (!fs.existsSync(finalDirectory)) {
     await promisify(fs.mkdir)(finalDirectory)
   }
