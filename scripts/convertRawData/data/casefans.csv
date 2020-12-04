@@ -1,0 +1,103 @@
+Part Type,Manufacturer,Part Name,HEM,In Shop,Price,Sell Price,Level,Level %,Steam Version,Platform Lock,Lighting,Air Flow,Size,Thickness,Air Pressure,Asset Path,Full Part Name
+Case Fan,Antec,Prizm 120 ARGB,,Y,20,7,30,50,1.2,,RGB,45.03,120,0,2.56,Prefabs/CoolingSystems/AirCoolers/Antec/FAN_Prizm_120_ARGB,Antec Prizm 120 ARGB
+Case Fan,ARCTIC,BioniX F120 (Green),,Y,13,4,3,60,1.0,,,69,120,0,3,Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F120_Green,ARCTIC BioniX F120 (Green)
+Case Fan,ARCTIC,BioniX F120 (Grey + White),,Y,13,4,3,60,1.9,PC,,69,120,0,3,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F120_GreyWhite,ARCTIC BioniX F120 (Grey + White)
+Case Fan,ARCTIC,BioniX F120 (Grey),,Y,13,4,3,60,1.9,PC,,69,120,0,3,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F120_Grey,ARCTIC BioniX F120 (Grey)
+Case Fan,ARCTIC,BioniX F120 (Red),,Y,13,4,3,60,1.0,,,69,120,0,3,Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F120,ARCTIC BioniX F120 (Red)
+Case Fan,ARCTIC,BioniX F120 (White),,Y,13,4,3,60,1.0,,,69,120,0,3,Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F120_White,ARCTIC BioniX F120 (White)
+Case Fan,ARCTIC,BioniX F120 (Yellow),,Y,13,4,3,60,1.0,,,69,120,0,3,Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F120_Yellow,ARCTIC BioniX F120 (Yellow)
+Case Fan,ARCTIC,BioniX F140 (Green),,Y,14,5,5,1,1.0,,,104,140,0,2,Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F140_Green,ARCTIC BioniX F140 (Green)
+Case Fan,ARCTIC,BioniX F140 (Grey + White),,Y,14,5,5,1,1.9,PC,,104,140,0,2,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F140_GreyWhite,ARCTIC BioniX F140 (Grey + White)
+Case Fan,ARCTIC,BioniX F140 (Grey),,Y,14,5,5,1,1.9,PC,,104,140,0,2,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F140_Grey,ARCTIC BioniX F140 (Grey)
+Case Fan,ARCTIC,BioniX F140 (Red),,Y,14,5,5,1,1.0,,,104,140,0,2,Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F140,ARCTIC BioniX F140 (Red)
+Case Fan,ARCTIC,BioniX F140 (White),,Y,14,5,5,1,1.0,,,104,140,0,2,Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F140_White,ARCTIC BioniX F140 (White)
+Case Fan,ARCTIC,BioniX F140 (Yellow),,Y,14,5,5,1,1.0,,,104,140,0,2,Prefabs/CoolingSystems/AirCoolers/Arctic/Arctic_Bionix_F140_Yellow,ARCTIC BioniX F140 (Yellow)
+Case Fan,ARCTIC,BioniX P120 (Green),,Y,16,5,13,10,1.9,PC,,67.56,120,0,2.75,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P120_Green,ARCTIC BioniX P120 (Green)
+Case Fan,ARCTIC,BioniX P120 (Grey + White),,Y,16,5,13,10,1.9,PC,,67.56,120,0,2.75,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P120_GreyWhite,ARCTIC BioniX P120 (Grey + White)
+Case Fan,ARCTIC,BioniX P120 (Grey),,Y,16,5,13,10,1.9,PC,,67.56,120,0,2.75,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P120_Grey,ARCTIC BioniX P120 (Grey)
+Case Fan,ARCTIC,BioniX P120 (Red),,Y,16,5,13,10,1.0,,,67.56,120,0,2.75,Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P120_Red,ARCTIC BioniX P120 (Red)
+Case Fan,ARCTIC,BioniX P120 (White),,Y,16,5,13,10,1.0,,,67.56,120,0,2.75,Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P120_White,ARCTIC BioniX P120 (White)
+Case Fan,ARCTIC,BioniX P120 (Yellow),,Y,16,5,13,10,1.9,PC,,67.56,120,0,2.75,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P120_Yellow,ARCTIC BioniX P120 (Yellow)
+Case Fan,ARCTIC,BioniX P140 (Grey + White),,Y,18,6,13,10,1.9,PC,,77.6,140,0,2.85,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P140_GreyWhite,ARCTIC BioniX P140 (Grey + White)
+Case Fan,ARCTIC,BioniX P140 (Grey),,Y,18,6,13,10,1.9,PC,,77.6,140,0,2.85,v1_9_0/Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P140_Grey,ARCTIC BioniX P140 (Grey)
+Case Fan,ARCTIC,BioniX P140 (Red),,Y,18,6,13,10,1.0,,,77.6,140,0,2.85,Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P140_Red,ARCTIC BioniX P140 (Red)
+Case Fan,ARCTIC,BioniX P140 (White),,Y,18,6,13,10,1.0,,,77.6,140,0,2.85,Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_Arctic_BioniX_P140_White,ARCTIC BioniX P140 (White)
+Case Fan,ARCTIC,F12 PWM PST,,Y,10,3,11,1,1.0,,,53,120,0,0.87,Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_ARCTIC_PWMPST_F12,ARCTIC F12 PWM PST
+Case Fan,ARCTIC,F14 PWM PST,,Y,10,3,11,1,1.0,,,74,140,0,2.4,Prefabs/CoolingSystems/AirCoolers/Arctic/FAN_ARCTIC_PWMPST_F14_White,ARCTIC F14 PWM PST
+Case Fan,be quiet!,Pure Wings 2 120mm,,Y,10,3,27,30,1.1,,,65.51,120,0,2.23,Prefabs/CoolingSystems/AirCoolers/Bequiet/FAN_bequiet_PUREWINGS_120mm,be quiet! Pure Wings 2 120mm
+Case Fan,be quiet!,Pure Wings 2 140mm,,Y,13,4,27,30,1.1,,,82.4,140,0,1.82,Prefabs/CoolingSystems/AirCoolers/Bequiet/FAN_bequiet_PUREWINGS_140mm,be quiet! Pure Wings 2 140mm
+Case Fan,be quiet!,Shadow Wings 2 120mm,,Y,16,5,27,70,1.1,,,38.5,120,0,0.82,Prefabs/CoolingSystems/AirCoolers/Bequiet/FAN_bequiet_SHADOWWINGS_120mm,be quiet! Shadow Wings 2 120mm
+Case Fan,be quiet!,Shadow Wings 2 140mm,,Y,19,6,27,70,1.1,,,49.8,140,0,0.58,Prefabs/CoolingSystems/AirCoolers/Bequiet/FAN_bequiet_SHADOWWINGS_140mm,be quiet! Shadow Wings 2 140mm
+Case Fan,be quiet!,Silent Wings 3 120mm,,Y,7,2,27,1,1.1,,,50.5,120,0,1.79,Prefabs/CoolingSystems/AirCoolers/Bequiet/FAN_bequiet_SILENTWINGS_120mm,be quiet! Silent Wings 3 120mm
+Case Fan,be quiet!,Silent Wings 3 140mm,,Y,8,3,27,1,1.1,,,59.5,140,0,1.08,Prefabs/CoolingSystems/AirCoolers/Bequiet/FAN_bequiet_SILENTWINGS_140mm,be quiet! Silent Wings 3 140mm
+Case Fan,Cooler Master,MasterCase H500P 200mm RGB,,,10,3,3,1,1.0,,RGB,90,200,0,0.88,Prefabs/CoolingSystems/AirCoolers/Cosmos/BuiltIn_200,Cooler Master MasterCase H500P 200mm RGB
+Case Fan,CORSAIR,HD120 RGB LED,,Y,30,10,18,40,1.0,,RGB,54.4,120,0,2.25,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_HD_120mm,CORSAIR HD120 RGB LED
+Case Fan,CORSAIR,HD140 RGB LED,,Y,33,11,18,40,1.0,,RGB,74,140,0,1.85,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_HD_140mm,CORSAIR HD140 RGB LED
+Case Fan,CORSAIR,LL120 RGB LED,,Y,35,12,18,80,1.0,,RGB,44,120,0,1.61,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_LL120RGBDualLightLoopFan,CORSAIR LL120 RGB LED
+Case Fan,CORSAIR,LL140 RGB LED,,Y,38,13,18,80,1.0,,RGB,52,140,0,1.52,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_LL140_RGBDualLightLoopFan,CORSAIR LL140 RGB LED
+Case Fan,CORSAIR,ML120,,Y,25,8,2,1,1.0,,,75,120,0,4.2,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_ML120mmPWM_Premium,CORSAIR ML120
+Case Fan,CORSAIR,ML140,,Y,28,9,2,1,1.0,,,97,140,0,3,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_ML140mmPMWPremium,CORSAIR ML140
+Case Fan,CORSAIR,SP120 RGB LED,,Y,35,12,10,1,1.0,,RGB,52,120,0,1.61,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_LL120_RGB,CORSAIR SP120 RGB LED
+Case Fan,Cryorig,QF120 - Performance,,Y,12,4,30,1,1.0,,,83,120,0,3.33,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_QF_120,Cryorig QF120 - Performance
+Case Fan,Cryorig,QF140 - Performance,,Y,15,5,30,1,1.0,,,128,140,0,2.12,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_QF_140,Cryorig QF140 - Performance
+Case Fan,Cryorig,XF140,,Y,20,7,29,1,1.0,,,76,Mixed,0,1.44,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_XF_140,Cryorig XF140
+Case Fan,Cryorig,XT140,,Y,60,20,29,1,1.0,,,65,Mixed,0,1.49,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_XT_140,Cryorig XT140
+Case Fan,Deepcool,RF 120,,Y,20,7,14,25,1.0,,RGB,56.5,120,0,,Prefabs/CoolingSystems/AirCoolers/Deepcool/FAN_DeepCool_RF120,Deepcool RF 120
+Case Fan,Deepcool,RF 140,,Y,25,8,14,25,1.0,,RGB,64.13,140,0,,Prefabs/CoolingSystems/AirCoolers/Deepcool/FAN_DeepCool_RF140,Deepcool RF 140
+Case Fan,EKWB,EK-Vardar EVO 120ER RGB,,Y,30,10,25,30,1.0,,RGB,77,120,0,3.16,Prefabs/CoolingSystems/AirCoolers/EKWB/EKVardar EVO 120ER RGB,EKWB EK-Vardar EVO 120ER RGB
+Case Fan,EKWB,EK-Vardar EVO 140S BB,,Y,30,10,25,1,1.0,,,98,140,0,3.15,Prefabs/CoolingSystems/AirCoolers/EKWB/EKVadar_EVO_140S_BB,EKWB EK-Vardar EVO 140S BB
+Case Fan,EKWB,EK-Vardar F4-120ER,,Y,25,8,25,1,1.0,,,77,120,0,3.16,Prefabs/CoolingSystems/AirCoolers/EKWB/EK-Vardar F4-120ER,EKWB EK-Vardar F4-120ER
+Case Fan,Fractal Design,Dynamic X2 GP-12,,Y,13,4,21,1,1.0,,,52,120,0,0.88,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FD_Dynamic_GP_12,Fractal Design Dynamic X2 GP-12
+Case Fan,Fractal Design,Dynamic X2 GP-12 (Black),,Y,13,4,21,1,1.0,,,52,120,0,0.88,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FD_Dynamic_GP_12_Black,Fractal Design Dynamic X2 GP-12 (Black)
+Case Fan,Fractal Design,Dynamic X2 GP-14,,Y,15,5,21,1,1.0,,,68,140,0,0.71,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FD_Dynamic_GP_14,Fractal Design Dynamic X2 GP-14
+Case Fan,Fractal Design,Dynamic X2 GP-14 (Black),,Y,15,5,21,1,1.0,,,68,140,0,0.71,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FD_Dynamic_GP_14_Black,Fractal Design Dynamic X2 GP-14 (Black)
+Case Fan,Fractal Design,Dynamic X2 GP-14 (White),,,15,5,1,1,1.0,,,68,140,0,0.71,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FD_Dynamic_GP_14_White,Fractal Design Dynamic X2 GP-14 (White)
+Case Fan,Fractal Design,Prisma AL-12,,Y,25,8,24,1,1.9,PC,RGB,50,120,0,0.8,v1_9_0/Prefabs/CoolingSystems/AirCoolers/FractalDesign/FAN_FractalDesign_Prisma_AL-12,Fractal Design Prisma AL-12
+Case Fan,Fractal Design,Prisma AL-14,,Y,25,8,24,1,1.9,PC,RGB,63,140,0,0.8,v1_9_0/Prefabs/CoolingSystems/AirCoolers/FractalDesign/FAN_FractalDesign_Prisma_AL-14,Fractal Design Prisma AL-14
+Case Fan,Fractal Design,Silent Series LL Blue 120mm,,Y,15,5,26,1,1.0,,Blue,41.8,120,0,0.87,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FAN_FractalDesign_SilentSeries_LL_120mm_Blue,Fractal Design Silent Series LL Blue 120mm
+Case Fan,Fractal Design,Silent Series LL Red 120mm,,Y,15,5,26,1,1.0,,Red,41.8,120,0,0.87,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FAN_FractalDesign_SilentSeries_LL_120mm_Red,Fractal Design Silent Series LL Red 120mm
+Case Fan,Fractal Design,Silent Series LL White 120mm,,Y,15,5,26,1,1.0,,White,41.8,120,0,0.87,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FAN_FractalDesign_SilentSeries_LL_120mm_White,Fractal Design Silent Series LL White 120mm
+Case Fan,FSP,CMT510,,Y,15,5,14,30,1.4,PC,RGB,45,120,0,1.5,Prefabs/CoolingSystems/AirCoolers/FSP/FAN_CMT510,FSP CMT510
+Case Fan,FSP,CMT520,,Y,15,5,14,30,1.4,PC,RGB,60,120,0,1.5,Prefabs/CoolingSystems/AirCoolers/FSP/FAN_CMT520,FSP CMT520
+Case Fan,GamerStorm,MF120,,Y,60,20,30,1,1.0,,RGB,45,120,0,1.67,Prefabs/CoolingSystems/AirCoolers/Deepcool/FAN_Deepcool_GamerStormMF120,GamerStorm MF120
+Case Fan,In Win,CROWN AC120,,Y,20,7,24,30,1.3,PC,RGB,60,120,0,2.24,Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_CROWN_AC120,In Win CROWN AC120
+Case Fan,In Win,CROWN AC140,,Y,30,10,24,30,1.3,PC,RGB,70,140,0,2.64,Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_CROWN_AC140,In Win CROWN AC140
+Case Fan,In Win,EGO AE120,,Y,30,10,25,1,1.8,PC,RGB,60,120,0,2.24,v1_8_0/Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_EGO_AE_120,In Win EGO AE120
+Case Fan,In Win,Polaris LED (Blue),,Y,25,8,24,1,1.0,PC,Blue,60,120,0,2.24,Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_Polaris_LED_Blue,In Win Polaris LED (Blue)
+Case Fan,In Win,Polaris LED (Green),,Y,25,8,24,1,1.0,PC,Green,60,120,0,2.24,Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_Polaris_LED_Green,In Win Polaris LED (Green)
+Case Fan,In Win,Polaris LED (Red),,Y,25,8,24,1,1.0,PC,Red,60,120,0,2.24,Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_Polaris_LED_Red,In Win Polaris LED (Red)
+Case Fan,In Win,Polaris LED (White),,Y,25,8,24,1,1.0,PC,White,60,120,0,2.24,Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_Polaris_LED_White,In Win Polaris LED (White)
+Case Fan,In Win,Polaris RGB,,Y,40,13,24,1,1.0,PC,RGB,60,120,0,2.24,Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_Polaris_RGB,In Win Polaris RGB
+Case Fan,In Win,Polaris RGB Aluminium,,Y,50,17,24,50,1.3,PC,RGB,60,120,0,2.24,Prefabs/CoolingSystems/AirCoolers/InWin/FAN_InWin_Polaris_RGB_Aluminium,In Win Polaris RGB Aluminium
+Case Fan,In Win,Sirius Loop ASL120,,Y,12,4,24,1,1.3,PC,RGB,60,120,0,2.24,Prefabs/CoolingSystems/AirCoolers/Inwin/FAN_InWin_Sirius_LoopASL_120,In Win Sirius Loop ASL120
+Case Fan,Kolink,Fan 120,,,11,4,1,1,1.7,PC,,60,120,0,1.61,Prefabs/CoolingSystems/AirCoolers/Kolink/MSH_Kolink_CaseFan_120,Kolink Fan 120
+Case Fan,Lian Li,Bora Digital ARGB (Black),,Y,20,7,15,1,1.6,PC,RGB,57.97,120,0,1.46,Prefabs/CoolingSystems/AirCoolers/LianLi/AC_LianLi_BoraDigital_Black,Lian Li Bora Digital ARGB (Black)
+Case Fan,Lian Li,Bora Digital ARGB (Silver),,Y,20,7,15,1,1.6,PC,RGB,57.97,120,0,1.46,Prefabs/CoolingSystems/AirCoolers/LianLi/AC_LianLi_BoraDigital_Silver,Lian Li Bora Digital ARGB (Silver)
+Case Fan,Lian Li,Bora Digital ARGB (Space Grey),,Y,20,7,15,1,1.6,PC,RGB,57.97,120,0,1.46,Prefabs/CoolingSystems/AirCoolers/LianLi/AC_LianLi_BoraDigital_SpaceGrey,Lian Li Bora Digital ARGB (Space Grey)
+Case Fan,Mortoni,Heat Away 120,,Y,7,2,1,1,1.0,,,40,120,0,1.61,Prefabs/Generic/Generic_120_CaseFan_01,Mortoni Heat Away 120
+Case Fan,Mortoni,Heat Away 140,,Y,7,2,1,1,1.0,,,60,140,0,1.61,Prefabs/Generic/Generic_140_CaseFan_01,Mortoni Heat Away 140
+Case Fan,Mortoni,Heat Away 90,,Y,5,2,1,1,1.0,,,25,90,0,1.2,Prefabs/Generic/Generic_CaseFan_90mm,Mortoni Heat Away 90
+Case Fan,Mortoni,Heat Away Pro RGB 120,,Y,12,4,10,50,1.7,PC,RGB,42,120,0,1.2,v1_7_0/Prefabs/Generic/Generic_120_CaseFan_FrameRGB,Mortoni Heat Away Pro RGB 120
+Case Fan,Mortoni,Heat Away RGB 120,,Y,10,3,10,1,1.6,PC,RGB,40,120,0,1.61,Prefabs/Generic/FAN_Mortoni_120RGB,Mortoni Heat Away RGB 120
+Case Fan,Mortoni,Heat Away RGB 140,,Y,10,3,10,1,1.6,PC,RGB,60,140,0,1.61,Prefabs/Generic/FAN_Mortoni_140RGB,Mortoni Heat Away RGB 140
+Case Fan,MSI,120mm,,,40,13,8,1,1.7,PC,,50,120,0,2,v1_7_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_120,MSI 120mm
+Case Fan,MSI,120mm RGB,,,40,13,8,1,1.7,PC,RGB,50,120,0,2,v1_7_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_RGB_120,MSI 120mm RGB
+Case Fan,MSI,200mm,,,40,13,8,1,1.7,PC,,90,200,0,2,v1_7_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_200,MSI 200mm
+Case Fan,MSI,MAG MAX F20A-1,,Y,40,13,8,1,1.7,PC,RGB,90,200,0,2,v1_7_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_RGB_200,MSI MAG MAX F20A-1
+Case Fan,NZXT,Aer P 120mm (Black),,Y,17,6,9,1,1.0,,,73,120,0,2.93,Prefabs/CoolingSystems/AirCoolers/NZXT/NZXT_AerP120_Black,NZXT Aer P 120mm (Black)
+Case Fan,NZXT,Aer P 120mm (Blue),,Y,17,6,9,1,1.0,,,73,120,0,2.93,Prefabs/CoolingSystems/AirCoolers/NZXT/NZXT_AerP120_Blue,NZXT Aer P 120mm (Blue)
+Case Fan,NZXT,Aer P 120mm (Red),,Y,17,6,9,1,1.0,,,73,120,0,2.93,Prefabs/CoolingSystems/AirCoolers/NZXT/NZXT_AerP120,NZXT Aer P 120mm (Red)
+Case Fan,NZXT,Aer P 120mm (White),,Y,17,6,9,1,1.0,,,73,120,0,2.93,Prefabs/CoolingSystems/AirCoolers/NZXT/NZXT_AerP120_White,NZXT Aer P 120mm (White)
+Case Fan,NZXT,Aer P 140mm (Black),,Y,17,6,9,1,1.0,,,98,140,0,2.71,Prefabs/CoolingSystems/AirCoolers/NZXT/NZXT_AerP140_Black,NZXT Aer P 140mm (Black)
+Case Fan,NZXT,Aer P 140mm (Blue),,Y,17,6,9,1,1.0,,,98,140,0,2.71,Prefabs/CoolingSystems/AirCoolers/NZXT/NZXT_AerP140_Blue,NZXT Aer P 140mm (Blue)
+Case Fan,NZXT,Aer P 140mm (Red),,Y,17,6,9,1,1.0,,,98,140,0,2.71,Prefabs/CoolingSystems/AirCoolers/NZXT/NZXT_AerP140,NZXT Aer P 140mm (Red)
+Case Fan,NZXT,Aer P 140mm (White),,Y,17,6,9,1,1.0,,,98,140,0,2.71,Prefabs/CoolingSystems/AirCoolers/NZXT/NZXT_AerP140_White,NZXT Aer P 140mm (White)
+Case Fan,Raijintek,IRIS 12,,Y,20,7,10,1,1.0,,RGB,42,120,0,1.7,Prefabs/CoolingSystems/AirCoolers/Raijintek/Raijintek_Iris_12,Raijintek IRIS 12
+Case Fan,Raijintek,IRIS 14 RBW ADD,,Y,25,8,10,1,1.3,PC,RGB,70,140,0,2.56,Prefabs/CoolingSystems/AirCoolers/Raijintek/FAN_Raijintek_IRIS_14_RBW_ADD,Raijintek IRIS 14 RBW ADD
+Case Fan,Raijintek,MACULA 12 RAINBOW RGB,,Y,30,10,12,1,1.3,PC,RGB,45,120,0,1.7,Prefabs/CoolingSystems/AirCoolers/Raijintek/FAN_Raijintek_MACULA_12_RAINBOW_RGB,Raijintek MACULA 12 RAINBOW RGB
+Case Fan,Raijintek,SKLERA 12 RBW ADD,,Y,30,10,12,1,1.3,PC,RGB,45,120,0,1.7,Prefabs/CoolingSystems/AirCoolers/Raijintek/FAN_Raijintek_SKLERA_12_RBW,Raijintek SKLERA 12 RBW ADD
+Case Fan,SilverStone,AP182 (Black),,,40,13,1,1,1.0,,,150,180,0,6.1,Prefabs/CoolingSystems/AirCoolers/Silverstone/Silverstone_AP182_Fan180_Black,SilverStone AP182 (Black)
+Case Fan,SilverStone,AP182 (White),,,40,13,1,1,1.0,,,150,180,0,6.1,Prefabs/CoolingSystems/AirCoolers/Silverstone/SilverstoneAP182_Fan180_White,SilverStone AP182 (White)
+Case Fan,Thermaltake,Pure Plus 12 LED RGB,,Y,20,7,28,20,1.0,,RGB,56.45,120,0,1.59,Prefabs/CoolingSystems/AirCoolers/Thermaltake/FAN_Thermaltake_Pure_12_LED_RGB,Thermaltake Pure Plus 12 LED RGB
+Case Fan,Thermaltake,Riing Plus 12 LED RGB,,Y,20,7,28,20,1.0,,RGB,48.34,120,0,1.54,Prefabs/CoolingSystems/AirCoolers/Thermaltake/FAN_Thermaltake_Riing_Plus_12_LED_RGB,Thermaltake Riing Plus 12 LED RGB
+Case Fan,Thermaltake,Riing Plus 14 LED RGB,,Y,25,8,28,20,1.0,,RGB,63.19,140,0,1.53,Prefabs/CoolingSystems/AirCoolers/Thermaltake/FAN_Thermaltake_Riing_Plus_14_LED_RGB,Thermaltake Riing Plus 14 LED RGB
