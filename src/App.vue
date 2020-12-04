@@ -1,7 +1,9 @@
 <template>
   <Navbar />
 
-  <router-view />
+  <div class="app-wrapper">
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -30,5 +32,10 @@ export default {
 
 body {
   font-size: 16px;
+}
+
+.app-wrapper {
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
 }
 </style>
