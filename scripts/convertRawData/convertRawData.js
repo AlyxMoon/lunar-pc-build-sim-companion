@@ -14,6 +14,12 @@ const partCategories = [
   'storage',
 ]
 
+const colNums = [
+  'Level',
+  'Price',
+  'Sell Price',
+]
+
 const convertRawData = raw => {
   const [headers, ...rows] = raw.trim()
     .split('\n')
@@ -23,7 +29,13 @@ const convertRawData = raw => {
     const formatted = {}
 
     for (const col in row) {
-      formatted[headers[col]] = row[col]
+      let val = row[col]
+
+      if (colNums.includes(headers[col])) {
+        val = Number(val)
+      }
+
+      formatted[headers[col]] = val
     }
 
     return formatted
