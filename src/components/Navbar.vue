@@ -2,21 +2,29 @@
   <nav>
     <router-link
       class="logo-wrapper"
-      to="/">
-      <img src="@/assets/logo.png" />
+      to="/"
+    >
+      <img src="@/assets/logo.png">
       <span>Home</span>
     </router-link>
 
-    <div class="link-wrapper" :class="{ open: navbarOpen }">
+    <div
+      class="link-wrapper"
+      :class="{ open: navbarOpen }"
+    >
       <router-link
         v-for="route in routes"
         :key="route.name"
-        :to="{ name: route.name }">
-        {{ route.title}}
+        :to="{ name: route.name }"
+      >
+        {{ route.title }}
       </router-link>
     </div>
 
-    <div class="expand" @click="navbarOpen = !navbarOpen">
+    <div
+      class="expand"
+      @click="navbarOpen = !navbarOpen"
+    >
       <FontAwesomeIcon icon="bars" />
     </div>
   </nav>
@@ -53,8 +61,8 @@ nav {
   align-items: center;
   flex-direction: row;
 
-  background-color: #232031;
-  border-bottom: 5px solid #A22744;
+  background-color: #262249;
+  border-bottom: 3px solid #E94800;
 
   .logo-wrapper {
     display: flex;
@@ -90,7 +98,7 @@ nav {
     }
 
     &:hover, &.router-link-active {
-      color: #A22744;
+      color: #E94800;
     }
   }
 

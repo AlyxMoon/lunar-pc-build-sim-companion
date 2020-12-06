@@ -3,8 +3,8 @@
 
   <Accordion
     v-for="category of categories"
-    :key="category">
-
+    :key="category"
+  >
     <template #header>
       <h3>{{ category }}</h3>
     </template>
@@ -21,7 +21,8 @@
         <tbody>
           <tr
             v-for="(part, i) in parts[category]"
-            :key="i">
+            :key="i"
+          >
             <td>{{ part['Part Type'] }}</td>
             <td>{{ part['Part Name'] }}</td>
             <td>{{ part['Manufacturer'] }}</td>

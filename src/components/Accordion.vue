@@ -1,11 +1,13 @@
 <template>
   <div
     class="accordion"
-    :class="{ show }">
+    :class="{ show }"
+  >
     <div
       class="accordion-header"
-      @click="show = !show">
-      <slot name="header"></slot>
+      @click="show = !show"
+    >
+      <slot name="header" />
 
       <div class="accordion-toggle">
         <FontAwesomeIcon icon="chevron-right" />
@@ -13,7 +15,7 @@
     </div>
 
     <div class="accordion-content">
-      <slot name="content"></slot>
+      <slot name="content" />
     </div>
   </div>
 </template>
