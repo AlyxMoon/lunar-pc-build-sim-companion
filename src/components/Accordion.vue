@@ -32,6 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 .accordion {
+  margin: 10px 0;
   padding: 0 20px;
 
   transition: margin 0.1s;
@@ -42,7 +43,7 @@ export default {
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     cursor: pointer;
   }
@@ -52,14 +53,13 @@ export default {
   }
 
   &-toggle {
-    font-size: 24px;
+    margin-left: auto;
 
+    font-size: 24px;
     transition: transform 0.3s;
   }
 
   &.show {
-    margin: 10px 5px;
-
     .accordion-content {
       display: block;
     }

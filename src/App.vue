@@ -36,6 +36,8 @@ body {
 
 .app-wrapper {
   height: calc(100vh - 50px);
+  padding: 0 20px 20px;
+
   overflow-y: scroll;
 }
 </style>

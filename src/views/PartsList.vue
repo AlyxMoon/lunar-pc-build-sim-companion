@@ -3,32 +3,33 @@
 
   <Accordion
     v-for="category of categories"
-    :key="category"
+    :key="category.name"
   >
     <template #header>
-      <h3>{{ category }}</h3>
+      <div
+        class="icon-wrapper"
+        :style="{ 'background-color': category.iconBackColor }"
+      >
+        <FontAwesomeIcon
+          v-if="category.icon"
+          :icon="category.icon"
+        />
+      </div>
+      <h3>
+        {{ category.displayName || category.name }}
+      </h3>
     </template>
 
     <template #content>
-      <table class="pure-table pure-table-horizontal">
-        <thead>
-          <tr>
-            <th>Part Type</th>
-            <th>Part Name</th>
-            <th>Manufacturer</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(part, i) in parts[category]"
-            :key="i"
-          >
-            <td>{{ part['Part Type'] }}</td>
-            <td>{{ part['Part Name'] }}</td>
-            <td>{{ part['Manufacturer'] }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <DataTable
+        :headers="[
+          { name: 'Part Name' },
+          { name: 'Manufacturer' },
+          { name: 'Level' },
+          { name: 'Price' },
+        ]"
+        :items="parts[category.name]"
+      />
     </template>
   </Accordion>
 </template>
@@ -37,11 +38,13 @@
 import { mapState } from 'vuex'
 
 import Accordion from '@/components/Accordion'
+import DataTable from '@/components/DataTable'
 
 export default {
   name: 'PagePartsList',
   components: {
     Accordion,
+    DataTable,
   },
 
   computed: {
@@ -54,7 +57,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-table {
-  width: 100%;
+.icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+
+  border: 1px solid black;
+  color: white;
+  font-size: 18px;
 }
 </style>
