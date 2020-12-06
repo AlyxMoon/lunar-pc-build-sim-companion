@@ -1,25 +1,30 @@
 
 class PageTracker {
-  install (vue, {
+  install (app, {
     gtag,
     useComponentNameAsFallback = true,
-    prefix = '',
+    titlePrefix = '',
     changePageTitle = true,
   } = {}) {
-    if (!gtag) return
+    if (!gtag || !app.config.globalProperties.$router) return
+
     this.gtag = gtag
 
-    const router = vue.config.globalProperties.$router
-    this.setUpRouteWatcher(router, { changePageTitle, prefix, useComponentNameAsFallback })
+    this.setUpRouteWatcher(
+      app.config.globalProperties.$router,
+      { changePageTitle, titlePrefix, useComponentNameAsFallback },
+    )
+
+    app.provide('gtag', gtag)
   }
 
   setUpRouteWatcher (router, {
     changePageTitle,
-    prefix,
+    titlePrefix,
     useComponentNameAsFallback,
   }) {
     router.afterEach(to => {
-      const pageName = prefix + (
+      const pageName = titlePrefix + (
         to.meta.title ||
         to[useComponentNameAsFallback ? 'name' : 'path']
       )
