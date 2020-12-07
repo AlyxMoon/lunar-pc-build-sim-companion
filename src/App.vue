@@ -51,6 +51,7 @@ body {
 }
 
 .app-content {
+  flex-shrink: 0;
   min-height: 100vh;
 }
 </style>
