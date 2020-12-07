@@ -1,0 +1,225 @@
+<template>
+  <article>
+    <div class="card-title">
+      <h4
+        v-if="!editing"
+      >
+        {{ activeBuild.name }}
+      </h4>
+      <input
+        v-else
+        v-model="activeBuild.name"
+      >
+
+      <div
+        class="pure-button-group"
+        role="group"
+      >
+        <button
+          class="pure-button"
+          :title="editing ? 'Save Build' : 'Edit Build'"
+          @click="toggleEdit"
+        >
+          <FontAwesomeIcon
+            v-if="!editing"
+            icon="pen"
+          />
+
+          <FontAwesomeIcon
+            v-else
+            icon="save"
+          />
+        </button>
+
+        <button
+          class="pure-button"
+          title="Remove Build"
+          @click="$emit('remove')"
+        >
+          <FontAwesomeIcon icon="times" />
+        </button>
+      </div>
+    </div>
+
+    <div class="card-subtitle">
+      <h5>Budget</h5>
+
+      <span
+        v-if="!editing"
+      >
+        {{ activeBuild.budget }}
+      </span>
+      <input
+        v-else
+        v-model="activeBuild.budget"
+      >
+
+      <h5>Job Type</h5>
+
+      <span
+        v-if="!editing"
+      >
+        {{ activeBuild.jobType }}
+      </span>
+      <input
+        v-else
+        v-model="activeBuild.jobType"
+      >
+    </div>
+
+    <div class="card-body">
+      <h6>Objectives</h6>
+      <ul>
+        <li
+          v-for="(item, i) in activeBuild.objectives"
+          :key="i"
+        >
+          {{ item }}
+        </li>
+      </ul>
+      <div class="input-group">
+        <input v-model="tempFields.objectives">
+        <button
+          class="pure-button"
+          @click="addNewItem('objectives')"
+        >
+          Add
+        </button>
+      </div>
+
+      <h6>Starting Parts</h6>
+      <ul>
+        <li
+          v-for="(item, i) in activeBuild.startingParts"
+          :key="i"
+        >
+          {{ item }}
+        </li>
+      </ul>
+      <div class="input-group">
+        <input v-model="tempFields.startingParts">
+        <button
+          class="pure-button"
+          @click="addNewItem('startingParts')"
+        >
+          Add
+        </button>
+      </div>
+
+      <h6>New Parts</h6>
+      <ul>
+        <li
+          v-for="(item, i) in activeBuild.newParts"
+          :key="i"
+        >
+          {{ item }}
+        </li>
+      </ul>
+      <div class="input-group">
+        <input v-model="tempFields.newParts">
+        <button
+          class="pure-button"
+          @click="addNewItem('newParts')"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </article>
+</template>
+
+<script>
+import BuildModel from '@/models/Build'
+
+export default {
+  name: 'BuildCard',
+  props: {
+    build: {
+      type: BuildModel,
+      default: () => new BuildModel(),
+    },
+  },
+  emits: ['update', 'remove'],
+
+  data: () => ({
+    activeBuild: null,
+    editing: false,
+    tempFields: {},
+  }),
+
+  methods: {
+    toggleEdit () {
+      this.editing = !this.editing
+      if (!this.editing) {
+        this.$emit('update', this.activeBuild.attributes)
+      }
+    },
+
+    addNewItem (field) {
+      this.activeBuild[field].push(this.tempFields[field])
+      this.tempFields[field] = ''
+
+      this.$emit('update', this.activeBuild.attributes)
+    },
+  },
+
+  created () {
+    this.activeBuild = this.build.clone()
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+article {
+  height: auto;
+  width: 100%;
+
+  border-left: 8px solid #E97816;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
+
+  .card-title {
+    width: 100%;
+    padding: 15px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #385590;
+    color: white;
+    font-size: 1.2rem;
+
+    h4 { margin: 0; }
+  }
+
+  .card-subtitle {
+    width: 100%;
+    padding: 10px;
+
+    display: grid;
+    grid-gap: 10px 15px;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+
+    background-color: #DDE7FD;
+    color: black;
+    font-size: 1.1rem;
+
+    h5 {
+      margin: 0;
+      text-align: right;
+    }
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+}
+
+.input-group {
+  margin: 5px 0 10px;
+
+  display: flex;
+  justify-content: flex-start;
+}
+</style>

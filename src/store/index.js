@@ -1,4 +1,8 @@
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
+
+import * as actions from './actions'
+import * as mutations from './mutations'
 
 import casefans from '@/assets/data/parts/casefans.json'
 import cases from '@/assets/data/parts/cases.json'
@@ -92,7 +96,7 @@ const categories = [
     name: 'storage',
     displayName: 'Storage',
     icon: 'hdd',
-    iconBackColor: '#DC0000',
+    iconBackColor: '#FF8100',
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
@@ -159,11 +163,28 @@ const state = {
     powersupplies,
     storage,
   },
+  builds: [],
 }
 
 export default createStore({
   state,
-  mutations: {},
-  actions: {},
-  modules: {},
+  actions,
+  mutations,
+
+  plugins: [
+    createPersistedState({
+      fetchBeforeUse: true,
+      paths: [
+        'builds',
+        'categories',
+      ],
+      rehydrated: store => {
+        const builds = store.state.builds || []
+
+        builds.forEach((build, i) => {
+          store.dispatch('updateBuild', { data: build._attributes, index: i })
+        })
+      },
+    }),
+  ],
 })

@@ -38,7 +38,7 @@ export default {
   transition: margin 0.1s;
 
   &-header {
-    padding: 0 20px;
+    padding: 10px 20px;
     border: 1px solid black;
 
     display: flex;

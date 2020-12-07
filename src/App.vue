@@ -1,24 +1,26 @@
 <template>
-  <Navbar />
+  <header>
+    <AppNavbar />
+  </header>
 
-  <div class="app-wrapper">
-    <div class="app-content">
+  <main>
+    <section>
       <router-view />
-    </div>
+    </section>
 
-    <Footer />
-  </div>
+    <AppFooter />
+  </main>
 </template>
 
 <script>
-import Footer from '@/components/layout/Footer'
-import Navbar from '@/components/layout/Navbar'
+import AppFooter from '@/components/layout/Footer'
+import AppNavbar from '@/components/layout/Navbar'
 
 export default {
   name: 'App',
   components: {
-    Footer,
-    Navbar,
+    AppFooter,
+    AppNavbar,
   },
 
   created () {
@@ -36,11 +38,7 @@ export default {
   box-sizing: border-box;
 }
 
-body {
-  font-size: 16px;
-}
-
-.app-wrapper {
+main {
   height: calc(100vh - 50px);
   padding: 0 20px;
 
@@ -50,7 +48,7 @@ body {
   overflow-y: scroll;
 }
 
-.app-content {
+main > section {
   flex-shrink: 0;
   min-height: 100vh;
 }

@@ -3,6 +3,9 @@ import {
   faBars,
   faChevronDown,
   faChevronRight,
+  faPen,
+  faSave,
+  faTimes,
 
   faBox,
   faChessBoard,
@@ -18,6 +21,9 @@ import {
 library.add(faBars)
 library.add(faChevronDown)
 library.add(faChevronRight)
+library.add(faPen)
+library.add(faSave)
+library.add(faTimes)
 
 library.add(faBox)
 library.add(faChessBoard)

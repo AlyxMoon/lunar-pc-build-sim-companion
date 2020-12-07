@@ -5,6 +5,8 @@ import './plugins/FontAwesome/library'
 import pageTracker from './plugins/Gtag'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+import './styles/main.scss'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
