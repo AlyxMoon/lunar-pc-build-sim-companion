@@ -22,12 +22,7 @@
 
     <template #content>
       <DataTable
-        :headers="[
-          { name: 'Part Name' },
-          { name: 'Manufacturer' },
-          { name: 'Level' },
-          { name: 'Price' },
-        ]"
+        :headers="category.headers"
         :items="parts[category.name]"
       />
     </template>

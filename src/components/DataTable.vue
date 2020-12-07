@@ -108,6 +108,7 @@ table {
     position: sticky;
     top: 0;
 
+    min-width: 200px;
     padding-right: 20px;
 
     background-color: #CECECE;

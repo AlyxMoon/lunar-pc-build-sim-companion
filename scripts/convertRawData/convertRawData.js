@@ -18,6 +18,13 @@ const colNums = [
   'Level',
   'Price',
   'Sell Price',
+  'Part Ranking Score',
+  'Wattage',
+  'Air Flow',
+  'Size',
+  'Size (GB)',
+  'VRAM (GB)',
+  'Frequency',
 ]
 
 const convertRawData = raw => {
