@@ -14,18 +14,20 @@ const partCategories = [
   'storage',
 ]
 
-const colNums = [
-  'Level',
-  'Price',
-  'Sell Price',
-  'Part Ranking Score',
-  'Wattage',
-  'Air Flow',
-  'Size',
-  'Size (GB)',
-  'VRAM (GB)',
-  'Frequency',
-]
+/* eslint-disable quote-props */
+const colHandlers = {
+  'Level': (data) => Number(data),
+  'Price': (data) => Number(data),
+  'Sell Price': (data) => Number(data),
+  'Part Ranking Score': (data) => Number(data),
+  'Wattage': (data) => Number(data),
+  'Air Flow': (data) => Number(data),
+  'Size': (data) => Number(data) || data,
+  'Size (GB)': (data) => Number(data),
+  'VRAM (GB)': (data) => Number(data),
+  'Frequency': (data) => Number(data),
+}
+/* eslint-enable quote-props */
 
 const convertRawData = raw => {
   const [headers, ...rows] = raw.trim()
@@ -36,13 +38,9 @@ const convertRawData = raw => {
     const formatted = {}
 
     for (const col in row) {
-      let val = row[col]
-
-      if (colNums.includes(headers[col])) {
-        val = Number(val)
-      }
-
-      formatted[headers[col]] = val
+      formatted[headers[col]] = headers[col] in colHandlers
+        ? colHandlers[headers[col]](row[col])
+        : row[col]
     }
 
     return formatted
