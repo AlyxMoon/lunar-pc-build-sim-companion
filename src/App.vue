@@ -2,16 +2,22 @@
   <Navbar />
 
   <div class="app-wrapper">
-    <router-view />
+    <div class="app-content">
+      <router-view />
+    </div>
+
+    <Footer />
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import Footer from '@/components/layout/Footer'
+import Navbar from '@/components/layout/Navbar'
 
 export default {
   name: 'App',
   components: {
+    Footer,
     Navbar,
   },
 
@@ -36,8 +42,15 @@ body {
 
 .app-wrapper {
   height: calc(100vh - 50px);
-  padding: 0 20px 20px;
+  padding: 0 20px;
+
+  display: flex;
+  flex-direction: column;
 
   overflow-y: scroll;
+}
+
+.app-content {
+  min-height: 100vh;
 }
 </style>
