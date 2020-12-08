@@ -93,13 +93,24 @@
           v-for="(item, i) in activeBuild.startingParts"
           :key="i"
         >
-          {{ item }}
+          {{ item['Full Part Name'] }}
         </li>
       </ul>
       <div class="input-group">
-        <input v-model="tempFields.startingParts">
+        <select
+          v-model="tempFields.startingParts"
+        >
+          <option
+            v-for="category in categories"
+            :key="category"
+            :value="category.name"
+          >
+            {{ category.displayName || category.name }}
+          </option>
+        </select>
         <button
           class="pure-button"
+          :disabled="!tempFields.startingParts"
           @click="addNewItem('startingParts')"
         >
           Add
@@ -112,13 +123,24 @@
           v-for="(item, i) in activeBuild.newParts"
           :key="i"
         >
-          {{ item }}
+          {{ item['Full Part Name'] }}
         </li>
       </ul>
       <div class="input-group">
-        <input v-model="tempFields.newParts">
+        <select
+          v-model="tempFields.newParts"
+        >
+          <option
+            v-for="category in categories"
+            :key="category"
+            :value="category.name"
+          >
+            {{ category.displayName || category.name }}
+          </option>
+        </select>
         <button
           class="pure-button"
+          :disabled="!tempFields.newParts"
           @click="addNewItem('newParts')"
         >
           Add
@@ -129,6 +151,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import BuildModel from '@/models/Build'
 
 export default {
@@ -139,13 +162,28 @@ export default {
       default: () => new BuildModel(),
     },
   },
-  emits: ['update', 'remove'],
+  emits: ['update', 'remove', 'addPartToBuild'],
 
   data: () => ({
     activeBuild: null,
     editing: false,
     tempFields: {},
   }),
+
+  computed: {
+    ...mapState({
+      categories: 'categories',
+    }),
+  },
+
+  watch: {
+    build: {
+      handler () {
+        this.activeBuild = this.build.clone()
+      },
+      deep: true,
+    },
+  },
 
   methods: {
     toggleEdit () {
@@ -156,10 +194,17 @@ export default {
     },
 
     addNewItem (field) {
-      this.activeBuild[field].push(this.tempFields[field])
-      this.tempFields[field] = ''
+      if (field === 'objectives') {
+        this.activeBuild[field].push(this.tempFields[field])
+        this.$emit('update', this.activeBuild.attributes)
+      } else {
+        this.$emit('addPartToBuild', {
+          partType: this.tempFields[field],
+          field,
+        })
+      }
 
-      this.$emit('update', this.activeBuild.attributes)
+      this.tempFields[field] = ''
     },
   },
 

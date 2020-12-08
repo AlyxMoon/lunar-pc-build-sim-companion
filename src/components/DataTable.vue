@@ -4,6 +4,7 @@
       <table class="pure-table pure-table-horizontal">
         <thead>
           <tr>
+            <th v-if="includeAction" />
             <th
               v-for="header in headers"
               :key="header.name"
@@ -25,6 +26,14 @@
             v-for="item in parsedItems"
             :key="item.toString()"
           >
+            <td v-if="includeAction">
+              <button
+                class="pure-button"
+                @click="$emit('selected', item)"
+              >
+                Select
+              </button>
+            </td>
             <td
               v-for="col in headers"
               :key="col.name"
@@ -50,7 +59,12 @@ export default {
       type: Array,
       default: () => [],
     },
+    includeAction: {
+      type: Boolean,
+      default: false,
+    },
   },
+  emits: ['selected'],
 
   data: () => ({
     sortBy: '',

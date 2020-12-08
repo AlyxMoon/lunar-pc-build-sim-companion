@@ -14,6 +14,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'comma-dangle': ['error', 'always-multiline'],
+    'vue/custom-event-name-casing': ['error', 'camelCase'],
     'import/no-duplicates': 'off',
   },
   overrides: [

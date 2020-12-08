@@ -14,21 +14,35 @@
       :key="`${i}-${build.name}`"
       :build="build"
       @update="updateBuild({ data: $event, index: i })"
+      @addPartToBuild="startDialogPartLookup(i, $event)"
       @remove="removeBuild(i)"
     />
   </section>
+
+  <DialogPartLookup
+    v-if="!!showDialogPartLookup"
+    :part-type="showDialogPartLookup.partType"
+    @cancel="showDialogPartLookup = null"
+    @selected="addPartToBuild($event)"
+  />
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 
 import BuildCard from '@/components/BuildCard'
+import DialogPartLookup from '@/components/DialogPartLookup'
 
 export default {
   name: 'PageActiveBuilds',
   components: {
     BuildCard,
+    DialogPartLookup,
   },
+
+  data: () => ({
+    showDialogPartLookup: null,
+  }),
 
   computed: {
     ...mapState({
@@ -38,10 +52,32 @@ export default {
 
   methods: {
     ...mapActions(['createBuild', 'updateBuild', 'removeBuild']),
-  },
 
-  created () {
+    startDialogPartLookup (index, { field, partType }) {
+      this.showDialogPartLookup = {
+        index,
+        field,
+        partType,
+      }
+    },
 
+    addPartToBuild (part) {
+      const { field, index } = this.showDialogPartLookup
+      const build = this.builds[index].attributes
+
+      this.updateBuild({
+        index: index,
+        data: {
+          ...build,
+          [field]: [
+            ...build[field],
+            part,
+          ],
+        },
+      })
+
+      this.showDialogPartLookup = null
+    },
   },
 }
 </script>

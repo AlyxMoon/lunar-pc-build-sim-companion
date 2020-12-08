@@ -1,1 +1,46 @@
 @import './typography.scss';
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+  height: auto;
+  min-height: 400px;
+  max-height: 90vh;
+  width: 40em;
+  max-width: 90vw;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.3);
+}
+
+.modal-title {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 10px 20px;
+
+  background-color: #262249;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: white;
+}
+
+.modal-body {
+  flex-grow: 1;
+}
