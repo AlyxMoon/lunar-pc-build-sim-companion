@@ -38,7 +38,12 @@
               v-for="col in headers"
               :key="col.name"
             >
-              {{ item[col.name] }}
+              <template v-if="col.filter && col.filter === 'currency'">
+                {{ filters.currency(item[col.name]) }}
+              </template>
+              <template v-else>
+                {{ item[col.name] }}
+              </template>
             </td>
           </tr>
         </tbody>
@@ -48,6 +53,8 @@
 </template>
 
 <script>
+import currency from '@/lib/filters/currency'
+
 export default {
   name: 'DataTable',
   props: {
@@ -69,6 +76,10 @@ export default {
   data: () => ({
     sortBy: '',
     sortDesc: true,
+
+    filters: {
+      currency,
+    },
   }),
 
   computed: {

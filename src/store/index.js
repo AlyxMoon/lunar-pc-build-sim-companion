@@ -23,7 +23,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'Part Ranking Score' },
       { name: 'Series' },
@@ -40,7 +40,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'Type' },
       { name: 'Air Flow' },
@@ -54,7 +54,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'CPU Socket' },
       { name: 'Chipset' },
@@ -70,7 +70,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'Size (GB)' },
       { name: 'Frequency' },
@@ -84,7 +84,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'Part Ranking Score' },
       { name: 'Chipset' },
@@ -100,7 +100,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'Type' },
       { name: 'Size (GB)' },
@@ -114,7 +114,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'Wattage' },
       { name: 'Type' },
@@ -129,7 +129,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'Air Flow' },
       { name: 'Size' },
@@ -143,7 +143,7 @@ const categories = [
     headers: [
       { name: 'Manufacturer' },
       { name: 'Part Name' },
-      { name: 'Price' },
+      { name: 'Price', filter: 'currency' },
       { name: 'Level' },
       { name: 'Size' },
     ],
@@ -180,7 +180,6 @@ export default createStore({
       fetchBeforeUse: true,
       paths: [
         'builds',
-        'categories',
       ],
       rehydrated: store => {
         const builds = store.state.builds || []

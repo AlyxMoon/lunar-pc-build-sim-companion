@@ -47,7 +47,7 @@
       <span
         v-if="!editing"
       >
-        {{ activeBuild.budget }}
+        {{ filters.currency(activeBuild.budget) }}
       </span>
       <input
         v-else
@@ -152,6 +152,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import currency from '@/lib/filters/currency'
+
 import BuildModel from '@/models/Build'
 
 export default {
@@ -168,6 +170,10 @@ export default {
     activeBuild: null,
     editing: false,
     tempFields: {},
+
+    filters: {
+      currency,
+    },
   }),
 
   computed: {
