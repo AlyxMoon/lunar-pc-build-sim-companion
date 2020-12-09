@@ -1,4 +1,8 @@
 
+export const UPDATE_PLAYER_LEVEL = (state, payload) => {
+  state.playerLevel = payload
+}
+
 export const CREATE_BUILD = (state, payload) => {
   state.builds.push(payload)
 }

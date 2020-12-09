@@ -168,6 +168,7 @@ const state = {
     storage,
   },
   builds: [],
+  playerLevel: 1,
 }
 
 export default createStore({
@@ -180,6 +181,7 @@ export default createStore({
       fetchBeforeUse: true,
       paths: [
         'builds',
+        'playerLevel',
       ],
       rehydrated: store => {
         const builds = store.state.builds || []

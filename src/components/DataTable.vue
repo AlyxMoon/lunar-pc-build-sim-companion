@@ -51,6 +51,18 @@
     </div>
 
     <div class="table-footer">
+      <div class="pull-left">
+        <label for="check-player-level">
+          <input
+            v-model="checkPlayerLevel"
+            :value="checkPlayerLevel"
+            name="check-player-level"
+            type="checkbox"
+          >
+          Check Player Level
+        </label>
+      </div>
+
       <span>{{ currentPageText }}</span>
 
       <button
@@ -75,6 +87,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import currency from '@/lib/filters/currency'
 
 export default {
@@ -100,7 +114,6 @@ export default {
     sortDesc: true,
 
     pagination: {
-      total: 0,
       perPage: 10,
       page: 0,
     },
@@ -108,11 +121,18 @@ export default {
     filters: {
       currency,
     },
+
+    checkPlayerLevel: true,
   }),
 
   computed: {
+    ...mapState({
+      playerLevel: 'playerLevel',
+    }),
+
     currentPageText () {
-      const { total, perPage, page } = this.pagination
+      const { perPage, page } = this.pagination
+      const total = this.parsedItems.length
       if (!total) return 'No Items'
 
       const start = (page * perPage) + 1
@@ -131,29 +151,26 @@ export default {
     },
 
     onLastPage () {
-      const { total, perPage, page } = this.pagination
+      const { perPage, page } = this.pagination
+      const total = this.parsedItems.length
+
       return page === Math.floor(total / perPage)
     },
 
     parsedItems () {
-      if (!this.sortBy) return this.items
+      let filtered = this.items.slice()
+      if (this.checkPlayerLevel) {
+        filtered = filtered.filter(item => item.Level <= this.playerLevel)
+      }
 
-      return this.items.slice().sort((a, b) => {
+      if (!this.sortBy) return filtered
+
+      return filtered.slice().sort((a, b) => {
         if (a[this.sortBy] < b[this.sortBy]) return this.sortDesc ? -1 : 1
         if (a[this.sortBy] > b[this.sortBy]) return this.sortDesc ? 1 : -1
         return 0
       })
     },
-  },
-
-  watch: {
-    items (newVal) {
-      this.updatePaginationOptions()
-    },
-  },
-
-  created () {
-    this.updatePaginationOptions()
   },
 
   methods: {
@@ -168,10 +185,6 @@ export default {
         this.sortBy = name
         this.sortDesc = true
       }
-    },
-
-    updatePaginationOptions () {
-      this.pagination.total = this.items.length || 0
     },
   },
 }
@@ -203,6 +216,10 @@ export default {
 
   button, span {
     margin: 0 5px;
+  }
+
+  .pull-left {
+    margin-right: auto;
   }
 }
 
