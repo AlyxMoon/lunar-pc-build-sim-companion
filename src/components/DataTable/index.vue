@@ -1,6 +1,12 @@
 <template>
   <div class="table-wrapper">
-    <div class="table-wrapper-inner">
+    <div class="table-header">
+      <SearchBar
+        v-model:searchQuery="searchQuery"
+      />
+    </div>
+
+    <div class="table-body">
       <table class="pure-table pure-table-horizontal">
         <thead>
           <tr>
@@ -90,9 +96,13 @@
 import { mapState } from 'vuex'
 
 import currency from '@/lib/filters/currency'
+import SearchBar from './DataTableSearchBar'
 
 export default {
   name: 'DataTable',
+  components: {
+    SearchBar,
+  },
   props: {
     headers: {
       type: Array,
@@ -123,6 +133,7 @@ export default {
     },
 
     checkPlayerLevel: true,
+    searchQuery: '',
   }),
 
   computed: {
@@ -158,14 +169,25 @@ export default {
     },
 
     parsedItems () {
-      let filtered = this.items.slice()
-      if (this.checkPlayerLevel) {
-        filtered = filtered.filter(item => item.Level <= this.playerLevel)
-      }
+      const filtered = this.items.slice().filter(item => {
+        let valid = true
+
+        if (this.checkPlayerLevel) {
+          valid = valid && item.Level <= this.playerLevel
+        }
+
+        if (this.searchQuery) {
+          const itemLowerCase = item['Full Part Name'].toLowerCase()
+          const queryLowerCase = this.searchQuery.toLowerCase()
+          valid = valid && itemLowerCase.includes(queryLowerCase)
+        }
+
+        return valid
+      })
 
       if (!this.sortBy) return filtered
 
-      return filtered.slice().sort((a, b) => {
+      return filtered.sort((a, b) => {
         if (a[this.sortBy] < b[this.sortBy]) return this.sortDesc ? -1 : 1
         if (a[this.sortBy] > b[this.sortBy]) return this.sortDesc ? 1 : -1
         return 0
@@ -192,26 +214,44 @@ export default {
 
 <style lang="scss" scoped>
 .table-wrapper {
+  margin: 10px 0 30px;
 }
 
-.table-wrapper-inner {
+.table-header {
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+
+  border: 2px solid #CECECE {
+    bottom: none;
+  };
+}
+
+.table-body {
   width: 100%;
 
   overflow-x: auto;
 
-  border: 1px solid #CECECE;
+  border: 1px solid #CECECE {
+    top: none;
+  };
 }
 
 .table-footer {
+  position: relative;
+  z-index: 10;
+
   width: 100%;
+  margin-top: -2px;
   padding: 5px 10px;
 
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
-  border: 1px solid black {
-    top: none;
+  border: 2px solid #CBCBCB {
+    top: 2px solid #E94800;
   }
 
   button, span {
@@ -227,7 +267,9 @@ table {
   width: 100%;
 
   thead tr th {
-    background-color: #CECECE;
+    background-color: #262249;
+    color: #DDDDDD;
+
     cursor: pointer;
     white-space: nowrap;
     user-select: none;
