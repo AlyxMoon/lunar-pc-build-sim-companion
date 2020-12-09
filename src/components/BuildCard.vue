@@ -54,6 +54,11 @@
         v-model="activeBuild.budget"
       >
 
+      <h5>Used Budget</h5>
+      <span>
+        {{ filters.currency(totalCostNewParts) }}
+      </span>
+
       <h5>Job Type</h5>
 
       <span
@@ -88,14 +93,29 @@
       </div>
 
       <h6>Starting Parts</h6>
-      <ul>
-        <li
+      <dl>
+        <template
           v-for="(item, i) in activeBuild.startingParts"
-          :key="i"
+          :key="`${i}-${item['Full Part Name']}`"
         >
-          {{ item['Full Part Name'] }}
-        </li>
-      </ul>
+          <button
+            class="pure-button"
+            @click="removePart('startingParts', i)"
+          >
+            X
+          </button>
+          <dd>
+            {{ filters.currency(item['Price']) }}
+          </dd>
+          <dd>
+            {{ item['Part Type'] }}
+          </dd>
+          <dd class="part-name">
+            {{ item['Full Part Name'] }}
+          </dd>
+        </template>
+      </dl>
+
       <div class="input-group">
         <select
           v-model="tempFields.startingParts"
@@ -118,14 +138,29 @@
       </div>
 
       <h6>New Parts</h6>
-      <ul>
-        <li
+      <dl>
+        <template
           v-for="(item, i) in activeBuild.newParts"
-          :key="i"
+          :key="`${i}-${item['Full Part Name']}`"
         >
-          {{ item['Full Part Name'] }}
-        </li>
-      </ul>
+          <button
+            class="pure-button"
+            @click="removePart('startingParts', i)"
+          >
+            X
+          </button>
+          <dd>
+            {{ filters.currency(item['Price']) }}
+          </dd>
+          <dd>
+            {{ item['Part Type'] }}
+          </dd>
+          <dd class="part-name">
+            {{ item['Full Part Name'] }}
+          </dd>
+        </template>
+      </dl>
+
       <div class="input-group">
         <select
           v-model="tempFields.newParts"
@@ -180,6 +215,13 @@ export default {
     ...mapState({
       categories: 'categories',
     }),
+
+    totalCostNewParts () {
+      if (!this.activeBuild) return 0
+      return this.activeBuild.newParts.reduce((sum, item) => {
+        return sum + item.Price
+      }, 0)
+    },
   },
 
   watch: {
@@ -211,6 +253,11 @@ export default {
       }
 
       this.tempFields[field] = ''
+    },
+
+    removePart (field, index) {
+      this.activeBuild[field].splice(index, 1)
+      this.$emit('update', this.activeBuild.attributes)
     },
   },
 
@@ -272,5 +319,44 @@ article {
 
   display: flex;
   justify-content: flex-start;
+}
+
+dl {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0 10px;
+
+  display: grid;
+  justify-content: flex-start;
+  grid-template-columns: auto auto auto;
+  grid-gap: 0;
+
+  @include md {
+    grid-template-columns: auto auto auto 1fr;
+    grid-gap: 5px 3px;
+  }
+
+  dd {
+    padding: 5px 10px;
+
+    display: flex;
+    align-items: center;
+
+    border: 2px solid #E6E6E6;
+
+    &:not(.part-name) {
+      @include smAndBelow {
+        border-bottom: none;
+      }
+    }
+
+    &.part-name {
+      @include smAndBelow {
+        margin-bottom: 10px;
+        grid-column-start: 1;
+        grid-column-end: 4;
+      }
+    }
+  }
 }
 </style>
