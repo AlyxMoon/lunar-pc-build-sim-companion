@@ -18,9 +18,9 @@
 
 .modal {
   height: auto;
-  min-height: 400px;
+  min-height: 50vh;
   max-height: 90vh;
-  width: 40em;
+  min-width: 40em;
   max-width: 90vw;
 
   display: flex;
