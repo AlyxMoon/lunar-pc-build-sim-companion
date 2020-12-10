@@ -145,7 +145,7 @@
         >
           <button
             class="pure-button"
-            @click="removePart('startingParts', i)"
+            @click="removePart('newParts', i)"
           >
             X
           </button>
