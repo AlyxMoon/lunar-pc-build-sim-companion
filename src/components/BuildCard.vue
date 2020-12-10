@@ -1,9 +1,15 @@
 <template>
-  <article>
+  <article :class="{ expanded }">
     <div class="card-title">
       <h4
         v-if="!editing"
       >
+        <FontAwesomeIcon
+          class="clickable"
+          icon="chevron-right"
+          @click="expanded = !expanded"
+        />
+
         {{ activeBuild.name }}
       </h4>
       <input
@@ -206,6 +212,8 @@ export default {
     editing: false,
     tempFields: {},
 
+    expanded: false,
+
     filters: {
       currency,
     },
@@ -269,13 +277,40 @@ export default {
 
 <style lang="scss" scoped>
 article {
-  height: auto;
   width: 100%;
 
   border-left: 8px solid #E97816;
-  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
+
+  overflow: hidden;
+  transition:
+    width 0.2s,
+    margin 0.2s;
+
+  &.expanded {
+    width: 99%;
+    margin: 20px 0 20px 1%;
+
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+
+    .card-title h4 svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &:not(.expanded) {
+    border-bottom: 4px solid #E97816;
+
+    &:first-child {
+      border-top: 4px solid #E97816;
+    }
+
+    .card-subtitle, .card-body, .card-footer {
+      display: none;
+    }
+  }
 
   .card-title {
+    height: 60px;
     width: 100%;
     padding: 15px 20px;
 
@@ -287,7 +322,9 @@ article {
     color: white;
     font-size: 1.2rem;
 
-    h4 { margin: 0; }
+    h4 {
+      margin: 0;
+    }
   }
 
   .card-subtitle {

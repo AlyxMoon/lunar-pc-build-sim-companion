@@ -19,6 +19,14 @@
     />
   </section>
 
+  <button
+    v-if="!!builds.length"
+    class="pure-button"
+    @click="createBuild"
+  >
+    Start New Build
+  </button>
+
   <DialogPartLookup
     v-if="!!showDialogPartLookup"
     :part-type="showDialogPartLookup.partType"
@@ -88,7 +96,7 @@ section.build-card-grid {
   margin: 30px 0;
 
   display: grid;
-  grid-gap: 20px;
+  // grid-gap: 20px;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   justify-content: flex-start;

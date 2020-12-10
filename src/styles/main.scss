@@ -45,3 +45,14 @@
 .modal-body {
   flex-grow: 1;
 }
+
+.clickable {
+  cursor: pointer;
+  user-select: none;
+  transition-duration: 0.2s;
+}
+
+svg.clickable {
+  box-sizing: content-box;
+  padding: 0 10px;
+}
