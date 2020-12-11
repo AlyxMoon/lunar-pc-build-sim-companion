@@ -19,6 +19,16 @@
       Use this as an app-wide filter for parts. Any parts above this level will not be displayed in the relevant tables.
     </p>
   </div>
+
+  <div>
+    For the builds I have started implementing some validation rules. Here are the list of rules currently being checked:
+
+    <ul>
+      <li>
+        The new parts will be added up and a message will display if you are over budget.
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -40,5 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+div {
+  margin-top: 40px;
+}
 </style>
