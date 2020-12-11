@@ -25,7 +25,10 @@ class Model {
     this.CurrentClass = CurrentClass
 
     this.assignAttributes(attributes)
+
     this.validate()
+
+    this.afterCreate()
   }
 
   assignAttributes (attributes) {
@@ -116,6 +119,8 @@ class Model {
   defaults () { return {} }
 
   validations () { return [] }
+
+  afterCreate () {}
 }
 
 export default Model

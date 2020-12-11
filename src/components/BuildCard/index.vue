@@ -81,6 +81,11 @@
         v-else
         v-model="activeBuild.jobType"
       >
+
+      <h6>Estimated 3Dmark Score</h6>
+      <span :key="build.estimatedScore">
+        {{ build.estimatedScore }}
+      </span>
     </div>
 
     <div class="card-body">
@@ -188,6 +193,7 @@ export default {
     build: {
       handler () {
         this.activeBuild = this.build.clone()
+        this.activeBuild.runBenchmark()
       },
       deep: true,
     },
@@ -237,6 +243,7 @@ export default {
 
   created () {
     this.activeBuild = this.build.clone()
+    this.activeBuild.runBenchmark()
   },
 }
 </script>

@@ -9,6 +9,22 @@ const numFields = [
   'Size (GB)',
   'VRAM (GB)',
   'Frequency',
+
+  'Cores',
+  'CoreClockMultiplier',
+  'MemChannelsMultiplier',
+  'MemClockMultiplier',
+  'FinalAdjustment',
+  'OC Base Freq',
+  'Max Memory Channels',
+  'Default Memory Speed',
+]
+
+const numIfIncludes = [
+  'Freq',
+  'Score',
+  'Multiplier',
+  'Adjustment',
 ]
 
 const categorySizeIsNum = [
@@ -69,6 +85,10 @@ const mutate = (value, field, category) => {
   if (field === 'Size') {
     if (categorySizeIsNum.includes(category)) return Number(value || 0)
     return value
+  }
+
+  if (numIfIncludes.some(inc => field.includes(inc))) {
+    return Number(value || 0)
   }
 
   if (isBooleanField(field, category)) {
