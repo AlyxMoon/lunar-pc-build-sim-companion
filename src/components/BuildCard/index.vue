@@ -38,11 +38,16 @@
         </button>
 
         <button
+          :key="`remove-${confirmRemove}`"
           class="pure-button"
           title="Remove Build"
-          @click="$emit('remove')"
+          @click="removeBuild(confirmRemove)"
         >
-          <FontAwesomeIcon icon="times" />
+          <FontAwesomeIcon
+            v-if="!confirmRemove"
+            icon="times"
+          />
+          <span v-else>Really?</span>
         </button>
       </div>
     </div>
@@ -156,6 +161,7 @@ export default {
     editing: false,
     tempFields: {},
 
+    confirmRemove: false,
     expanded: false,
 
     filters: {
@@ -205,6 +211,15 @@ export default {
       }
 
       this.tempFields[field] = ''
+    },
+
+    removeBuild (confirmed = false) {
+      if (!confirmed) {
+        this.confirmRemove = true
+        return
+      }
+
+      this.$emit('remove')
     },
 
     removePart (field, index) {
