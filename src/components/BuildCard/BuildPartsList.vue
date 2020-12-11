@@ -24,11 +24,13 @@
       </button>
 
       <dd>
-        {{ displayFilters.currency(item['Price']) }}
-      </dd>
-      <dd>
         {{ item['Part Type'] }}
       </dd>
+
+      <dd>
+        {{ displayFilters.currency(item['Price']) }}
+      </dd>
+
       <dd class="part-name">
         {{ item['Full Part Name'] }}
       </dd>
@@ -36,17 +38,6 @@
   </dl>
 
   <div class="input-group">
-    <select
-      v-model="selectedPartCategory"
-    >
-      <option
-        v-for="category in categories"
-        :key="category"
-        :value="category.name"
-      >
-        {{ category.displayName || category.name }}
-      </option>
-    </select>
     <button
       class="pure-button"
       :disabled="!selectedPartCategory"
@@ -54,6 +45,17 @@
     >
       Add
     </button>
+    <select
+      v-model="selectedPartCategory"
+    >
+      <option
+        v-for="category in filteredCategories"
+        :key="category"
+        :value="category.name"
+      >
+        {{ category.displayName || category.name }}
+      </option>
+    </select>
   </div>
 </template>
 
@@ -82,6 +84,53 @@ export default {
     ...mapState({
       categories: 'categories',
     }),
+
+    filteredCategories () {
+      const categories = this.categories.slice()
+
+      let hasCase
+      let hasPowerSupply
+      let hasMotherboard
+      let hasCpu
+      let hasCpuCooler
+
+      this.parts.forEach(part => {
+        const type = part['Part Type']
+
+        if (type === 'Case') hasCase = true
+        if (type === 'Power Supply') hasPowerSupply = true
+        if (type === 'Motherboard') hasMotherboard = true
+        if (type === 'CPU') hasCpu = true
+        if (type.startsWith('CPU Cooler')) hasCpuCooler = true
+      })
+
+      if (hasCase) {
+        const index = categories.findIndex(({ name }) => name === 'cases')
+        categories.splice(index, 1)
+      }
+
+      if (hasPowerSupply) {
+        const index = categories.findIndex(({ name }) => name === 'powersupplies')
+        categories.splice(index, 1)
+      }
+
+      if (hasMotherboard) {
+        const index = categories.findIndex(({ name }) => name === 'motherboards')
+        categories.splice(index, 1)
+      }
+
+      if (hasCpu) {
+        const index = categories.findIndex(({ name }) => name === 'cpus')
+        categories.splice(index, 1)
+      }
+
+      if (hasCpuCooler) {
+        const index = categories.findIndex(({ name }) => name === 'cpucoolers')
+        categories.splice(index, 1)
+      }
+
+      return categories
+    },
   },
 
   methods: {
@@ -96,7 +145,7 @@ export default {
 <style lang="scss" scoped>
 dl {
   list-style: none;
-  margin: 20px 0;
+  margin: 20px 0 0;
   padding: 0 10px;
 
   display: grid;
@@ -130,6 +179,14 @@ dl {
         grid-column-end: 5;
       }
     }
+  }
+}
+
+.input-group {
+  padding: 0 10px;
+
+  input, select {
+    flex-grow: 1;
   }
 }
 </style>

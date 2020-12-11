@@ -106,14 +106,16 @@
           {{ item }}
         </li>
       </ul>
+
       <div class="input-group">
-        <input v-model="tempFields.objectives">
         <button
           class="pure-button"
+          :disabled="!tempFields.objectives"
           @click="addNewItem('objectives', tempFields.objectives)"
         >
           Add
         </button>
+        <input v-model="tempFields.objectives">
       </div>
 
       <h6>Existing Parts</h6>
@@ -322,6 +324,13 @@ article {
 
   .card-body {
     padding: 10px;
+
+    .input-group {
+      padding: 0 10px;
+      input {
+        flex-grow: 1;
+      }
+    }
   }
 }
 </style>
