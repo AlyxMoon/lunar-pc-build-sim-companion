@@ -101,8 +101,10 @@
       <h6>Existing Parts</h6>
       <BuildPartsList
         :parts="activeBuild.startingParts"
+        :show-copy="true"
         @addNewItem="addNewItem('startingParts', $event)"
         @removePart="removePart('startingParts', $event)"
+        @copyPart="copyPart($event)"
       />
 
       <h6>New Parts</h6>
@@ -194,6 +196,11 @@ export default {
 
     removePart (field, index) {
       this.activeBuild[field].splice(index, 1)
+      this.$emit('update', this.activeBuild.attributes)
+    },
+
+    copyPart (item) {
+      this.activeBuild.newParts.push(item)
       this.$emit('update', this.activeBuild.attributes)
     },
   },

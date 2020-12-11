@@ -5,6 +5,7 @@ import {
   faChevronLeft,
   faChevronRight,
   faChevronUp,
+  faCopy,
   faPen,
   faSave,
   faTimes,
@@ -25,6 +26,7 @@ library.add(faChevronDown)
 library.add(faChevronLeft)
 library.add(faChevronRight)
 library.add(faChevronUp)
+library.add(faCopy)
 library.add(faPen)
 library.add(faSave)
 library.add(faTimes)

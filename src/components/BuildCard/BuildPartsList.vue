@@ -6,10 +6,23 @@
     >
       <button
         class="pure-button"
+        title="Remove Part"
         @click="$emit('removePart', i)"
       >
-        X
+        <FontAwesomeIcon icon="times" />
       </button>
+
+      <div v-if="!showCopy" />
+
+      <button
+        v-else
+        class="pure-button"
+        title="Copy Part to Other Section"
+        @click="$emit('copyPart', item)"
+      >
+        <FontAwesomeIcon icon="copy" />
+      </button>
+
       <dd>
         {{ displayFilters.currency(item['Price']) }}
       </dd>
@@ -54,8 +67,12 @@ export default {
       type: Array,
       default: () => [],
     },
+    showCopy: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['addNewItem', 'removePart'],
+  emits: ['addNewItem', 'copyPart', 'removePart'],
 
   data: () => ({
     selectedPartCategory: '',
@@ -84,11 +101,11 @@ dl {
 
   display: grid;
   justify-content: flex-start;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto 1fr;
   grid-gap: 0;
 
   @include md {
-    grid-template-columns: auto auto auto 1fr;
+    grid-template-columns: repeat(4, auto) 1fr;
     grid-gap: 5px 3px;
   }
 
@@ -110,7 +127,7 @@ dl {
       @include smAndBelow {
         margin-bottom: 10px;
         grid-column-start: 1;
-        grid-column-end: 4;
+        grid-column-end: 5;
       }
     }
   }
