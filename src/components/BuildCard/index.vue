@@ -92,101 +92,25 @@
         <input v-model="tempFields.objectives">
         <button
           class="pure-button"
-          @click="addNewItem('objectives')"
+          @click="addNewItem('objectives', tempFields.objectives)"
         >
           Add
         </button>
       </div>
 
-      <h6>Starting Parts</h6>
-      <dl>
-        <template
-          v-for="(item, i) in activeBuild.startingParts"
-          :key="`${i}-${item['Full Part Name']}`"
-        >
-          <button
-            class="pure-button"
-            @click="removePart('startingParts', i)"
-          >
-            X
-          </button>
-          <dd>
-            {{ filters.currency(item['Price']) }}
-          </dd>
-          <dd>
-            {{ item['Part Type'] }}
-          </dd>
-          <dd class="part-name">
-            {{ item['Full Part Name'] }}
-          </dd>
-        </template>
-      </dl>
-
-      <div class="input-group">
-        <select
-          v-model="tempFields.startingParts"
-        >
-          <option
-            v-for="category in categories"
-            :key="category"
-            :value="category.name"
-          >
-            {{ category.displayName || category.name }}
-          </option>
-        </select>
-        <button
-          class="pure-button"
-          :disabled="!tempFields.startingParts"
-          @click="addNewItem('startingParts')"
-        >
-          Add
-        </button>
-      </div>
+      <h6>Existing Parts</h6>
+      <BuildPartsList
+        :parts="activeBuild.startingParts"
+        @addNewItem="addNewItem('startingParts', $event)"
+        @removePart="removePart('startingParts', $event)"
+      />
 
       <h6>New Parts</h6>
-      <dl>
-        <template
-          v-for="(item, i) in activeBuild.newParts"
-          :key="`${i}-${item['Full Part Name']}`"
-        >
-          <button
-            class="pure-button"
-            @click="removePart('newParts', i)"
-          >
-            X
-          </button>
-          <dd>
-            {{ filters.currency(item['Price']) }}
-          </dd>
-          <dd>
-            {{ item['Part Type'] }}
-          </dd>
-          <dd class="part-name">
-            {{ item['Full Part Name'] }}
-          </dd>
-        </template>
-      </dl>
-
-      <div class="input-group">
-        <select
-          v-model="tempFields.newParts"
-        >
-          <option
-            v-for="category in categories"
-            :key="category"
-            :value="category.name"
-          >
-            {{ category.displayName || category.name }}
-          </option>
-        </select>
-        <button
-          class="pure-button"
-          :disabled="!tempFields.newParts"
-          @click="addNewItem('newParts')"
-        >
-          Add
-        </button>
-      </div>
+      <BuildPartsList
+        :parts="activeBuild.newParts"
+        @addNewItem="addNewItem('newParts', $event)"
+        @removePart="removePart('newParts', $event)"
+      />
     </div>
   </article>
 </template>
@@ -197,8 +121,13 @@ import currency from '@/lib/filters/currency'
 
 import BuildModel from '@/models/Build'
 
+import BuildPartsList from './BuildPartsList'
+
 export default {
   name: 'BuildCard',
+  components: {
+    BuildPartsList,
+  },
   props: {
     build: {
       type: BuildModel,
@@ -249,13 +178,13 @@ export default {
       }
     },
 
-    addNewItem (field) {
+    addNewItem (field, item) {
       if (field === 'objectives') {
-        this.activeBuild[field].push(this.tempFields[field])
+        this.activeBuild[field].push(item)
         this.$emit('update', this.activeBuild.attributes)
       } else {
         this.$emit('addPartToBuild', {
-          partType: this.tempFields[field],
+          partType: item,
           field,
         })
       }
@@ -348,52 +277,6 @@ article {
 
   .card-body {
     padding: 10px;
-  }
-}
-
-.input-group {
-  margin: 5px 0 10px;
-
-  display: flex;
-  justify-content: flex-start;
-}
-
-dl {
-  list-style: none;
-  margin: 20px 0;
-  padding: 0 10px;
-
-  display: grid;
-  justify-content: flex-start;
-  grid-template-columns: auto auto auto;
-  grid-gap: 0;
-
-  @include md {
-    grid-template-columns: auto auto auto 1fr;
-    grid-gap: 5px 3px;
-  }
-
-  dd {
-    padding: 5px 10px;
-
-    display: flex;
-    align-items: center;
-
-    border: 2px solid #E6E6E6;
-
-    &:not(.part-name) {
-      @include smAndBelow {
-        border-bottom: none;
-      }
-    }
-
-    &.part-name {
-      @include smAndBelow {
-        margin-bottom: 10px;
-        grid-column-start: 1;
-        grid-column-end: 4;
-      }
-    }
   }
 }
 </style>

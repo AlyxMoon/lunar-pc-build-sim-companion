@@ -7,11 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import './styles/main.scss'
 
+import filtersMixin from '@/lib/filters'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 createApp(App)
+  .mixin(filtersMixin)
   .component('FontAwesomeIcon', FontAwesomeIcon)
   .use(store)
   .use(router)
