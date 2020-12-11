@@ -2,6 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const { promisify } = require('util')
 
+const mutate = require('./mutate')
+
 const partCategories = [
   'casefans',
   'cases',
@@ -14,33 +16,28 @@ const partCategories = [
   'storage',
 ]
 
-/* eslint-disable quote-props */
-const colHandlers = {
-  'Level': (data) => Number(data),
-  'Price': (data) => Number(data),
-  'Sell Price': (data) => Number(data),
-  'Part Ranking Score': (data) => Number(data),
-  'Wattage': (data) => Number(data),
-  'Air Flow': (data) => Number(data),
-  'Size': (data) => Number(data) || data,
-  'Size (GB)': (data) => Number(data),
-  'VRAM (GB)': (data) => Number(data),
-  'Frequency': (data) => Number(data),
-}
-/* eslint-enable quote-props */
+const splitStringByCommas = (string = '') => {
+  // capture all items between commas
+  // and account for commas that contain commas in their value
+  // these are wrapped with "" so that's what to check for
+  const regex = /(".*?"|[^",]+)(?=\s*,|\s*$)/g
 
-const convertRawData = raw => {
+  return string.trim()
+    .replace(/,/g, ', ')
+    .match(regex)
+    .map(item => item.trim().replace(/"/g, '').replace(/, +/g, ','))
+}
+
+const convertRawData = (raw, category) => {
   const [headers, ...rows] = raw.trim()
     .split('\n')
-    .map(line => line.trim().split(','))
+    .map(splitStringByCommas)
 
   return rows.map(row => {
     const formatted = {}
 
     for (const col in row) {
-      formatted[headers[col]] = headers[col] in colHandlers
-        ? colHandlers[headers[col]](row[col])
-        : row[col]
+      formatted[headers[col]] = mutate(row[col], headers[col], category)
     }
 
     return formatted
@@ -63,7 +60,7 @@ const main = async () => {
     const formattedFilePath = path.join(finalDirectory, category + '.json')
 
     const rawData = await promisify(fs.readFile)(rawFilePath, 'utf-8')
-    const formattedData = JSON.stringify(convertRawData(rawData), null, 2)
+    const formattedData = JSON.stringify(convertRawData(rawData, category), null, 2)
 
     await promisify(fs.writeFile)(formattedFilePath, formattedData, 'utf-8')
   }
