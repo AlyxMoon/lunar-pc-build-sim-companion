@@ -79,6 +79,19 @@
     </div>
 
     <div class="card-body">
+      <h6>Errors With Build</h6>
+      <ul v-if="!!activeBuild.errors.length">
+        <li
+          v-for="error in activeBuild.errors"
+          :key="error"
+        >
+          {{ error }}
+        </li>
+      </ul>
+      <p v-else>
+        No errors!
+      </p>
+
       <h6>Objectives</h6>
       <ul>
         <li

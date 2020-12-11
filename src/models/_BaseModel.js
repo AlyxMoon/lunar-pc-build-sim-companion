@@ -6,14 +6,26 @@ const reservedAttributes = [
 ]
 
 class Model {
+  _hasErrors = false
+  _errors = []
+
   get attributes () {
     return this._attributes
   }
 
-  constructor (attributes = {}, CurrentClass) {
-    this.assignAttributes(attributes)
+  get hasErrors () {
+    return this._hasErrors
+  }
 
+  get errors () {
+    return this._errors.slice()
+  }
+
+  constructor (attributes = {}, CurrentClass) {
     this.CurrentClass = CurrentClass
+
+    this.assignAttributes(attributes)
+    this.validate()
   }
 
   assignAttributes (attributes) {
@@ -35,7 +47,10 @@ class Model {
 
     Object.defineProperty(this, attribute, {
       get: () => this.get(attribute),
-      set: value => this.set(attribute, value),
+      set: value => {
+        this.set(attribute, value)
+        this.validate()
+      },
     })
   }
 
@@ -49,6 +64,31 @@ class Model {
     }
 
     this._attributes[attribute] = this.deepCopy(value)
+  }
+
+  validate () {
+    this._errors = []
+
+    this.validations().forEach(fn => {
+      const result = fn(this.attributes)
+
+      if (typeof result === 'boolean') {
+        this._hasErrors = this._hasErrors && result
+      }
+
+      if (typeof result === 'string') {
+        this._hasErrors = false
+        this._errors.push(result)
+      }
+
+      if (Array.isArray(result)) {
+        const [valid, message] = result
+        this._hasErrors = this._hasErrors && valid
+        if (message) this._errors.push(message)
+      }
+    })
+
+    return this._hasErrors
   }
 
   deepCopy (value) {
@@ -74,6 +114,8 @@ class Model {
 
   // Intended to be overwritten
   defaults () { return {} }
+
+  validations () { return [] }
 }
 
 export default Model
