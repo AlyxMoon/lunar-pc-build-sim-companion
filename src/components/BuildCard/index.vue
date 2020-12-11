@@ -261,7 +261,7 @@ article {
   .card-title {
     height: 60px;
     width: 100%;
-    padding: 15px 20px;
+    padding-left: 20px;
 
     display: flex;
     align-items: center;
@@ -273,6 +273,16 @@ article {
 
     h4 {
       margin: 0;
+    }
+
+    .pure-button-group {
+      align-self: flex-start;
+      margin: 2px;
+
+      button {
+        border-radius: 0;
+        margin-left: 2px;
+      }
     }
   }
 

@@ -92,11 +92,11 @@ export default {
 
 <style lang="scss" scoped>
 section.build-card-grid {
-  max-width: 50em;
+  width: 100%;
+  max-width: 100em;
   margin: 30px 0;
 
   display: grid;
-  // grid-gap: 20px;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   justify-content: flex-start;
