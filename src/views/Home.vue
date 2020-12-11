@@ -25,7 +25,16 @@
 
     <ul>
       <li>
-        The new parts will be added up and a message will display if you are over budget.
+        If the sum of new parts are above the budget
+      </li>
+      <li>
+        If the power supply fits in the case
+      </li>
+      <li>
+        If the motherboard fits in the case
+      </li>
+      <li>
+        If the CPU is compatible with the motherboard
       </li>
     </ul>
   </div>
