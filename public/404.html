@@ -5,18 +5,11 @@
     <meta http-equiv content="0;URL=/lunar-pc-build-sim-companion">
 
     <script>
-      (() => {
-        var redirect = sessionStorage.redirect
-        delete sessionStorage.redirect
+      sessionStorage.redirect = '/' + location.pathname.slice(1).split('/').slice(1).join('/')
 
-        if (redirect && redirect != location.href) {
-          history.replaceState(null, null, redirect)
-        }
-      })()
-    </script>
-
-    <script>
-      sessionStorage.redirect = location.href
+      location.replace(
+        location.pathname.split('/').slice(0, 2).join('/')
+      )
     </script>
   </head>
 </html>
