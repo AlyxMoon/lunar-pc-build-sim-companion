@@ -16,6 +16,10 @@ const partCategories = [
   'storage',
 ]
 
+const otherFiles = [
+  'program-requirements',
+]
+
 const splitStringByCommas = (string = '') => {
   // capture all items between commas
   // and account for commas that contain commas in their value
@@ -61,6 +65,16 @@ const main = async () => {
 
     const rawData = await promisify(fs.readFile)(rawFilePath, 'utf-8')
     const formattedData = JSON.stringify(convertRawData(rawData, category), null, 2)
+
+    await promisify(fs.writeFile)(formattedFilePath, formattedData, 'utf-8')
+  }
+
+  for (const file of otherFiles) {
+    const rawFilePath = path.join(__dirname, 'data', file + '.csv')
+    const formattedFilePath = path.join(finalDirectory, '..', file + '.json')
+
+    const rawData = await promisify(fs.readFile)(rawFilePath, 'utf-8')
+    const formattedData = JSON.stringify(convertRawData(rawData, file), null, 2)
 
     await promisify(fs.writeFile)(formattedFilePath, formattedData, 'utf-8')
   }

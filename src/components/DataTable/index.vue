@@ -115,6 +115,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    searchField: {
+      type: String,
+      default: 'Full Part Name',
+    },
   },
   emits: ['selected'],
 
@@ -172,7 +176,7 @@ export default {
         }
 
         if (this.searchQuery) {
-          const itemLowerCase = item['Full Part Name'].toLowerCase()
+          const itemLowerCase = item[this.searchField].toLowerCase()
           const queryLowerCase = this.searchQuery.toLowerCase()
           valid = valid && itemLowerCase.includes(queryLowerCase)
         }
