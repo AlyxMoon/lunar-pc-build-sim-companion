@@ -103,10 +103,14 @@ class BuildModel extends BaseModel {
 
   runBenchmark () {
     const cpu = this.findPartOfType('CPU')
-    const gpus = this.findPartOfType('GPU')
-    const memory = this.findPartOfType('Memory')
 
-    if (!cpu || !gpus || !gpus.length || !memory) {
+    const gpus = (this.findPartOfType('GPU') || []).sort((a, b) => {
+      return a['Base Core Freq'] - b['Base Core Freq']
+    })
+
+    const memory = (this.findPartOfType('Memory') || [])
+
+    if (!cpu || !gpus.length || !memory.length) {
       this.estimatedScore = 0
       return
     }
