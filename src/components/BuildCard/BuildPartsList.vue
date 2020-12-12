@@ -12,16 +12,15 @@
         <FontAwesomeIcon icon="times" />
       </button>
 
-      <div v-if="!showCopy" />
-
       <button
-        v-else
+        v-if="!!showCopy"
         class="pure-button"
-        title="Copy Part to Other Section"
+        :title="copyText"
         @click="$emit('copyPart', item)"
       >
         <FontAwesomeIcon icon="copy" />
       </button>
+      <div v-else />
 
       <dd>
         {{ item['Part Type'] }}
@@ -72,6 +71,10 @@ export default {
     showCopy: {
       type: Boolean,
       default: false,
+    },
+    copyText: {
+      type: String,
+      default: '',
     },
   },
   emits: ['addNewItem', 'copyPart', 'removePart'],

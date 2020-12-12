@@ -45,7 +45,7 @@
               :key="col.name"
             >
               <template v-if="col.filter && col.filter === 'currency'">
-                {{ filters.currency(item[col.name]) }}
+                {{ displayFilters.currency(item[col.name]) }}
               </template>
               <template v-else>
                 {{ item[col.name] }}
@@ -95,7 +95,6 @@
 <script>
 import { mapState } from 'vuex'
 
-import currency from '@/lib/filters/currency'
 import SearchBar from './DataTableSearchBar'
 
 export default {
@@ -126,10 +125,6 @@ export default {
     pagination: {
       perPage: 10,
       page: 0,
-    },
-
-    filters: {
-      currency,
     },
 
     checkPlayerLevel: true,

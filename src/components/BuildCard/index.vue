@@ -127,6 +127,7 @@
       <BuildPartsList
         :parts="activeBuild.startingParts"
         :show-copy="true"
+        copy-text="Copy part to other section"
         @addNewItem="addNewItem('startingParts', $event)"
         @removePart="removePart('startingParts', $event)"
         @copyPart="copyPart($event)"
@@ -135,8 +136,11 @@
       <h6>New Parts</h6>
       <BuildPartsList
         :parts="activeBuild.newParts"
+        :show-copy="true"
+        copy-text="Add another of the same part"
         @addNewItem="addNewItem('newParts', $event)"
         @removePart="removePart('newParts', $event)"
+        @copyPart="copyPart($event)"
       />
     </div>
   </article>
