@@ -162,11 +162,7 @@ const state = {
     cpus,
     gpus,
     memory,
-    // todo: correct the motherboard Full Part Name getting parsed incorrectly
-    motherboards: motherboards.map(part => ({
-      ...part,
-      'Full Part Name': part.undefined,
-    })),
+    motherboards,
     powersupplies,
     storage,
   },
