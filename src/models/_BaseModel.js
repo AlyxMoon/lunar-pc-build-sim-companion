@@ -97,13 +97,13 @@ class Model {
   deepCopy (value) {
     let newVal
 
-    if (typeof value === 'object') {
+    if (Array.isArray(value)) {
+      newVal = value.map(val => this.deepCopy(val))
+    } else if (typeof value === 'object') {
       newVal = {}
       for (const [key, val] of Object.entries(value)) {
         newVal[key] = this.deepCopy(val)
       }
-    } else if (Array.isArray(value)) {
-      newVal = value.map(val => this.deepCopy(val))
     } else {
       newVal = value
     }
