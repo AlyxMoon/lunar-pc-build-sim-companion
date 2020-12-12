@@ -24,6 +24,8 @@ class Model {
   constructor (attributes = {}, CurrentClass) {
     this.CurrentClass = CurrentClass
 
+    this.beforeCreate()
+
     this.assignAttributes(attributes)
 
     this.validate()
@@ -119,9 +121,10 @@ class Model {
 
   // Intended to be overwritten
   defaults () { return {} }
-
+  renames () { return {} }
+  mutations () { return {} }
   validations () { return [] }
-
+  beforeCreate () {}
   afterCreate () {}
 }
 

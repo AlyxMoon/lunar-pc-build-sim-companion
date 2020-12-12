@@ -98,7 +98,7 @@ export default {
       let hasCpuCooler
 
       this.parts.forEach(part => {
-        const type = part['Part Type']
+        const type = part['Part Type'] || ''
 
         if (type === 'Case') hasCase = true
         if (type === 'Power Supply') hasPowerSupply = true

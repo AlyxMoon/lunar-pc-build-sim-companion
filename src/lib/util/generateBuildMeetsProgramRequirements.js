@@ -14,7 +14,7 @@ const generateBuildMeetsProgramRequirements = (
 
   // get cpu
   const cpu = availablePartsByCategory.cpus.reduce((best, part) => {
-    if (part['Part Ranking Score'] >= program['CPU score']) {
+    if (part['Basic CPU Score'] >= program['CPU score']) {
       if (best.Price > part.Price) return part
     }
 
@@ -24,7 +24,7 @@ const generateBuildMeetsProgramRequirements = (
   // get gpu
   const gpu = availablePartsByCategory.gpus.reduce((best, part) => {
     if (
-      part['Part Ranking Score'] >= program['GPU score'] &&
+      part['Single GPU Graphics Score'] >= program['GPU score'] &&
       part['VRAM (GB)'] >= program.VRAM
     ) {
       if (best.Price > part.Price) return part
