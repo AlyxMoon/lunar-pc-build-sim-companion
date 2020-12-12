@@ -5,8 +5,6 @@
     <meta http-equiv content="0;URL=/lunar-pc-build-sim-companion">
 
     <script>
-      sessionStorage.redirect = location.href
-
       (() => {
         var redirect = sessionStorage.redirect
         delete sessionStorage.redirect
@@ -15,6 +13,10 @@
           history.replaceState(null, null, redirect)
         }
       })()
+    </script>
+
+    <script>
+      sessionStorage.redirect = location.href
     </script>
   </head>
 </html>

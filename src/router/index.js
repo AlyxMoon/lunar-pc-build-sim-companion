@@ -38,6 +38,10 @@ const routes = [
     name: 'WillItRun',
     component: WillItRun,
   },
+  {
+    path: '/:pathMath(.*)*',
+    redirect: { name: 'Home' },
+  },
 ]
 
 const router = createRouter({
