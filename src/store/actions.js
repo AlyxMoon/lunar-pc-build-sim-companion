@@ -1,7 +1,10 @@
 import BuildModel from '@/models/Build'
 
 export const createBuild = (context, data) => {
-  const build = new BuildModel(data)
+  const build = data instanceof BuildModel
+    ? data
+    : new BuildModel(data)
+
   context.commit('CREATE_BUILD', build)
 }
 

@@ -1,6 +1,7 @@
 
 const numFields = [
   'Level',
+  'Percent Through',
   'Price',
   'Sell Price',
   'Part Ranking Score',
@@ -9,6 +10,8 @@ const numFields = [
   'Size (GB)',
   'VRAM (GB)',
   'Frequency',
+  'Height',
+  'Length',
 
   'Cores',
   'CoreClockMultiplier',
@@ -18,6 +21,17 @@ const numFields = [
   'OC Base Freq',
   'Max Memory Channels',
   'Default Memory Speed',
+
+  // program requirements
+  'Storage (GB)',
+  'RAM (GB)',
+  'CPU score',
+  'GPU score',
+  'VRAM',
+  'Benchmark',
+  'Case Fan Type 1 Count',
+  'Case Fan Type 2 Count',
+  'Case Fan Type 3 Count',
 ]
 
 const numIfIncludes = [
@@ -72,6 +86,9 @@ const fieldsAlwaysBoolean = [
 
   // power-supplies
   'Includes Heatsink',
+
+  // program requirements
+  'Is Game',
 ]
 
 const isBooleanField = (field, category) => {

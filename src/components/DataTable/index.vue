@@ -16,7 +16,12 @@
               :key="header.name"
               @click="toggleSort(header.name)"
             >
-              {{ header.displayName || header.name }}
+              <template v-if="'displayName' in header">
+                {{ header.displayName }}
+              </template>
+              <template v-else>
+                {{ header.name }}
+              </template>
 
               <FontAwesomeIcon
                 v-if="sortBy === header.name"
@@ -41,15 +46,21 @@
               </button>
             </td>
             <td
-              v-for="col in headers"
+              v-for="(col, index) in headers"
               :key="col.name"
             >
-              <template v-if="col.filter && col.filter === 'currency'">
-                {{ displayFilters.currency(item[col.name]) }}
-              </template>
-              <template v-else>
-                {{ item[col.name] }}
-              </template>
+              <slot
+                :name="`column-${index}`"
+                :item="item"
+                :value="item[col.name]"
+              >
+                <template v-if="col.filter && col.filter in displayFilters">
+                  {{ displayFilters[col.filter](item[col.name]) }}
+                </template>
+                <template v-else>
+                  {{ item[col.name] }}
+                </template>
+              </slot>
             </td>
           </tr>
         </tbody>

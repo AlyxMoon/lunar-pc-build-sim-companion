@@ -58,7 +58,7 @@ const checkMotherboardFitsInCase = build => {
   if (!computerCase || !motherboard) return true
 
   return (
-    computerCase[motherboard.Size] === 'Y' ||
+    computerCase[motherboard.Size] ||
     'The motherboard will not fit in the case.'
   )
 }
@@ -79,7 +79,7 @@ const checkPowerSupplyFitsInCase = build => {
   if (!computerCase || !powerSupply) return true
 
   return (
-    computerCase[`PSU ${powerSupply.Size}`] === 'Y' ||
+    computerCase[`PSU ${powerSupply.Size}`] ||
     'The power supply will not fit in the case.'
   )
 }
