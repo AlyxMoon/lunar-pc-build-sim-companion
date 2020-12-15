@@ -6,6 +6,28 @@
   </p>
 
   <div>
+    <h5>App Data</h5>
+
+    <p>Want to save the data in the app? This will save it to a json file which can be imported later.</p>
+    <button
+      class="pure-button"
+      title="Export player data"
+      @click="exportPlayerData"
+    >
+      Export Data
+    </button>
+
+    <p>Want to import data you previously exported? Got it here.</p>
+    <input
+      type="file"
+      accept=".json, .txt"
+      ref="importData"
+      :disable="handlingImport"
+      @change="handleFileInput"
+    >
+  </div>
+
+  <div>
     <h5>General Options</h5>
 
     <label for="player-level">
@@ -41,8 +63,14 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'PageActiveBuild',
+
+  data: () => ({
+    handlingImport: false,
+  }),
 
   computed: {
     playerLevel: {
@@ -53,6 +81,31 @@ export default {
       set (value) {
         this.$store.commit('UPDATE_PLAYER_LEVEL', value)
       },
+    },
+  },
+
+  methods: {
+    ...mapActions(['exportPlayerData', 'importPlayerData']),
+
+    handleFileInput () {
+      this.handlingImport = true
+
+      const reader = new FileReader()
+
+      reader.onload = event => {
+        this.$refs.importData.value = null
+        try {
+          const stuff = JSON.parse(event.target.result)
+          this.importPlayerData(stuff)
+          alert('Import successful!')
+        } catch (error) {
+          console.error('could not parse JSON, was the file correct?', error)
+        }
+
+        this.handlingImport = false
+      }
+
+      reader.readAsText(this.$refs.importData.files[0])
     },
   },
 }

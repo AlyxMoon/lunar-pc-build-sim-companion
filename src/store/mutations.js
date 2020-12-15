@@ -15,6 +15,10 @@ export const REMOVE_BUILD = (state, payload) => {
   state.builds.splice(payload.index, 1)
 }
 
+export const SET_ALL_BUILDS = (state, payload) => {
+  state.builds = payload
+}
+
 export const CLEAR_ALL_BUILDS = (state) => {
   state.builds = []
 }
