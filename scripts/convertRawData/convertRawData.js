@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url'
 import { promisify } from 'util'
 
 import mutate from './mutate'
+import ModelProgramRequirements from '../../src/models/ProgramRequirements'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -26,7 +27,7 @@ const partCategories = [
 ]
 
 const otherFiles = [
-  'program-requirements',
+  ['program-requirements', ModelProgramRequirements],
 ]
 
 const splitStringByCommas = (string = '') => {
@@ -50,7 +51,11 @@ const convertRawData = (raw, category) => {
     const formatted = {}
 
     for (const col in row) {
-      formatted[headers[col]] = mutate(row[col], headers[col], category)
+      if (category) {
+        formatted[headers[col]] = mutate(row[col], headers[col], category)
+      } else {
+        formatted[headers[col]] = row[col]
+      }
     }
 
     return formatted
@@ -78,14 +83,19 @@ const main = async () => {
     await promisify(writeFile)(formattedFilePath, formattedData, 'utf-8')
   }
 
-  for (const file of otherFiles) {
+  for (const [file, Model] of otherFiles) {
     const rawFilePath = join(__dirname, 'data', file + '.csv')
     const formattedFilePath = join(finalDirectory, '..', file + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
-    const formattedData = convertRawData(rawData, file)
+    const rows = convertRawData(rawData)
 
-    await promisify(writeFile)(formattedFilePath, JSON.stringify(formattedData, null, 2), 'utf-8')
+    const data = rows.map(row => {
+      const model = new Model(row)
+      return model.attributes
+    })
+
+    await promisify(writeFile)(formattedFilePath, JSON.stringify(data), 'utf-8')
   }
 }
 

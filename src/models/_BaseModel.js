@@ -21,16 +21,14 @@ class Model {
     return this._errors.slice()
   }
 
-  constructor (attributes = {}, CurrentClass) {
-    this.CurrentClass = CurrentClass
+  constructor (attributes = {}) {
+    const activeAttributes = this.deepCopy(attributes)
 
-    this.beforeCreate()
-
-    this.assignAttributes(attributes)
-
-    this.validate()
-
+    this.beforeCreate(activeAttributes)
+    this.assignAttributes(activeAttributes)
+    this.runMutations()
     this.afterCreate()
+    this.validate()
   }
 
   assignAttributes (attributes) {
@@ -64,11 +62,16 @@ class Model {
   }
 
   set (attribute, value) {
-    if (!(attribute in this._attributes)) {
-      this.registerAttribute(attribute)
+    const field = this.runSingleFieldAlias(attribute)
+
+    const toKeep = this.keepAttributes()
+    if (toKeep.length && !toKeep.includes(field)) return
+
+    if (!(field in this._attributes)) {
+      this.registerAttribute(field)
     }
 
-    this._attributes[attribute] = this.deepCopy(value)
+    this._attributes[field] = this.deepCopy(value)
   }
 
   validate () {
@@ -116,12 +119,42 @@ class Model {
   }
 
   clone () {
-    return new this.CurrentClass(this._attributes)
+    return new this.constructor(this.attributes)
+  }
+
+  runSingleFieldAlias (attribute = '') {
+    const aliases = this.fieldAliases()
+
+    return attribute in aliases
+      ? aliases[attribute]
+      : attribute
+  }
+
+  runFieldAliases (attributes = {}) {
+    const aliases = this.fieldAliases()
+
+    for (const [oldName, newName] of Object.entries(aliases)) {
+      if (oldName in attributes) {
+        attributes[newName] = attributes[oldName]
+        delete attributes[oldName]
+      }
+    }
+
+    return attributes
+  }
+
+  runMutations () {
+    for (const [field, func] of Object.entries(this.mutations())) {
+      if (field in this.attributes) {
+        this.set(field, func(this.get(field)))
+      }
+    }
   }
 
   // Intended to be overwritten
   defaults () { return {} }
-  renames () { return {} }
+  fieldAliases () { return {} }
+  keepAttributes () { return [] }
   mutations () { return {} }
   validations () { return [] }
   beforeCreate () {}

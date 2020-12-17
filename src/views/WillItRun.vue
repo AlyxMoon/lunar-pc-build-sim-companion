@@ -4,7 +4,7 @@
   <DataTable
     :headers="headers"
     :items="programRequirements"
-    search-field="Name"
+    search-field="name"
   >
     <template #column-0="{ item }">
       <button
@@ -33,13 +33,13 @@ export default {
   data: () => ({
     headers: [
       { name: 'actions', displayName: '' },
-      { name: 'Name' },
-      { name: 'Type' },
-      { name: 'CPU score' },
-      { name: 'GPU score' },
-      { name: 'VRAM' },
-      { name: 'RAM (GB)' },
-      { name: 'Storage (GB)' },
+      { name: 'name', displayName: 'Name' },
+      { name: 'type', displayName: 'Type' },
+      { name: 'cpuScore', displayName: 'CPU score' },
+      { name: 'gpuScore', displayName: 'GPU Score' },
+      { name: 'gpuVram', displayName: 'GPU VRAM (GB)' },
+      { name: 'memory', displayName: 'Memory (GB)' },
+      { name: 'storage', displayName: 'Storage (GB)' },
     ],
   }),
 

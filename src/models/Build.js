@@ -85,10 +85,6 @@ const checkPowerSupplyFitsInCase = build => {
 }
 
 class BuildModel extends BaseModel {
-  constructor (attributes) {
-    super(attributes, BuildModel)
-  }
-
   defaults () {
     return {
       name: 'New Build',

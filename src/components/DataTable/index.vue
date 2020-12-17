@@ -183,7 +183,8 @@ export default {
         let valid = true
 
         if (this.checkPlayerLevel) {
-          valid = valid && item.Level <= this.playerLevel
+          const level = item.Level || item.level || 1
+          valid = valid && level <= this.playerLevel
         }
 
         if (this.searchQuery) {
