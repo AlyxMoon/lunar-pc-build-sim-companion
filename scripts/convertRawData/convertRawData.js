@@ -1,8 +1,17 @@
-const fs = require('fs')
-const path = require('path')
-const { promisify } = require('util')
 
-const mutate = require('./mutate')
+import {
+  existsSync,
+  mkdir,
+  readFile,
+  writeFile,
+} from 'fs'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
+import { promisify } from 'util'
+
+import mutate from './mutate'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const partCategories = [
   'casefans',
@@ -49,34 +58,34 @@ const convertRawData = (raw, category) => {
 }
 
 const main = async () => {
-  const dataDirectory = path.join(__dirname, '../../src/assets/data')
-  const finalDirectory = path.join(dataDirectory, 'parts')
+  const dataDirectory = join(__dirname, '../../src/assets/data')
+  const finalDirectory = join(dataDirectory, 'parts')
 
-  if (!fs.existsSync(dataDirectory)) {
-    await promisify(fs.mkdir)(dataDirectory)
+  if (!existsSync(dataDirectory)) {
+    await promisify(mkdir)(dataDirectory)
   }
-  if (!fs.existsSync(finalDirectory)) {
-    await promisify(fs.mkdir)(finalDirectory)
+  if (!existsSync(finalDirectory)) {
+    await promisify(mkdir)(finalDirectory)
   }
 
   for (const category of partCategories) {
-    const rawFilePath = path.join(__dirname, 'data', category + '.csv')
-    const formattedFilePath = path.join(finalDirectory, category + '.json')
+    const rawFilePath = join(__dirname, 'data', category + '.csv')
+    const formattedFilePath = join(finalDirectory, category + '.json')
 
-    const rawData = await promisify(fs.readFile)(rawFilePath, 'utf-8')
+    const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
     const formattedData = JSON.stringify(convertRawData(rawData, category), null, 2)
 
-    await promisify(fs.writeFile)(formattedFilePath, formattedData, 'utf-8')
+    await promisify(writeFile)(formattedFilePath, formattedData, 'utf-8')
   }
 
   for (const file of otherFiles) {
-    const rawFilePath = path.join(__dirname, 'data', file + '.csv')
-    const formattedFilePath = path.join(finalDirectory, '..', file + '.json')
+    const rawFilePath = join(__dirname, 'data', file + '.csv')
+    const formattedFilePath = join(finalDirectory, '..', file + '.json')
 
-    const rawData = await promisify(fs.readFile)(rawFilePath, 'utf-8')
-    const formattedData = JSON.stringify(convertRawData(rawData, file), null, 2)
+    const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
+    const formattedData = convertRawData(rawData, file)
 
-    await promisify(fs.writeFile)(formattedFilePath, formattedData, 'utf-8')
+    await promisify(writeFile)(formattedFilePath, JSON.stringify(formattedData, null, 2), 'utf-8')
   }
 }
 

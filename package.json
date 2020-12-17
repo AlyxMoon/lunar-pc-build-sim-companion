@@ -2,12 +2,16 @@
   "name": "lunar-pc-build-sim-companion",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=0.14"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "convert-raw-data": "node ./scripts/convertRawData/convertRawData.js"
+    "convert-raw-data": "node --experimental-specifier-resolution=node ./scripts/convertRawData/convertRawData.js"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",

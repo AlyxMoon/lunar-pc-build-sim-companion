@@ -115,4 +115,4 @@ const mutate = (value, field, category) => {
   return value
 }
 
-module.exports = mutate
+export default mutate
