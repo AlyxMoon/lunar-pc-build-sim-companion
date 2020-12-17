@@ -1,18 +1,15 @@
 
-import {
+const {
   existsSync,
   mkdir,
   readFile,
   writeFile,
-} from 'fs'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
-import { promisify } from 'util'
+} = require('fs')
+const { join } = require('path')
+const { promisify } = require('util')
 
-import mutate from './mutate'
-import ModelProgramRequirements from '../../src/models/ProgramRequirements'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const mutate = require('./mutate')
+const ModelProgramRequirements = require('../../src/models/ProgramRequirements')
 
 const partCategories = [
   'casefans',
@@ -88,7 +85,7 @@ const main = async () => {
     const formattedFilePath = join(finalDirectory, '..', file + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
-    const rows = convertRawData(rawData)
+    const rows = convertRawData(rawData, '')
 
     const data = rows.map(row => {
       const model = new Model(row)
