@@ -193,16 +193,6 @@ export default {
     },
   },
 
-  watch: {
-    build: {
-      handler () {
-        this.activeBuild = this.build.clone()
-        this.activeBuild.runBenchmark()
-      },
-      deep: true,
-    },
-  },
-
   methods: {
     toggleEdit () {
       this.editing = !this.editing
