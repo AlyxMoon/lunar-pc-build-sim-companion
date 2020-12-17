@@ -6,15 +6,15 @@ const generateBuildMeetsProgramRequirements = (
   availablePartsByCategory,
 ) => {
   const attributes = {
-    name: `New Build - run ${program.Name} ${program.Type}`,
+    name: `New Build - run ${program.get('name', true)} | ${program.get('type', true)}`,
     objectives: [
-      `Meet requirements to run ${program.Name} ${program.Type}`,
+      `Meet requirements to run ${program.get('name', true)} | ${program.get('type', true)}`,
     ],
   }
 
   // get cpu
   const cpu = availablePartsByCategory.cpus.reduce((best, part) => {
-    if (part['Basic CPU Score'] >= program['CPU score']) {
+    if (part['Basic CPU Score'] >= program.cpuScore) {
       if (best.Price > part.Price) return part
     }
 
@@ -24,8 +24,8 @@ const generateBuildMeetsProgramRequirements = (
   // get gpu
   const gpu = availablePartsByCategory.gpus.reduce((best, part) => {
     if (
-      part['Single GPU Graphics Score'] >= program['GPU score'] &&
-      part['VRAM (GB)'] >= program.VRAM
+      part['Single GPU Graphics Score'] >= program.gpuScore &&
+      part['VRAM (GB)'] >= program.gpuVram
     ) {
       if (best.Price > part.Price) return part
     }
@@ -35,7 +35,7 @@ const generateBuildMeetsProgramRequirements = (
 
   // get memory
   const memory = availablePartsByCategory.memory.reduce((best, part) => {
-    if (part['Size (GB)'] >= program['RAM (GB)']) {
+    if (part['Size (GB)'] >= program.memory) {
       if (best.Price > part.Price) return part
     }
 
@@ -44,7 +44,7 @@ const generateBuildMeetsProgramRequirements = (
 
   // get storage
   const storage = availablePartsByCategory.storage.reduce((best, part) => {
-    if (part['Size (GB)'] >= program['Storage (GB)']) {
+    if (part['Size (GB)'] >= program.storage) {
       if (best.Price > part.Price) return part
     }
 
