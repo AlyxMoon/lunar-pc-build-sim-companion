@@ -37,9 +37,9 @@ export default {
       { name: 'type', displayName: 'Type' },
       { name: 'cpuScore', displayName: 'CPU score' },
       { name: 'gpuScore', displayName: 'GPU Score' },
-      { name: 'gpuVram', displayName: 'GPU VRAM (GB)' },
-      { name: 'memory', displayName: 'Memory (GB)' },
-      { name: 'storage', displayName: 'Storage (GB)' },
+      { name: 'gpuVram', displayName: 'GPU VRAM' },
+      { name: 'memory', displayName: 'Memory' },
+      { name: 'storage', displayName: 'Storage' },
     ],
   }),
 

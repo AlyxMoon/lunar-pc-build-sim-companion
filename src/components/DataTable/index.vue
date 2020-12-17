@@ -58,7 +58,7 @@
                   {{ displayFilters[col.filter](item[col.name]) }}
                 </template>
                 <template v-else>
-                  {{ item[col.name] }}
+                  {{ item.get ? item.get(col.name, true) : item[col.name] }}
                 </template>
               </slot>
             </td>

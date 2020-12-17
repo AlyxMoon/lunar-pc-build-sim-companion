@@ -57,8 +57,11 @@ class Model {
     })
   }
 
-  get (attribute) {
-    return this._attributes[attribute]
+  get (attribute, addDisplayFilter = false) {
+    const filter = addDisplayFilter && this.displayFilters()[attribute]
+    const val = this._attributes[attribute]
+
+    return filter ? filter(val, this) : val
   }
 
   set (attribute, value) {
@@ -159,6 +162,7 @@ class Model {
   validations () { return [] }
   beforeCreate () {}
   afterCreate () {}
+  displayFilters () { return {} }
 }
 
 export default Model

@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
+import ProgramRequirementsModel from '@/models/ProgramRequirements'
+
 import * as actions from './actions'
 import * as mutations from './mutations'
 
@@ -153,7 +155,7 @@ const categories = [
 ]
 
 const state = {
-  programRequirements,
+  programRequirements: programRequirements.map(item => new ProgramRequirementsModel(item)),
   categories,
   parts: {
     casefans,
