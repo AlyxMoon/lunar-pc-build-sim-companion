@@ -6,8 +6,9 @@ const reservedAttributes = [
 ]
 
 class Model {
+  _attributes: any
   _hasErrors = false
-  _errors = []
+  _errors: string[] = []
 
   get attributes () {
     return this._attributes
@@ -31,7 +32,7 @@ class Model {
     this.validate()
   }
 
-  assignAttributes (attributes) {
+  assignAttributes (attributes: any) {
     this._attributes = reactive({})
 
     for (const [key, value] of Object.entries(this.defaults())) {
@@ -43,7 +44,7 @@ class Model {
     }
   }
 
-  registerAttribute (attribute) {
+  registerAttribute (attribute: string) {
     if (reservedAttributes.includes(attribute)) {
       throw new Error(`The attribute name ${attribute} is reserved and cannot be used`)
     }
@@ -57,17 +58,19 @@ class Model {
     })
   }
 
-  get (attribute, addDisplayFilter = false) {
-    const filter = addDisplayFilter && this.displayFilters()[attribute]
+  get (attribute: string, addDisplayFilter = false) {
+    const filter: any = (this.displayFilters() as { [key: string]: Function })[attribute]
+
+    const runFilter = addDisplayFilter && !!filter
     const val = this._attributes[attribute]
 
-    return filter ? filter(val, this) : val
+    return runFilter ? filter(val, this) : val
   }
 
-  set (attribute, value) {
-    const field = this.runSingleFieldAlias(attribute)
+  set (attribute: string, value: any) {
+    const field: string = this.runSingleFieldAlias(attribute)
 
-    const toKeep = this.keepAttributes()
+    const toKeep: string[] = this.keepAttributes() || []
     if (toKeep.length && !toKeep.includes(field)) return
 
     if (!(field in this._attributes)) {
@@ -80,8 +83,10 @@ class Model {
   validate () {
     this._errors = []
 
-    this.validations().forEach(fn => {
-      const result = fn(this.attributes)
+    const validations: Function[] = this.validations()
+
+    validations.forEach((fn: Function) => {
+      const result: any = fn(this.attributes)
 
       if (typeof result === 'boolean') {
         this._hasErrors = this._hasErrors && result
@@ -102,8 +107,8 @@ class Model {
     return this._hasErrors
   }
 
-  deepCopy (value) {
-    let newVal
+  deepCopy (value: any) {
+    let newVal: any
 
     if (value === null || value === undefined) {
       newVal = null
@@ -122,19 +127,19 @@ class Model {
   }
 
   clone () {
-    return new this.constructor(this.attributes)
+    return new (this.constructor as any)(this.attributes)
   }
 
   runSingleFieldAlias (attribute = '') {
-    const aliases = this.fieldAliases()
+    const aliases: { [key: string]: string } = this.fieldAliases()
 
     return attribute in aliases
       ? aliases[attribute]
       : attribute
   }
 
-  runFieldAliases (attributes = {}) {
-    const aliases = this.fieldAliases()
+  runFieldAliases (attributes: { [key: string]: any } = {}) {
+    const aliases: { [key: string]: string } = this.fieldAliases()
 
     for (const [oldName, newName] of Object.entries(aliases)) {
       if (oldName in attributes) {
@@ -147,7 +152,9 @@ class Model {
   }
 
   runMutations () {
-    for (const [field, func] of Object.entries(this.mutations())) {
+    const mutations: [string, Function][] = Object.entries(this.mutations())
+
+    for (const [field, func] of mutations) {
       if (field in this.attributes) {
         this.set(field, func(this.get(field)))
       }
@@ -157,10 +164,10 @@ class Model {
   // Intended to be overwritten
   defaults () { return {} }
   fieldAliases () { return {} }
-  keepAttributes () { return [] }
+  keepAttributes (): string[] { return [] }
   mutations () { return {} }
-  validations () { return [] }
-  beforeCreate () {}
+  validations (): Function[] { return [] }
+  beforeCreate (attributes: { [key: string]: any }) {}
   afterCreate () {}
   displayFilters () { return {} }
 }

@@ -1,8 +1,8 @@
 import BaseModel from './_BaseModel'
 
-const ensureNewPartsUnderBudget = build => {
+const ensureNewPartsUnderBudget = (build: any) => {
   const { budget, newParts } = build
-  const sumOfNewParts = newParts.reduce((sum, part) => sum + part.Price, 0)
+  const sumOfNewParts = newParts.reduce((sum: number, part: any) => sum + part.Price, 0)
 
   return (
     budget >= sumOfNewParts ||
@@ -10,17 +10,17 @@ const ensureNewPartsUnderBudget = build => {
   )
 }
 
-const checkCpuCompatibleWithMotherboard = build => {
+const checkCpuCompatibleWithMotherboard = (build: any) => {
   const { startingParts, newParts } = build
 
   const cpu = (
-    newParts.find(part => part['Part Type'] === 'CPU') ||
-    startingParts.find(part => part['Part Type'] === 'CPU')
+    newParts.find((part: any) => part['Part Type'] === 'CPU') ||
+    startingParts.find((part: any) => part['Part Type'] === 'CPU')
   )
 
   const motherboard = (
-    newParts.find(part => part['Part Type'] === 'Motherboard') ||
-    startingParts.find(part => part['Part Type'] === 'Motherboard')
+    newParts.find((part: any) => part['Part Type'] === 'Motherboard') ||
+    startingParts.find((part: any) => part['Part Type'] === 'Motherboard')
   )
 
   if (!cpu || !motherboard) return true
@@ -42,17 +42,17 @@ const checkCpuCompatibleWithMotherboard = build => {
   )
 }
 
-const checkMotherboardFitsInCase = build => {
+const checkMotherboardFitsInCase = (build: any) => {
   const { startingParts, newParts } = build
 
   const computerCase = (
-    newParts.find(part => part['Part Type'] === 'Case') ||
-    startingParts.find(part => part['Part Type'] === 'Case')
+    newParts.find((part: any) => part['Part Type'] === 'Case') ||
+    startingParts.find((part: any) => part['Part Type'] === 'Case')
   )
 
   const motherboard = (
-    newParts.find(part => part['Part Type'] === 'Motherboard') ||
-    startingParts.find(part => part['Part Type'] === 'Motherboard')
+    newParts.find((part: any) => part['Part Type'] === 'Motherboard') ||
+    startingParts.find((part: any) => part['Part Type'] === 'Motherboard')
   )
 
   if (!computerCase || !motherboard) return true
@@ -63,17 +63,17 @@ const checkMotherboardFitsInCase = build => {
   )
 }
 
-const checkPowerSupplyFitsInCase = build => {
+const checkPowerSupplyFitsInCase = (build: any) => {
   const { startingParts, newParts } = build
 
   const computerCase = (
-    newParts.find(part => part['Part Type'] === 'Case') ||
-    startingParts.find(part => part['Part Type'] === 'Case')
+    newParts.find((part: any) => part['Part Type'] === 'Case') ||
+    startingParts.find((part: any) => part['Part Type'] === 'Case')
   )
 
   const powerSupply = (
-    newParts.find(part => part['Part Type'] === 'Power Supply') ||
-    startingParts.find(part => part['Part Type'] === 'Power Supply')
+    newParts.find((part: any) => part['Part Type'] === 'Power Supply') ||
+    startingParts.find((part: any) => part['Part Type'] === 'Power Supply')
   )
 
   if (!computerCase || !powerSupply) return true
@@ -85,6 +85,8 @@ const checkPowerSupplyFitsInCase = build => {
 }
 
 class BuildModel extends BaseModel {
+  [key: string]: any
+
   defaults () {
     return {
       name: 'New Build',
@@ -100,7 +102,7 @@ class BuildModel extends BaseModel {
   runBenchmark () {
     const cpu = this.findPartOfType('CPU')
 
-    const gpus = (this.findPartOfType('GPU') || []).sort((a, b) => {
+    const gpus = (this.findPartOfType('GPU') || []).sort((a: any, b: any) => {
       return a['Base Core Freq'] - b['Base Core Freq']
     })
 
@@ -156,12 +158,12 @@ class BuildModel extends BaseModel {
     return this.estimatedScore
   }
 
-  findPartOfType (type) {
-    const startingPartsOfType = this.startingParts.filter(part => {
+  findPartOfType (type: string) {
+    const startingPartsOfType = this.startingParts.filter((part: any) => {
       return part['Part Type'] === type
     })
 
-    const newPartsOfType = this.newParts.filter(part => {
+    const newPartsOfType = this.newParts.filter((part: any) => {
       return part['Part Type'] === type
     })
 

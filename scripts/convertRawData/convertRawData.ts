@@ -1,4 +1,7 @@
 
+import ModelProgramRequirements from '../../src/models/ProgramRequirements'
+import mutate from './mutate'
+
 const {
   existsSync,
   mkdir,
@@ -8,8 +11,7 @@ const {
 const { join } = require('path')
 const { promisify } = require('util')
 
-const mutate = require('./mutate')
-const ModelProgramRequirements = require('../../src/models/ProgramRequirements')
+declare const __dirname: string
 
 const partCategories = [
   'casefans',
@@ -33,19 +35,17 @@ const splitStringByCommas = (string = '') => {
   // these are wrapped with "" so that's what to check for
   const regex = /(".*?"|[^",]+)(?=\s*,|\s*$)/g
 
-  return string.trim()
-    .replace(/,/g, ', ')
-    .match(regex)
+  return (string.trim().replace(/,/g, ', ').match(regex) || [])
     .map(item => item.trim().replace(/"/g, '').replace(/, +/g, ','))
 }
 
-const convertRawData = (raw, category) => {
+const convertRawData = (raw: string, category: string) => {
   const [headers, ...rows] = raw.trim()
     .split('\n')
     .map(splitStringByCommas)
 
   return rows.map(row => {
-    const formatted = {}
+    const formatted: any = {}
 
     for (const col in row) {
       if (category) {
@@ -71,7 +71,7 @@ const main = async () => {
   }
 
   for (const category of partCategories) {
-    const rawFilePath = join(__dirname, 'data', category + '.csv')
+    const rawFilePath = join(__dirname, `data/${category}.csv`)
     const formattedFilePath = join(finalDirectory, category + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
@@ -81,14 +81,14 @@ const main = async () => {
   }
 
   for (const [file, Model] of otherFiles) {
-    const rawFilePath = join(__dirname, 'data', file + '.csv')
+    const rawFilePath = join(__dirname, `data/${file}.csv`)
     const formattedFilePath = join(finalDirectory, '..', file + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
     const rows = convertRawData(rawData, '')
 
     const data = rows.map(row => {
-      const model = new Model(row)
+      const model = new (Model as any)(row)
       return model.attributes
     })
 
