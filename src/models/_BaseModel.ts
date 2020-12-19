@@ -1,3 +1,4 @@
+import { DisplayFunctionMap, Model, MutationFunctionMap, PlainObject, StringArray, StringMap, ValidationFunctionArray } from '@/typings/interface'
 import { reactive } from 'vue'
 
 const reservedAttributes = [
@@ -5,20 +6,20 @@ const reservedAttributes = [
   'attributes',
 ]
 
-class Model {
-  _attributes: any
+class BaseModel implements Model {
+  _attributes = {} as PlainObject
   _hasErrors = false
-  _errors: string[] = []
+  _errors = [] as StringArray
 
-  get attributes () {
+  get attributes (): PlainObject {
     return this._attributes
   }
 
-  get hasErrors () {
+  get hasErrors (): boolean {
     return this._hasErrors
   }
 
-  get errors () {
+  get errors (): StringArray {
     return this._errors.slice()
   }
 
@@ -32,7 +33,7 @@ class Model {
     this.validate()
   }
 
-  assignAttributes (attributes: any) {
+  assignAttributes (attributes: any): void {
     this._attributes = reactive({})
 
     for (const [key, value] of Object.entries(this.defaults())) {
@@ -44,7 +45,7 @@ class Model {
     }
   }
 
-  registerAttribute (attribute: string) {
+  registerAttribute (attribute: string): void {
     if (reservedAttributes.includes(attribute)) {
       throw new Error(`The attribute name ${attribute} is reserved and cannot be used`)
     }
@@ -58,16 +59,16 @@ class Model {
     })
   }
 
-  get (attribute: string, addDisplayFilter = false) {
+  get (attribute: string, addDisplayFilter = false): any {
     const filter: any = (this.displayFilters() as { [key: string]: Function })[attribute]
 
     const runFilter = addDisplayFilter && !!filter
-    const val = this._attributes[attribute]
+    const val: any = this._attributes[attribute]
 
     return runFilter ? filter(val, this) : val
   }
 
-  set (attribute: string, value: any) {
+  set (attribute: string, value: any): any {
     const field: string = this.runSingleFieldAlias(attribute)
 
     const toKeep: string[] = this.keepAttributes() || []
@@ -78,9 +79,10 @@ class Model {
     }
 
     this._attributes[field] = this.deepCopy(value)
+    return this._attributes[field]
   }
 
-  validate () {
+  validate (): boolean {
     this._errors = []
 
     const validations: Function[] = this.validations()
@@ -107,7 +109,7 @@ class Model {
     return this._hasErrors
   }
 
-  deepCopy (value: any) {
+  deepCopy (value: any): any {
     let newVal: any
 
     if (value === null || value === undefined) {
@@ -126,19 +128,19 @@ class Model {
     return value
   }
 
-  clone () {
+  clone (): this {
     return new (this.constructor as any)(this.attributes)
   }
 
-  runSingleFieldAlias (attribute = '') {
+  runSingleFieldAlias (field = ''): string {
     const aliases: { [key: string]: string } = this.fieldAliases()
 
-    return attribute in aliases
-      ? aliases[attribute]
-      : attribute
+    return field in aliases
+      ? aliases[field]
+      : field
   }
 
-  runFieldAliases (attributes: { [key: string]: any } = {}) {
+  runFieldAliases (attributes: PlainObject): PlainObject {
     const aliases: { [key: string]: string } = this.fieldAliases()
 
     for (const [oldName, newName] of Object.entries(aliases)) {
@@ -151,7 +153,7 @@ class Model {
     return attributes
   }
 
-  runMutations () {
+  runMutations (): void {
     const mutations: [string, Function][] = Object.entries(this.mutations())
 
     for (const [field, func] of mutations) {
@@ -162,14 +164,16 @@ class Model {
   }
 
   // Intended to be overwritten
-  defaults () { return {} }
-  fieldAliases () { return {} }
-  keepAttributes (): string[] { return [] }
-  mutations () { return {} }
-  validations (): Function[] { return [] }
-  beforeCreate (attributes: { [key: string]: any }) {}
-  afterCreate () {}
-  displayFilters () { return {} }
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  defaults (): PlainObject { return {} }
+  fieldAliases (): StringMap { return {} }
+  keepAttributes (): StringArray { return [] }
+  mutations (): MutationFunctionMap { return {} }
+  validations (): ValidationFunctionArray { return [] }
+  beforeCreate (attributes: PlainObject): void {}
+  afterCreate (): void {}
+  displayFilters (): DisplayFunctionMap { return {} }
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 }
 
-export default Model
+export default BaseModel

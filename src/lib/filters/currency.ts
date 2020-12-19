@@ -1,5 +1,5 @@
 
-const filterCurrency = (value) => {
+const filterCurrency = (value: any): any => {
   if (
     !(value || value === 0) ||
     !['number', 'string'].includes(typeof value)

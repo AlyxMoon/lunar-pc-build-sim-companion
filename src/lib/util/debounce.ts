@@ -1,13 +1,17 @@
 
-const debounce = (func, wait = 1000, immediate = false) => {
-  let timer
+const debounce = (
+  func: Function,
+  wait = 1000,
+  immediate = false,
+): Function => {
+  let timer: number
 
-  return function () {
+  return function (this: Function) {
     const context = this
     const args = arguments
 
     const later = function () {
-      timer = null
+      timer = 0
       if (!immediate) func.apply(context, args)
     }
 

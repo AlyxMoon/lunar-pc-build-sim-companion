@@ -13,6 +13,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+declare global {
+  interface Window { gtag: any }
+}
+
 createApp(App)
   .mixin(filtersMixin)
   .component('FontAwesomeIcon', FontAwesomeIcon)

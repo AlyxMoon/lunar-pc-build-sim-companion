@@ -1,24 +1,29 @@
+import BuildModel from '@/models/Build'
+import { PlainObject } from '@/typings/interface'
 
-export const UPDATE_PLAYER_LEVEL = (state, payload) => {
-  state.playerLevel = payload
+export const UPDATE_PLAYER_LEVEL = (state: PlainObject, level: number): void => {
+  state.playerLevel = level
 }
 
-export const CREATE_BUILD = (state, payload) => {
-  state.builds.push(payload)
+export const CREATE_BUILD = (state: PlainObject, build: BuildModel): void => {
+  state.builds.push(build)
 }
 
-export const UPDATE_BUILD = (state, payload) => {
+export const UPDATE_BUILD = (
+  state: PlainObject,
+  payload: { index: number, data: BuildModel },
+): void => {
   state.builds.splice(payload.index, 1, payload.data)
 }
 
-export const REMOVE_BUILD = (state, payload) => {
-  state.builds.splice(payload.index, 1)
+export const REMOVE_BUILD = (state: PlainObject, index: number): void => {
+  state.builds.splice(index, 1)
 }
 
-export const SET_ALL_BUILDS = (state, payload) => {
-  state.builds = payload
+export const SET_ALL_BUILDS = (state: PlainObject, builds: BuildModel[]): void => {
+  state.builds = builds
 }
 
-export const CLEAR_ALL_BUILDS = (state) => {
+export const CLEAR_ALL_BUILDS = (state: PlainObject): void => {
   state.builds = []
 }

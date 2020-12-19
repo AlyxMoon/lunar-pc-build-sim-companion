@@ -12,11 +12,13 @@
   </main>
 </template>
 
-<script>
-import AppFooter from '@/components/layout/Footer'
-import AppNavbar from '@/components/layout/Navbar'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import AppFooter from '@/components/layout/Footer.vue'
+import AppNavbar from '@/components/layout/Navbar.vue'
+
+export default defineComponent({
   name: 'App',
   components: {
     AppFooter,
@@ -30,7 +32,7 @@ export default {
       this.$router.push(redirect)
     }
   },
-}
+})
 </script>
 
 <style lang="scss">

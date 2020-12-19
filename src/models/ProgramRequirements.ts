@@ -1,6 +1,8 @@
+import { DisplayFunctionMap, MutationFunctionMap, StringArray, StringMap } from '@/typings/interface'
 import BaseModel from './_BaseModel'
 
-const nameMap = {
+/* eslint-disable @typescript-eslint/camelcase */
+const nameMap: StringMap = {
   adobe_photoshop: 'Adobe Photoshop CC',
   adobe_premiere: 'Adobe Premiere Pro CC',
   battlefield: 'Battlefield 1',
@@ -32,15 +34,22 @@ const nameMap = {
   tanks: 'World of Tanks',
   warcraft: 'World of Warcraft',
 }
+/* eslint-enable @typescript-eslint/camelcase */
 
-const specsMap = {
+const specsMap: StringMap = {
   min: 'Minimum',
   rec: 'Recommended',
   x4k: 'Recommended 4k',
 }
 
 class ModelProgramRequirements extends BaseModel {
-  fieldAliases () {
+  cpuScore?: number
+  gpuScore?: number
+  gpuVram?: number
+  memory?: number
+  storage?: number
+
+  fieldAliases (): StringMap {
     return {
       Name: 'name',
       Level: 'level',
@@ -55,7 +64,7 @@ class ModelProgramRequirements extends BaseModel {
     }
   }
 
-  keepAttributes () {
+  keepAttributes (): StringArray {
     return [
       'name',
       'level',
@@ -69,7 +78,7 @@ class ModelProgramRequirements extends BaseModel {
     ]
   }
 
-  mutations () {
+  mutations (): MutationFunctionMap {
     return {
       level: Number,
       storage: Number,
@@ -81,13 +90,13 @@ class ModelProgramRequirements extends BaseModel {
     }
   }
 
-  displayFilters () {
+  displayFilters (): DisplayFunctionMap {
     return {
-      name: val => nameMap[val] || val,
-      type: val => specsMap[val] || val,
-      gpuVram: val => `${val} GB`,
-      memory: val => `${val} GB`,
-      storage: val => `${val} GB`,
+      name: (val: string): string => nameMap[val] || val,
+      type: (val: string): string => specsMap[val] || val,
+      gpuVram: (val: number): string => `${val} GB`,
+      memory: (val: number): string => `${val} GB`,
+      storage: (val: number): string => `${val} GB`,
     }
   }
 }

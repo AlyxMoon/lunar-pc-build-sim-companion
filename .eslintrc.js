@@ -4,10 +4,16 @@ module.exports = {
     node: true,
   },
   extends: [
+    'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-strongly-recommended',
-    '@vue/typescript',
     '@vue/standard',
+    '@vue/typescript',
   ],
+  plugins: [
+    'vue',
+    '@typescript-eslint',
+  ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
   },
@@ -15,6 +21,18 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'comma-dangle': ['error', 'always-multiline'],
+    '@typescript-eslint/member-delimiter-style': ['error', {
+      multiline: {
+        delimiter: 'comma',
+        requireLast: true,
+      },
+      singleline: {
+        delimiter: 'comma',
+        requireLast: false,
+      },
+    }],
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'vue/custom-event-name-casing': ['error', 'camelCase'],
     'import/no-duplicates': 'off',
   },

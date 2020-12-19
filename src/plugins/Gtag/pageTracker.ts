@@ -1,14 +1,27 @@
+import { App } from 'vue'
+import { Router } from 'vue-router'
 
 class PageTracker {
-  install (app, {
-    gtag,
-    useComponentNameAsFallback = true,
-    titlePrefix = '',
-    changePageTitle = true,
-  } = {}) {
-    if (!gtag || !app.config.globalProperties.$router) return
+  gtag: Function = (): void => {}
 
-    this.gtag = gtag
+  install (
+    app: App,
+    options: {
+      gtag: Function,
+      useComponentNameAsFallback?: boolean,
+      titlePrefix?: string,
+      changePageTitle?: boolean,
+    },
+  ): void {
+    if (!app.config.globalProperties.$router) return
+    const {
+      gtag,
+      useComponentNameAsFallback = true,
+      titlePrefix = '',
+      changePageTitle = true,
+    } = options
+
+    this.gtag = gtag || ((): void => {})
 
     this.setUpRouteWatcher(
       app.config.globalProperties.$router,
@@ -18,11 +31,20 @@ class PageTracker {
     app.provide('gtag', gtag)
   }
 
-  setUpRouteWatcher (router, {
-    changePageTitle,
-    titlePrefix,
-    useComponentNameAsFallback,
-  }) {
+  setUpRouteWatcher (
+    router: Router,
+    options: {
+      useComponentNameAsFallback: boolean,
+      titlePrefix: string,
+      changePageTitle: boolean,
+    },
+  ): void {
+    const {
+      useComponentNameAsFallback,
+      titlePrefix,
+      changePageTitle,
+    } = options
+
     router.afterEach(to => {
       const pageName = titlePrefix + (
         to.meta.title ||

@@ -1,6 +1,7 @@
+import { PlainObject, ValidationFunctionArray, ValidationFunctionReturn } from '@/typings/interface'
 import BaseModel from './_BaseModel'
 
-const ensureNewPartsUnderBudget = (build: any) => {
+const ensureNewPartsUnderBudget = (build: any): ValidationFunctionReturn => {
   const { budget, newParts } = build
   const sumOfNewParts = newParts.reduce((sum: number, part: any) => sum + part.Price, 0)
 
@@ -10,7 +11,7 @@ const ensureNewPartsUnderBudget = (build: any) => {
   )
 }
 
-const checkCpuCompatibleWithMotherboard = (build: any) => {
+const checkCpuCompatibleWithMotherboard = (build: any): ValidationFunctionReturn => {
   const { startingParts, newParts } = build
 
   const cpu = (
@@ -42,7 +43,7 @@ const checkCpuCompatibleWithMotherboard = (build: any) => {
   )
 }
 
-const checkMotherboardFitsInCase = (build: any) => {
+const checkMotherboardFitsInCase = (build: any): ValidationFunctionReturn => {
   const { startingParts, newParts } = build
 
   const computerCase = (
@@ -63,7 +64,7 @@ const checkMotherboardFitsInCase = (build: any) => {
   )
 }
 
-const checkPowerSupplyFitsInCase = (build: any) => {
+const checkPowerSupplyFitsInCase = (build: any): ValidationFunctionReturn => {
   const { startingParts, newParts } = build
 
   const computerCase = (
@@ -85,9 +86,7 @@ const checkPowerSupplyFitsInCase = (build: any) => {
 }
 
 class BuildModel extends BaseModel {
-  [key: string]: any
-
-  defaults () {
+  defaults (): PlainObject {
     return {
       name: 'New Build',
       jobType: '',
@@ -99,7 +98,7 @@ class BuildModel extends BaseModel {
     }
   }
 
-  runBenchmark () {
+  runBenchmark (): number {
     const cpu = this.findPartOfType('CPU')
 
     const gpus = (this.findPartOfType('GPU') || []).sort((a: any, b: any) => {
@@ -109,8 +108,7 @@ class BuildModel extends BaseModel {
     const memory = (this.findPartOfType('Memory') || [])
 
     if (!cpu || !gpus.length || !memory.length) {
-      this.estimatedScore = 0
-      return
+      return (this.attributes.estimatedScore = 0)
     }
 
     const memoryChannels = Math.min(cpu['Max Memory Channels'], memory.length)
@@ -150,20 +148,20 @@ class BuildModel extends BaseModel {
       )
     ))
 
-    this.estimatedScore = Math.floor(1 / (
+    this.attributes.estimatedScore = Math.floor(1 / (
       (0.85 / gpuScore) +
       (0.15 / cpuScore)
     ))
 
-    return this.estimatedScore
+    return this.attributes.estimatedScore
   }
 
-  findPartOfType (type: string) {
-    const startingPartsOfType = this.startingParts.filter((part: any) => {
+  findPartOfType (type: string): PlainObject {
+    const startingPartsOfType = this.attributes.startingParts.filter((part: any) => {
       return part['Part Type'] === type
     })
 
-    const newPartsOfType = this.newParts.filter((part: any) => {
+    const newPartsOfType = this.attributes.newParts.filter((part: any) => {
       return part['Part Type'] === type
     })
 
@@ -181,7 +179,7 @@ class BuildModel extends BaseModel {
     return parts[0]
   }
 
-  validations () {
+  validations (): ValidationFunctionArray {
     return [
       ensureNewPartsUnderBudget,
       checkMotherboardFitsInCase,
@@ -190,7 +188,7 @@ class BuildModel extends BaseModel {
     ]
   }
 
-  afterCreate () {
+  afterCreate (): void {
     this.runBenchmark()
   }
 }

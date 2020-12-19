@@ -1,6 +1,12 @@
-import BuildModel from '@/models/Build'
+import { ActionContext } from 'vuex'
 
-export const createBuild = (context, data) => {
+import BuildModel from '@/models/Build'
+import { AppState, ImportExportData, PlainObject } from '@/typings/interface'
+
+export const createBuild = (
+  context: ActionContext<AppState, AppState>,
+  data: PlainObject | BuildModel,
+): void => {
   const build = data instanceof BuildModel
     ? data
     : new BuildModel(data)
@@ -8,19 +14,27 @@ export const createBuild = (context, data) => {
   context.commit('CREATE_BUILD', build)
 }
 
-export const updateBuild = (context, { data, index }) => {
+export const updateBuild = (
+  context: ActionContext<AppState, AppState>,
+  { data, index }: { data: BuildModel, index: number },
+): void => {
   const build = new BuildModel(data)
   context.commit('UPDATE_BUILD', { data: build, index })
 }
 
-export const removeBuild = (context, index) => {
-  context.commit('REMOVE_BUILD', { index })
+export const removeBuild = (
+  context: ActionContext<AppState, AppState>,
+  index: number,
+): void => {
+  context.commit('REMOVE_BUILD', index)
 }
 
-export const exportPlayerData = (context) => {
+export const exportPlayerData = (
+  context: ActionContext<AppState, AppState>,
+): void => {
   const fieldsToSave = ['builds', 'playerLevel']
 
-  const data = {}
+  const data: ImportExportData = {}
   for (const field of fieldsToSave) {
     data[field] = context.state[field]
   }
@@ -35,9 +49,12 @@ export const exportPlayerData = (context) => {
   pseudoEl.remove()
 }
 
-export const importPlayerData = (context, data) => {
+export const importPlayerData = (
+  context: ActionContext<AppState, AppState>,
+  data: ImportExportData,
+): void => {
   if ('builds' in data) {
-    const builds = data.builds.map(build => new BuildModel(build._attributes))
+    const builds = data.builds?.map(build => new BuildModel(build._attributes))
     context.commit('SET_ALL_BUILDS', builds)
   }
 

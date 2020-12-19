@@ -30,9 +30,10 @@
   </nav>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'Navbar',
 
   data: () => ({
@@ -46,7 +47,7 @@ export default {
 
     navbarOpen: false,
   }),
-}
+})
 </script>
 
 <style lang="scss" scoped>
