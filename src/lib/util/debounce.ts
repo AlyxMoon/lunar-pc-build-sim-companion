@@ -6,13 +6,10 @@ const debounce = (
 ): Function => {
   let timer: number
 
-  return function (this: Function) {
-    const context = this
-    const args = arguments
-
-    const later = function () {
+  return function (this: any, ...args: any[]): void {
+    const later = (): void => {
       timer = 0
-      if (!immediate) func.apply(context, args)
+      if (!immediate) func.apply(this, args)
     }
 
     const callNow = immediate && !timer
@@ -20,7 +17,7 @@ const debounce = (
     clearTimeout(timer)
     timer = setTimeout(later, wait)
 
-    if (callNow) func.apply(context, args)
+    if (callNow) func.apply(this, args)
   }
 }
 

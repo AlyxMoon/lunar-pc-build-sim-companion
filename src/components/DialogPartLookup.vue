@@ -26,12 +26,14 @@
   </teleport>
 </template>
 
-<script>
+<script lang="ts">
+import { PlainObject } from '@/typings/interface'
+import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
-import DataTable from '@/components/DataTable'
+import DataTable from '@/components/DataTable/index.vue'
 
-export default {
+export default defineComponent({
   name: 'PartLookup',
   components: {
     DataTable,
@@ -50,13 +52,13 @@ export default {
       parts: 'parts',
     }),
 
-    activeCategory () {
+    activeCategory (): PlainObject | void {
       if (!this.partType) return
 
-      return this.categories.find(({ name }) => name === this.partType)
+      return this.categories.find(({ name }: { name: string }) => name === this.partType)
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>
@@ -64,7 +66,7 @@ export default {
 .modal-body {
   overflow-y: auto;
 
-  ::v-deep .table-wrapper-inner {
+  :deep(.table-wrapper-inner) {
     height: 400px;
   }
 }

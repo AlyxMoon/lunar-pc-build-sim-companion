@@ -103,12 +103,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { PlainObject } from '@/typings/interface'
+import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
-import SearchBar from './DataTableSearchBar'
+import SearchBar from './DataTableSearchBar.vue'
 
-export default {
+export default defineComponent({
   name: 'DataTable',
   components: {
     SearchBar,
@@ -116,11 +118,11 @@ export default {
   props: {
     headers: {
       type: Array,
-      default: () => [],
+      default: (): PlainObject[] => [],
     },
     items: {
       type: Array,
-      default: () => [],
+      default: (): PlainObject[] => [],
     },
     includeAction: {
       type: Boolean,
@@ -151,7 +153,7 @@ export default {
       playerLevel: 'playerLevel',
     }),
 
-    currentPageText () {
+    currentPageText (): string {
       const { perPage, page } = this.pagination
       const total = this.parsedItems.length
       if (!total) return 'No Items'
@@ -162,24 +164,24 @@ export default {
       return `${start} - ${end} of ${total}`
     },
 
-    currentlyDisplayedItems () {
+    currentlyDisplayedItems (): any[] {
       const { perPage, page } = this.pagination
       return this.parsedItems.slice(page * perPage, (page + 1) * perPage)
     },
 
-    onFirstPage () {
+    onFirstPage (): boolean {
       return this.pagination.page === 0
     },
 
-    onLastPage () {
+    onLastPage (): boolean {
       const { perPage, page } = this.pagination
       const total = this.parsedItems.length
 
       return page === Math.floor(total / perPage)
     },
 
-    parsedItems () {
-      const filtered = this.items.slice().filter(item => {
+    parsedItems (): any[] {
+      const filtered = this.items.slice().filter((item: any) => {
         let valid = true
 
         if (this.checkPlayerLevel) {
@@ -198,7 +200,7 @@ export default {
 
       if (!this.sortBy) return filtered
 
-      return filtered.sort((a, b) => {
+      return filtered.sort((a: any, b: any) => {
         if (a[this.sortBy] < b[this.sortBy]) return this.sortDesc ? -1 : 1
         if (a[this.sortBy] > b[this.sortBy]) return this.sortDesc ? 1 : -1
         return 0
@@ -207,7 +209,7 @@ export default {
   },
 
   methods: {
-    toggleSort (name) {
+    toggleSort (name: string): void {
       if (this.sortBy === name) {
         if (!this.sortDesc) {
           this.sortBy = ''
@@ -220,7 +222,7 @@ export default {
       }
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>
