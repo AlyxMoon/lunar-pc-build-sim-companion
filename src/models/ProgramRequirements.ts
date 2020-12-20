@@ -1,4 +1,4 @@
-import { DisplayFunctionMap, MutationFunctionMap, StringArray, StringMap } from '@/typings/interface'
+import { DisplayFunctionMap, MutationFunctionMap, ProgramRequirementsModelInterface, StringArray, StringMap } from '@/typings/interface'
 import BaseModel from './_BaseModel'
 
 /* eslint-disable @typescript-eslint/camelcase */
@@ -42,13 +42,7 @@ const specsMap: StringMap = {
   x4k: 'Recommended 4k',
 }
 
-class ModelProgramRequirements extends BaseModel {
-  cpuScore?: number
-  gpuScore?: number
-  gpuVram?: number
-  memory?: number
-  storage?: number
-
+class ProgramRequirements extends BaseModel implements ProgramRequirementsModelInterface {
   fieldAliases (): StringMap {
     return {
       Name: 'name',
@@ -101,4 +95,4 @@ class ModelProgramRequirements extends BaseModel {
   }
 }
 
-export default ModelProgramRequirements
+export default ProgramRequirements

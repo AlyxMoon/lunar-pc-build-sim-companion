@@ -1,10 +1,8 @@
-
+import { PlainObject, ProgramRequirementsModelInterface } from '@/typings/interface'
 import BuildModel from '@/models/Build'
-import ProgramRequirementsModel from '@/models/ProgramRequirements'
-import { PlainObject } from '@/typings/interface'
 
 const generateBuildMeetsProgramRequirements = (
-  program: ProgramRequirementsModel,
+  program: ProgramRequirementsModelInterface,
   availablePartsByCategory: Record<string, PlainObject>,
 ): { [key: string]: any } => {
   const attributes: {

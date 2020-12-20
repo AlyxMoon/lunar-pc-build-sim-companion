@@ -25,7 +25,17 @@ export interface DisplayFunctionMap {
   [key: string]: DisplayFunction,
 }
 
-export interface Model {
+export interface AppState {
+  [key: string]: any,
+}
+
+export interface ImportExportData {
+  [key: string]: any,
+  builds?: Model[],
+  playerLevel?: number,
+}
+
+export interface ModelInterface {
   [key: string]: any,
   _attributes: PlainObject,
   _hasErrors: boolean,
@@ -41,12 +51,20 @@ export interface Model {
   displayFilters: () => DisplayFunctionMap,
 }
 
-export interface AppState {
-  [key: string]: any,
+export interface BuildModelInterface extends ModelInterface {
+  name?: string,
+  jobType?: string,
+  budget?: number,
+  estimatedScore?: estimatedScore,
+  objectives?: string[],
+  startingParts?: PlainObject[],
+  newParts?: PlainObject[],
 }
 
-export interface ImportExportData {
-  [key: string]: any,
-  builds?: Model[],
-  playerLevel?: number,
+export interface ProgramRequirementsModelInterface extends ModelInterface {
+  cpuScore?: number,
+  gpuScore?: number,
+  gpuVram?: number,
+  memory?: number,
+  storage?: number,
 }

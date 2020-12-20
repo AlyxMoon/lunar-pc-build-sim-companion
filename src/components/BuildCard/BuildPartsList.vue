@@ -58,7 +58,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { PlainObject } from '@/typings/interface'
 import { mapState } from 'vuex'
 
 export default {
@@ -66,7 +67,7 @@ export default {
   props: {
     parts: {
       type: Array,
-      default: () => [],
+      default: (): PlainObject[] => [],
     },
     showCopy: {
       type: Boolean,
@@ -79,7 +80,7 @@ export default {
   },
   emits: ['addNewItem', 'copyPart', 'removePart'],
 
-  data: () => ({
+  data: (): PlainObject => ({
     selectedPartCategory: '',
   }),
 
@@ -88,7 +89,7 @@ export default {
       categories: 'categories',
     }),
 
-    filteredCategories () {
+    filteredCategories (): PlainObject[] {
       const categories = this.categories.slice()
 
       let hasCase
@@ -98,7 +99,7 @@ export default {
       let hasCpuCooler
 
       this.parts.forEach(part => {
-        const type = part['Part Type'] || ''
+        const type = (part as PlainObject)['Part Type'] || ''
 
         if (type === 'Case') hasCase = true
         if (type === 'Power Supply') hasPowerSupply = true
@@ -108,27 +109,27 @@ export default {
       })
 
       if (hasCase) {
-        const index = categories.findIndex(({ name }) => name === 'cases')
+        const index = categories.findIndex(({ name }: PlainObject) => name === 'cases')
         categories.splice(index, 1)
       }
 
       if (hasPowerSupply) {
-        const index = categories.findIndex(({ name }) => name === 'powersupplies')
+        const index = categories.findIndex(({ name }: PlainObject) => name === 'powersupplies')
         categories.splice(index, 1)
       }
 
       if (hasMotherboard) {
-        const index = categories.findIndex(({ name }) => name === 'motherboards')
+        const index = categories.findIndex(({ name }: PlainObject) => name === 'motherboards')
         categories.splice(index, 1)
       }
 
       if (hasCpu) {
-        const index = categories.findIndex(({ name }) => name === 'cpus')
+        const index = categories.findIndex(({ name }: PlainObject) => name === 'cpus')
         categories.splice(index, 1)
       }
 
       if (hasCpuCooler) {
-        const index = categories.findIndex(({ name }) => name === 'cpucoolers')
+        const index = categories.findIndex(({ name }: PlainObject) => name === 'cpucoolers')
         categories.splice(index, 1)
       }
 
@@ -137,7 +138,7 @@ export default {
   },
 
   methods: {
-    addNewItem () {
+    addNewItem (): void {
       this.$emit('addNewItem', this.selectedPartCategory)
       this.selectedPartCategory = ''
     },

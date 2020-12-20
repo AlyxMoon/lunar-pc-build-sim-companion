@@ -1,11 +1,11 @@
 import { ActionContext } from 'vuex'
 
 import BuildModel from '@/models/Build'
-import { AppState, ImportExportData, PlainObject } from '@/typings/interface'
+import { AppState, BuildModelInterface, ImportExportData, PlainObject } from '@/typings/interface'
 
 export const createBuild = (
   context: ActionContext<AppState, AppState>,
-  data: PlainObject | BuildModel,
+  data: PlainObject | BuildModelInterface,
 ): void => {
   const build = data instanceof BuildModel
     ? data
@@ -16,7 +16,7 @@ export const createBuild = (
 
 export const updateBuild = (
   context: ActionContext<AppState, AppState>,
-  { data, index }: { data: BuildModel, index: number },
+  { data, index }: { data: BuildModelInterface, index: number },
 ): void => {
   const build = new BuildModel(data)
   context.commit('UPDATE_BUILD', { data: build, index })

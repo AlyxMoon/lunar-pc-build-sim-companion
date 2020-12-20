@@ -1,4 +1,4 @@
-import { PlainObject, ValidationFunctionArray, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, PlainObject, ValidationFunctionArray, ValidationFunctionReturn } from '@/typings/interface'
 import BaseModel from './_BaseModel'
 
 const ensureNewPartsUnderBudget = (build: any): ValidationFunctionReturn => {
@@ -85,7 +85,7 @@ const checkPowerSupplyFitsInCase = (build: any): ValidationFunctionReturn => {
   )
 }
 
-class BuildModel extends BaseModel {
+class BuildModel extends BaseModel implements BuildModelInterface {
   defaults (): PlainObject {
     return {
       name: 'New Build',

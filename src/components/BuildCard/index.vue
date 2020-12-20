@@ -146,13 +146,13 @@
   </article>
 </template>
 
-<script>
+<script lang="ts">
 import { mapState } from 'vuex'
+
+import { BuildModelInterface, PlainObject } from '@/typings/interface'
 import currency from '@/lib/filters/currency'
-
 import BuildModel from '@/models/Build'
-
-import BuildPartsList from './BuildPartsList'
+import BuildPartsList from './BuildPartsList.vue'
 
 export default {
   name: 'BuildCard',
@@ -162,12 +162,12 @@ export default {
   props: {
     build: {
       type: BuildModel,
-      default: () => new BuildModel(),
+      default: (): BuildModelInterface => new BuildModel(),
     },
   },
   emits: ['update', 'remove', 'addPartToBuild'],
 
-  data: () => ({
+  data: (): PlainObject => ({
     activeBuild: null,
     editing: false,
     tempFields: {},
@@ -185,23 +185,23 @@ export default {
       categories: 'categories',
     }),
 
-    totalCostNewParts () {
+    totalCostNewParts (): number {
       if (!this.activeBuild) return 0
-      return this.activeBuild.newParts.reduce((sum, item) => {
+      return this.activeBuild.newParts.reduce((sum: number, item: PlainObject) => {
         return sum + item.Price
       }, 0)
     },
   },
 
   methods: {
-    toggleEdit () {
+    toggleEdit (): void {
       this.editing = !this.editing
       if (!this.editing) {
         this.$emit('update', this.activeBuild.attributes)
       }
     },
 
-    addNewItem (field, item) {
+    addNewItem (field: string, item: PlainObject): void {
       if (field === 'objectives') {
         this.activeBuild[field].push(item)
         this.$emit('update', this.activeBuild.attributes)
@@ -215,7 +215,7 @@ export default {
       this.tempFields[field] = ''
     },
 
-    removeBuild (confirmed = false) {
+    removeBuild (confirmed = false): void {
       if (!confirmed) {
         this.confirmRemove = true
         return
@@ -224,18 +224,18 @@ export default {
       this.$emit('remove')
     },
 
-    removePart (field, index) {
+    removePart (field: string, index: number): void {
       this.activeBuild[field].splice(index, 1)
       this.$emit('update', this.activeBuild.attributes)
     },
 
-    copyPart (item) {
+    copyPart (item: PlainObject): void {
       this.activeBuild.newParts.push(item)
       this.$emit('update', this.activeBuild.attributes)
     },
   },
 
-  created () {
+  created (): void {
     this.activeBuild = this.build.clone()
     this.activeBuild.runBenchmark()
   },
