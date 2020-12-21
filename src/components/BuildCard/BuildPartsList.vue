@@ -60,9 +60,10 @@
 
 <script lang="ts">
 import { PlainObject } from '@/typings/interface'
+import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
-export default {
+export default defineComponent({
   name: 'BuildPartsList',
   props: {
     parts: {
@@ -143,7 +144,7 @@ export default {
       this.selectedPartCategory = ''
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

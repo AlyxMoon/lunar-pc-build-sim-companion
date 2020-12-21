@@ -147,14 +147,15 @@
 </template>
 
 <script lang="ts">
+import { BuildModelInterface, PlainObject } from '@/typings/interface'
+import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
-import { BuildModelInterface, PlainObject } from '@/typings/interface'
 import currency from '@/lib/filters/currency'
 import BuildModel from '@/models/Build'
 import BuildPartsList from './BuildPartsList.vue'
 
-export default {
+export default defineComponent({
   name: 'BuildCard',
   components: {
     BuildPartsList,
@@ -239,7 +240,7 @@ export default {
     this.activeBuild = this.build.clone()
     this.activeBuild.runBenchmark()
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>
