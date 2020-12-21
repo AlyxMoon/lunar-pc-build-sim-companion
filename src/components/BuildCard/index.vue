@@ -255,8 +255,7 @@ article {
     margin 0.2s;
 
   &.expanded {
-    width: 99%;
-    margin: 20px 0 20px 1%;
+    margin: 20px 0 20px;
 
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
 
@@ -278,7 +277,7 @@ article {
   }
 
   .card-title {
-    height: 60px;
+    min-height: 60px;
     width: 100%;
     padding-left: 20px;
 
@@ -292,16 +291,28 @@ article {
 
     h4 {
       margin: 0;
+
+      flex-shrink: 1;
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
     }
 
     .pure-button-group {
-      align-self: flex-start;
       margin: 2px;
+
+      align-self: flex-start;
+      flex-shrink: 0;
 
       button {
         border-radius: 0;
         margin-left: 2px;
       }
+    }
+
+    input {
+      width: 100%;
     }
   }
 
