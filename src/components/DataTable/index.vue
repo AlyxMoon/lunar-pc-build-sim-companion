@@ -129,7 +129,7 @@ export default defineComponent({
       default: false,
     },
     searchField: {
-      type: String,
+      type: [String, Array],
       default: 'Full Part Name',
     },
   },
@@ -184,15 +184,34 @@ export default defineComponent({
       const filtered = this.items.slice().filter((item: any) => {
         let valid = true
 
-        if (this.checkPlayerLevel) {
+        if (valid && this.checkPlayerLevel) {
           const level = item.Level || item.level || 1
           valid = valid && level <= this.playerLevel
         }
 
-        if (this.searchQuery) {
-          const itemLowerCase = item[this.searchField].toLowerCase()
-          const queryLowerCase = this.searchQuery.toLowerCase()
-          valid = valid && itemLowerCase.includes(queryLowerCase)
+        if (valid && this.searchQuery) {
+          const fieldsToSearch = Array.isArray(this.searchField)
+            ? this.searchField as string[]
+            : [this.searchField]
+
+          const searchQuery = this.searchQuery.toLowerCase()
+
+          let anyFieldHasSearch = false
+          for (const field of fieldsToSearch) {
+            if (anyFieldHasSearch) break
+
+            const valueRaw = item[field].toLowerCase()
+            const valueDisplayed = item.get
+              ? item.get(field, true).toLowerCase()
+              : ''
+
+            anyFieldHasSearch = (
+              valueRaw.includes(searchQuery) ||
+              valueDisplayed.includes(searchQuery)
+            )
+          }
+
+          valid = valid && anyFieldHasSearch
         }
 
         return valid

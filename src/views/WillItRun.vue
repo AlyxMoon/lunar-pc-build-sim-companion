@@ -4,7 +4,7 @@
   <DataTable
     :headers="headers"
     :items="programRequirements"
-    search-field="name"
+    :search-field="['name', 'type']"
   >
     <template #column-0="{ item }">
       <button
@@ -18,13 +18,16 @@
   </DataTable>
 </template>
 
-<script>
+<script lang="ts">
+import { ProgramRequirementsModelInterface } from '@/typings/interface'
+
+import { defineComponent } from 'vue'
 import { mapActions, mapState } from 'vuex'
+
 import generateBuild from '@/lib/util/generateBuildMeetsProgramRequirements'
+import DataTable from '@/components/DataTable/index.vue'
 
-import DataTable from '@/components/DataTable'
-
-export default {
+export default defineComponent({
   name: 'PageWillItRun',
   components: {
     DataTable,
@@ -53,14 +56,14 @@ export default {
   methods: {
     ...mapActions(['createBuild']),
 
-    generateBuild (program) {
+    generateBuild (program: ProgramRequirementsModelInterface): void {
       const build = generateBuild(program, this.parts)
 
       this.createBuild(build)
       this.$router.push({ name: 'ActiveBuilds' })
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>
