@@ -1,5 +1,7 @@
 import { DisplayFunctionMap, ModelInterface, MutationFunctionMap, PlainObject, StringArray, StringMap, ValidationFunctionArray } from '@/typings/interface'
+
 import { reactive } from 'vue'
+import { v4 as uuidv4 } from 'uuid'
 
 const reservedAttributes = [
   '_attributes',
@@ -23,8 +25,15 @@ class BaseModel implements ModelInterface {
     return this._errors.slice()
   }
 
-  constructor (attributes = {}) {
-    const activeAttributes = this.deepCopy(attributes)
+  constructor (
+    data: PlainObject | BaseModel = {},
+    { ignoreId = false }: { ignoreId?: boolean } = {},
+  ) {
+    const activeAttributes = data instanceof BaseModel
+      ? this.deepCopy(data.attributes)
+      : this.deepCopy(data)
+
+    if (ignoreId) delete activeAttributes.id
 
     this.beforeCreate(activeAttributes)
     this.assignAttributes(activeAttributes)
@@ -42,6 +51,10 @@ class BaseModel implements ModelInterface {
 
     for (const [key, value] of Object.entries(attributes)) {
       this.set(key, value)
+    }
+
+    if (!('id' in attributes)) {
+      this.set('id', uuidv4())
     }
   }
 
@@ -129,7 +142,7 @@ class BaseModel implements ModelInterface {
   }
 
   clone (): this {
-    return new (this.constructor as any)(this.attributes)
+    return new (this.constructor as any)(this.attributes, { ignoreId: true })
   }
 
   runSingleFieldAlias (field = ''): string {

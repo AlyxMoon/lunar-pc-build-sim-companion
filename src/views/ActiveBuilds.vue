@@ -11,7 +11,7 @@
   <section class="build-card-grid">
     <BuildCard
       v-for="(build, i) in builds"
-      :key="`${i}-${build.name}`"
+      :key="build.id"
       :build="build"
       @update="updateBuild({ data: $event, index: i })"
       @addPartToBuild="startDialogPartLookup(i, $event)"
@@ -35,20 +35,23 @@
   />
 </template>
 
-<script>
+<script lang="ts">
+import { BuildModelInterface, PlainObject } from '@/typings/interface'
+
+import { defineComponent } from 'vue'
 import { mapActions, mapState } from 'vuex'
 
-import BuildCard from '@/components/BuildCard'
-import DialogPartLookup from '@/components/DialogPartLookup'
+import BuildCard from '@/components/BuildCard/index.vue'
+import DialogPartLookup from '@/components/DialogPartLookup.vue'
 
-export default {
+export default defineComponent({
   name: 'PageActiveBuilds',
   components: {
     BuildCard,
     DialogPartLookup,
   },
 
-  data: () => ({
+  data: (): PlainObject => ({
     showDialogPartLookup: null,
   }),
 
@@ -61,33 +64,32 @@ export default {
   methods: {
     ...mapActions(['createBuild', 'updateBuild', 'removeBuild']),
 
-    startDialogPartLookup (index, { field, partType }) {
+    startDialogPartLookup (
+      index: number,
+      { field, partType, build }: { field: string, partType: string, build: BuildModelInterface },
+    ): void {
       this.showDialogPartLookup = {
         index,
         field,
         partType,
+        build,
       }
     },
 
-    addPartToBuild (part) {
-      const { field, index } = this.showDialogPartLookup
-      const build = this.builds[index].attributes
+    addPartToBuild (part: Parts.BaseInterface): void {
+      const { build, field, index } = this.showDialogPartLookup
+
+      build.set(field, [...build.get(field), part])
 
       this.updateBuild({
         index: index,
-        data: {
-          ...build,
-          [field]: [
-            ...build[field],
-            part,
-          ],
-        },
+        data: build.attributes,
       })
 
       this.showDialogPartLookup = null
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

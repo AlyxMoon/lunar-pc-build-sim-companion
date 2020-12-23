@@ -210,6 +210,7 @@ export default defineComponent({
         this.$emit('addPartToBuild', {
           partType: item,
           field,
+          build: this.activeBuild,
         })
       }
 
@@ -237,7 +238,7 @@ export default defineComponent({
   },
 
   created (): void {
-    this.activeBuild = this.build.clone()
+    this.activeBuild = this.build
     this.activeBuild.runBenchmark()
   },
 })
