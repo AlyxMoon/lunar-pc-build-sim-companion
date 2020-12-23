@@ -80,6 +80,7 @@ export default defineComponent({
       const { build, field, index } = this.showDialogPartLookup
 
       build.set(field, [...build.get(field), part])
+      build.validate()
 
       this.updateBuild({
         index: index,

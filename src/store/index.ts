@@ -68,6 +68,8 @@ const categories = [
       { name: 'Chipset' },
       { name: 'Size' },
       { name: 'Max RAM Speed Step' },
+      { name: 'Support SLI' },
+      { name: 'Support CrossFire' },
     ],
   },
   {
@@ -99,6 +101,7 @@ const categories = [
       { name: 'Part Ranking Score' },
       { name: 'Chipset' },
       { name: 'VRAM (GB)' },
+      { name: 'Multi-GPU' },
       { name: 'Wattage' },
     ],
   },

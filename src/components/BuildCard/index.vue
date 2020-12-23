@@ -204,6 +204,7 @@ export default defineComponent({
     addNewItem (field: string, item: PlainObject): void {
       if (field === 'objectives') {
         this.activeBuild[field].push(item)
+        this.activeBuild.validate()
         this.$emit('update', this.activeBuild.attributes)
       } else {
         this.$emit('addPartToBuild', {
@@ -212,7 +213,6 @@ export default defineComponent({
           build: this.activeBuild,
         })
       }
-
       this.tempFields[field] = ''
     },
 
@@ -227,12 +227,13 @@ export default defineComponent({
 
     removePart (field: string, index: number): void {
       this.activeBuild[field].splice(index, 1)
+      this.activeBuild.validate()
       this.$emit('update', this.activeBuild.attributes)
     },
 
     copyPart (item: PlainObject, section: 'newParts' | 'startingParts'): void {
-      console.log(section, this.activeBuild[section])
       this.activeBuild[section].push(item)
+      this.activeBuild.validate()
       this.$emit('update', this.activeBuild.attributes)
     },
   },

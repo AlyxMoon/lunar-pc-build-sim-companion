@@ -13,7 +13,7 @@ export interface StringMap {
 
 export type StringArray = string[]
 
-export type ValidationFunction = (val: any) => boolean | string
+export type ValidationFunction = (val: any, model: ModelInterface) => boolean | string
 export type ValidationFunctionReturn = ReturnType<ValidationFunction>
 export type ValidationFunctionArray = ValidationFunction[]
 

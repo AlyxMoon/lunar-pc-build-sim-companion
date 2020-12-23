@@ -101,7 +101,7 @@ class BaseModel implements ModelInterface {
     const validations: Function[] = this.validations()
 
     validations.forEach((fn: Function) => {
-      const result: any = fn(this.attributes)
+      const result: any = fn(this.attributes, this)
 
       if (typeof result === 'boolean') {
         this._hasErrors = this._hasErrors && result

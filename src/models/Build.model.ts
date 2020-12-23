@@ -3,6 +3,7 @@ import BaseModel from './_BaseModel'
 import {
   caseFitsMotherboard,
   caseFitsPowersupply,
+  gpuMultiCompatible,
   motherboardFitsCpu,
   newPartsUnderBudget,
 } from '@/lib/buildValidationRules'
@@ -78,7 +79,10 @@ class BuildModel extends BaseModel implements BuildModelInterface {
     return this.attributes.estimatedScore
   }
 
-  findPartOfType (type: string): PlainObject {
+  findPartOfType (
+    type: string,
+    { limit = true, combineStartAndNew = false } = {},
+  ): PlainObject {
     const startingPartsOfType = this.attributes.startingParts.filter((part: any) => {
       return part['Part Type'] === type
     })
@@ -87,10 +91,12 @@ class BuildModel extends BaseModel implements BuildModelInterface {
       return part['Part Type'] === type
     })
 
-    const parts = newPartsOfType.length ? newPartsOfType : startingPartsOfType
+    const parts = combineStartAndNew
+      ? [...startingPartsOfType, ...newPartsOfType]
+      : newPartsOfType.length ? newPartsOfType : startingPartsOfType
 
     if (type === 'GPU') {
-      return parts.slice(0, 2)
+      return limit ? parts.slice(0, 2) : parts
     }
 
     if (
@@ -105,6 +111,7 @@ class BuildModel extends BaseModel implements BuildModelInterface {
     return [
       caseFitsMotherboard,
       caseFitsPowersupply,
+      gpuMultiCompatible,
       motherboardFitsCpu,
       newPartsUnderBudget,
     ]
