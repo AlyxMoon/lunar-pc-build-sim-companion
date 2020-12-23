@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-import ModelProgramRequirements from '../../src/models/ProgramRequirements'
+import ModelProgramRequirements from '../../src/models/ProgramRequirements.model'
 import mutate from './mutate'
 
 const {
