@@ -130,17 +130,16 @@
         copy-text="Copy part to other section"
         @addNewItem="addNewItem('startingParts', $event)"
         @removePart="removePart('startingParts', $event)"
-        @copyPart="copyPart($event)"
+        @copyPart="copyPart($event, 'startingParts')"
+        @copyPartToOtherSection="copyPart($event, 'newParts')"
       />
 
       <h6>New Parts</h6>
       <BuildPartsList
         :parts="activeBuild.newParts"
-        :show-copy="true"
-        copy-text="Add another of the same part"
         @addNewItem="addNewItem('newParts', $event)"
         @removePart="removePart('newParts', $event)"
-        @copyPart="copyPart($event)"
+        @copyPart="copyPart($event, 'newParts')"
       />
     </div>
   </article>
@@ -231,8 +230,9 @@ export default defineComponent({
       this.$emit('update', this.activeBuild.attributes)
     },
 
-    copyPart (item: PlainObject): void {
-      this.activeBuild.newParts.push(item)
+    copyPart (item: PlainObject, section: 'newParts' | 'startingParts'): void {
+      console.log(section, this.activeBuild[section])
+      this.activeBuild[section].push(item)
       this.$emit('update', this.activeBuild.attributes)
     },
   },
@@ -344,6 +344,10 @@ article {
       input {
         flex-grow: 1;
       }
+    }
+
+    h6 {
+      margin: 20px 0 0;
     }
   }
 }

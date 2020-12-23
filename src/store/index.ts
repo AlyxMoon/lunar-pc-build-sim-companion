@@ -23,6 +23,7 @@ const categories = [
   {
     name: 'cpus',
     displayName: 'CPU / Processors',
+    partTypeNames: ['CPU'],
     icon: 'microchip',
     iconBackColor: '#FFC800',
     headers: [
@@ -40,6 +41,7 @@ const categories = [
   {
     name: 'cpucoolers',
     displayName: 'CPU Cooling',
+    partTypeNames: ['CPU Cooler - Air', 'CPU Cooler - Liquid'],
     icon: 'fan',
     iconBackColor: '#00BCFF',
     headers: [
@@ -54,6 +56,7 @@ const categories = [
   {
     name: 'motherboards',
     displayName: 'Motherboards',
+    partTypeNames: ['Motherboard'],
     icon: 'chess-board',
     iconBackColor: '#99359A',
     headers: [
@@ -70,6 +73,7 @@ const categories = [
   {
     name: 'memory',
     displayName: 'Memory',
+    partTypeNames: ['Memory'],
     icon: 'memory',
     iconBackColor: '#00A668',
     headers: [
@@ -84,6 +88,7 @@ const categories = [
   {
     name: 'gpus',
     displayName: 'Graphics Cards',
+    partTypeNames: ['GPU'],
     icon: 'image',
     iconBackColor: '#DC0000',
     headers: [
@@ -100,6 +105,7 @@ const categories = [
   {
     name: 'storage',
     displayName: 'Storage',
+    partTypeNames: ['Storage - HDD', 'Storage - SSD', 'Storage - M.2'],
     icon: 'hdd',
     iconBackColor: '#FF8100',
     headers: [
@@ -114,6 +120,7 @@ const categories = [
   {
     name: 'powersupplies',
     displayName: 'Power Supplies',
+    partTypeNames: ['Power Supply'],
     icon: 'plug',
     iconBackColor: '#FE0086',
     headers: [
@@ -129,6 +136,7 @@ const categories = [
   {
     name: 'casefans',
     displayName: 'Case Fans',
+    partTypeNames: ['Case Fan'],
     icon: 'wind',
     iconBackColor: '#007AA6',
     headers: [
@@ -143,6 +151,7 @@ const categories = [
   {
     name: 'cases',
     displayName: 'Cases',
+    partTypeNames: ['Case'],
     icon: 'box',
     iconBackColor: '#AAAAAA',
     headers: [

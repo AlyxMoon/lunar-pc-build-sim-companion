@@ -1,61 +1,59 @@
 <template>
   <dl>
     <template
-      v-for="(item, i) in parts"
-      :key="`${i}-${item['Full Part Name']}`"
+      v-for="category in categories"
+      :key="category.name"
     >
-      <button
-        class="pure-button"
-        title="Remove Part"
-        @click="$emit('removePart', i)"
+      <dt>
+        <button
+          class="pure-button add-new-button"
+          @click="$emit('addNewItem', category.name)"
+        >
+          Add
+        </button>
+        {{ category.displayName }}
+      </dt>
+
+      <template
+        v-for="(item, i) in partsOfCategory(category.partTypeNames)"
+        :key="`${i}-${item['Full Part Name']}`"
       >
-        <FontAwesomeIcon icon="times" />
-      </button>
+        <button
+          class="pure-button"
+          title="Remove Part"
+          @click="$emit('removePart', item.originalIndex)"
+        >
+          <FontAwesomeIcon icon="times" />
+        </button>
 
-      <button
-        v-if="!!showCopy"
-        class="pure-button"
-        :title="copyText"
-        @click="$emit('copyPart', item)"
-      >
-        <FontAwesomeIcon icon="copy" />
-      </button>
-      <div v-else />
+        <button
+          class="pure-button"
+          title="Add another of the same part"
+          @click="$emit('copyPart', item)"
+        >
+          <FontAwesomeIcon icon="copy" />
+        </button>
 
-      <dd>
-        {{ item['Part Type'] }}
-      </dd>
+        <button
+          v-if="!!showCopy"
+          class="pure-button"
+          :title="copyText"
+          @click="$emit('copyPartToOtherSection', item)"
+        >
+          <FontAwesomeIcon icon="paste" />
+        </button>
+        <div v-else />
 
-      <dd>
-        {{ displayFilters.currency(item['Price']) }}
-      </dd>
+        <dd>
+          {{ displayFilters.currency(item['Price']) }}
+        </dd>
 
-      <dd class="part-name">
-        {{ item['Full Part Name'] }}
-      </dd>
+        <dd class="part-name">
+          {{ item['Full Part Name'] }}
+        </dd>
+      </template>
     </template>
   </dl>
-
-  <div class="input-group">
-    <button
-      class="pure-button"
-      :disabled="!selectedPartCategory"
-      @click="addNewItem"
-    >
-      Add
-    </button>
-    <select
-      v-model="selectedPartCategory"
-    >
-      <option
-        v-for="category in filteredCategories"
-        :key="category"
-        :value="category.name"
-      >
-        {{ category.displayName || category.name }}
-      </option>
-    </select>
-  </div>
 </template>
 
 <script lang="ts">
@@ -79,7 +77,7 @@ export default defineComponent({
       default: '',
     },
   },
-  emits: ['addNewItem', 'copyPart', 'removePart'],
+  emits: ['addNewItem', 'copyPart', 'copyPartToOtherSection', 'removePart'],
 
   data: (): PlainObject => ({
     selectedPartCategory: '',
@@ -139,9 +137,13 @@ export default defineComponent({
   },
 
   methods: {
-    addNewItem (): void {
-      this.$emit('addNewItem', this.selectedPartCategory)
-      this.selectedPartCategory = ''
+    partsOfCategory (partTypeNames: string[]): Parts.BaseInterface[] {
+      return (this.parts as Parts.BaseInterface[])
+        .map((item, index) => ({ ...item, originalIndex: index }))
+        .filter(item => {
+          const type: string = (item as Parts.BaseInterface)['Part Type'] + ''
+          return partTypeNames.includes(type)
+        })
     },
   },
 })
@@ -150,7 +152,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 dl {
   list-style: none;
-  margin: 20px 0 0;
+  margin: 10px 0 0;
   padding: 0 10px;
 
   display: grid;
@@ -161,6 +163,21 @@ dl {
   @include md {
     grid-template-columns: repeat(4, auto) 1fr;
     grid-gap: 5px 3px;
+  }
+
+  dt {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    margin: 10px 0 5px;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 1.2rem;
+
+    @include md {
+      grid-column-end: 6;
+    }
   }
 
   dd {
@@ -181,17 +198,20 @@ dl {
       @include smAndBelow {
         margin-bottom: 10px;
         grid-column-start: 1;
-        grid-column-end: 5;
+        grid-column-end: 4;
       }
     }
   }
 }
 
-.input-group {
-  padding: 0 10px;
+.pure-button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
 
-  input, select {
-    flex-grow: 1;
-  }
+  border-radius: 0;
+}
+
+.add-new-button {
+  margin-right: 10px;
 }
 </style>
