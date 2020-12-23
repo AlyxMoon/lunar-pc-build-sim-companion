@@ -5,6 +5,7 @@ import {
   caseFitsPowersupply,
   gpuMultiCompatible,
   motherboardFitsCpu,
+  motherboardSupportsMultiGpu,
   newPartsUnderBudget,
 } from '@/lib/buildValidationRules'
 
@@ -113,6 +114,7 @@ class BuildModel extends BaseModel implements BuildModelInterface {
       caseFitsPowersupply,
       gpuMultiCompatible,
       motherboardFitsCpu,
+      motherboardSupportsMultiGpu,
       newPartsUnderBudget,
     ]
   }
