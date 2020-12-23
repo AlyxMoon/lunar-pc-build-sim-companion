@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+import { PlainObject } from '@/typings/interface'
 import ModelProgramRequirements from '../../src/models/ProgramRequirements.model'
 import mutate from './mutate'
 
@@ -30,7 +31,7 @@ const otherFiles = [
   ['program-requirements', ModelProgramRequirements],
 ]
 
-const splitStringByCommas = (string = '') => {
+const splitStringByCommas = (string = ''): string[] => {
   // capture all items between commas
   // and account for commas that contain commas in their value
   // these are wrapped with "" so that's what to check for
@@ -40,7 +41,7 @@ const splitStringByCommas = (string = '') => {
     .map(item => item.trim().replace(/"/g, '').replace(/, +/g, ','))
 }
 
-const convertRawData = (raw: string, category: string) => {
+const convertRawData = (raw: string, category: string): PlainObject => {
   const [headers, ...rows] = raw.trim()
     .split('\n')
     .map(splitStringByCommas)
@@ -60,7 +61,7 @@ const convertRawData = (raw: string, category: string) => {
   })
 }
 
-const main = async () => {
+const main = async (): Promise<void> => {
   const dataDirectory = join(__dirname, '../../src/assets/data')
   const finalDirectory = join(dataDirectory, 'parts')
 

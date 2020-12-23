@@ -91,12 +91,12 @@ const fieldsAlwaysBoolean = [
   'Is Game',
 ]
 
-const isBooleanField = (field: string = '') => {
+const isBooleanField = (field = ''): boolean => {
   if (fieldsAlwaysBoolean.includes(field)) return true
   return false
 }
 
-const mutate = (value: any, field: string, category: string = '') => {
+const mutate = (value: any, field: string, category = ''): any => {
   if (numFields.includes(field)) return Number(value)
 
   if (field === 'Size') {

@@ -54,7 +54,7 @@ export interface ModelInterface {
 }
 
 export interface BuildModelInterface extends ModelInterface {
-  id: string,
+  id?: string,
   name?: string,
   jobType?: string,
   budget?: number,
