@@ -26,7 +26,7 @@ const nameMap: StringMap = {
   league: 'League of Legends',
   minecraft: 'Minecraft',
   overwatch: 'Overwatch',
-  pubg: 'PlaterUnknown\'s Battlegrounds',
+  pubg: 'PlayerUnknown\'s Battlegrounds',
   rocket_league: 'Rocket League',
   sailaway: 'Sailaway - The Sailing Simulator',
   sublevel_zero: 'Sublevel Zero Redux',
@@ -39,7 +39,7 @@ const nameMap: StringMap = {
 const specsMap: StringMap = {
   min: 'Minimum',
   rec: 'Recommended',
-  x4k: 'Recommended 4k',
+  x4k: '4k',
 }
 
 class ProgramRequirements extends BaseModel implements ProgramRequirementsModelInterface {
