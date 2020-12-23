@@ -227,6 +227,12 @@ export default defineComponent({
     },
   },
 
+  watch: {
+    searchQuery (): void {
+      this.pagination.page = 0
+    },
+  },
+
   methods: {
     toggleSort (name: string): void {
       if (this.sortBy === name) {
