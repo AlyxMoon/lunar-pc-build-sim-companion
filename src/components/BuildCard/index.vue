@@ -152,7 +152,7 @@ import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
 import currency from '@/lib/filters/currency'
-import BuildModel from '@/models/Build'
+import BuildModel from '@/models/Build.model'
 import BuildPartsList from './BuildPartsList.vue'
 
 export default defineComponent({

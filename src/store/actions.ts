@@ -1,7 +1,7 @@
+import { AppState, BuildModelInterface, ImportExportData, PlainObject } from '@/typings/interface'
 import { ActionContext } from 'vuex'
 
-import BuildModel from '@/models/Build'
-import { AppState, BuildModelInterface, ImportExportData, PlainObject } from '@/typings/interface'
+import BuildModel from '@/models/Build.model'
 
 export const createBuild = (
   context: ActionContext<AppState, AppState>,

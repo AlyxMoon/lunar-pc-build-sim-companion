@@ -1,8 +1,8 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
-import BuildModel from '@/models/Build'
-import ProgramRequirementsModel from '@/models/ProgramRequirements'
+import BuildModel from '@/models/Build.model'
+import ProgramRequirementsModel from '@/models/ProgramRequirements.model'
 
 import * as actions from './actions'
 import * as mutations from './mutations'

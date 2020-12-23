@@ -1,4 +1,4 @@
-import BuildModel from '@/models/Build'
+import BuildModel from '@/models/Build.model'
 import { PlainObject } from '@/typings/interface'
 
 export const UPDATE_PLAYER_LEVEL = (state: PlainObject, level: number): void => {

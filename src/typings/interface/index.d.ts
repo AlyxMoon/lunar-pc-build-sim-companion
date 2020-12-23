@@ -1,4 +1,6 @@
 
+export * from './parts.d.ts'
+
 export as namespace Types
 
 export interface PlainObject {
