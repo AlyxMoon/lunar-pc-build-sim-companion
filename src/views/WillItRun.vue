@@ -50,6 +50,7 @@ export default defineComponent({
     ...mapState({
       programRequirements: 'programRequirements',
       parts: 'parts',
+      playerLevel: 'playerLevel',
     }),
   },
 
@@ -57,7 +58,9 @@ export default defineComponent({
     ...mapActions(['createBuild']),
 
     generateBuild (program: ProgramRequirementsModelInterface): void {
-      const build = generateBuild(program, this.parts)
+      const build = generateBuild(program, this.parts, {
+        playerLevel: this.playerLevel,
+      })
 
       this.createBuild(build)
       this.$router.push({ name: 'ActiveBuilds' })

@@ -4,6 +4,7 @@ import BuildModel from '@/models/Build.model'
 const generateBuildMeetsProgramRequirements = (
   program: ProgramRequirementsModelInterface,
   availablePartsByCategory: Record<string, PlainObject>,
+  { playerLevel }: { playerLevel: number },
 ): { [key: string]: any } => {
   const attributes: {
     name: string,
@@ -19,6 +20,8 @@ const generateBuildMeetsProgramRequirements = (
 
   // get cpu
   const cpu = availablePartsByCategory.cpus.reduce((best: PlainObject, part: PlainObject) => {
+    if (part.Level > playerLevel) return best
+
     if (part['Basic CPU Score'] >= (program.cpuScore || 0)) {
       if (best.Price > part.Price) return part
     }
@@ -28,6 +31,8 @@ const generateBuildMeetsProgramRequirements = (
 
   // get gpu
   const gpu = availablePartsByCategory.gpus.reduce((best: PlainObject, part: PlainObject) => {
+    if (part.Level > playerLevel) return best
+
     if (
       part['Single GPU Graphics Score'] >= (program.gpuScore || 0) &&
       part['VRAM (GB)'] >= (program.gpuVram || 0)
@@ -40,6 +45,8 @@ const generateBuildMeetsProgramRequirements = (
 
   // get memory
   const memory = availablePartsByCategory.memory.reduce((best: PlainObject, part: PlainObject) => {
+    if (part.Level > playerLevel) return best
+
     if (part['Size (GB)'] >= (program.memory || 0)) {
       if (best.Price > part.Price) return part
     }
@@ -49,6 +56,8 @@ const generateBuildMeetsProgramRequirements = (
 
   // get storage
   const storage = availablePartsByCategory.storage.reduce((best: PlainObject, part: PlainObject) => {
+    if (part.Level > playerLevel) return best
+
     if (part['Size (GB)'] >= (program.storage || 0)) {
       if (best.Price > part.Price) return part
     }
@@ -58,6 +67,8 @@ const generateBuildMeetsProgramRequirements = (
 
   // get motherboard
   const motherboard = availablePartsByCategory.motherboards.reduce((best: PlainObject, part: PlainObject) => {
+    if (part.Level > playerLevel) return best
+
     if (part['CPU Socket'] === cpu.Socket) {
       if (best.Price > part.Price) return part
     }
@@ -67,6 +78,8 @@ const generateBuildMeetsProgramRequirements = (
 
   // get cpu cooler
   const cpuCooler = availablePartsByCategory.cpucoolers.reduce((best: PlainObject, part: PlainObject) => {
+    if (part.Level > playerLevel) return best
+
     if (part[cpu.Socket]) {
       if (best.Price > part.Price) return part
     }
@@ -76,6 +89,8 @@ const generateBuildMeetsProgramRequirements = (
 
   // get power supply
   const powerSupply = availablePartsByCategory.powersupplies.reduce((best: PlainObject, part: PlainObject) => {
+    if (part.Level > playerLevel) return best
+
     if (part.Wattage >= +cpu.Wattage + +gpu.Wattage) {
       if (best.Price > part.Price) return part
     }
@@ -85,6 +100,8 @@ const generateBuildMeetsProgramRequirements = (
 
   // get case
   const computerCase = availablePartsByCategory.cases.reduce((best: PlainObject, part: PlainObject) => {
+    if (part.Level > playerLevel) return best
+
     if (
       part[`PSU ${powerSupply.Size}`] &&
       part['Max PSU length'] >= powerSupply.Length &&
