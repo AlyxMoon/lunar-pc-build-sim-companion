@@ -49,6 +49,8 @@
           </option>
         </select>
 
+        <div />
+
         <dd>
           {{ displayFilters.currency(item['Price']) }}
         </dd>
@@ -198,14 +200,14 @@ dl {
   grid-gap: 0;
 
   @include md {
-    grid-template-columns: repeat(4, auto) 1fr;
+    grid-template-columns: repeat(5, auto) 1fr;
     grid-gap: 5px 3px;
   }
 
   dt {
     grid-column-start: 1;
     grid-column-end: 5;
-    margin: 10px 0 5px;
+    margin: 20px 0 5px;
 
     display: flex;
     align-items: center;
@@ -213,7 +215,7 @@ dl {
     font-size: 1.2rem;
 
     @include md {
-      grid-column-end: 6;
+      grid-column-end: 7;
     }
   }
 
@@ -225,17 +227,10 @@ dl {
 
     border: 2px solid #E6E6E6;
 
-    &:not(.part-name) {
-      @include smAndBelow {
-        border-bottom: none;
-      }
-    }
-
     &.part-name {
       @include smAndBelow {
-        margin-bottom: 10px;
-        grid-column-start: 1;
-        grid-column-end: 4;
+        grid-column-start: 2;
+        grid-column-end: 5;
       }
     }
   }
