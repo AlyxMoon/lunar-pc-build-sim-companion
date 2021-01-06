@@ -89,58 +89,82 @@
     </div>
 
     <div class="card-body">
-      <h6>Errors With Build</h6>
-      <ul v-if="!!activeBuild.errors.length">
-        <li
-          v-for="error in activeBuild.errors"
-          :key="error"
-        >
-          {{ error }}
-        </li>
-      </ul>
-      <p v-else>
-        No errors!
-      </p>
+      <Accordion>
+        <template #header>
+          <h6>Errors With Build</h6>
+        </template>
+        <template #content>
+          <ul v-if="!!activeBuild.errors.length">
+            <li
+              v-for="error in activeBuild.errors"
+              :key="error"
+            >
+              {{ error }}
+            </li>
+          </ul>
+          <p v-else>
+            No errors!
+          </p>
+        </template>
+      </Accordion>
 
-      <h6>Objectives</h6>
-      <ul>
-        <li
-          v-for="(item, i) in activeBuild.objectives"
-          :key="i"
-        >
-          {{ item }}
-        </li>
-      </ul>
+      <Accordion>
+        <template #header>
+          <h6>Objectives</h6>
+        </template>
+        <template #content>
+          <div class="input-group">
+            <button
+              class="pure-button"
+              :disabled="!tempFields.objectives"
+              @click="addNewItem('objectives', tempFields.objectives)"
+            >
+              Add
+            </button>
+            <input v-model="tempFields.objectives">
+          </div>
 
-      <div class="input-group">
-        <button
-          class="pure-button"
-          :disabled="!tempFields.objectives"
-          @click="addNewItem('objectives', tempFields.objectives)"
-        >
-          Add
-        </button>
-        <input v-model="tempFields.objectives">
-      </div>
+          <ul>
+            <li
+              v-for="(item, i) in activeBuild.objectives"
+              :key="i"
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </template>
+      </Accordion>
 
-      <h6>Existing Parts</h6>
-      <BuildPartsList
-        :parts="activeBuild.startingParts"
-        :show-copy="true"
-        copy-text="Copy part to other section"
-        @addNewItem="addNewItem('startingParts', $event)"
-        @removePart="removePart('startingParts', $event)"
-        @copyPart="copyPart($event, 'startingParts')"
-        @copyPartToOtherSection="copyPart($event, 'newParts')"
-      />
+      <Accordion>
+        <template #header>
+          <h6>Existing Parts</h6>
+        </template>
+        <template #content>
+          <BuildPartsList
+            :parts="activeBuild.startingParts"
+            :show-copy="true"
+            copy-text="Copy part to other section"
+            @addNewItem="addNewItem('startingParts', $event)"
+            @removePart="removePart('startingParts', $event)"
+            @copyPart="copyPart($event, 'startingParts')"
+            @copyPartToOtherSection="copyPart($event, 'newParts')"
+          />
+        </template>
+      </Accordion>
 
-      <h6>New Parts</h6>
-      <BuildPartsList
-        :parts="activeBuild.newParts"
-        @addNewItem="addNewItem('newParts', $event)"
-        @removePart="removePart('newParts', $event)"
-        @copyPart="copyPart($event, 'newParts')"
-      />
+      <Accordion>
+        <template #header>
+          <h6>New Parts</h6>
+        </template>
+        <template #content>
+          <BuildPartsList
+            :parts="activeBuild.newParts"
+            @addNewItem="addNewItem('newParts', $event)"
+            @removePart="removePart('newParts', $event)"
+            @copyPart="copyPart($event, 'newParts')"
+          />
+        </template>
+      </Accordion>
     </div>
   </article>
 </template>
@@ -152,12 +176,15 @@ import { mapState } from 'vuex'
 
 import currency from '@/lib/filters/currency'
 import BuildModel from '@/models/Build.model'
+
+import Accordion from '@/components/Accordion.vue'
 import BuildPartsList from './BuildPartsList.vue'
 
 export default defineComponent({
   name: 'BuildCard',
   components: {
     BuildPartsList,
+    Accordion,
   },
   props: {
     build: {
@@ -345,10 +372,6 @@ article {
       input {
         flex-grow: 1;
       }
-    }
-
-    h6 {
-      margin: 20px 0 0;
     }
   }
 }

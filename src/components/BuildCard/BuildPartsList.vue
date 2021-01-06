@@ -138,7 +138,6 @@ export default defineComponent({
 
   methods: {
     partsOfCategory (partTypeNames: string[]): Parts.BaseInterface[] {
-      console.log('test', this.parts)
       return (this.parts as Parts.BaseInterface[])
         .map((item, index) => ({ ...item, originalIndex: index }))
         .filter(item => {

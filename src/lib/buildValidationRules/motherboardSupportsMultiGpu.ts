@@ -15,8 +15,6 @@ const motherboardSupportsMultiGpu = (
 
   if (!multi1 || !multi2 || multi1 !== multi2) return true
 
-  console.log('checking', motherboard, gpus)
-
   if (multi1 === 'SLI' && !motherboard['Support SLI']) {
     return 'The motherboard does not support SLI multi-GPU'
   }
