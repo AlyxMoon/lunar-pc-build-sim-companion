@@ -90,7 +90,7 @@ const categories = [
   {
     name: 'gpus',
     displayName: 'Graphics Cards',
-    partTypeNames: ['GPU'],
+    partTypeNames: ['GPU', 'GPU - Water'],
     icon: 'image',
     iconBackColor: '#DC0000',
     headers: [
