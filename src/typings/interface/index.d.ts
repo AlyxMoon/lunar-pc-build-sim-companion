@@ -60,8 +60,7 @@ export interface BuildModelInterface extends ModelInterface {
   budget?: number,
   estimatedScore?: estimatedScore,
   objectives?: string[],
-  startingParts?: PlainObject[],
-  newParts?: PlainObject[],
+  parts?: PlainObject[],
 }
 
 export interface ProgramRequirementsModelInterface extends ModelInterface {

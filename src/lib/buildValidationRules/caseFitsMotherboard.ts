@@ -1,17 +1,11 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
 
 const caseFitsMotherboard = (build: BuildModelInterface): ValidationFunctionReturn => {
-  const { startingParts = [], newParts = [] } = build
+  const parts = build.parts?.filter((part: PlainObject) => part.isBeingKept) || []
 
-  const computerCase = (
-    newParts.find((part: any) => part['Part Type'] === 'Case') ||
-    startingParts.find((part: any) => part['Part Type'] === 'Case')
-  )
+  const computerCase = parts.find((part: any) => part['Part Type'] === 'Case')
 
-  const motherboard = (
-    newParts.find((part: any) => part['Part Type'] === 'Motherboard') ||
-    startingParts.find((part: any) => part['Part Type'] === 'Motherboard')
-  )
+  const motherboard = parts.find((part: any) => part['Part Type'] === 'Motherboard')
 
   if (!computerCase || !motherboard) return true
 

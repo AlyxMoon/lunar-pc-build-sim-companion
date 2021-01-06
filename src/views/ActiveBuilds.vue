@@ -66,20 +66,19 @@ export default defineComponent({
 
     startDialogPartLookup (
       index: number,
-      { field, partType, build }: { field: string, partType: string, build: BuildModelInterface },
+      { partType, build }: { partType: string, build: BuildModelInterface },
     ): void {
       this.showDialogPartLookup = {
         index,
-        field,
         partType,
         build,
       }
     },
 
     addPartToBuild (part: Parts.BaseInterface): void {
-      const { build, field, index } = this.showDialogPartLookup
+      const { build, index } = this.showDialogPartLookup
 
-      build.set(field, [...build.get(field), part])
+      build.parts.push(part)
       build.validate()
 
       this.updateBuild({

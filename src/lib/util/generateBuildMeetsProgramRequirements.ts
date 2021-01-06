@@ -9,13 +9,13 @@ const generateBuildMeetsProgramRequirements = (
   const attributes: {
     name: string,
     objectives: string[],
-    newParts: PlainObject[],
+    parts: PlainObject[],
   } = {
     name: `New Build - run ${program.get('name', true)} | ${program.get('type', true)}`,
     objectives: [
       `Meet requirements to run ${program.get('name', true)} | ${program.get('type', true)}`,
     ],
-    newParts: [],
+    parts: [],
   }
 
   // get cpu
@@ -132,7 +132,7 @@ const generateBuildMeetsProgramRequirements = (
     return fans
   }, [])
 
-  attributes.newParts = [
+  attributes.parts = [
     cpu,
     gpu,
     memory,
@@ -142,7 +142,11 @@ const generateBuildMeetsProgramRequirements = (
     powerSupply,
     computerCase,
     ...caseFans,
-  ]
+  ].map((part: PlainObject) => ({
+    ...part,
+    isNewPart: true,
+    isBeingKept: true,
+  }))
 
   return new BuildModel(attributes)
 }

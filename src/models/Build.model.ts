@@ -17,8 +17,7 @@ class BuildModel extends BaseModel implements BuildModelInterface {
       budget: 0,
       estimatedScore: 0,
       objectives: [],
-      startingParts: [],
-      newParts: [],
+      parts: [],
     }
   }
 
@@ -82,19 +81,13 @@ class BuildModel extends BaseModel implements BuildModelInterface {
 
   findPartOfType (
     type: string,
-    { limit = true, combineStartAndNew = false } = {},
+    { limit = true } = {},
   ): PlainObject {
-    const startingPartsOfType = this.attributes.startingParts.filter((part: any) => {
-      return part['Part Type'] === type
+    const parts = this.attributes.parts.filter((part: PlainObject) => {
+      const partType = part['Part Type']
+      if (type === 'GPU') return ['GPU', 'GPU - Water'].includes(partType)
+      return type === partType
     })
-
-    const newPartsOfType = this.attributes.newParts.filter((part: any) => {
-      return part['Part Type'] === type
-    })
-
-    const parts = combineStartAndNew
-      ? [...startingPartsOfType, ...newPartsOfType]
-      : newPartsOfType.length ? newPartsOfType : startingPartsOfType
 
     if (type === 'GPU') {
       return limit ? parts.slice(0, 2) : parts
@@ -117,6 +110,33 @@ class BuildModel extends BaseModel implements BuildModelInterface {
       motherboardSupportsMultiGpu,
       newPartsUnderBudget,
     ]
+  }
+
+  beforeCreate (attributes: PlainObject): void {
+    // apply migration to handle change of how parts are handled
+    // can remove this in about a month 2021-02-01
+
+    const startingParts: PlainObject[] = attributes.startingParts || []
+    const newParts: PlainObject[] = attributes.newParts || []
+
+    delete attributes.startingParts
+    delete attributes.newParts
+
+    if (!startingParts.length && !newParts.length) return
+
+    attributes.parts = []
+
+    attributes.parts.push(...startingParts.map(part => ({
+      ...part,
+      isNewPart: false,
+      isBeingKept: false,
+    })))
+
+    attributes.parts.push(...newParts.map(part => ({
+      ...part,
+      isNewPart: true,
+      isBeingKept: true,
+    })))
   }
 
   afterCreate (): void {

@@ -1,13 +1,14 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
 
 const newPartsUnderBudget = (build: BuildModelInterface): ValidationFunctionReturn => {
-  const { budget, newParts } = build
-  if (!budget) return true
+  if (!build.budget) return true
 
-  const sumOfNewParts = (newParts || []).reduce((sum: number, part: any) => sum + part.Price, 0)
+  const sumOfNewParts = build.parts?.reduce((sum: number, part: PlainObject) => {
+    return sum + (part.isNewPart ? part.Price : 0)
+  }, 0) || 0
 
   return (
-    budget >= sumOfNewParts ||
+    build.budget >= sumOfNewParts ||
     'You are over budget.'
   )
 }

@@ -7,7 +7,7 @@
       <dt>
         <button
           class="pure-button add-new-button"
-          @click="$emit('addNewItem', category.name)"
+          @click="$emit('addNewPart', category.name)"
         >
           Add
         </button>
@@ -34,15 +34,20 @@
           <FontAwesomeIcon icon="copy" />
         </button>
 
-        <button
-          v-if="!!showCopy"
-          class="pure-button"
-          :title="copyText"
-          @click="$emit('copyPartToOtherSection', item)"
+        <select
+          :value="newOldStatusLabel(item)"
+          @change="changePartStatus(item.originalIndex, $event.target.value)"
         >
-          <FontAwesomeIcon icon="paste" />
-        </button>
-        <div v-else />
+          <option value="New">
+            New
+          </option>
+          <option value="Old - Replacing">
+            Old - Replacing
+          </option>
+          <option value="Old - Keeping">
+            Old - Keeping
+          </option>
+        </select>
 
         <dd>
           {{ displayFilters.currency(item['Price']) }}
@@ -77,7 +82,7 @@ export default defineComponent({
       default: '',
     },
   },
-  emits: ['addNewItem', 'copyPart', 'copyPartToOtherSection', 'removePart'],
+  emits: ['addNewPart', 'copyPart', 'removePart', 'updatePart'],
 
   data: (): PlainObject => ({
     selectedPartCategory: '',
@@ -137,6 +142,38 @@ export default defineComponent({
   },
 
   methods: {
+    newOldStatusLabel (part: PlainObject): string {
+      const isNewPart = part.isNewPart || false
+      const isBeingKept = part.isBeingKept || false
+
+      return isNewPart
+        ? 'New'
+        : isBeingKept ? 'Old - Keeping' : 'Old - Replacing'
+    },
+
+    changePartStatus (index: number, statusLabel: string): void {
+      if (statusLabel === 'New') {
+        this.$emit('updatePart', {
+          index,
+          newValues: { isNewPart: true, isBeingKept: true },
+        })
+      }
+
+      if (statusLabel === 'Old - Keeping') {
+        this.$emit('updatePart', {
+          index,
+          newValues: { isNewPart: false, isBeingKept: true },
+        })
+      }
+
+      if (statusLabel === 'Old - Replacing') {
+        this.$emit('updatePart', {
+          index,
+          newValues: { isNewPart: false, isBeingKept: false },
+        })
+      }
+    },
+
     partsOfCategory (partTypeNames: string[]): Parts.BaseInterface[] {
       return (this.parts as Parts.BaseInterface[])
         .map((item, index) => ({ ...item, originalIndex: index }))

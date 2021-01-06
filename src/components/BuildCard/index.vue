@@ -117,7 +117,7 @@
             <button
               class="pure-button"
               :disabled="!tempFields.objectives"
-              @click="addNewItem('objectives', tempFields.objectives)"
+              @click="addNewObjective(tempFields.objectives)"
             >
               Add
             </button>
@@ -137,31 +137,15 @@
 
       <Accordion>
         <template #header>
-          <h6>Existing Parts</h6>
+          <h6>Parts</h6>
         </template>
         <template #content>
           <BuildPartsList
-            :parts="activeBuild.startingParts"
-            :show-copy="true"
-            copy-text="Copy part to other section"
-            @addNewItem="addNewItem('startingParts', $event)"
-            @removePart="removePart('startingParts', $event)"
-            @copyPart="copyPart($event, 'startingParts')"
-            @copyPartToOtherSection="copyPart($event, 'newParts')"
-          />
-        </template>
-      </Accordion>
-
-      <Accordion>
-        <template #header>
-          <h6>New Parts</h6>
-        </template>
-        <template #content>
-          <BuildPartsList
-            :parts="activeBuild.newParts"
-            @addNewItem="addNewItem('newParts', $event)"
-            @removePart="removePart('newParts', $event)"
-            @copyPart="copyPart($event, 'newParts')"
+            :parts="activeBuild.parts"
+            @addNewPart="addNewPart($event)"
+            @removePart="removePart($event)"
+            @copyPart="copyPart($event)"
+            @updatePart="updatePart($event)"
           />
         </template>
       </Accordion>
@@ -214,8 +198,8 @@ export default defineComponent({
 
     totalCostNewParts (): number {
       if (!this.activeBuild) return 0
-      return this.activeBuild.newParts.reduce((sum: number, item: PlainObject) => {
-        return sum + item.Price
+      return this.activeBuild.parts.reduce((sum: number, item: PlainObject) => {
+        return sum + (item.isNewPart ? item.Price : 0)
       }, 0)
     },
   },
@@ -228,19 +212,17 @@ export default defineComponent({
       }
     },
 
-    addNewItem (field: string, item: PlainObject): void {
-      if (field === 'objectives') {
-        this.activeBuild[field].push(item)
-        this.activeBuild.validate()
-        this.$emit('update', this.activeBuild.attributes)
-      } else {
-        this.$emit('addPartToBuild', {
-          partType: item,
-          field,
-          build: this.activeBuild,
-        })
-      }
-      this.tempFields[field] = ''
+    addNewPart (item: PlainObject): void {
+      this.$emit('addPartToBuild', {
+        partType: item,
+        build: this.activeBuild,
+      })
+    },
+
+    addNewObjective (objective: string): void {
+      this.activeBuild.objectives.push(objective)
+      this.activeBuild.validate()
+      this.$emit('update', this.activeBuild.attributes)
     },
 
     removeBuild (confirmed = false): void {
@@ -252,16 +234,26 @@ export default defineComponent({
       this.$emit('remove')
     },
 
-    removePart (field: string, index: number): void {
-      this.activeBuild[field].splice(index, 1)
+    removePart (index: number): void {
+      this.activeBuild.parts.splice(index, 1)
       this.activeBuild.validate()
       this.$emit('update', this.activeBuild.attributes)
     },
 
-    copyPart (item: PlainObject, section: 'newParts' | 'startingParts'): void {
-      this.activeBuild[section].push(item)
+    copyPart (item: PlainObject): void {
+      this.activeBuild.parts.push({ ...item })
       this.activeBuild.validate()
       this.$emit('update', this.activeBuild.attributes)
+    },
+
+    updatePart ({ index, newValues }: { index: number, newValues: PlainObject }): void {
+      this.activeBuild.parts.splice(index, 1, {
+        ...this.activeBuild.parts[index],
+        ...newValues,
+      })
+
+      this.activeBuild.validate()
+      this.$emit('update', this.activeBuild)
     },
   },
 
