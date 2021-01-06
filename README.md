@@ -1,29 +1,7 @@
-# lunar-pc-build-sim-companion
+# Lunar's PC Building Simulator Companion
 
-## Project setup
-```
-yarn install
-```
+This is a web-hosted companion app for PC Building Simulator. Intended to help look up parts, keep track of client projects, and plan out builds. It's a hobby project right now so I'm not spending too much time on documentation. If you have any questions or want to help you are welcome to reach out.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Notes on validation rules
+One goal I have is to check all possible errors that might happen when picking out parts for a build. These rules can be found in `src/lib/buildValidationRules`. The general naming convention I'm going with is to have it rule start with the part type and then state the rule. In the case of part compatibility, the part that holds the other part goes first (i.e. a CPU goes on a motherboard, so that check would be motherboardFitsCpu).

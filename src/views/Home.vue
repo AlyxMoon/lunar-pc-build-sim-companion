@@ -42,32 +42,20 @@
     </p>
   </div>
 
-  <div>
-    For the builds I have started implementing some validation rules. Here are the list of rules currently being checked:
-
-    <ul>
-      <li>
-        If the sum of new parts are above the budget
-      </li>
-      <li>
-        If the power supply fits in the case
-      </li>
-      <li>
-        If the motherboard fits in the case
-      </li>
-      <li>
-        If the CPU is compatible with the motherboard
-      </li>
-    </ul>
-  </div>
+  <BuildValidationList />
 </template>
 
 <script lang="ts">
 import { PlainObject } from '@/typings/interface'
 import { mapActions } from 'vuex'
 
+import BuildValidationList from '@/components/BuildValidationList.vue'
+
 export default {
   name: 'PageActiveBuild',
+  components: {
+    BuildValidationList,
+  },
 
   data: (): PlainObject => ({
     handlingImport: false,
