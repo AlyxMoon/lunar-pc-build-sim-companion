@@ -62,23 +62,24 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { PlainObject } from '@/typings/interface'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'PageActiveBuild',
 
-  data: () => ({
+  data: (): PlainObject => ({
     handlingImport: false,
   }),
 
   computed: {
     playerLevel: {
-      get () {
-        return this.$store.state.playerLevel
+      get (): number {
+        return this.$store.state.playerLevel || 0
       },
 
-      set (value) {
+      set (value: number): void {
         this.$store.commit('UPDATE_PLAYER_LEVEL', value)
       },
     },
@@ -87,15 +88,16 @@ export default {
   methods: {
     ...mapActions(['exportPlayerData', 'importPlayerData']),
 
-    handleFileInput () {
+    handleFileInput (): void {
       this.handlingImport = true
 
       const reader = new FileReader()
+      const importData = this.$refs.importData as PlainObject
 
-      reader.onload = event => {
-        this.$refs.importData.value = null
+      reader.onload = (event): void => {
+        importData.value = null
         try {
-          const stuff = JSON.parse(event.target.result)
+          const stuff = JSON.parse(event.target?.result as string)
           this.importPlayerData(stuff)
           alert('Import successful!')
         } catch (error) {
@@ -105,7 +107,7 @@ export default {
         this.handlingImport = false
       }
 
-      reader.readAsText(this.$refs.importData.files[0])
+      reader.readAsText(importData.files[0])
     },
   },
 }
