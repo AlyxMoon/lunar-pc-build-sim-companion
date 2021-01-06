@@ -91,7 +91,10 @@
     <div class="card-body">
       <Accordion>
         <template #header>
-          <h6>Errors With Build</h6>
+          <h6>
+            <span class="badge error">{{ activeBuild.errors.length }}</span>
+            Errors With Build
+          </h6>
         </template>
         <template #content>
           <ul v-if="!!activeBuild.errors.length">
@@ -110,7 +113,10 @@
 
       <Accordion>
         <template #header>
-          <h6>Objectives</h6>
+          <h6>
+            <span class="badge info">{{ activeBuild.objectives.length }}</span>
+            Objectives
+          </h6>
         </template>
         <template #content>
           <div class="input-group">
@@ -137,7 +143,10 @@
 
       <Accordion>
         <template #header>
-          <h6>Parts</h6>
+          <h6>
+            <span class="badge info">{{ activeBuild.parts.length }}</span>
+            Parts
+          </h6>
         </template>
         <template #content>
           <BuildPartsList
@@ -352,7 +361,7 @@ article {
 
     h5 {
       margin: 0;
-      text-align: right;
+      justify-content: flex-end;
     }
   }
 
@@ -364,6 +373,10 @@ article {
       input {
         flex-grow: 1;
       }
+    }
+
+    :deep(.accordion-header) {
+      padding-left: 5px;
     }
   }
 }
