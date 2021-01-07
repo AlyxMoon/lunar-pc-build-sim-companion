@@ -1,3 +1,4 @@
+@import './buttons.scss';
 @import './inputs.scss';
 @import './typography.scss';
 
@@ -36,7 +37,7 @@
   width: 100%;
   padding: 10px 20px;
 
-  background-color: #262249;
+  background-color: $colorPrimary;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: white;
@@ -70,13 +71,13 @@ svg.clickable {
   text-align: center;
 
   &.info {
-    background-color: #0DCAFF;
+    background-color: $colorInfo;
     color: #FFFFFF;
     text-shadow: 0 0 5px #555555;
   }
 
   &.error {
-    background-color: #DC3535;
+    background-color: $colorError;
     color: #FFFFFF;
     text-shadow: 0 0 5px #555555;
   }

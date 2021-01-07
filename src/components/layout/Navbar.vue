@@ -62,8 +62,8 @@ nav {
   align-items: center;
   flex-direction: row;
 
-  background-color: #262249;
-  border-bottom: 3px solid #E94800;
+  background-color: $colorPrimary;
+  border-bottom: 3px solid $colorPrimaryAccent;
 
   .logo-wrapper {
     display: flex;
@@ -99,7 +99,7 @@ nav {
     }
 
     &:hover, &.router-link-active {
-      color: #E94800;
+      color: $colorPrimaryAccent;
     }
   }
 

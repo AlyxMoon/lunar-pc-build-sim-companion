@@ -61,8 +61,8 @@ footer {
   justify-content: center;
   flex-direction: column;
 
-  background-color: #262249;
-  border-top: 3px solid #E94800;
+  background-color: $colorPrimary;
+  border-top: 3px solid $colorPrimaryAccent;
   color: white;
 
   a {
@@ -76,7 +76,7 @@ footer {
     transition-duration: 0.2s;
 
     &:hover {
-      color: #E94800;
+      color: $colorPrimaryAccent;
     }
   }
 }

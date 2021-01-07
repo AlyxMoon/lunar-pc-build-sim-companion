@@ -6,7 +6,7 @@
     >
       <dt>
         <button
-          class="pure-button add-new-button"
+          class="pure-button success add-new-button"
           @click="$emit('addNewPart', category.name)"
         >
           Add
@@ -19,7 +19,7 @@
         :key="`${i}-${item['Full Part Name']}`"
       >
         <button
-          class="pure-button"
+          class="pure-button danger"
           title="Remove Part"
           @click="$emit('removePart', item.originalIndex)"
         >
@@ -279,7 +279,6 @@ dl {
 }
 
 .pure-button {
-  padding: 5px 10px;
   font-size: 0.9rem;
 
   border-radius: 0;

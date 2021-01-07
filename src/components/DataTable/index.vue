@@ -289,7 +289,7 @@ export default defineComponent({
   justify-content: flex-end;
 
   border: 2px solid #CBCBCB {
-    top: 2px solid #E94800;
+    top: 2px solid $colorPrimaryAccent;
   }
 
   button, span {
@@ -305,7 +305,7 @@ table {
   width: 100%;
 
   thead tr th {
-    background-color: #262249;
+    background-color: $colorPrimary;
     color: #DDDDDD;
 
     cursor: pointer;
@@ -313,6 +313,7 @@ table {
     user-select: none;
 
     svg {
+      margin-left: 5px;
       transition: transform 0.2s;
 
       &.ascending {

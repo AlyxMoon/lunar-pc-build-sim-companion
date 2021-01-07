@@ -1,0 +1,47 @@
+
+.pure-button {
+  background-image: none;
+  background-color: #DDDDDD;
+  border: 1px solid transparent;
+  
+  color: black;
+  font-size: 1rem;
+
+  transition-duration: 0.2s;
+  
+  &:hover {
+    background-image: none;
+    background-color: #CCCCCC;
+    border-color: black;
+  }
+
+  &.danger, &.error {
+    background-color: $colorDanger;
+    color: white;
+
+    &:hover {
+      border-color: black;
+      background-color: lighten($colorDanger, 5);
+    }
+  }
+
+  &.info {
+    background-color: $colorInfo;
+    color: white;
+
+    &:hover {
+      border-color: black;
+      background-color: lighten($colorInfo, 5);
+    }
+  }
+
+  &.success {
+    background-color: $colorSuccess;
+    color: white;
+
+    &:hover {
+      border-color: black;
+      background-color: lighten($colorSuccess, 5);
+    }
+  }
+}

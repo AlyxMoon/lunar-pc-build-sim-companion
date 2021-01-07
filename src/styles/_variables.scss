@@ -1,5 +1,16 @@
 @use 'sass:map';
 
+$colorPrimary: #262249;
+$colorPrimaryAccent: #E94800;
+$colorSecondary: #385590;
+$colorSecondaryAccent: #E97816;
+$colorTertiary: #DDE7FD;
+
+$colorSuccess: #00A668;
+$colorInfo: #00BCFF;
+$colorError: #DC0000;
+$colorDanger: $colorError;
+
 $breakpoints: (
   "sm": 35em,
   "md": 48em,

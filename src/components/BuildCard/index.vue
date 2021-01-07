@@ -3,16 +3,18 @@
     <div class="card-title">
       <h4
         v-if="!editing"
+        class="clickable"
+        @click="expanded = !expanded"
       >
         <FontAwesomeIcon
           class="clickable"
           icon="chevron-right"
-          @click="expanded = !expanded"
         />
 
         {{ activeBuild.name }}
       </h4>
       <input
+        type="text"
         v-else
         v-model="activeBuild.name"
       >
@@ -22,7 +24,8 @@
         role="group"
       >
         <button
-          class="pure-button"
+          v-if="!confirmRemove"
+          class="pure-button info"
           :title="editing ? 'Save Build' : 'Edit Build'"
           @click="toggleEdit"
         >
@@ -38,17 +41,29 @@
         </button>
 
         <button
-          :key="`remove-${confirmRemove}`"
-          class="pure-button"
+          v-if="!confirmRemove && !editing"
+          class="pure-button danger"
           title="Remove Build"
-          @click="removeBuild(confirmRemove)"
+          @click="removeBuild(false)"
         >
-          <FontAwesomeIcon
-            v-if="!confirmRemove"
-            icon="times"
-          />
-          <span v-else>Really?</span>
+          <FontAwesomeIcon icon="times" />
         </button>
+
+        <template v-if="confirmRemove && !editing">
+          <button
+            class="pure-button danger"
+            @click="removebuild(true)"
+          >
+            Delete
+          </button>
+
+          <button
+            class="pure-button"
+            @click="confirmRemove = false"
+          >
+            Cancel
+          </button>
+        </template>
       </div>
     </div>
 
@@ -61,6 +76,7 @@
         {{ filters.currency(activeBuild.budget) }}
       </span>
       <input
+        type="text"
         v-else
         v-model="activeBuild.budget"
       >
@@ -78,6 +94,7 @@
         {{ activeBuild.jobType }}
       </span>
       <input
+        type="text"
         v-else
         v-model="activeBuild.jobType"
       >
@@ -127,7 +144,10 @@
             >
               Add
             </button>
-            <input v-model="tempFields.objectives">
+            <input
+              type="text"
+              v-model="tempFields.objectives"
+            >
           </div>
 
           <ul>
@@ -283,7 +303,7 @@ export default defineComponent({
 article {
   width: 100%;
 
-  border-left: 8px solid #E97816;
+  border-left: 8px solid $colorSecondaryAccent;
 
   overflow: hidden;
   transition:
@@ -301,10 +321,10 @@ article {
   }
 
   &:not(.expanded) {
-    border-bottom: 4px solid #E97816;
+    border-bottom: 4px solid $colorSecondaryAccent;
 
     &:first-child {
-      border-top: 4px solid #E97816;
+      border-top: 4px solid $colorSecondaryAccent;
     }
 
     .card-subtitle, .card-body, .card-footer {
@@ -321,7 +341,7 @@ article {
     align-items: center;
     justify-content: space-between;
 
-    background-color: #385590;
+    background-color: $colorSecondary;
     color: white;
     font-size: 1.2rem;
 
@@ -361,7 +381,7 @@ article {
     grid-template-columns: auto 1fr;
     align-items: center;
 
-    background-color: #DDE7FD;
+    background-color: $colorTertiary;
     color: black;
     font-size: 1.1rem;
 

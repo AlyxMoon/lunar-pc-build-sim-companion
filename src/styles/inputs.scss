@@ -1,4 +1,15 @@
 
+label {
+  margin: 10px 0;
+
+  display: flex;
+  align-items: center;
+}
+
+dl, dt, dd {
+  margin: 0;
+}
+
 .input-group {
   margin: 5px 0 10px;
 
@@ -19,13 +30,35 @@ input[type="checkbox"] {
   width: 20px;
 }
 
-label {
-  margin: 10px 0;
+input[type="search"],
+input[type="text"],
+select {
+  padding: 5px 5px 5px 10px;
 
-  display: flex;
-  align-items: center;
+  background-color: #EEEEEE;
+  border: 2px solid $colorPrimary;
+  border-radius: 0;
+
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+
+  transition: all 0.3s;
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $colorPrimaryAccent;
+  }
 }
 
-dl, dt, dd {
-  margin: 0;
+select {
+  padding: 0;
+
+  cursor: pointer;
+
+  option:checked, option:hover {
+    background-color: $colorPrimary;
+    box-shadow: 0 0 10px 100px $colorPrimary inset;
+    color: white;
+  }
 }
+
