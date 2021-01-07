@@ -208,7 +208,13 @@ export default defineComponent({
     totalCostNewParts (): number {
       if (!this.activeBuild) return 0
       return this.activeBuild.parts.reduce((sum: number, item: PlainObject) => {
-        return sum + (item.isNewPart ? item.Price : 0)
+        if (!item.isNewPart) return sum
+
+        const partPrice = item.isNewUsedPart
+          ? Math.floor(item.Price * 1.25 / 3)
+          : item.Price
+
+        return sum + partPrice
       }, 0)
     },
   },

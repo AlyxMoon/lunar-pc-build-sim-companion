@@ -38,21 +38,22 @@
           :value="newOldStatusLabel(item)"
           @change="changePartStatus(item.originalIndex, $event.target.value)"
         >
-          <option value="New">
-            New
-          </option>
-          <option value="Old - Replacing">
-            Old - Replacing
-          </option>
-          <option value="Old - Keeping">
-            Old - Keeping
+          <option
+            v-for="option in partStatusOptions"
+            :key="option"
+            :value="option"
+          >
+            {{ option }}
           </option>
         </select>
 
         <div />
 
         <dd>
-          {{ displayFilters.currency(item['Price']) }}
+          {{ displayFilters.currency(getPartPrice(item)) }}
+          <span v-if="!item.isNewPart || item.isNewUsedPart">
+            (New: {{ displayFilters.currency(item.Price) }})
+          </span>
         </dd>
 
         <dd class="part-name">
@@ -88,6 +89,12 @@ export default defineComponent({
 
   data: (): PlainObject => ({
     selectedPartCategory: '',
+    partStatusOptions: [
+      'New',
+      'New - Used Part',
+      'Old - Keeping',
+      'Old - Replacing',
+    ],
   }),
 
   computed: {
@@ -146,32 +153,40 @@ export default defineComponent({
   methods: {
     newOldStatusLabel (part: PlainObject): string {
       const isNewPart = part.isNewPart || false
+      const isUsedPart = (part.isNewPart && part.isNewUsedPart) || false
       const isBeingKept = part.isBeingKept || false
 
       return isNewPart
-        ? 'New'
-        : isBeingKept ? 'Old - Keeping' : 'Old - Replacing'
+        ? (isUsedPart ? 'New - Used Part' : 'New')
+        : (isBeingKept ? 'Old - Keeping' : 'Old - Replacing')
     },
 
     changePartStatus (index: number, statusLabel: string): void {
       if (statusLabel === 'New') {
         this.$emit('updatePart', {
           index,
-          newValues: { isNewPart: true, isBeingKept: true },
+          newValues: { isNewPart: true, isNewUsedPart: false, isBeingKept: true },
+        })
+      }
+
+      if (statusLabel === 'New - Used Part') {
+        this.$emit('updatePart', {
+          index,
+          newValues: { isNewPart: true, isNewUsedPart: true, isBeingKept: true },
         })
       }
 
       if (statusLabel === 'Old - Keeping') {
         this.$emit('updatePart', {
           index,
-          newValues: { isNewPart: false, isBeingKept: true },
+          newValues: { isNewPart: false, isNewUsedPart: false, isBeingKept: true },
         })
       }
 
       if (statusLabel === 'Old - Replacing') {
         this.$emit('updatePart', {
           index,
-          newValues: { isNewPart: false, isBeingKept: false },
+          newValues: { isNewPart: false, isNewUsedPart: false, isBeingKept: false },
         })
       }
     },
@@ -183,6 +198,14 @@ export default defineComponent({
           const type: string = (item as Parts.BaseInterface)['Part Type'] + ''
           return partTypeNames.includes(type)
         })
+    },
+
+    getPartPrice (part: PlainObject): number {
+      if (!part.isNewPart) return 0
+
+      return part.isNewUsedPart
+        ? Math.floor(part.Price * 1.25 / 3)
+        : part.Price
     },
   },
 })
@@ -232,6 +255,10 @@ dl {
         grid-column-start: 2;
         grid-column-end: 5;
       }
+    }
+
+    span {
+      margin-left: 5px;
     }
   }
 }
