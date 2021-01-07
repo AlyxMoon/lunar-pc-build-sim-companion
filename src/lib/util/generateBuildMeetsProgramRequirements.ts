@@ -146,6 +146,7 @@ const generateBuildMeetsProgramRequirements = (
     ...part,
     isNewPart: true,
     isBeingKept: true,
+    isPartOfCase: part['Part Type'] === 'Case Fan',
   }))
 
   return new BuildModel(attributes)

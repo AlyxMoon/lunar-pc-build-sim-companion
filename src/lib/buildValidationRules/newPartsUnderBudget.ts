@@ -4,7 +4,7 @@ const newPartsUnderBudget = (build: BuildModelInterface): ValidationFunctionRetu
   if (!build.budget) return true
 
   const sumOfNewParts = build.parts?.reduce((sum: number, part) => {
-    if (!part.isNewPart) return sum
+    if (!part.isNewPart || part.isPartOfCase) return sum
 
     const partPrice = part.isNewUsedPart
       ? Math.floor(part.Price * 1.25 / 3)

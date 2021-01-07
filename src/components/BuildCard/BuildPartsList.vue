@@ -39,6 +39,12 @@
           @change="changePartStatus(item.originalIndex, $event.target.value)"
         >
           <option
+            v-if="item['Part Type'] === 'Case Fan'"
+            value="New - Comes With Case"
+          >
+            New - Comes With Case
+          </option>
+          <option
             v-for="option in partStatusOptions"
             :key="option"
             :value="option"
@@ -51,7 +57,7 @@
 
         <dd>
           {{ displayFilters.currency(getPartPrice(item)) }}
-          <span v-if="!item.isNewPart || item.isNewUsedPart">
+          <span v-if="!item.isNewPart || item.isNewUsedPart || item.isPartOfCase">
             (New: {{ displayFilters.currency(item.Price) }})
           </span>
         </dd>
@@ -154,8 +160,10 @@ export default defineComponent({
     newOldStatusLabel (part: PlainObject): string {
       const isNewPart = part.isNewPart || false
       const isUsedPart = (part.isNewPart && part.isNewUsedPart) || false
+      const isPartOfCase = part.isPartOfCase || false
       const isBeingKept = part.isBeingKept || false
 
+      if (isPartOfCase) return 'New - Comes With Case'
       return isNewPart
         ? (isUsedPart ? 'New - Used Part' : 'New')
         : (isBeingKept ? 'Old - Keeping' : 'Old - Replacing')
@@ -165,28 +173,35 @@ export default defineComponent({
       if (statusLabel === 'New') {
         this.$emit('updatePart', {
           index,
-          newValues: { isNewPart: true, isNewUsedPart: false, isBeingKept: true },
+          newValues: { isNewPart: true, isNewUsedPart: false, isBeingKept: true, isPartOfCase: false },
+        })
+      }
+
+      if (statusLabel === 'New - Comes With Case') {
+        this.$emit('updatePart', {
+          index,
+          newValues: { isNewPart: true, isNewUsedPart: false, isBeingKept: true, isPartOfCase: true },
         })
       }
 
       if (statusLabel === 'New - Used Part') {
         this.$emit('updatePart', {
           index,
-          newValues: { isNewPart: true, isNewUsedPart: true, isBeingKept: true },
+          newValues: { isNewPart: true, isNewUsedPart: true, isBeingKept: true, isPartOfCase: false },
         })
       }
 
       if (statusLabel === 'Old - Keeping') {
         this.$emit('updatePart', {
           index,
-          newValues: { isNewPart: false, isNewUsedPart: false, isBeingKept: true },
+          newValues: { isNewPart: false, isNewUsedPart: false, isBeingKept: true, isPartOfCase: false },
         })
       }
 
       if (statusLabel === 'Old - Replacing') {
         this.$emit('updatePart', {
           index,
-          newValues: { isNewPart: false, isNewUsedPart: false, isBeingKept: false },
+          newValues: { isNewPart: false, isNewUsedPart: false, isBeingKept: false, isPartOfCase: false },
         })
       }
     },
@@ -201,7 +216,7 @@ export default defineComponent({
     },
 
     getPartPrice (part: PlainObject): number {
-      if (!part.isNewPart) return 0
+      if (!part.isNewPart || part.isPartOfCase) return 0
 
       return part.isNewUsedPart
         ? Math.floor(part.Price * 1.25 / 3)
