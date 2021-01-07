@@ -68,23 +68,26 @@
     </div>
 
     <div class="card-subtitle">
-      <h5>Budget</h5>
+      <h5>Used / Budget</h5>
 
-      <span
-        v-if="!editing"
-      >
-        {{ filters.currency(activeBuild.budget) }}
-      </span>
-      <input
-        type="text"
-        v-else
-        v-model="activeBuild.budget"
-      >
+      <div class="budget-group">
+        <span>
+          {{ filters.currency(totalCostNewParts) }}
+        </span>
 
-      <h5>Used Budget</h5>
-      <span>
-        {{ filters.currency(totalCostNewParts) }}
-      </span>
+        /
+
+        <span
+          v-if="!editing"
+        >
+          {{ filters.currency(activeBuild.budget) }}
+        </span>
+        <input
+          type="text"
+          v-else
+          v-model="activeBuild.budget"
+        >
+      </div>
 
       <h5>Job Type</h5>
 
@@ -404,6 +407,15 @@ article {
     :deep(.accordion-header) {
       padding-left: 5px;
     }
+  }
+}
+
+.budget-group {
+  display: flex;
+  align-items: center;
+
+  span, input {
+    margin: 0 10px;
   }
 }
 </style>
