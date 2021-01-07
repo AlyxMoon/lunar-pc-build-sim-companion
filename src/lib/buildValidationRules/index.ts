@@ -1,7 +1,12 @@
 
+export { default as caseFitsCpuCooler } from './caseFitsCpuCooler'
+export { default as caseFitsGpu } from './caseFitsGpu'
 export { default as caseFitsMotherboard } from './caseFitsMotherboard'
 export { default as caseFitsPowersupply } from './caseFitsPowersupply'
+export { default as cpuSupportsCooler } from './cpuSupportsCooler'
 export { default as gpuMultiCompatible } from './gpuMultiCompatible'
+export { default as memoryIsCompatible } from './memoryIsCompatible'
 export { default as motherboardFitsCpu } from './motherboardFitsCpu'
 export { default as motherboardSupportsMultiGpu } from './motherboardSupportsMultiGpu'
 export { default as newPartsUnderBudget } from './newPartsUnderBudget'
+export { default as psuProvidesEnoughWattage } from './psuProvidesEnoughWattage'

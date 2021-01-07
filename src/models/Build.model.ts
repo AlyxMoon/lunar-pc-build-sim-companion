@@ -1,12 +1,17 @@
 import { BuildModelInterface, PlainObject, ValidationFunctionArray } from '@/typings/interface'
 import BaseModel from './_BaseModel'
 import {
+  caseFitsCpuCooler,
+  caseFitsGpu,
   caseFitsMotherboard,
   caseFitsPowersupply,
+  cpuSupportsCooler,
   gpuMultiCompatible,
+  memoryIsCompatible,
   motherboardFitsCpu,
   motherboardSupportsMultiGpu,
   newPartsUnderBudget,
+  psuProvidesEnoughWattage,
 } from '@/lib/buildValidationRules'
 
 class BuildModel extends BaseModel implements BuildModelInterface {
@@ -103,12 +108,17 @@ class BuildModel extends BaseModel implements BuildModelInterface {
 
   validations (): ValidationFunctionArray {
     return [
+      caseFitsCpuCooler,
+      caseFitsGpu,
       caseFitsMotherboard,
       caseFitsPowersupply,
+      cpuSupportsCooler,
       gpuMultiCompatible,
+      memoryIsCompatible,
       motherboardFitsCpu,
       motherboardSupportsMultiGpu,
       newPartsUnderBudget,
+      psuProvidesEnoughWattage,
     ]
   }
 

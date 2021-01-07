@@ -48,14 +48,18 @@ export default {
   data: (): PlainObject => ({
     implemented: [
       'Budget: If the sum of new parts are above the budget',
-      'Case: If the power supply fits in the case',
-      'Case: If the motherboard fits in the case',
+      'Case: Can fit the CPU Cooler',
+      'Case: Can fit the GPU(s)',
+      'Case: Can fit the Motherboard',
+      'Case: Can fit the PSU',
+      'CPU: Can fit the provided CPU Cooler',
       'GPU: If a build contains 2 GPU\'s, whether they are compatible',
+      'Memory: If a build contains more than 1 stick, check if they are compatible',
       'Motherboard: If the CPU is compatible with the motherboard',
       'Motherboard: If a build contains 2 GPU\'s, whether it supports that multi-GPU',
+      'PSU: Provides enough voltage for all the included parts',
     ],
     notImplemented: [
-
     ],
   }),
 }
