@@ -60,6 +60,18 @@ export default {
       'PSU: Provides enough voltage for all the included parts',
     ],
     notImplemented: [
+      'Build: if a flag is set, require at least 1 of every part',
+      'Build: contains no more than 1 case',
+      'Build: can fit the included number of case fans',
+      'Build: contains no more than 1 motherboard',
+      'Build: contains no more than 1 CPU',
+      'Build: contains no more than 1 CPU Cooler',
+      'Build: contains no more than 2 GPUs',
+      'Build: contains no more than 1 PSU',
+      'Build: motherboard supports amount of storage',
+      'Build: motherboard supports amount of RAM',
+      'Motherboard: if build contains RAM, the frequency is supported',
+      'Motherboard: if build contains storage, can support the amount provided',
     ],
   }),
 }
