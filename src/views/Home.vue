@@ -47,11 +47,12 @@
 
 <script lang="ts">
 import { PlainObject } from '@/typings/interface'
+import { defineComponent } from 'vue'
 import { mapActions } from 'vuex'
 
 import BuildValidationList from '@/components/BuildValidationList.vue'
 
-export default {
+export default defineComponent({
   name: 'PageActiveBuild',
   components: {
     BuildValidationList,
@@ -98,7 +99,7 @@ export default {
       reader.readAsText(importData.files[0])
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>
