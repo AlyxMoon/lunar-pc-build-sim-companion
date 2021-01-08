@@ -158,13 +158,21 @@
             >
           </div>
 
-          <ul>
-            <li
+          <ul class="objectives-list">
+            <template
               v-for="(item, i) in activeBuild.objectives"
               :key="i"
             >
-              {{ item }}
-            </li>
+              <button
+                class="pure-button danger"
+                @click="removeObjective(i)"
+              >
+                <FontAwesomeIcon icon="times" />
+              </button>
+              <li>
+                {{ item }}
+              </li>
+            </template>
           </ul>
         </template>
       </Accordion>
@@ -272,6 +280,13 @@ export default defineComponent({
 
     addNewObjective (objective: string): void {
       this.activeBuild.objectives.push(objective)
+      this.activeBuild.validate()
+      this.$emit('update', this.activeBuild.attributes)
+      this.tempFields.objectives = ''
+    },
+
+    removeObjective (index: number): void {
+      this.activeBuild.objectives.splice(index, 1)
       this.activeBuild.validate()
       this.$emit('update', this.activeBuild.attributes)
     },
@@ -427,6 +442,23 @@ article {
 
   span, input {
     margin: 0 10px;
+  }
+}
+
+.objectives-list {
+  margin: 10px 0;
+  padding: 0 10px;
+
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 5px 10px;
+  justify-content: flex-start;
+  align-items: center;
+
+  list-style: none;
+
+  button {
+    font-size: 0.9rem;
   }
 }
 </style>
