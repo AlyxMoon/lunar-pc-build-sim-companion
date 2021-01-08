@@ -109,6 +109,11 @@
     </div>
 
     <div class="card-body">
+      <BuildCommandsBar
+        :build="activeBuild"
+        @addPartsToBuild="addMultipleNewParts"
+      />
+
       <Accordion>
         <template #header>
           <h6>
@@ -194,13 +199,15 @@ import currency from '@/lib/filters/currency'
 import BuildModel from '@/models/Build.model'
 
 import Accordion from '@/components/Accordion.vue'
+import BuildCommandsBar from './BuildCommandsBar.vue'
 import BuildPartsList from './BuildPartsList.vue'
 
 export default defineComponent({
   name: 'BuildCard',
   components: {
-    BuildPartsList,
     Accordion,
+    BuildCommandsBar,
+    BuildPartsList,
   },
   props: {
     build: {
@@ -248,6 +255,12 @@ export default defineComponent({
       if (!this.editing) {
         this.$emit('update', this.activeBuild.attributes)
       }
+    },
+
+    addMultipleNewParts (parts: Parts.BaseInterface[]): void {
+      this.activeBuild.parts.push(...parts)
+      this.activeBuild.validate()
+      this.$emit('update', this.activeBuild.attributes)
     },
 
     addNewPart (item: PlainObject): void {
@@ -395,8 +408,6 @@ article {
   }
 
   .card-body {
-    padding: 10px;
-
     .input-group {
       padding: 0 10px;
       input {

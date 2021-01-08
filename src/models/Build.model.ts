@@ -15,6 +15,8 @@ import {
 } from '@/lib/buildValidationRules'
 
 class BuildModel extends BaseModel implements BuildModelInterface {
+  budget?: number
+
   defaults (): PlainObject {
     return {
       name: 'New Build',

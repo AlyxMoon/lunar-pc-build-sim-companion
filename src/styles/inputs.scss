@@ -62,3 +62,11 @@ select {
   }
 }
 
+form.form-vertical {
+  display: grid;
+  align-items: center;
+  justify-content: flex-start;
+  grid-template-columns: auto auto;
+  grid-gap: 10px 15px;
+}
+

@@ -3,7 +3,6 @@ import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/ty
 const caseFitsCpuCooler = (attributes: BuildModelInterface): ValidationFunctionReturn => {
   const parts: PlainObject[] = attributes.parts?.filter((part: PlainObject) => part.isBeingKept) || []
 
-  console.log('checking caseFitsCpuCooler', parts)
   const computerCase = parts.find((part) => part['Part Type'] === 'Case')
   const cooler = parts.find(part => part['Part Type'].startsWith('CPU Cooler'))
 

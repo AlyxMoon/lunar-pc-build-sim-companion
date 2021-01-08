@@ -9,6 +9,7 @@ import {
   faPaste,
   faPen,
   faSave,
+  faSpinner,
   faTimes,
 
   faBox,
@@ -31,6 +32,7 @@ library.add(faCopy)
 library.add(faPaste)
 library.add(faPen)
 library.add(faSave)
+library.add(faSpinner)
 library.add(faTimes)
 
 library.add(faBox)
