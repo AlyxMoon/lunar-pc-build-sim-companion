@@ -51,17 +51,17 @@
 
         <template v-if="confirmRemove && !editing">
           <button
-            class="pure-button danger"
-            @click="removebuild(true)"
-          >
-            Delete
-          </button>
-
-          <button
             class="pure-button"
             @click="confirmRemove = false"
           >
             Cancel
+          </button>
+
+          <button
+            class="pure-button danger"
+            @click="removeBuild(true)"
+          >
+            Delete
           </button>
         </template>
       </div>
