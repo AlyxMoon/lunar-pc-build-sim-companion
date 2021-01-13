@@ -143,12 +143,12 @@ const categories = [
     icon: 'wind',
     iconBackColor: '#007AA6',
     headers: [
-      { name: 'Manufacturer' },
-      { name: 'Part Name' },
-      { name: 'Price', filter: 'currency' },
-      { name: 'Level' },
-      { name: 'Air Flow' },
-      { name: 'Size' },
+      { name: 'name', displayName: 'Part Name' },
+      { name: 'manufacturer', displayName: 'Manufacturer' },
+      { name: 'price', displayName: 'Price', filter: 'currency' },
+      { name: 'level', displayName: 'Level' },
+      { name: 'airFlow', displayName: 'Air Flow' },
+      { name: 'size', displayName: 'Size' },
     ],
   },
   {

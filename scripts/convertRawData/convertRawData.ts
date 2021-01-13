@@ -51,7 +51,11 @@ const convertRawData = (raw: string, category: string): PlainObject => {
 
     for (const col in row) {
       if (category) {
-        formatted[headers[col]] = mutate(row[col], headers[col], category)
+        const newFieldAndVal = mutate(row[col], headers[col], category)
+
+        if (newFieldAndVal) {
+          formatted[newFieldAndVal[0]] = newFieldAndVal[1]
+        }
       } else {
         formatted[headers[col]] = row[col]
       }

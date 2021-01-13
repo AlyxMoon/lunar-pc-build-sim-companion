@@ -122,7 +122,7 @@ const generateBuildMeetsProgramRequirements = (
     if (!count || !model) return fans
 
     const fan = availablePartsByCategory.casefans.find((part: PlainObject) => {
-      return part['Full Part Name'] === model
+      return part.nameFull === model
     })
 
     if (fan) {
@@ -146,8 +146,10 @@ const generateBuildMeetsProgramRequirements = (
     ...part,
     isNewPart: true,
     isBeingKept: true,
-    isPartOfCase: part['Part Type'] === 'Case Fan',
+    isPartOfCase: part.type === 'Case Fan',
   }))
+
+  console.log(attributes.parts)
 
   return new BuildModel(attributes)
 }

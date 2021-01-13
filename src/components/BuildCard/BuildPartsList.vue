@@ -16,7 +16,7 @@
 
       <template
         v-for="(item, i) in partsOfCategory(category.partTypeNames)"
-        :key="`${i}-${item['Full Part Name']}`"
+        :key="`${i}-${item['Full Part Name'] || item.nameFull}`"
       >
         <button
           class="pure-button danger"
@@ -39,7 +39,7 @@
           @change="changePartStatus(item.originalIndex, $event.target.value)"
         >
           <option
-            v-if="item['Part Type'] === 'Case Fan'"
+            v-if="item.type === 'Case Fan'"
             value="New - Comes With Case"
           >
             New - Comes With Case
@@ -58,12 +58,12 @@
         <dd>
           {{ displayFilters.currency(getPartPrice(item)) }}
           <span v-if="!item.isNewPart || item.isNewUsedPart || item.isPartOfCase">
-            (New: {{ displayFilters.currency(item.Price) }})
+            (New: {{ displayFilters.currency(item.Price || item.price) }})
           </span>
         </dd>
 
         <dd class="part-name">
-          {{ item['Full Part Name'] }}
+          {{ item['Full Part Name'] || item.nameFull }}
         </dd>
       </template>
     </template>
@@ -209,8 +209,8 @@ export default defineComponent({
     partsOfCategory (partTypeNames: string[]): Parts.BaseInterface[] {
       return (this.parts as Parts.BaseInterface[])
         .map((item, index) => ({ ...item, originalIndex: index }))
-        .filter(item => {
-          const type: string = (item as Parts.BaseInterface)['Part Type'] + ''
+        .filter((item: Parts.BaseInterface) => {
+          const type: string = (item['Part Type'] || item.type) + ''
           return partTypeNames.includes(type)
         })
     },
@@ -219,8 +219,8 @@ export default defineComponent({
       if (!part.isNewPart || part.isPartOfCase) return 0
 
       return part.isNewUsedPart
-        ? Math.floor(part.Price * 1.25 / 3)
-        : part.Price
+        ? Math.floor((part.Price || part.price) * 1.25 / 3)
+        : (part.Price || part.price)
     },
   },
 })

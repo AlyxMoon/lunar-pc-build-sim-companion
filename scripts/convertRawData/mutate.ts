@@ -34,6 +34,34 @@ const numFields = [
   'Case Fan Type 3 Count',
 ]
 
+/* eslint-disable quote-props, @typescript-eslint/explicit-function-return-type */
+type ObjectPartAliasAndMutation = {
+  [key: string]: (value: string) => [string, string | number | boolean],
+}
+
+const propertiesForAllParts: ObjectPartAliasAndMutation = {
+  'Part Type': value => ['type', value],
+  'Manufacturer': value => ['manufacturer', value],
+  'Part Name': value => ['name', value],
+  'Full Part Name': value => ['nameFull', value],
+  'In Shop': value => ['availableInShop', value === 'Y'],
+  'Price': value => ['price', Number(value)],
+  'Level': value => ['level', Number(value)],
+  'Level %': value => ['levelPercent', Number(value)],
+  'Lighting': value => ['lighting', value],
+  'Size': value => ['size', Number(value) || 0],
+  'Thickness': value => ['thickness', Number(value) || 0],
+}
+
+const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation> = {
+  'casefans': {
+    ...propertiesForAllParts,
+    'Air Flow': value => ['airFlow', Number(value)],
+    'Air Pressure': value => ['airPressure', Number(value)],
+  },
+}
+/* eslint-enable quote-props, @typescript-eslint/explicit-function-return-type */
+
 const numIfIncludes = [
   'Freq',
   'Score',
@@ -96,23 +124,27 @@ const isBooleanField = (field = ''): boolean => {
   return false
 }
 
-const mutate = (value: any, field: string, category = ''): any => {
-  if (numFields.includes(field)) return Number(value)
+const mutate = (value: any, field: string, category = ''): [string, string | number | boolean] | false => {
+  const newFieldAndVal = fieldsToKeepAndModifyByCategory?.[category]?.[field]?.(value)
+  if (newFieldAndVal) return newFieldAndVal
+  else if (category in fieldsToKeepAndModifyByCategory) return false
+
+  if (numFields.includes(field)) return [field, Number(value)]
 
   if (field === 'Size') {
-    if (categorySizeIsNum.includes(category)) return Number(value || 0)
-    return value
+    if (categorySizeIsNum.includes(category)) return [field, Number(value || 0)]
+    return [field, value]
   }
 
   if (numIfIncludes.some(inc => field.includes(inc))) {
-    return Number(value || 0)
+    return [field, Number(value || 0)]
   }
 
   if (isBooleanField(field)) {
-    return value === 'Y'
+    return [field, value === 'Y']
   }
 
-  return value
+  return [field, value]
 }
 
 export default mutate
