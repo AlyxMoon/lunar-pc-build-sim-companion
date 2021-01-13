@@ -5,15 +5,15 @@ const memoryIsCompatible = (
 ): ValidationFunctionReturn => {
   const parts: PlainObject[] = attributes.parts?.filter(part => part.isBeingKept) || []
 
-  const memory = parts.filter(part => part['Part Type'] === 'Memory')
+  const memory = parts.filter(part => part.type === 'Memory')
   if (!memory.length) return true
 
   return (
     memory.every(mem => (
-      mem.Manufacturer === memory[0].Manufacturer &&
-      mem['Size (GB)'] === memory[0]['Size (GB)'] &&
-      mem.Frequency === memory[0].Frequency &&
-      mem['Part Name (Base)'] === memory[0]['Part Name (Base)']
+      mem.manufacturer === memory[0].manufacturer &&
+      mem.sizeGb === memory[0].sizeGb &&
+      mem.frequency === memory[0].frequency &&
+      mem.nameBase === memory[0].nameBase
     )) ||
     'The memory sticks are not compatible (must all match: manufacturer, model, frequency, size)'
   )

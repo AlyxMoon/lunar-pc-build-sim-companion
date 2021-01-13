@@ -249,8 +249,8 @@ export default defineComponent({
         if (!item.isNewPart || item.isPartOfCase) return sum
 
         const partPrice = item.isNewUsedPart
-          ? Math.floor(item.Price * 1.25 / 3)
-          : item.Price
+          ? Math.floor((item.Price || item.price) * 1.25 / 3)
+          : (item.Price || item.price)
 
         return sum + partPrice
       }, 0)

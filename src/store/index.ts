@@ -79,12 +79,12 @@ const categories = [
     icon: 'memory',
     iconBackColor: '#00A668',
     headers: [
-      { name: 'Manufacturer' },
-      { name: 'Part Name' },
-      { name: 'Price', filter: 'currency' },
-      { name: 'Level' },
-      { name: 'Size (GB)' },
-      { name: 'Frequency' },
+      { name: 'name', displayName: 'Part Name' },
+      { name: 'manufacturer', displayName: 'Manufacturer' },
+      { name: 'price', displayName: 'Price', filter: 'currency' },
+      { name: 'level', displayName: 'Level' },
+      { name: 'sizeGb', displayName: 'Size (GB)' },
+      { name: 'frequency', displayName: 'Frequency' },
     ],
   },
   {

@@ -63,6 +63,16 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'Air Pressure': value => ['airPressure', Number(value)],
   },
 
+  'memory': {
+    ...propertiesForAllParts,
+    'Size (GB)': value => ['sizeGb', Number(value)],
+    'Frequency': value => ['frequency', Number(value)],
+    'Voltage': value => ['voltage', Number(value)],
+    'Part Name (Base)': value => ['nameBase', value],
+    'OC Base Voltage': value => ['ocBaseVoltage', Number(value)],
+    'OC Base Freq': value => ['ocBaseFrequency', Number(value)],
+  },
+
   'storage': {
     ...propertiesForAllParts,
     'Size (GB)': value => ['sizeGb', Number(value)],
