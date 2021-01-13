@@ -112,12 +112,12 @@ const categories = [
     icon: 'hdd',
     iconBackColor: '#FF8100',
     headers: [
-      { name: 'Manufacturer' },
-      { name: 'Part Name' },
-      { name: 'Price', filter: 'currency' },
-      { name: 'Level' },
-      { name: 'Type' },
-      { name: 'Size (GB)' },
+      { name: 'name', displayName: 'Part Name' },
+      { name: 'typeSecondary', displayName: 'Type' },
+      { name: 'manufacturer', displayName: 'Manufacturer' },
+      { name: 'price', displayName: 'Price', filter: 'currency' },
+      { name: 'level', displayName: 'Level' },
+      { name: 'sizeGb', displayName: 'Size (GB)' },
     ],
   },
   {

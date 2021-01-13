@@ -56,14 +56,14 @@ const generateBuildMeetsProgramRequirements = (
 
   // get storage
   const storage = availablePartsByCategory.storage.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.Level > playerLevel) return best
+    if (part.level > playerLevel) return best
 
-    if (part['Size (GB)'] >= (program.storage || 0)) {
-      if (best.Price > part.Price) return part
+    if (part.sizeGb >= (program.storage || 0)) {
+      if (best.price > part.price) return part
     }
 
     return best
-  }, { Price: Infinity })
+  }, { price: Infinity })
 
   // get motherboard
   const motherboard = availablePartsByCategory.motherboards.reduce((best: PlainObject, part: PlainObject) => {
@@ -148,8 +148,6 @@ const generateBuildMeetsProgramRequirements = (
     isBeingKept: true,
     isPartOfCase: part.type === 'Case Fan',
   }))
-
-  console.log(attributes.parts)
 
   return new BuildModel(attributes)
 }

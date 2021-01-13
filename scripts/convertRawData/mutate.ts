@@ -34,9 +34,12 @@ const numFields = [
   'Case Fan Type 3 Count',
 ]
 
+type ValueTypes = string | number | boolean
+type PartType = Record<string, ValueTypes>
+
 /* eslint-disable quote-props, @typescript-eslint/explicit-function-return-type */
 type ObjectPartAliasAndMutation = {
-  [key: string]: (value: string) => [string, string | number | boolean],
+  [key: string]: (value: string) => [string, ValueTypes],
 }
 
 const propertiesForAllParts: ObjectPartAliasAndMutation = {
@@ -59,7 +62,16 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'Air Flow': value => ['airFlow', Number(value)],
     'Air Pressure': value => ['airPressure', Number(value)],
   },
+
+  'storage': {
+    ...propertiesForAllParts,
+    'Size (GB)': value => ['sizeGb', Number(value)],
+    'Transfer Speed (MB/s)': value => ['transferSpeed', Number(value)],
+    'Includes Heatsink': value => ['includesHeatsink', value === 'Y'],
+    'Heatsink Thickness': value => ['heatsinkThickness', Number(value)],
+  },
 }
+
 /* eslint-enable quote-props, @typescript-eslint/explicit-function-return-type */
 
 const numIfIncludes = [
@@ -124,7 +136,7 @@ const isBooleanField = (field = ''): boolean => {
   return false
 }
 
-const mutate = (value: any, field: string, category = ''): [string, string | number | boolean] | false => {
+export const mutateField = (value: any, field: string, category = ''): [string, ValueTypes] | false => {
   const newFieldAndVal = fieldsToKeepAndModifyByCategory?.[category]?.[field]?.(value)
   if (newFieldAndVal) return newFieldAndVal
   else if (category in fieldsToKeepAndModifyByCategory) return false
@@ -147,4 +159,13 @@ const mutate = (value: any, field: string, category = ''): [string, string | num
   return [field, value]
 }
 
-export default mutate
+export const mutatePart: Record<string, (part: PartType) => PartType> = {
+  storage: part => {
+    const newPart = { ...part }
+
+    newPart.typeSecondary = (newPart.type as string).split(' - ')[1]
+    newPart.type = (newPart.type as string).split(' - ')[0]
+
+    return newPart
+  },
+}

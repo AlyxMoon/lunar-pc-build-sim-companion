@@ -2,7 +2,7 @@
 
 import { PlainObject } from '@/typings/interface'
 import ModelProgramRequirements from '../../src/models/ProgramRequirements.model'
-import mutate from './mutate'
+import { mutateField, mutatePart } from './mutate'
 
 const {
   existsSync,
@@ -51,7 +51,7 @@ const convertRawData = (raw: string, category: string): PlainObject => {
 
     for (const col in row) {
       if (category) {
-        const newFieldAndVal = mutate(row[col], headers[col], category)
+        const newFieldAndVal = mutateField(row[col], headers[col], category)
 
         if (newFieldAndVal) {
           formatted[newFieldAndVal[0]] = newFieldAndVal[1]
@@ -61,7 +61,7 @@ const convertRawData = (raw: string, category: string): PlainObject => {
       }
     }
 
-    return formatted
+    return category in mutatePart ? mutatePart[category](formatted) : formatted
   })
 }
 
