@@ -40,9 +40,7 @@ export default defineComponent({
     routes: [
       { name: 'ActiveBuilds', title: 'Active Builds' },
       { name: 'PartsList', title: 'Parts List' },
-      { name: 'BuildPlanner', title: 'Build Planner' },
       { name: 'WillItRun', title: 'Will It Run' },
-      { name: 'Overclocking', title: 'Overclocking' },
     ],
 
     navbarOpen: false,
