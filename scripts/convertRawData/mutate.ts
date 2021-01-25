@@ -1,3 +1,6 @@
+import { Parts } from '@/typings/interface/parts'
+
+import calculateGpuStats from '../../src/lib/util/calculateGpuStats'
 
 const numFields = [
   'Level',
@@ -52,15 +55,43 @@ const propertiesForAllParts: ObjectPartAliasAndMutation = {
   'Level': value => ['level', Number(value)],
   'Level %': value => ['levelPercent', Number(value)],
   'Lighting': value => ['lighting', value],
-  'Size': value => ['size', Number(value) || 0],
   'Thickness': value => ['thickness', Number(value) || 0],
+  'Wattage': value => ['wattage', Number(value)],
+  'Length': value => ['length', Number(value)],
 }
 
 const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation> = {
   'casefans': {
     ...propertiesForAllParts,
+    'Size': value => ['size', Number(value)],
     'Air Flow': value => ['airFlow', Number(value)],
     'Air Pressure': value => ['airPressure', Number(value)],
+  },
+
+  'gpus': {
+    ...propertiesForAllParts,
+    'VRAM (GB)': value => ['vramGb', Number(value)],
+    'GPU Tuner Min Core Freq': value => ['minCoreFreq', Number(value)],
+    'Base Core Freq': value => ['baseCoreFreq', Number(value)],
+    'OC Base Core Freq': value => ['baseCoreFreqOc', Number(value)],
+    'Max Core Freq': value => ['maxCoreFreq', Number(value)],
+    'GPU Tuner Min Mem Freq': value => ['minMemFreq', Number(value)],
+    'Base Mem Freq': value => ['baseMemFreq', Number(value)],
+    'OC Base Mem Freq': value => ['baseMemFreqOc', Number(value)],
+    'Max Mem Freq': value => ['maxMemFreq', Number(value)],
+    'Multi-GPU': value => ['multi', value],
+    'GT1 Single Core Clock Multiplier': value => ['multCoreSingle1', Number(value)],
+    'GT1 Single Mem Clock Multiplier': value => ['multMemSingle1', Number(value)],
+    'GT1 Single Benchmark Adjustment': value => ['multAdjustSingle1', Number(value)],
+    'GT2 Single Core Clock Multiplier': value => ['multCoreSingle2', Number(value)],
+    'GT2 Single Mem Clock Multiplier': value => ['multMemSingle2', Number(value)],
+    'GT2 Single Benchmark Adjustment': value => ['multAdjustSingle2', Number(value)],
+    'GT1 Dual Core Clock Multiplier': value => ['multCoreDual1', Number(value)],
+    'GT1 Dual Mem Clock Multiplier': value => ['multMemDual1', Number(value)],
+    'GT1 Dual Benchmark Adjustment': value => ['multAdjustDual1', Number(value)],
+    'GT2 Dual Core Clock Multiplier': value => ['multCoreDual2', Number(value)],
+    'GT2 Dual Mem Clock Multiplier': value => ['multMemDual2', Number(value)],
+    'GT2 Dual Benchmark Adjustment': value => ['multAdjustDual2', Number(value)],
   },
 
   'memory': {
@@ -174,6 +205,18 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
     const newPart = { ...part }
 
     newPart.typeSecondary = (newPart.type as string).split(' - ')[1]
+    newPart.type = (newPart.type as string).split(' - ')[0]
+
+    return newPart
+  },
+
+  gpus: part => {
+    const newPart = {
+      ...part,
+      ...calculateGpuStats(part as Parts.Gpu),
+    }
+
+    newPart.waterCooled = (newPart.type as string).endsWith('Water')
     newPart.type = (newPart.type as string).split(' - ')[0]
 
     return newPart

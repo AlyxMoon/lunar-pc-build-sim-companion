@@ -7,20 +7,38 @@
 // powersupplies
 // storage
 
-declare namespace Parts {
+export declare namespace Parts {
   export interface BaseInterface {
-    [key: string]: number | string,
+    [key: string]: number | string | boolean,
   }
 
-  export interface CaseInterface extends PartBaseInterface {
+  export interface CaseInterface extends BaseInterface {
     name: string,
   }
 
-  export interface CaseFanInterface extends PartBaseInterface {
+  export interface CaseFanInterface extends BaseInterface {
     name: string,
   }
 
-  export interface PartMotherboardInterface extends PartBaseInterface {
+  export interface Gpu extends BaseInterface {
+    multi: string,
+    baseCoreFreq: number,
+    baseMemFreq: number,
+    multCoreSingle1: number,
+    multMemSingle1: number,
+    multAdjustSingle1: number,
+    multCoreSingle2: number,
+    multMemSingle2: number,
+    multAdjustSingle2: number,
+    multCoreDual1: number,
+    multMemDual1: number,
+    multAdjustDual1: number,
+    multCoreDual2: number,
+    multMemDual2: number,
+    multAdjustDual2: number,
+  }
+
+  export interface PartMotherboardInterface extends BaseInterface {
     name: string,
   }
 }
