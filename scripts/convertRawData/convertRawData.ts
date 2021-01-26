@@ -23,7 +23,7 @@ const partCategories = [
   'gpus',
   'memory',
   'motherboards',
-  'power-supplies',
+  'powersupplies',
   'storage',
 ]
 

@@ -104,6 +104,12 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'OC Base Freq': value => ['ocBaseFrequency', Number(value)],
   },
 
+  'powersupplies': {
+    ...propertiesForAllParts,
+    'Type': value => ['modularType', value],
+    'Size': value => ['sizeType', value],
+  },
+
   'storage': {
     ...propertiesForAllParts,
     'Size (GB)': value => ['sizeGb', Number(value)],
