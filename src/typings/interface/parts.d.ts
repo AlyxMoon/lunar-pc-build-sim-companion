@@ -20,6 +20,21 @@ export declare namespace Parts {
     name: string,
   }
 
+  export interface Cpu extends BaseInterface {
+    frequency: number,
+    coreCount: number,
+    socketType: value,
+    canOverclock: boolean,
+    ocMultStep: number,
+    maxMemChannels: number,
+    baseVolt: number,
+    baseFreq: number,
+    multCoreClock: number,
+    multMemChannels: number,
+    multMemClock: number,
+    multAdjust: number,
+  }
+
   export interface Gpu extends BaseInterface {
     multi: string,
     baseCoreFreq: number,

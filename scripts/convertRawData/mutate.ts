@@ -68,6 +68,23 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'Air Pressure': value => ['airPressure', Number(value)],
   },
 
+  'cpus': {
+    ...propertiesForAllParts,
+    'Frequency': value => ['frequency', Number(value)],
+    'Cores': value => ['coreCount', Number(value)],
+    'Socket': value => ['socketType', value],
+    'Can Overclock': value => ['canOverclock', value === 'Y'],
+    'Multiplier Step': value => ['ocMultStep', Number(value)],
+    'Default Memory Speed': value => ['defaultMemSpeed', Number(value)],
+    'Max Memory Channels': value => ['maxMemChannels', Number(value)],
+    'OC Base Voltage': value => ['baseVolt', Number(value)],
+    'OC Base Freq': value => ['baseFreq', Number(value)],
+    'CoreClockMultiplier': value => ['multCoreClock', Number(value)],
+    'MemChannelsMultiplier': value => ['multMemChannels', Number(value)],
+    'MemClockMultiplier': value => ['multMemClock', Number(value)],
+    'FinalAdjustment': value => ['multAdjust', Number(value)],
+  },
+
   'gpus': {
     ...propertiesForAllParts,
     'VRAM (GB)': value => ['vramGb', Number(value)],
@@ -207,11 +224,10 @@ export const mutateField = (value: any, field: string, category = ''): [string, 
 }
 
 export const mutatePart: Record<string, (part: PartType) => PartType> = {
-  storage: part => {
-    const newPart = { ...part }
-
-    newPart.typeSecondary = (newPart.type as string).split(' - ')[1]
-    newPart.type = (newPart.type as string).split(' - ')[0]
+  cpus: part => {
+    const newPart = {
+      ...part,
+    }
 
     return newPart
   },
@@ -223,6 +239,15 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
     }
 
     newPart.waterCooled = (newPart.type as string).endsWith('Water')
+    newPart.type = (newPart.type as string).split(' - ')[0]
+
+    return newPart
+  },
+
+  storage: part => {
+    const newPart = { ...part }
+
+    newPart.typeSecondary = (newPart.type as string).split(' - ')[1]
     newPart.type = (newPart.type as string).split(' - ')[0]
 
     return newPart

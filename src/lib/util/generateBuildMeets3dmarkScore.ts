@@ -1,4 +1,5 @@
 import { BuildModelInterface, PlainObject } from '@/typings/interface'
+import { Parts } from '@/typings/interface/parts'
 import BuildModel from '@/models/Build.model'
 
 // assumes highest amount of RAM sticks / frequency to be as permissive as possible
