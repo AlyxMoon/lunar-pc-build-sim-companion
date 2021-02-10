@@ -18,7 +18,7 @@ declare const __dirname: string
 const partCategories = [
   'casefans',
   'cases',
-  'cpu-coolers',
+  'cpucoolers',
   'cpus',
   'gpus',
   'memory',

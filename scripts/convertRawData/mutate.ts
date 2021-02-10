@@ -61,14 +61,14 @@ const propertiesForAllParts: ObjectPartAliasAndMutation = {
 }
 
 const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation> = {
-  'casefans': {
+  casefans: {
     ...propertiesForAllParts,
     'Size': value => ['size', Number(value)],
     'Air Flow': value => ['airFlow', Number(value)],
     'Air Pressure': value => ['airPressure', Number(value)],
   },
 
-  'cases': {
+  cases: {
     ...propertiesForAllParts,
     'Size': value => ['sizeType', value],
     'Mini-ITX': value => ['Mini-ITX', value === 'Y'],
@@ -96,7 +96,27 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'Restricted GPU length': value => ['restrictedLengthGpu', Number(value)],
   },
 
-  'cpus': {
+  cpucoolers: {
+    ...propertiesForAllParts,
+    'No Fan': value => ['hasFan', value !== 'Y'],
+    'Air Flow': value => ['airFlow', Number(value)],
+    'LGA 2011-V3': value => ['LGA 2011-V3', value === 'Y'],
+    'AM4': value => ['AM4', value === 'Y'],
+    'LGA 1151 (Skylake)': value => ['LGA 1151 (Skylake)', value === 'Y'],
+    'LGA 1151 (Kaby Lake)': value => ['LGA 1151 (Kaby Lake)', value === 'Y'],
+    'LGA 1200': value => ['LGA 1200', value === 'Y'],
+    'LGA 2066': value => ['LGA 2066', value === 'Y'],
+    'TR4': value => ['TR4', value === 'Y'],
+    'sTRX4': value => ['sTRX4', value === 'Y'],
+    'FM2+': value => ['FM2+', value === 'Y'],
+    'Height': value => ['length', Number(value)],
+    'Size': value => ['size', Number(value)],
+    'Slots': value => ['slots', Number(value)],
+    'Thickness': value => ['thickness', Number(value)],
+    'Air Pressure': value => ['airPressure', Number(value)],
+  },
+
+  cpus: {
     ...propertiesForAllParts,
     'Frequency': value => ['frequency', Number(value)],
     'Cores': value => ['coreCount', Number(value)],
@@ -113,7 +133,7 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'FinalAdjustment': value => ['multAdjust', Number(value)],
   },
 
-  'gpus': {
+  gpus: {
     ...propertiesForAllParts,
     'VRAM (GB)': value => ['vramGb', Number(value)],
     'GPU Tuner Min Core Freq': value => ['minCoreFreq', Number(value)],
@@ -139,7 +159,7 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'GT2 Dual Benchmark Adjustment': value => ['multAdjustDual2', Number(value)],
   },
 
-  'memory': {
+  memory: {
     ...propertiesForAllParts,
     'Size (GB)': value => ['sizeGb', Number(value)],
     'Frequency': value => ['frequency', Number(value)],
@@ -149,7 +169,7 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'OC Base Freq': value => ['ocBaseFrequency', Number(value)],
   },
 
-  'motherboards': {
+  motherboards: {
     ...propertiesForAllParts,
     'Chipset': value => ['chipset', value],
     'CPU Socket': value => ['socket', value],
@@ -168,13 +188,13 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'Base Clock': value => ['baseClock', Number(value)],
   },
 
-  'powersupplies': {
+  powersupplies: {
     ...propertiesForAllParts,
     'Type': value => ['modularType', value],
     'Size': value => ['sizeType', value],
   },
 
-  'storage': {
+  storage: {
     ...propertiesForAllParts,
     'Size (GB)': value => ['sizeGb', Number(value)],
     'Transfer Speed (MB/s)': value => ['transferSpeed', Number(value)],
@@ -272,9 +292,7 @@ export const mutateField = (value: any, field: string, category = ''): [string, 
 
 export const mutatePart: Record<string, (part: PartType) => PartType> = {
   cases: part => {
-    const newPart = {
-      ...part,
-    }
+    const newPart = { ...part }
 
     const supportedMotherboards: string[] = []
     const supportedPowersupplies: string[] = []
@@ -301,6 +319,36 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
 
     newPart.supportedMotherboards = supportedMotherboards
     newPart.supportedPowersupplies = supportedPowersupplies
+
+    return newPart
+  },
+
+  cpucoolers: part => {
+    const newPart = { ...part }
+
+    const cpuTypes = [
+      'LGA 2011-V3',
+      'AM4',
+      'LGA 1151 (Skylake)',
+      'LGA 1151 (Kaby Lake)',
+      'LGA 1200',
+      'LGA 2066',
+      'TR4',
+      'sTRX4',
+      'FM2+',
+    ]
+
+    const supportedCpus: string[] = []
+
+    cpuTypes.forEach(size => {
+      if (newPart[size]) supportedCpus.push(size)
+      delete newPart[size]
+    })
+
+    newPart.cpuTypes = cpuTypes
+
+    newPart.typeSecondary = (newPart.type as string).split(' - ')[1]
+    newPart.type = (newPart.type as string).split(' - ')[0]
 
     return newPart
   },
