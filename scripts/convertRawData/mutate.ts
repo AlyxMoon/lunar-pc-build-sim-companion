@@ -37,7 +37,7 @@ const numFields = [
   'Case Fan Type 3 Count',
 ]
 
-type ValueTypes = string | number | boolean
+type ValueTypes = string | number | boolean | string[] | number[]
 type PartType = Record<string, ValueTypes>
 
 /* eslint-disable quote-props, @typescript-eslint/explicit-function-return-type */
@@ -66,6 +66,34 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'Size': value => ['size', Number(value)],
     'Air Flow': value => ['airFlow', Number(value)],
     'Air Pressure': value => ['airPressure', Number(value)],
+  },
+
+  'cases': {
+    ...propertiesForAllParts,
+    'Size': value => ['sizeType', value],
+    'Mini-ITX': value => ['Mini-ITX', value === 'Y'],
+    'Micro-ATX': value => ['Micro-ITX', value === 'Y'],
+    'S-ATX': value => ['S-ATX', value === 'Y'],
+    'E-ATX': value => ['E-ATX', value === 'Y'],
+    'XL-ATX': value => ['XL-ATX', value === 'Y'],
+    'PSU ATX': value => ['PSU ATX', value === 'Y'],
+    'PSU SFX': value => ['PSU SFX', value === 'Y'],
+    'Max 120mm Radiators': value => ['maxFan120', Number(value)],
+    'Max 140mm Radiators': value => ['maxFan140', Number(value)],
+    'Max PSU length': value => ['maxLengthPsu', Number(value)],
+    'Max GPU length': value => ['maxLengthGpu', Number(value)],
+    'Max CPU Fan Height': value => ['maxLengthCpuFan', Number(value)],
+    'Is Open Bench': value => ['typeOpenBench', value === 'Y'],
+    'Case Fan Type 1 Count': value => ['case1Count', Number(value)],
+    'Case Fan Type 1 Model': value => ['case1Model', value],
+    'Case Fan Type 1 Decorator': value => ['case1Decorator', value],
+    'Case Fan Type 2 Count': value => ['case2Count', Number(value)],
+    'Case Fan Type 2 Model': value => ['case2Model', value],
+    'Case Fan Type 2 Decorator': value => ['case2Decorator', value],
+    'Case Fan Type 3 Count': value => ['case3Count', Number(value)],
+    'Case Fan Type 3 Model': value => ['case3Model', value],
+    'Case Fan Type 3 Decorator': value => ['case3Decorator', value],
+    'Restricted GPU length': value => ['restrictedLengthGpu', Number(value)],
   },
 
   'cpus': {
@@ -119,6 +147,25 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'Part Name (Base)': value => ['nameBase', value],
     'OC Base Voltage': value => ['ocBaseVoltage', Number(value)],
     'OC Base Freq': value => ['ocBaseFrequency', Number(value)],
+  },
+
+  'motherboards': {
+    ...propertiesForAllParts,
+    'Chipset': value => ['chipset', value],
+    'CPU Socket': value => ['socket', value],
+    'Size': value => ['sizeType', value],
+    'Max RAM Speed Step': value => ['ramSpeedMax', Number(value)],
+    'Support CrossFire': value => ['gpuCrossFire', value === 'Y'],
+    'Support SLI': value => ['gpuSLI', value === 'Y'],
+    'Can Overclock': value => ['canOverclock', value === 'Y'],
+    'M.2 Slots': value => ['storageMaxM2', Number(value)],
+    'M.2 Slots Supporting Heatsinks': value => ['storageMaxHeatsinkM2', Number(value)],
+    'RAM Slots': value => ['ramMax', Number(value)],
+    'SATA Slots Usable': value => ['storageMaxSata', Number(value)],
+    'Default RAM Speed': value => ['ramSpeedDefault', Number(value)],
+    'RAM Speed Steps': value => ['ramSpeedOptions', value.split(',').map(Number)],
+    'Min RAM Speed Step': value => ['ramSpeedMin', Number(value)],
+    'Base Clock': value => ['baseClock', Number(value)],
   },
 
   'powersupplies': {
@@ -224,6 +271,40 @@ export const mutateField = (value: any, field: string, category = ''): [string, 
 }
 
 export const mutatePart: Record<string, (part: PartType) => PartType> = {
+  cases: part => {
+    const newPart = {
+      ...part,
+    }
+
+    const supportedMotherboards: string[] = []
+    const supportedPowersupplies: string[] = []
+
+    const motherboardSizes = [
+      'Mini-ITX',
+      'Micro-ATX',
+      'S-ATX',
+      'E-ATX',
+      'XL-ATX',
+    ]
+
+    const powersupplySizes = ['ATX', 'SFX']
+
+    motherboardSizes.forEach(size => {
+      if (newPart[size]) supportedMotherboards.push(size)
+      delete newPart[size]
+    })
+
+    powersupplySizes.forEach(size => {
+      if (newPart[`PSU ${size}`]) supportedPowersupplies.push(size)
+      delete newPart[`PUS ${size}`]
+    })
+
+    newPart.supportedMotherboards = supportedMotherboards
+    newPart.supportedPowersupplies = supportedPowersupplies
+
+    return newPart
+  },
+
   cpus: part => {
     const newPart = {
       ...part,
