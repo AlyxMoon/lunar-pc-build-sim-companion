@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import { PlainObject } from '@/typings/interface'
-import ModelProgramRequirements from '../../src/models/ProgramRequirements.model'
 import { mutateField, mutatePart } from './mutate'
 
 const {
@@ -27,8 +26,8 @@ const partCategories = [
   'storage',
 ]
 
-const otherFiles = [
-  ['program-requirements', ModelProgramRequirements],
+const otherCategories = [
+  'programrequirements',
 ]
 
 const splitStringByCommas = (string = ''): string[] => {
@@ -52,10 +51,9 @@ const convertRawData = (raw: string, category: string): PlainObject => {
     for (const col in row) {
       if (category) {
         const newFieldAndVal = mutateField(row[col], headers[col], category)
+        if (!newFieldAndVal) continue
 
-        if (newFieldAndVal) {
-          formatted[newFieldAndVal[0]] = newFieldAndVal[1]
-        }
+        formatted[newFieldAndVal[0]] = newFieldAndVal[1]
       } else {
         formatted[headers[col]] = row[col]
       }
@@ -81,24 +79,19 @@ const main = async (): Promise<void> => {
     const formattedFilePath = join(finalDirectory, category + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
-    const formattedData = JSON.stringify(convertRawData(rawData, category), null, 2)
+    const formattedData = JSON.stringify(convertRawData(rawData, category))
 
     await promisify(writeFile)(formattedFilePath, formattedData, 'utf-8')
   }
 
-  for (const [file, Model] of otherFiles) {
-    const rawFilePath = join(__dirname, `data/${file}.csv`)
-    const formattedFilePath = join(finalDirectory, '..', file + '.json')
+  for (const category of otherCategories) {
+    const rawFilePath = join(__dirname, `data/${category}.csv`)
+    const formattedFilePath = join(finalDirectory, '..', category + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
-    const rows = convertRawData(rawData, '')
+    const formattedData = JSON.stringify(convertRawData(rawData, category))
 
-    const data = rows.map(row => {
-      const model = new (Model as any)(row)
-      return model.attributes
-    })
-
-    await promisify(writeFile)(formattedFilePath, JSON.stringify(data), 'utf-8')
+    await promisify(writeFile)(formattedFilePath, formattedData, 'utf-8')
   }
 }
 
