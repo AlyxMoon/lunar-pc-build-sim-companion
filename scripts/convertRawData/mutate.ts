@@ -246,7 +246,7 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
       delete newPart[size]
     })
 
-    newPart.cpuTypes = cpuTypes
+    newPart.supportedCpus = supportedCpus
 
     newPart.typeSecondary = (newPart.type as string).split(' - ')[1]
     newPart.type = (newPart.type as string).split(' - ')[0]
