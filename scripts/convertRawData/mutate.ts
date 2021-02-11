@@ -85,7 +85,7 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     ...propertiesForAllParts,
     'Frequency': value => ['frequency', Number(value)],
     'Cores': value => ['coreCount', Number(value)],
-    'Socket': value => ['socketType', value],
+    'Socket': value => ['socket', value],
     'Can Overclock': value => ['canOverclock', value === 'Y'],
     'Multiplier Step': value => ['ocMultStep', Number(value)],
     'Default Memory Speed': value => ['defaultMemSpeed', Number(value)],

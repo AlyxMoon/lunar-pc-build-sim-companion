@@ -1,16 +1,14 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
 
 const caseFitsMotherboard = (build: BuildModelInterface): ValidationFunctionReturn => {
-  const parts = build.parts?.filter((part: PlainObject) => part.isBeingKept) || []
+  const parts = build.parts?.filter(part => part.isBeingKept) || []
 
-  const computerCase = parts.find((part: any) => part['Part Type'] === 'Case')
-
-  const motherboard = parts.find((part: any) => part['Part Type'] === 'Motherboard')
-
-  if (!computerCase || !motherboard) return true
+  const computerCase = parts.find(part => part.type === 'Case')
+  const motherboard = parts.find(part => part.type === 'Motherboard')
 
   return (
-    computerCase[motherboard.Size] ||
+    (!computerCase || !motherboard) ||
+    computerCase.supportedMotherboards.includes(motherboard.sizeType) ||
     'The motherboard will not fit in the case.'
   )
 }

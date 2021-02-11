@@ -1,27 +1,26 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
 
 const motherboardFitsCpu = (build: BuildModelInterface): ValidationFunctionReturn => {
-  const parts = build.parts?.filter((part: PlainObject) => part.isBeingKept) || []
+  const parts = build.parts?.filter(part => part.isBeingKept) || []
 
-  const cpu = parts.find((part: PlainObject) => part['Part Type'] === 'CPU')
-
-  const motherboard = parts.find((part: PlainObject) => part['Part Type'] === 'Motherboard')
+  const cpu = parts.find(part => part.type === 'CPU')
+  const motherboard = parts.find(part => part.type === 'Motherboard')
 
   if (!cpu || !motherboard) return true
 
   const isSkyOrKabyCpu = (
-    cpu.Socket.endsWith('(Skylake)') ||
-    cpu.Socket.endsWith('(Kaby Lake)')
+    cpu.socket.endsWith('(Skylake)') ||
+    cpu.socket.endsWith('(Kaby Lake)')
   )
 
   const isSkyOrKabyMotherboard = (
-    motherboard['CPU Socket'].endsWith('(Skylake)') ||
-    motherboard['CPU Socket'].endsWith('(Kaby Lake)')
+    motherboard.socket.endsWith('(Skylake)') ||
+    motherboard.socket.endsWith('(Kaby Lake)')
   )
 
   return (
     (isSkyOrKabyCpu && isSkyOrKabyMotherboard) ||
-    (!isSkyOrKabyCpu && motherboard['CPU Socket'] === cpu.Socket) ||
+    (!isSkyOrKabyCpu && motherboard.socket === cpu.socket) ||
     'The cpu will not fit in the motherboard.'
   )
 }

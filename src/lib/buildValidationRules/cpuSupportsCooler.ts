@@ -1,14 +1,14 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
 
 const motherboardFitsCpu = (attributes: BuildModelInterface): ValidationFunctionReturn => {
-  const parts: PlainObject[] = attributes.parts?.filter(part => part.isBeingKept) || []
+  const parts = attributes.parts?.filter(part => part.isBeingKept) || []
 
-  const cpu = parts.find(part => part['Part Type'] === 'CPU')
-  const cooler = parts.find(part => part['Part Type'].startsWith('CPU Cooler'))
+  const cpu = parts.find(part => part.type === 'CPU')
+  const cooler = parts.find(part => part.type === 'CPU Cooler')
 
-  if (!cpu || !cooler) return true
   return (
-    cooler[cpu.Socket] ||
+    (!cpu || !cooler) ||
+    cooler.supportedCpus.includes(cpu.socket) ||
     'The CPU Cooler will not fit on the current CPU'
   )
 }

@@ -1,15 +1,15 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
 
 const psuProvidesEnoughWattage = (attributes: BuildModelInterface): ValidationFunctionReturn => {
-  const parts: PlainObject[] = attributes.parts?.filter(part => part.isBeingKept) || []
+  const parts = attributes.parts?.filter(part => part.isBeingKept) || []
 
-  const powerSupply = parts.find(part => part['Part Type'] === 'Power Supply')
-  const poweredParts = parts.filter(part => 'Wattage' in part && part['Part Type'] !== 'Power Supply')
+  const powerSupply = parts.find(part => part.type === 'Power Supply')
+  const poweredParts = parts.filter(part => 'wattage' in part && part.type !== 'Power Supply')
 
   if (!powerSupply || !poweredParts.length) return true
 
   return (
-    powerSupply.Wattage >= poweredParts.reduce((sum, part) => sum + part.Wattage, 0) ||
+    powerSupply.wattage >= poweredParts.reduce((sum, part) => sum + part.wattage, 0) ||
     'The power supply does not provide enough power to handle the included parts.'
   )
 }
