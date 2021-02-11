@@ -1,3 +1,4 @@
+import { Parts } from './parts'
 
 export * from './parts.d.ts'
 
@@ -40,6 +41,7 @@ export interface ImportExportData {
 export interface ModelInterface {
   [key: string]: any,
   _attributes: PlainObject,
+  attributes: PlainObject,
   _hasErrors: boolean,
   _errors: StringArray,
 
@@ -60,7 +62,7 @@ export interface BuildModelInterface extends ModelInterface {
   budget?: number,
   estimatedScore?: estimatedScore,
   objectives?: string[],
-  parts?: PlainObject[],
+  parts?: Parts.BaseInterface[],
 }
 
 export interface ProgramRequirementsModelInterface extends ModelInterface {

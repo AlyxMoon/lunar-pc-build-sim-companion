@@ -10,6 +10,13 @@
 export declare namespace Parts {
   export interface BaseInterface {
     [key: string]: number | string | boolean,
+    name: string,
+    nameFull: string,
+    type: string,
+    manufacturer: string,
+    level: number,
+    levelPercent: number,
+    price: number,
   }
 
   export interface CaseInterface extends BaseInterface {
@@ -36,6 +43,16 @@ export declare namespace Parts {
   }
 
   export interface Gpu extends BaseInterface {
+    minCoreFreq: number,
+    baseCoreFreq: number,
+    baseCoreFreqOc: number,
+    maxCoreFreq: number,
+    minMemFreq: number,
+    baseMemFreq: number,
+    baseMemFreqOc: number,
+    maxMemFreq: number,
+    length: number,
+    wattage: number,
     multi: string,
     baseCoreFreq: number,
     baseMemFreq: number,
@@ -51,6 +68,16 @@ export declare namespace Parts {
     multCoreDual2: number,
     multMemDual2: number,
     multAdjustDual2: number,
+  }
+
+  export interface Memory extends BaseInterface {
+    lighting: string,
+    sizeGb: number,
+    frequency: number,
+    voltage: number,
+    nameBase: string,
+    ocBaseVoltage: number,
+    ocBaseFrequency: number,
   }
 
   export interface PartMotherboardInterface extends BaseInterface {

@@ -13,9 +13,12 @@ import {
   newPartsUnderBudget,
   psuProvidesEnoughWattage,
 } from '@/lib/buildValidationRules'
+import { Parts } from '@/typings/interface/parts'
 
 class BuildModel extends BaseModel implements BuildModelInterface {
   budget?: number
+  parts?: Parts.BaseInterface[]
+  estimatedScore?: number
 
   defaults (): PlainObject {
     return {
@@ -29,41 +32,39 @@ class BuildModel extends BaseModel implements BuildModelInterface {
   }
 
   runBenchmark (): number {
-    const cpu = this.findPartOfType('CPU')
+    const cpu = this.findPartOfType('CPU') as Parts.Cpu
+    const gpus = this.findPartOfType('GPU') as Parts.Gpu[]
+    const memory = this.findPartOfType('Memory') as Parts.Memory[]
 
-    const gpus = (this.findPartOfType('GPU') || []).sort((a: any, b: any) => {
-      return a['Base Core Freq'] - b['Base Core Freq']
-    })
-
-    const memory = (this.findPartOfType('Memory') || [])
+    gpus.sort((a, b) => a.baseCoreFreq - b.baseCoreFreq)
 
     if (!cpu || !gpus.length || !memory.length) {
       return (this.attributes.estimatedScore = 0)
     }
 
-    const memoryChannels = Math.min(cpu['Max Memory Channels'], memory.length)
-    const memorySpeed = memory[0].Frequency
+    const memoryChannels = Math.min(cpu.maxMemChannels, memory.length)
+    const memorySpeed = memory[0].frequency
 
     const cpuScore = Math.floor((
-      (cpu.CoreClockMultiplier * cpu.Frequency) +
-      (cpu.MemChannelsMultiplier * memoryChannels) +
-      (cpu.MemClockMultiplier * memorySpeed) +
-      cpu.FinalAdjustment
+      (cpu.multCoreClock * cpu.frequency) +
+      (cpu.multMemChannels * memoryChannels) +
+      (cpu.multMemClock * memorySpeed) +
+      cpu.multAdjust
     ) * 298)
 
-    const gpuBaseCoreFreq = gpus[0]['Base Core Freq']
-    const gpuBaseMemFreq = gpus[0]['Base Mem Freq']
+    const gpuBaseCoreFreq = gpus[0].baseCoreFreq
+    const gpuBaseMemFreq = gpus[0].baseMemFreq
     const calcType = gpus.length === 1 ? 'Single' : 'Dual'
     const gpu = gpus[0]
 
-    const gpuCoreClockMult1 = gpu[`GT1 ${calcType} Core Clock Multiplier`]
-    const gpuCoreClockMult2 = gpu[`GT2 ${calcType} Core Clock Multiplier`]
+    const gpuCoreClockMult1 = gpu[`multCore${calcType}1`] as number
+    const gpuCoreClockMult2 = gpu[`multCore${calcType}2`] as number
 
-    const gpuMemClockMult1 = gpu[`GT1 ${calcType} Mem Clock Multiplier`]
-    const gpuMemClockMult2 = gpu[`GT2 ${calcType} Mem Clock Multiplier`]
+    const gpuMemClockMult1 = gpu[`multMem${calcType}1`] as number
+    const gpuMemClockMult2 = gpu[`multMem${calcType}2`] as number
 
-    const gpuAdjust1 = gpu[`GT1 ${calcType} Benchmark Adjustment`]
-    const gpuAdjust2 = gpu[`GT2 ${calcType} Benchmark Adjustment`]
+    const gpuAdjust1 = gpu[`multAdjust${calcType}1`] as number
+    const gpuAdjust2 = gpu[`multAdjust${calcType}2`] as number
 
     const gpuScore = Math.floor(164 / (
       0.5 / (
@@ -78,32 +79,25 @@ class BuildModel extends BaseModel implements BuildModelInterface {
       )
     ))
 
-    this.attributes.estimatedScore = Math.floor(1 / (
+    this.estimatedScore = Math.floor(1 / (
       (0.85 / gpuScore) +
       (0.15 / cpuScore)
     ))
 
-    return this.attributes.estimatedScore
+    return this.estimatedScore
   }
 
   findPartOfType (
     type: string,
     { limit = true } = {},
-  ): PlainObject {
-    const parts = this.attributes.parts.filter((part: PlainObject) => {
-      const partType = part['Part Type']
-      if (type === 'GPU') return ['GPU', 'GPU - Water'].includes(partType)
-      return type === partType
-    })
+  ): Parts.BaseInterface | Parts.BaseInterface[] {
+    const parts = this.parts?.filter(part => part.type === 'GPU') ?? []
 
     if (type === 'GPU') {
       return limit ? parts.slice(0, 2) : parts
     }
 
-    if (
-      ['Case Fan', 'Memory'].includes(type) ||
-      type.startsWith('Storage')
-    ) return parts
+    if (['Case Fan', 'Memory', 'Storage'].includes(type)) return parts
 
     return parts[0]
   }
