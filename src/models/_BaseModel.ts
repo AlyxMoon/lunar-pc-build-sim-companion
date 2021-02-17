@@ -1,4 +1,4 @@
-import { DisplayFunctionMap, ModelInterface, MutationFunctionMap, PlainObject, StringArray, StringMap, ValidationFunctionArray } from '@/typings/interface'
+import { DisplayFunctionMap, ModelInterface, MutationFunctionMap, PlainObject, StringArray, StringMap, ValidationFunctionArray } from '@/typings'
 
 import { reactive } from 'vue'
 import { v4 as uuidv4 } from 'uuid'

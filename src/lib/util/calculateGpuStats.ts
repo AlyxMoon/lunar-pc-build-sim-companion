@@ -1,5 +1,4 @@
-import { PlainObject } from '@/typings/interface'
-import { Parts } from '@/typings/interface/parts'
+import { PlainObject, Parts } from '@/typings'
 
 const calculateGpuStats = (part: Parts.Gpu): PlainObject => {
   const output = {

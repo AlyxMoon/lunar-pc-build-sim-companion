@@ -1,4 +1,4 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionArray, parts } from '@/typings/interface'
+import { BuildModelInterface, PlainObject, ValidationFunctionArray, Parts } from '@/typings'
 import BaseModel from './_BaseModel'
 import {
   caseFitsCpuCooler,
@@ -16,7 +16,7 @@ import {
 
 class BuildModel extends BaseModel implements BuildModelInterface {
   budget?: number
-  parts?: parts.BaseInterface[]
+  parts?: Parts.BaseInterface[]
   estimatedScore?: number
 
   defaults (): PlainObject {
@@ -31,9 +31,9 @@ class BuildModel extends BaseModel implements BuildModelInterface {
   }
 
   runBenchmark (): number {
-    const cpu = this.findPartOfType('CPU') as parts.Cpu
-    const gpus = this.findPartOfType('GPU') as parts.Gpu[]
-    const memory = this.findPartOfType('Memory') as parts.Memory[]
+    const cpu = this.findPartOfType('CPU') as Parts.Cpu
+    const gpus = this.findPartOfType('GPU') as Parts.Gpu[]
+    const memory = this.findPartOfType('Memory') as Parts.Memory[]
 
     gpus.sort((a, b) => a.baseCoreFreq - b.baseCoreFreq)
 
@@ -89,7 +89,7 @@ class BuildModel extends BaseModel implements BuildModelInterface {
   findPartOfType (
     type: string,
     { limit = true } = {},
-  ): parts.BaseInterface | parts.BaseInterface[] {
+  ): Parts.BaseInterface | Parts.BaseInterface[] {
     const parts = this.parts?.filter(part => part.type === 'GPU') ?? []
 
     if (type === 'GPU') {

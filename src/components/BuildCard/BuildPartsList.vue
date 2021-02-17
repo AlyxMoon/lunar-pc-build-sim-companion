@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import { PlainObject } from '@/typings/interface'
+import { PlainObject, Parts } from '@/typings'
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 

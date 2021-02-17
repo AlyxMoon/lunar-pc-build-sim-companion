@@ -1,5 +1,5 @@
 
-import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
 
 const motherboardSupportsMultiGpu = (attributes: BuildModelInterface): ValidationFunctionReturn => {
   const parts = attributes.parts?.filter(part => part.isBeingKept) || []

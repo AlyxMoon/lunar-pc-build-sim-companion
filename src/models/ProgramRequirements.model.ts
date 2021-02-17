@@ -1,4 +1,4 @@
-import { DisplayFunctionMap, ProgramRequirementsModelInterface, StringMap } from '@/typings/interface'
+import { DisplayFunctionMap, ProgramRequirementsModelInterface, StringMap } from '@/typings'
 import BaseModel from './_BaseModel'
 
 /* eslint-disable @typescript-eslint/camelcase */

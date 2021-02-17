@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { ProgramRequirementsModelInterface } from '@/typings/interface'
+import { ProgramRequirementsModelInterface } from '@/typings'
 
 import { defineComponent } from 'vue'
 import { mapActions, mapState } from 'vuex'

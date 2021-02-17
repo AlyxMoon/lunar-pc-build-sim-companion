@@ -1,4 +1,4 @@
-import { Parts } from '@/typings/interface/parts'
+import { Parts } from '@/typings'
 
 import calculateGpuStats from '../../src/lib/util/calculateGpuStats'
 

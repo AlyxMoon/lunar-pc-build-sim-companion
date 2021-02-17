@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import { PlainObject } from '@/typings/interface'
+import { PlainObject } from '@/typings'
 import { mutateField, mutatePart } from './mutate'
 
 const {

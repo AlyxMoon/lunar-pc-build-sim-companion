@@ -20,11 +20,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { PlainObject } from '@/typings'
+
 export default {
   name: 'Accordion',
 
-  data: () => ({
+  data: (): PlainObject => ({
     show: false,
   }),
 }

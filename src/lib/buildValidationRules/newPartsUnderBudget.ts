@@ -1,4 +1,4 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
 
 const newPartsUnderBudget = (build: BuildModelInterface): ValidationFunctionReturn => {
   if (!build.budget) return true

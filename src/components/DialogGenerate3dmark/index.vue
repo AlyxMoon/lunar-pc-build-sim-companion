@@ -122,7 +122,7 @@
 </template>
 
 <script lang="ts">
-import { BuildModelInterface } from '@/typings/interface'
+import { BuildModelInterface } from '@/typings'
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 

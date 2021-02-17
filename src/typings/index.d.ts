@@ -1,41 +1,40 @@
-declare module 'lunar-pc-build-sim-companion' {
-  export * as Parts from './parts.d.ts'
+export * as Parts from './parts'
 
-  export interface PlainObject {
+export interface PlainObject {
     [key: string]: any,
   }
 
-  export interface StringMap {
+export interface StringMap {
     [key: string]: string,
   }
 
-  export type StringArray = string[]
+export type StringArray = string[]
 
-  export type ValidationFunction = (val: any, model: ModelInterface) => boolean | string
-  export type ValidationFunctionReturn = ReturnType<ValidationFunction>
-  export type ValidationFunctionArray = ValidationFunction[]
+export type ValidationFunction = (val: any, model: ModelInterface) => boolean | string
+export type ValidationFunctionReturn = ReturnType<ValidationFunction>
+export type ValidationFunctionArray = ValidationFunction[]
 
-  export type MutationFunction = (val: any) => any
-  export interface MutationFunctionMap {
+export type MutationFunction = (val: any) => any
+export interface MutationFunctionMap {
     [key: string]: MutationFunction,
   }
 
-  export type DisplayFunction = (val: any) => string
-  export interface DisplayFunctionMap {
+export type DisplayFunction = (val: any) => string
+export interface DisplayFunctionMap {
     [key: string]: DisplayFunction,
   }
 
-  export interface AppState {
+export interface AppState {
     [key: string]: any,
   }
 
-  export interface ImportExportData {
+export interface ImportExportData {
     [key: string]: any,
     builds?: Model[],
     playerLevel?: number,
   }
 
-  export interface ModelInterface {
+export interface ModelInterface {
     [key: string]: any,
     _attributes: PlainObject,
     attributes: PlainObject,
@@ -52,7 +51,7 @@ declare module 'lunar-pc-build-sim-companion' {
     displayFilters: () => DisplayFunctionMap,
   }
 
-  export interface BuildModelInterface extends ModelInterface {
+export interface BuildModelInterface extends ModelInterface {
     id?: string,
     name?: string,
     jobType?: string,
@@ -62,11 +61,10 @@ declare module 'lunar-pc-build-sim-companion' {
     parts?: Parts.BaseInterface[],
   }
 
-  export interface ProgramRequirementsModelInterface extends ModelInterface {
+export interface ProgramRequirementsModelInterface extends ModelInterface {
     cpuScore?: number,
     gpuScore?: number,
     gpuVram?: number,
     memory?: number,
     storage?: number,
   }
-}

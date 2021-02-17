@@ -1,4 +1,4 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
 
 const motherboardFitsCpu = (build: BuildModelInterface): ValidationFunctionReturn => {
   const parts = build.parts?.filter(part => part.isBeingKept) || []

@@ -36,6 +36,8 @@
 </template>
 
 <script lang="ts">
+import { PlainObject, BuildModelInterface, Parts } from '@/typings'
+
 import { defineComponent } from 'vue'
 import { mapActions, mapState } from 'vuex'
 
@@ -73,7 +75,7 @@ export default defineComponent({
       }
     },
 
-    addPartToBuild (part: parts.BaseInterface): void {
+    addPartToBuild (part: Parts.BaseInterface): void {
       const { build, index } = this.showDialogPartLookup
 
       build.parts.push(part)

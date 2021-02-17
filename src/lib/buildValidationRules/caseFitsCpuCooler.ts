@@ -1,4 +1,4 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
 
 const caseFitsCpuCooler = (attributes: BuildModelInterface): ValidationFunctionReturn => {
   const parts = attributes.parts?.filter(part => part.isBeingKept) || []

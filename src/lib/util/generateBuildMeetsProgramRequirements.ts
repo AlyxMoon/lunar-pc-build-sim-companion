@@ -1,4 +1,4 @@
-import { PlainObject, ProgramRequirementsModelInterface } from '@/typings/interface'
+import { PlainObject, ProgramRequirementsModelInterface } from '@/typings'
 import BuildModel from '@/models/Build.model'
 
 const generateBuildMeetsProgramRequirements = (

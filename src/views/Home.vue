@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { PlainObject } from '@/typings/interface'
+import { PlainObject } from '@/typings'
 import { defineComponent } from 'vue'
 import { mapActions } from 'vuex'
 

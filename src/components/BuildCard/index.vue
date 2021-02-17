@@ -199,6 +199,8 @@
 </template>
 
 <script lang="ts">
+import { BuildModelInterface, PlainObject, Parts } from '@/typings'
+
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
@@ -264,7 +266,7 @@ export default defineComponent({
       }
     },
 
-    addMultipleNewParts (parts: BaseInterface): void {
+    addMultipleNewParts (parts: Parts.BaseInterface[]): void {
       this.activeBuild.parts.push(...parts)
       this.activeBuild.validate()
       this.$emit('update', this.activeBuild.attributes)

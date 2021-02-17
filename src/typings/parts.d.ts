@@ -24,6 +24,7 @@ export interface Cpu extends BaseInterface {
   socketType: value,
   canOverclock: boolean,
   ocMultStep: number,
+  defaultMemSpeed: number,
   maxMemChannels: number,
   baseVolt: number,
   baseFreq: number,
@@ -73,4 +74,10 @@ export interface Memory extends BaseInterface {
 
 export interface PartMotherboardInterface extends BaseInterface {
   name: string,
+}
+
+export interface ByCategoryInterface {
+  cpus: Cpu[],
+  gpus: Gpu[],
+  memory: Memory[],
 }
