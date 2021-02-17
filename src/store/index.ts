@@ -7,11 +7,11 @@ import ProgramRequirementsModel from '@/models/ProgramRequirements.model'
 import * as actions from './actions'
 import * as mutations from './mutations'
 
-import programRequirements from '@/assets/data/program-requirements.json'
+import programRequirements from '@/assets/data/programrequirements.json'
 
 import casefans from '@/assets/data/parts/casefans.json'
 import cases from '@/assets/data/parts/cases.json'
-import cpucoolers from '@/assets/data/parts/cpu-coolers.json'
+import cpucoolers from '@/assets/data/parts/cpucoolers.json'
 import cpus from '@/assets/data/parts/cpus.json'
 import gpus from '@/assets/data/parts/gpus.json'
 import memory from '@/assets/data/parts/memory.json'

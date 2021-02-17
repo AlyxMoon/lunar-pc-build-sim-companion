@@ -1,9 +1,8 @@
-import { BuildModelInterface, PlainObject } from '@/typings/interface'
-import { Parts } from '@/typings/interface/parts'
+import { BuildModelInterface, parts } from '@/typings/interface'
 import BuildModel from '@/models/Build.model'
 
 // assumes highest amount of RAM sticks / frequency to be as permissive as possible
-const getCpuScore = (part: Parts.BaseInterface, memFreq?: number, memCount?: number): number => {
+const getCpuScore = (part: parts.BaseInterface, memFreq?: number, memCount?: number): number => {
   const coreClockMultiplier = part.CoreClockMultiplier as number
   const finalAdjustment = part.FinalAdjustment as number
   const frequency = part.Frequency as number
@@ -21,7 +20,7 @@ const getCpuScore = (part: Parts.BaseInterface, memFreq?: number, memCount?: num
   ) * 298)
 }
 
-const getGpuSingleScore = (part: Parts.BaseInterface): number => {
+const getGpuSingleScore = (part: parts.BaseInterface): number => {
   const gpuBaseCoreFreq = part['Base Core Freq'] as number
   const gpuBaseMemFreq = part['Base Mem Freq'] as number
 
@@ -48,7 +47,7 @@ const getGpuSingleScore = (part: Parts.BaseInterface): number => {
   ))
 }
 
-const getGpuDualScore = (part: Parts.BaseInterface): number => {
+const getGpuDualScore = (part: parts.BaseInterface): number => {
   const gpuBaseCoreFreq = part['Base Core Freq'] as number
   const gpuBaseMemFreq = part['Base Mem Freq'] as number
 
@@ -76,7 +75,7 @@ const getGpuDualScore = (part: Parts.BaseInterface): number => {
 }
 
 const generateBuildMeets3dmarkScore = async (
-  availablePartsByCategory: Record<string, PlainObject>,
+  availablePartsByCategory: Record<string, parts.BaseInterface>,
   args: {
     desiredScore: number,
     budget: number,
@@ -86,7 +85,7 @@ const generateBuildMeets3dmarkScore = async (
     useBudget: boolean,
   },
 ): Promise<BuildModelInterface[]> => {
-  const gpus = availablePartsByCategory.gpus.filter((part: Parts.BaseInterface) => {
+  const gpus = availablePartsByCategory.gpus.filter((part: parts.BaseInterface) => {
     const meetsLevel = !args.usePlayerLevel || part.Level <= args.playerLevel
     const meetsBudget = !args.useBudget || part.Price <= args.budget
     const scoreToMeet = args.desiredScore * 0.85
@@ -98,7 +97,7 @@ const generateBuildMeets3dmarkScore = async (
     )
   })
 
-  const cpus = availablePartsByCategory.cpus.filter((part: Parts.BaseInterface) => {
+  const cpus = availablePartsByCategory.cpus.filter((part: parts.BaseInterface) => {
     const meetsLevel = !args.usePlayerLevel || part.Level <= args.playerLevel
     const meetsBudget = !args.useBudget || part.Price <= args.budget
     const scoreToMeet = args.desiredScore * 0.15
@@ -106,7 +105,7 @@ const generateBuildMeets3dmarkScore = async (
     return meetsLevel && meetsBudget && (getCpuScore(part) >= scoreToMeet)
   })
 
-  const memory = availablePartsByCategory.memory.filter((part: Parts.BaseInterface) => {
+  const memory = availablePartsByCategory.memory.filter((part: parts.BaseInterface) => {
     const meetsLevel = !args.usePlayerLevel || part.Level <= args.playerLevel
     const meetsBudget = !args.useBudget || part.Price <= args.budget
 

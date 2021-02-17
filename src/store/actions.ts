@@ -1,4 +1,4 @@
-import { AppState, BuildModelInterface, ImportExportData, PlainObject } from '@/typings/interface'
+import { AppState, BuildModelInterface, ImportExportData, PlainObject } from 'lunar-pc-build-sim-companion'
 import { ActionContext } from 'vuex'
 
 import BuildModel from '@/models/Build.model'
