@@ -1,3 +1,4 @@
+import { CategoryInterface } from '@/typings'
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
@@ -19,7 +20,7 @@ import motherboards from '@/assets/data/parts/motherboards.json'
 import powersupplies from '@/assets/data/parts/powersupplies.json'
 import storage from '@/assets/data/parts/storage.json'
 
-const categories = [
+const categories: CategoryInterface[] = [
   {
     name: 'cpus',
     displayName: 'CPU / Processors',

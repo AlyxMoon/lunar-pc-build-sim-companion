@@ -71,16 +71,16 @@
 </template>
 
 <script lang="ts">
-import { PlainObject, Parts } from '@/typings'
-import { defineComponent } from 'vue'
+import { PlainObject, Parts, CategoryInterface } from '@/typings'
+import { defineComponent, PropType } from 'vue'
 import { mapState } from 'vuex'
 
 export default defineComponent({
   name: 'BuildPartsList',
   props: {
     parts: {
-      type: Array,
-      default: (): PlainObject[] => [],
+      type: Array as PropType<Parts.BaseInterface[]>,
+      default: (): Parts.BaseInterface[] => [],
     },
     showCopy: {
       type: Boolean,
@@ -109,46 +109,44 @@ export default defineComponent({
     }),
 
     filteredCategories (): PlainObject[] {
-      const categories = this.categories.slice()
+      const categories = this.categories.slice() as CategoryInterface[]
 
-      let hasCase
-      let hasPowerSupply
-      let hasMotherboard
-      let hasCpu
-      let hasCpuCooler
+      let hasCase = false
+      let hasPowerSupply = false
+      let hasMotherboard = false
+      let hasCpu = false
+      let hasCpuCooler = false
 
-      this.parts.forEach(part => {
-        const type = (part as PlainObject)['Part Type'] || ''
-
-        if (type === 'Case') hasCase = true
-        if (type === 'Power Supply') hasPowerSupply = true
-        if (type === 'Motherboard') hasMotherboard = true
-        if (type === 'CPU') hasCpu = true
-        if (type.startsWith('CPU Cooler')) hasCpuCooler = true
+      this.parts.forEach(({ type }) => {
+        hasCase = hasCase || type === 'Case'
+        hasPowerSupply = hasPowerSupply || type === 'Power Supply'
+        hasMotherboard = hasMotherboard || type === 'Motherboard'
+        hasCpu = hasCpu || type === 'CPU'
+        hasCpuCooler = hasCpuCooler || type === 'CPU Cooler'
       })
 
       if (hasCase) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'cases')
+        const index = categories.findIndex(({ name }) => name === 'cases')
         categories.splice(index, 1)
       }
 
       if (hasPowerSupply) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'powersupplies')
+        const index = categories.findIndex(({ name }) => name === 'powersupplies')
         categories.splice(index, 1)
       }
 
       if (hasMotherboard) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'motherboards')
+        const index = categories.findIndex(({ name }) => name === 'motherboards')
         categories.splice(index, 1)
       }
 
       if (hasCpu) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'cpus')
+        const index = categories.findIndex(({ name }) => name === 'cpus')
         categories.splice(index, 1)
       }
 
       if (hasCpuCooler) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'cpucoolers')
+        const index = categories.findIndex(({ name }) => name === 'cpucoolers')
         categories.splice(index, 1)
       }
 
