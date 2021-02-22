@@ -1,6 +1,6 @@
 import { PlainObject, Parts } from '@/typings'
 
-const calculateGpuStats = (part: Parts.Gpu): PlainObject => {
+const calculateGpuStats = (part: Parts.GpuInterface): PlainObject => {
   const output = {
     rank: 0,
     scoreSingle: 0,

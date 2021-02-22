@@ -79,7 +79,7 @@ const main = async (): Promise<void> => {
     const formattedFilePath = join(finalDirectory, category + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
-    const formattedData = JSON.stringify(convertRawData(rawData, category))
+    const formattedData = JSON.stringify(convertRawData(rawData, category), null, 2)
 
     await promisify(writeFile)(formattedFilePath, formattedData, 'utf-8')
   }

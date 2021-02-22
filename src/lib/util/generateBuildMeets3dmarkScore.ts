@@ -3,7 +3,7 @@ import BuildModel from '@/models/Build.model'
 
 // assumes highest amount of RAM sticks / frequency to be as permissive as possible
 const getCpuScore = (
-  cpu: Parts.Cpu,
+  cpu: Parts.CpuInterface,
   memFreq = cpu.defaultMemSpeed,
   memCount = cpu.maxMemChannels,
 ): number => {
@@ -16,7 +16,7 @@ const getCpuScore = (
 }
 
 const getGpuScore = (
-  gpu: Parts.Gpu,
+  gpu: Parts.GpuInterface,
   dual = false,
 ): number => {
   const calcType = dual ? 'Dual' : 'Single'
@@ -55,7 +55,7 @@ const generateBuildMeets3dmarkScore = async (
     useBudget: boolean,
   },
 ): Promise<BuildModelInterface[]> => {
-  const gpus = availablePartsByCategory.gpus.filter((part: Parts.Gpu) => {
+  const gpus = availablePartsByCategory.gpus.filter((part: Parts.GpuInterface) => {
     const meetsLevel = !args.usePlayerLevel || part.level <= args.playerLevel
     const meetsBudget = !args.useBudget || part.price <= args.budget
     const scoreToMeet = args.desiredScore * 0.85
@@ -67,7 +67,7 @@ const generateBuildMeets3dmarkScore = async (
     )
   })
 
-  const cpus = availablePartsByCategory.cpus.filter((part: Parts.Cpu) => {
+  const cpus = availablePartsByCategory.cpus.filter((part: Parts.CpuInterface) => {
     const meetsLevel = !args.usePlayerLevel || part.level <= args.playerLevel
     const meetsBudget = !args.useBudget || part.price <= args.budget
     const scoreToMeet = args.desiredScore * 0.15
@@ -78,7 +78,7 @@ const generateBuildMeets3dmarkScore = async (
     )
   })
 
-  const memory = availablePartsByCategory.memory.filter((part: Parts.Memory) => {
+  const memory = availablePartsByCategory.memory.filter((part: Parts.MemoryInterface) => {
     const meetsLevel = !args.usePlayerLevel || part.level <= args.playerLevel
     const meetsBudget = !args.useBudget || part.price <= args.budget
 

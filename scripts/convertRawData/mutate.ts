@@ -201,6 +201,7 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
 
     const motherboardSizes = [
       'Mini-ITX',
+      'Micro-ITX',
       'Micro-ATX',
       'S-ATX',
       'E-ATX',
@@ -216,7 +217,7 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
 
     powersupplySizes.forEach(size => {
       if (newPart[`PSU ${size}`]) supportedPowersupplies.push(size)
-      delete newPart[`PUS ${size}`]
+      delete newPart[`PSU ${size}`]
     })
 
     newPart.supportedMotherboards = supportedMotherboards
@@ -258,7 +259,7 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
   cpus: part => {
     const newPart = {
       ...part,
-      ...calculateCpuStats(part as Parts.Cpu),
+      ...calculateCpuStats(part as Parts.CpuInterface),
     }
 
     return newPart
@@ -267,7 +268,7 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
   gpus: part => {
     const newPart = {
       ...part,
-      ...calculateGpuStats(part as Parts.Gpu),
+      ...calculateGpuStats(part as Parts.GpuInterface),
     }
 
     newPart.waterCooled = (newPart.type as string).endsWith('Water')

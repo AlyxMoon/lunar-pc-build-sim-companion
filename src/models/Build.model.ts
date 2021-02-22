@@ -31,9 +31,9 @@ class BuildModel extends BaseModel implements BuildModelInterface {
   }
 
   runBenchmark (): number {
-    const cpu = this.findPartOfType('CPU') as Parts.Cpu
-    const gpus = this.findPartOfType('GPU') as Parts.Gpu[]
-    const memory = this.findPartOfType('Memory') as Parts.Memory[]
+    const cpu = this.findPartOfType('CPU') as Parts.CpuInterface
+    const gpus = this.findPartOfType('GPU') as Parts.GpuInterface[]
+    const memory = this.findPartOfType('Memory') as Parts.MemoryInterface[]
 
     gpus.sort((a, b) => a.baseCoreFreq - b.baseCoreFreq)
 

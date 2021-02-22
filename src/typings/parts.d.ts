@@ -8,23 +8,48 @@ export interface BaseInterface {
   level: number,
   levelPercent: number,
   price: number,
+  availableInShop: boolean,
 }
 
 export interface CaseInterface extends BaseInterface {
-  name: string,
+  lighting: string,
+  sizeType: string,
+  maxFan120: number,
+  maxFan140: number,
+  maxLengthPsu: number,
+  maxLengthGpu: number,
+  maxLengthCpuFan: number,
+  typeOpenBench: boolean,
+  case1Count: number,
+  case1Model: string,
+  case1Decorator: string,
+  case2Count: number,
+  case2Model: string,
+  case2Decorator: string,
+  case3Count: number,
+  case3Model: string,
+  case3Decorator: string,
+  restrictedLengthGpu: number,
+  supportedMotherboards: string[],
+  supportedPowersupplies: string[],
 }
 
 export interface CaseFanInterface extends BaseInterface {
-  name: string,
+  lighting: string,
+  airFlow: number,
+  size: number,
+  thickness: number,
+  airPressure: number,
 }
 
-export interface Cpu extends BaseInterface {
+export interface CpuInterface extends BaseInterface {
   frequency: number,
   coreCount: number,
-  socketType: value,
+  socket: value,
+  wattage: number,
   canOverclock: boolean,
-  ocMultStep: number,
   defaultMemSpeed: number,
+  ocMultStep: number,
   maxMemChannels: number,
   baseVolt: number,
   baseFreq: number,
@@ -32,9 +57,13 @@ export interface Cpu extends BaseInterface {
   multMemChannels: number,
   multMemClock: number,
   multAdjust: number,
+  rank: number,
+  score: number,
 }
 
-export interface Gpu extends BaseInterface {
+export interface GpuInterface extends BaseInterface {
+  lighting: string,
+  vramGb: number,
   minCoreFreq: number,
   baseCoreFreq: number,
   baseCoreFreqOc: number,
@@ -60,9 +89,13 @@ export interface Gpu extends BaseInterface {
   multCoreDual2: number,
   multMemDual2: number,
   multAdjustDual2: number,
+  rank: number,
+  scoreSingle: number,
+  scoreDual: number,
+  waterCooled: boolean,
 }
 
-export interface Memory extends BaseInterface {
+export interface MemoryInterface extends BaseInterface {
   lighting: string,
   sizeGb: number,
   frequency: number,
@@ -72,8 +105,39 @@ export interface Memory extends BaseInterface {
   ocBaseFrequency: number,
 }
 
-export interface PartMotherboardInterface extends BaseInterface {
-  name: string,
+export interface MotherboardInterface extends BaseInterface {
+  lighting: string,
+  chipset: string,
+  socket: string,
+  sizeType: string,
+  ramSpeedMax: number,
+  gpuCrossFire: boolean,
+  gpuSLI: boolean,
+  canOverclock: boolean,
+  storageMaxM2: number,
+  storageMaxHeatsinkM2: number,
+  ramMax: number,
+  storageMaxSata: number,
+  ramSpeedDefault: number,
+  ramSpeedOptions: number[],
+  ramSpeedMin: number,
+  baseClock: number,
+}
+
+export interface PowerSupplyInterface extends BaseInterface {
+  wattage: number,
+  length: number,
+  modularType: string,
+  sizeType: string,
+}
+
+export interface StorageInterface extends BaseInterface {
+  lighting: string,
+  sizeGb: number,
+  transferSpeed: number,
+  includesHeatsink: false,
+  heatsinkThickness: number,
+  typeSecondary: string,
 }
 
 export interface ByCategoryInterface {

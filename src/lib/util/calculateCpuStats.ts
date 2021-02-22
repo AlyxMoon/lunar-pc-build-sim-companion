@@ -1,7 +1,7 @@
 import { PlainObject, Parts } from '@/typings'
 
 const calculateCpuStats = (
-  cpu: Parts.Cpu,
+  cpu: Parts.CpuInterface,
   memFreq = cpu.defaultMemSpeed,
   memCount = cpu.maxMemChannels,
 ): PlainObject => {
