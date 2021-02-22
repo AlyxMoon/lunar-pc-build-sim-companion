@@ -127,7 +127,7 @@ import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
 import BuildModel from '@/models/Build.model'
-import generateBuildMeets3dmarkScore from '@/lib/util/generateBuildMeets3dmarkScore'
+import { generateBuildMeets3dmarkScore } from '@/lib/calculations'
 
 import DataTable from '@/components/DataTable/index.vue'
 

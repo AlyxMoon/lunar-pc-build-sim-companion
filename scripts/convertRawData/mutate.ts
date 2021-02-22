@@ -1,7 +1,9 @@
 import { Parts } from '@/typings'
 
-import calculateCpuStats from '../../src/lib/util/calculateCpuStats'
-import calculateGpuStats from '../../src/lib/util/calculateGpuStats'
+import {
+  calculateCpuStats,
+  calculateGpuStats,
+} from '../../src/lib/calculations'
 
 type ValueTypes = string | number | boolean | string[] | number[]
 type PartType = Record<string, ValueTypes>
@@ -267,9 +269,9 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
 
   gpus: part => {
     const newPart = {
-      ...part,
       ...calculateGpuStats(part as Parts.GpuInterface),
-    }
+      ...part,
+    } as Parts.GpuInterface
 
     newPart.waterCooled = (newPart.type as string).endsWith('Water')
     newPart.type = (newPart.type as string).split(' - ')[0]

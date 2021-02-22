@@ -1,10 +1,10 @@
-import { PlainObject, Parts } from '@/typings'
+import { Parts } from '@/typings'
 
 const calculateCpuStats = (
   cpu: Parts.CpuInterface,
   memFreq = cpu.defaultMemSpeed,
   memCount = cpu.maxMemChannels,
-): PlainObject => {
+): { rank: number, score: number } => {
   const output = {
     rank: 0,
     score: 0,

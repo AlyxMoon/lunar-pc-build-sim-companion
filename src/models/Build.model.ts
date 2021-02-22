@@ -14,6 +14,11 @@ import {
   psuProvidesEnoughWattage,
 } from '@/lib/buildValidationRules'
 
+import {
+  calculateCpuStats,
+  calculateGpuStats,
+} from '@/lib/calculations'
+
 class BuildModel extends BaseModel implements BuildModelInterface {
   budget?: number
   parts?: Parts.BaseInterface[]
@@ -35,51 +40,20 @@ class BuildModel extends BaseModel implements BuildModelInterface {
     const gpus = this.findPartOfType('GPU') as Parts.GpuInterface[]
     const memory = this.findPartOfType('Memory') as Parts.MemoryInterface[]
 
-    gpus.sort((a, b) => a.baseCoreFreq - b.baseCoreFreq)
-
     if (!cpu || !gpus.length || !memory.length) {
       return (this.attributes.estimatedScore = 0)
     }
 
+    gpus.sort((a, b) => a.baseCoreFreq - b.baseCoreFreq)
+
     const memoryChannels = Math.min(cpu.maxMemChannels, memory.length)
     const memorySpeed = memory[0].frequency
 
-    const cpuScore = Math.floor((
-      (cpu.multCoreClock * cpu.frequency) +
-      (cpu.multMemChannels * memoryChannels) +
-      (cpu.multMemClock * memorySpeed) +
-      cpu.multAdjust
-    ) * 298)
-
-    const gpuBaseCoreFreq = gpus[0].baseCoreFreq
-    const gpuBaseMemFreq = gpus[0].baseMemFreq
-    const calcType = gpus.length === 1 ? 'Single' : 'Dual'
-    const gpu = gpus[0]
-
-    const gpuCoreClockMult1 = gpu[`multCore${calcType}1`] as number
-    const gpuCoreClockMult2 = gpu[`multCore${calcType}2`] as number
-
-    const gpuMemClockMult1 = gpu[`multMem${calcType}1`] as number
-    const gpuMemClockMult2 = gpu[`multMem${calcType}2`] as number
-
-    const gpuAdjust1 = gpu[`multAdjust${calcType}1`] as number
-    const gpuAdjust2 = gpu[`multAdjust${calcType}2`] as number
-
-    const gpuScore = Math.floor(164 / (
-      0.5 / (
-        (gpuCoreClockMult1 * gpuBaseCoreFreq) +
-        (gpuMemClockMult1 * gpuBaseMemFreq) +
-        gpuAdjust1
-      ) +
-      0.5 / (
-        (gpuCoreClockMult2 * gpuBaseCoreFreq) +
-        (gpuMemClockMult2 * gpuBaseMemFreq) +
-        gpuAdjust2
-      )
-    ))
+    const { score: cpuScore } = calculateCpuStats(cpu, memorySpeed, memoryChannels)
+    const { scoreSingle, scoreDual } = calculateGpuStats(gpus[0])
 
     this.estimatedScore = Math.floor(1 / (
-      (0.85 / gpuScore) +
+      (0.85 / (gpus.length === 1 ? scoreSingle : scoreDual)) +
       (0.15 / cpuScore)
     ))
 

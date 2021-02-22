@@ -1,6 +1,8 @@
-import { PlainObject, Parts } from '@/typings'
+import { Parts } from '@/typings'
 
-const calculateGpuStats = (part: Parts.GpuInterface): PlainObject => {
+const calculateGpuStats = (
+  part: Parts.GpuInterface,
+): { rank: number, scoreSingle: number, scoreDual: number } => {
   const output = {
     rank: 0,
     scoreSingle: 0,
