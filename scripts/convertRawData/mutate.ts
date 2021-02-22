@@ -1,5 +1,6 @@
 import { Parts } from '@/typings'
 
+import calculateCpuStats from '../../src/lib/util/calculateCpuStats'
 import calculateGpuStats from '../../src/lib/util/calculateGpuStats'
 
 type ValueTypes = string | number | boolean | string[] | number[]
@@ -257,6 +258,7 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
   cpus: part => {
     const newPart = {
       ...part,
+      ...calculateCpuStats(part as Parts.Cpu),
     }
 
     return newPart
