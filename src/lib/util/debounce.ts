@@ -15,7 +15,7 @@ const debounce = (
     const callNow = immediate && !timer
 
     clearTimeout(timer)
-    timer = setTimeout(later, wait)
+    timer = window.setTimeout(later, wait)
 
     if (callNow) func.apply(this, args)
   }
