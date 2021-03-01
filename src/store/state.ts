@@ -17,7 +17,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'cpus',
     displayName: 'CPU / Processors',
-    partTypeNames: ['CPU'],
+    partType: 'CPU',
     icon: 'microchip',
     iconBackColor: '#FFC800',
     headers: [
@@ -34,7 +34,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'cpucoolers',
     displayName: 'CPU Cooling',
-    partTypeNames: ['CPU Cooler - Air', 'CPU Cooler - Liquid'],
+    partType: 'CPU Cooler',
     icon: 'fan',
     iconBackColor: '#00BCFF',
     headers: [
@@ -49,7 +49,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'motherboards',
     displayName: 'Motherboards',
-    partTypeNames: ['Motherboard'],
+    partType: 'Motherboard',
     icon: 'chess-board',
     iconBackColor: '#99359A',
     headers: [
@@ -68,7 +68,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'memory',
     displayName: 'Memory',
-    partTypeNames: ['Memory'],
+    partType: 'Memory',
     icon: 'memory',
     iconBackColor: '#00A668',
     headers: [
@@ -83,7 +83,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'gpus',
     displayName: 'Graphics Cards',
-    partTypeNames: ['GPU', 'GPU - Water'],
+    partType: 'GPU',
     icon: 'image',
     iconBackColor: '#DC0000',
     headers: [
@@ -100,7 +100,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'storage',
     displayName: 'Storage',
-    partTypeNames: ['Storage - HDD', 'Storage - SSD', 'Storage - M.2'],
+    partType: 'Storage',
     icon: 'hdd',
     iconBackColor: '#FF8100',
     headers: [
@@ -115,7 +115,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'powersupplies',
     displayName: 'Power Supplies',
-    partTypeNames: ['Power Supply'],
+    partType: 'Power Supply',
     icon: 'plug',
     iconBackColor: '#FE0086',
     headers: [
@@ -131,7 +131,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'casefans',
     displayName: 'Case Fans',
-    partTypeNames: ['Case Fan'],
+    partType: 'Case Fan',
     icon: 'wind',
     iconBackColor: '#007AA6',
     headers: [
@@ -146,7 +146,7 @@ const categories: CategoryInterface[] = [
   {
     name: 'cases',
     displayName: 'Cases',
-    partTypeNames: ['Case'],
+    partType: 'Case',
     icon: 'box',
     iconBackColor: '#AAAAAA',
     headers: [

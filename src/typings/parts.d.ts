@@ -9,6 +9,11 @@ export interface BaseInterface {
   levelPercent: number,
   price: number,
   availableInShop: boolean,
+
+  isBeingKept: boolean,
+  isNewPart: boolean,
+  isNewUsedPart: boolean,
+  isPartOfCase: boolean,
 }
 
 export interface CaseInterface extends BaseInterface {

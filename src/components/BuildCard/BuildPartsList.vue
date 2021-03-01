@@ -204,12 +204,11 @@ export default defineComponent({
       }
     },
 
-    partsOfCategory (partTypeNames: string[]): Parts.BaseInterface[] {
-      return (this.parts as Parts.BaseInterface[])
+    partsOfCategory (partType: string): Parts.BaseInterface[] {
+      return this.parts
         .map((item, index) => ({ ...item, originalIndex: index }))
         .filter((item: Parts.BaseInterface) => {
-          const type: string = (item['Part Type'] || item.type) + ''
-          return partTypeNames.includes(type)
+          return partType === ((item['Part Type'] || item.type) + '')
         })
     },
 

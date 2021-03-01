@@ -37,7 +37,7 @@ export interface ImportExportData {
 export interface CategoryInterface {
   name: string,
   displayName: string,
-  partTypeNames: string[],
+  partType: string,
   icon: string,
   iconBackColor: string,
   headers: {
@@ -72,6 +72,11 @@ export interface BuildModelInterface extends ModelInterface {
   estimatedScore?: estimatedScore,
   objectives?: string[],
   parts?: Parts.BaseInterface[],
+}
+
+export interface PartModelInterface extends ModelInterface, Parts.BaseInterface {
+  attributes: Parts.BaseInterface,
+  _attributes: Parts.BaseInterface,
 }
 
 export interface ProgramRequirementsModelInterface extends ModelInterface {
