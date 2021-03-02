@@ -1,6 +1,6 @@
 
 export interface BaseInterface {
-  [key: string]: number | string | boolean,
+  [key: string]: number | string | boolean | string[] | number[],
   name: string,
   nameFull: string,
   type: string,
@@ -64,6 +64,19 @@ export interface CpuInterface extends BaseInterface {
   multAdjust: number,
   rank: number,
   score: number,
+}
+
+export interface CpuCoolerInterface extends BaseInterface {
+  lighting: string,
+  hasFan: boolean,
+  airFlow: number,
+  length: number,
+  size: number,
+  slots: number,
+  thickness: number,
+  airPressure: number,
+  supportedCpus: string[],
+  typeSecondary: string,
 }
 
 export interface GpuInterface extends BaseInterface {
@@ -149,4 +162,16 @@ export interface ByCategoryInterface {
   cpus: Cpu[],
   gpus: Gpu[],
   memory: Memory[],
+}
+
+export interface ByAllCategoriesInterface {
+  cpus: Cpu[],
+  gpus: Gpu[],
+  memory: Memory[],
+  cases: CaseInterface[],
+  casefans: CaseFanInterface[],
+  cpucoolers: CpuCoolerInterface[],
+  motherboards: MotherboardInterface[],
+  powersupplies: PowerSupplyInterface[],
+  storage: StorageInterface[],
 }

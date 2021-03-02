@@ -53,6 +53,7 @@ export interface ModelInterface {
   attributes: PlainObject,
   _hasErrors: boolean,
   _errors: StringArray,
+  id: string,
 
   defaults: () => PlainObject,
   fieldAliases: () => StringMap,
@@ -65,13 +66,12 @@ export interface ModelInterface {
 }
 
 export interface BuildModelInterface extends ModelInterface {
-  id?: string,
-  name?: string,
-  jobType?: string,
-  budget?: number,
-  estimatedScore?: estimatedScore,
-  objectives?: string[],
-  parts?: Parts.BaseInterface[],
+  name: string,
+  jobType: string,
+  budget: number,
+  estimatedScore: estimatedScore,
+  objectives: string[],
+  parts: Parts.BaseInterface[],
 }
 
 export interface PartModelInterface extends ModelInterface, Parts.BaseInterface {
@@ -80,9 +80,11 @@ export interface PartModelInterface extends ModelInterface, Parts.BaseInterface 
 }
 
 export interface ProgramRequirementsModelInterface extends ModelInterface {
-  cpuScore?: number,
-  gpuScore?: number,
-  gpuVram?: number,
-  memory?: number,
-  storage?: number,
+  name: string,
+  type: string,
+  cpuScore: number,
+  gpuScore: number,
+  gpuVram: number,
+  memory: number,
+  storage: number,
 }

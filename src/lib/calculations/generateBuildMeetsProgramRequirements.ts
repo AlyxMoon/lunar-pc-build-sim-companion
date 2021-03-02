@@ -1,15 +1,15 @@
-import { PlainObject, ProgramRequirementsModelInterface } from '@/typings'
+import { Parts, ProgramRequirementsModelInterface } from '@/typings'
 import BuildModel from '@/models/Build.model'
 
 const generateBuildMeetsProgramRequirements = (
   program: ProgramRequirementsModelInterface,
-  availablePartsByCategory: Record<string, PlainObject>,
+  availablePartsByCategory: Parts.ByAllCategoriesInterface,
   { playerLevel }: { playerLevel: number },
-): { [key: string]: any } => {
+): BuildModel => {
   const attributes: {
     name: string,
     objectives: string[],
-    parts: PlainObject[],
+    parts: Parts.BaseInterface[],
   } = {
     name: `New Build - run ${program.get('name', true)} | ${program.get('type', true)}`,
     objectives: [
@@ -18,115 +18,116 @@ const generateBuildMeetsProgramRequirements = (
     parts: [],
   }
 
-  // get cpu
-  const cpu = availablePartsByCategory.cpus.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.Level > playerLevel) return best
+  const cpu: Parts.CpuInterface = availablePartsByCategory.cpus.reduce((
+    best: Parts.CpuInterface | null,
+    part: Parts.CpuInterface,
+  ) => {
+    return (
+      part.level <= playerLevel &&
+      part.score >= program.cpuScore &&
+      (best?.price ?? Infinity) >= part.price
+    ) ? part : best
+  })
 
-    if (part['Basic CPU Score'] >= (program.cpuScore || 0)) {
-      if (best.Price > part.Price) return part
-    }
+  const gpu: Parts.GpuInterface = availablePartsByCategory.gpus.reduce((
+    best: Parts.GpuInterface,
+    part: Parts.GpuInterface,
+  ) => {
+    return (
+      part.level <= playerLevel &&
+      part.scoreSingle >= program.gpuScore &&
+      part.vramGb >= program.gpuVram &&
+      (best?.price ?? Infinity) >= part.price
+    ) ? part : best
+  })
 
-    return best
-  }, { Price: Infinity })
+  const memory: Parts.MemoryInterface = availablePartsByCategory.memory.reduce((
+    best: Parts.MemoryInterface,
+    part: Parts.MemoryInterface,
+  ) => {
+    return (
+      part.level <= playerLevel &&
+      part.sizeGb >= program.memory &&
+      (best?.price ?? Infinity) >= part.price
+    ) ? part : best
+  })
 
-  // get gpu
-  const gpu = availablePartsByCategory.gpus.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.Level > playerLevel) return best
+  const storage: Parts.StorageInterface = availablePartsByCategory.storage.reduce((
+    best: Parts.StorageInterface,
+    part: Parts.StorageInterface,
+  ) => {
+    return (
+      part.level <= playerLevel &&
+      part.sizeGb >= program.storage &&
+      (best?.price ?? Infinity) >= part.price
+    ) ? part : best
+  })
 
-    if (
-      part['Single GPU Graphics Score'] >= (program.gpuScore || 0) &&
-      part['VRAM (GB)'] >= (program.gpuVram || 0)
-    ) {
-      if (best.Price > part.Price) return part
-    }
+  const motherboard: Parts.MotherboardInterface = availablePartsByCategory.motherboards.reduce((
+    best: Parts.MotherboardInterface,
+    part: Parts.MotherboardInterface,
+  ) => {
+    return (
+      part.level <= playerLevel &&
+      part.socket >= cpu.socket &&
+      (best?.price ?? Infinity) >= part.price
+    ) ? part : best
+  })
 
-    return best
-  }, { Price: Infinity })
+  const cpuCooler = availablePartsByCategory.cpucoolers.reduce((
+    best: Parts.CpuCoolerInterface,
+    part: Parts.CpuCoolerInterface,
+  ) => {
+    return (
+      part.level <= playerLevel &&
+      part.supportedCpus.includes(cpu.socket) &&
+      (best?.price ?? Infinity) >= part.price
+    ) ? part : best
+  })
 
-  // get memory
-  const memory = availablePartsByCategory.memory.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.Level > playerLevel) return best
+  const powerSupply: Parts.PowerSupplyInterface = availablePartsByCategory.powersupplies.reduce((
+    best: Parts.PowerSupplyInterface,
+    part: Parts.PowerSupplyInterface,
+  ) => {
+    return (
+      part.level <= playerLevel &&
+      part.wattage >= (cpu.wattage + gpu.wattage) &&
+      (best?.price ?? Infinity) >= part.price
+    ) ? part : best
+  })
 
-    if (part['Size (GB)'] >= (program.memory || 0)) {
-      if (best.Price > part.Price) return part
-    }
+  const computerCase: Parts.CaseInterface = availablePartsByCategory.cases.reduce((
+    best: Parts.CaseInterface,
+    part: Parts.CaseInterface,
+  ) => {
+    return (
+      part.level <= playerLevel &&
+      part.supportedMotherboards.includes(motherboard.sizeType) &&
+      part.supportedPowersupplies.includes(powerSupply.sizeType) &&
+      part.maxLengthPsu >= powerSupply.length &&
+      part.maxLengthGpu >= gpu.length &&
+      part.maxLengthCpuFan >= cpuCooler.length &&
+      (best?.price ?? Infinity) >= part.price
+    ) ? part : best
+  })
 
-    return best
-  }, { Price: Infinity })
-
-  // get storage
-  const storage = availablePartsByCategory.storage.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.level > playerLevel) return best
-
-    if (part.sizeGb >= (program.storage || 0)) {
-      if (best.price > part.price) return part
-    }
-
-    return best
-  }, { price: Infinity })
-
-  // get motherboard
-  const motherboard = availablePartsByCategory.motherboards.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.Level > playerLevel) return best
-
-    if (part['CPU Socket'] === cpu.Socket) {
-      if (best.Price > part.Price) return part
-    }
-
-    return best
-  }, { Price: Infinity })
-
-  // get cpu cooler
-  const cpuCooler = availablePartsByCategory.cpucoolers.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.Level > playerLevel) return best
-
-    if (part[cpu.Socket]) {
-      if (best.Price > part.Price) return part
-    }
-
-    return best
-  }, { Price: Infinity })
-
-  // get power supply
-  const powerSupply = availablePartsByCategory.powersupplies.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.Level > playerLevel) return best
-
-    if (part.Wattage >= +cpu.Wattage + +gpu.Wattage) {
-      if (best.Price > part.Price) return part
-    }
-
-    return best
-  }, { Price: Infinity })
-
-  // get case
-  const computerCase = availablePartsByCategory.cases.reduce((best: PlainObject, part: PlainObject) => {
-    if (part.Level > playerLevel) return best
-
-    if (
-      part[`PSU ${powerSupply.Size}`] &&
-      part['Max PSU length'] >= powerSupply.Length &&
-      part[motherboard.Size] &&
-      part['Max GPU length'] >= gpu.Length &&
-      part['Max CPU Fan Height'] >= cpuCooler.Height
-    ) {
-      if (best.Price > part.Price) return part
-    }
-
-    return best
-  }, { Price: Infinity })
-
-  const caseFans = [1, 2, 3].reduce((fans: PlainObject[], i) => {
-    const model = computerCase[`Case Fan Type ${i} Model`]
-    const count = computerCase[`Case Fan Type ${i} Count`]
+  const caseFans: Parts.CaseFanInterface[] = [1, 2, 3].reduce((
+    fans: Parts.CaseFanInterface[],
+    i: number,
+  ) => {
+    const model = computerCase[`case${i}Model`] as string
+    const count = computerCase[`case${i}Count`] as number
 
     if (!count || !model) return fans
 
-    const fan = availablePartsByCategory.casefans.find((part: PlainObject) => {
+    const fan = availablePartsByCategory.casefans.find(part => {
       return part.nameFull === model
     })
 
     if (fan) {
-      for (let i = 0; i < count; i++) fans.push(fan)
+      for (let i = 0; i < count; i++) {
+        fans.push({ ...fan, isPartOfCase: true })
+      }
     }
 
     return fans
@@ -142,7 +143,7 @@ const generateBuildMeetsProgramRequirements = (
     powerSupply,
     computerCase,
     ...caseFans,
-  ].map((part: PlainObject) => ({
+  ].map(part => ({
     ...part,
     isNewPart: true,
     isBeingKept: true,

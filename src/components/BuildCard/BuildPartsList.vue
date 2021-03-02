@@ -15,8 +15,8 @@
       </dt>
 
       <template
-        v-for="(item, i) in partsOfCategory(category.partTypeNames)"
-        :key="`${i}-${item['Full Part Name'] || item.nameFull}`"
+        v-for="(item, i) in partsOfCategory(category.partType)"
+        :key="`${i}-${item.nameFull}`"
       >
         <button
           class="pure-button danger"
@@ -58,12 +58,12 @@
         <dd>
           {{ displayFilters.currency(getPartPrice(item)) }}
           <span v-if="!item.isNewPart || item.isNewUsedPart || item.isPartOfCase">
-            (New: {{ displayFilters.currency(item.Price || item.price) }})
+            (New: {{ displayFilters.currency(item.price) }})
           </span>
         </dd>
 
         <dd class="part-name">
-          {{ item['Full Part Name'] || item.nameFull }}
+          {{ item.nameFull }}
         </dd>
       </template>
     </template>
@@ -108,7 +108,7 @@ export default defineComponent({
       categories: 'categories',
     }),
 
-    filteredCategories (): PlainObject[] {
+    filteredCategories (): CategoryInterface[] {
       const categories = this.categories.slice() as CategoryInterface[]
 
       let hasCase = false
@@ -207,17 +207,15 @@ export default defineComponent({
     partsOfCategory (partType: string): Parts.BaseInterface[] {
       return this.parts
         .map((item, index) => ({ ...item, originalIndex: index }))
-        .filter((item: Parts.BaseInterface) => {
-          return partType === ((item['Part Type'] || item.type) + '')
-        })
+        .filter(item => partType === item.type)
     },
 
     getPartPrice (part: PlainObject): number {
       if (!part.isNewPart || part.isPartOfCase) return 0
 
       return part.isNewUsedPart
-        ? Math.floor((part.Price || part.price) * 1.25 / 3)
-        : (part.Price || part.price)
+        ? Math.floor(part.price * 1.25 / 3)
+        : part.price
     },
   },
 })

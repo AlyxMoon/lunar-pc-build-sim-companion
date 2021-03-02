@@ -43,6 +43,16 @@ const specsMap: StringMap = {
 }
 
 class ProgramRequirements extends BaseModel implements ProgramRequirementsModelInterface {
+  id!: string
+
+  name!: string
+  type!: string
+  cpuScore!: number
+  gpuScore!: number
+  gpuVram!: number
+  memory!: number
+  storage!: number
+
   displayFilters (): DisplayFunctionMap {
     return {
       name: (val: string): string => nameMap[val] || val,

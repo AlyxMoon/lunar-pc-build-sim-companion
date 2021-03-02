@@ -72,7 +72,7 @@
 
       <div class="budget-group">
         <span>
-          {{ filters.currency(totalCostNewParts) }}
+          {{ displayFilters.currency(totalCostNewParts) }}
         </span>
 
         /
@@ -80,7 +80,7 @@
         <span
           v-if="!editing"
         >
-          {{ filters.currency(activeBuild.budget) }}
+          {{ displayFilters.currency(activeBuild.budget) }}
         </span>
         <input
           type="text"
@@ -204,7 +204,6 @@ import { BuildModelInterface, PlainObject, Parts } from '@/typings'
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
-import currency from '@/lib/filters/currency'
 import BuildModel from '@/models/Build.model'
 
 import Accordion from '@/components/Accordion.vue'
@@ -226,17 +225,19 @@ export default defineComponent({
   },
   emits: ['update', 'remove', 'addPartToBuild'],
 
-  data: (): PlainObject => ({
-    activeBuild: null,
+  data: (): {
+    activeBuild: BuildModel,
+    editing: boolean,
+    tempFields: PlainObject,
+    confirmRemove: boolean,
+    expanded: boolean,
+  } => ({
+    activeBuild: new BuildModel(),
     editing: false,
     tempFields: {},
 
     confirmRemove: false,
     expanded: false,
-
-    filters: {
-      currency,
-    },
   }),
 
   computed: {
@@ -246,12 +247,12 @@ export default defineComponent({
 
     totalCostNewParts (): number {
       if (!this.activeBuild) return 0
-      return this.activeBuild.parts.reduce((sum: number, item: PlainObject) => {
+      return this.activeBuild.parts.reduce((sum: number, item) => {
         if (!item.isNewPart || item.isPartOfCase) return sum
 
         const partPrice = item.isNewUsedPart
-          ? Math.floor((item.Price || item.price) * 1.25 / 3)
-          : (item.Price || item.price)
+          ? Math.floor(item.price * 1.25 / 3)
+          : item.price
 
         return sum + partPrice
       }, 0)
@@ -307,7 +308,7 @@ export default defineComponent({
       this.$emit('update', this.activeBuild.attributes)
     },
 
-    copyPart (item: PlainObject): void {
+    copyPart (item: Parts.BaseInterface): void {
       this.activeBuild.parts.push({ ...item })
       this.activeBuild.validate()
       this.$emit('update', this.activeBuild.attributes)

@@ -9,6 +9,8 @@ const reservedAttributes = [
 ]
 
 class BaseModel implements ModelInterface {
+  id!: string
+
   _attributes = {} as PlainObject
   _hasErrors = false
   _errors = [] as StringArray

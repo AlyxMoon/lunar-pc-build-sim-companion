@@ -99,19 +99,19 @@
               @selected="selectBuild"
             >
               <template #column-1="{ item }">
-                {{ displayFilters.currency(item.parts.reduce((sum, part) => sum + part.Price, 0)) }}
+                {{ displayFilters.currency(item.parts.reduce((sum, part) => sum + part.price, 0)) }}
               </template>
 
               <template #column-2="{ item }">
-                {{ item.parts.find(part => part['Part Type'].startsWith('GPU'))['Full Part Name'] }}
+                {{ item.parts.find(part => part.type === 'GPU').nameFull }}
               </template>
 
               <template #column-3="{ item }">
-                {{ item.parts.find(part => part['Part Type'] === 'CPU')['Full Part Name'] }}
+                {{ item.parts.find(part => part.type === 'CPU').nameFull }}
               </template>
 
               <template #column-4="{ item }">
-                {{ item.parts.find(part => part['Part Type'] === 'Memory')['Full Part Name'] }}
+                {{ item.parts.find(part => part.type === 'Memory').nameFull }}
               </template>
             </DataTable>
           </template>

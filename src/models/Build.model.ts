@@ -20,9 +20,14 @@ import {
 } from '@/lib/calculations'
 
 class BuildModel extends BaseModel implements BuildModelInterface {
-  budget?: number
-  parts?: Parts.BaseInterface[]
-  estimatedScore?: number
+  id!: string
+
+  name!: string
+  budget!: number
+  jobType!: string
+  objectives!: string[]
+  estimatedScore!: number
+  parts!: Parts.BaseInterface[]
 
   defaults (): PlainObject {
     return {
@@ -64,7 +69,7 @@ class BuildModel extends BaseModel implements BuildModelInterface {
     type: string,
     { limit = true } = {},
   ): Parts.BaseInterface | Parts.BaseInterface[] {
-    const parts = this.parts?.filter(part => part.type === 'GPU') ?? []
+    const parts = this.parts.filter(part => part.type === type) ?? []
 
     if (type === 'GPU') {
       return limit ? parts.slice(0, 2) : parts
