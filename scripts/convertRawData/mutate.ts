@@ -1,9 +1,7 @@
 import { Parts } from '@/typings'
 
-import {
-  calculateCpuStats,
-  calculateGpuStats,
-} from '../../src/lib/calculations'
+import calculateCpuStats from '../../src/lib/calculations/calculateCpuStats'
+import calculateGpuStats from '../../src/lib/calculations/calculateGpuStats'
 
 type ValueTypes = string | number | boolean | string[] | number[]
 type PartType = Record<string, ValueTypes>

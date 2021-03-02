@@ -15,11 +15,11 @@
     "rootDir": "../..",
     "baseUrl": "../..",
     "paths": {
-      "@models/*": ["./src/models/*"],
       "@/typings": ["./src/typings/index.d.ts"],
+      "@/*": ["../../src/*"]
     },
     "typeRoots": [
-      "./src/typings"
+      "../../src/typings"
     ],
     "types": [
       "webpack-env",
@@ -35,6 +35,6 @@
   "include": [
     "./*.ts",
     "./data/*.json",
-    "../../src/models/*.ts"
+    "../../src/**/*.ts"
   ],
 }
