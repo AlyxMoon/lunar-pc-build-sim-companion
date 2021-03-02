@@ -1,4 +1,4 @@
-import { AppState, BuildModelInterface, ImportExportData, PlainObject } from '@/typings/interface'
+import { AppState, BuildModelInterface, ImportExportData, PlainObject } from '@/typings'
 import { ActionContext } from 'vuex'
 
 import BuildModel from '@/models/Build.model'

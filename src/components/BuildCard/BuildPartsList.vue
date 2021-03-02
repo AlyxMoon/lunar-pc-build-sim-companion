@@ -15,8 +15,8 @@
       </dt>
 
       <template
-        v-for="(item, i) in partsOfCategory(category.partTypeNames)"
-        :key="`${i}-${item['Full Part Name']}`"
+        v-for="(item, i) in partsOfCategory(category.partType)"
+        :key="`${i}-${item.nameFull}`"
       >
         <button
           class="pure-button danger"
@@ -39,7 +39,7 @@
           @change="changePartStatus(item.originalIndex, $event.target.value)"
         >
           <option
-            v-if="item['Part Type'] === 'Case Fan'"
+            v-if="item.type === 'Case Fan'"
             value="New - Comes With Case"
           >
             New - Comes With Case
@@ -58,12 +58,12 @@
         <dd>
           {{ displayFilters.currency(getPartPrice(item)) }}
           <span v-if="!item.isNewPart || item.isNewUsedPart || item.isPartOfCase">
-            (New: {{ displayFilters.currency(item.Price) }})
+            (New: {{ displayFilters.currency(item.price) }})
           </span>
         </dd>
 
         <dd class="part-name">
-          {{ item['Full Part Name'] }}
+          {{ item.nameFull }}
         </dd>
       </template>
     </template>
@@ -71,16 +71,16 @@
 </template>
 
 <script lang="ts">
-import { PlainObject } from '@/typings/interface'
-import { defineComponent } from 'vue'
+import { PlainObject, Parts, CategoryInterface } from '@/typings'
+import { defineComponent, PropType } from 'vue'
 import { mapState } from 'vuex'
 
 export default defineComponent({
   name: 'BuildPartsList',
   props: {
     parts: {
-      type: Array,
-      default: (): PlainObject[] => [],
+      type: Array as PropType<Parts.BaseInterface[]>,
+      default: (): Parts.BaseInterface[] => [],
     },
     showCopy: {
       type: Boolean,
@@ -108,47 +108,45 @@ export default defineComponent({
       categories: 'categories',
     }),
 
-    filteredCategories (): PlainObject[] {
-      const categories = this.categories.slice()
+    filteredCategories (): CategoryInterface[] {
+      const categories = this.categories.slice() as CategoryInterface[]
 
-      let hasCase
-      let hasPowerSupply
-      let hasMotherboard
-      let hasCpu
-      let hasCpuCooler
+      let hasCase = false
+      let hasPowerSupply = false
+      let hasMotherboard = false
+      let hasCpu = false
+      let hasCpuCooler = false
 
-      this.parts.forEach(part => {
-        const type = (part as PlainObject)['Part Type'] || ''
-
-        if (type === 'Case') hasCase = true
-        if (type === 'Power Supply') hasPowerSupply = true
-        if (type === 'Motherboard') hasMotherboard = true
-        if (type === 'CPU') hasCpu = true
-        if (type.startsWith('CPU Cooler')) hasCpuCooler = true
+      this.parts.forEach(({ type }) => {
+        hasCase = hasCase || type === 'Case'
+        hasPowerSupply = hasPowerSupply || type === 'Power Supply'
+        hasMotherboard = hasMotherboard || type === 'Motherboard'
+        hasCpu = hasCpu || type === 'CPU'
+        hasCpuCooler = hasCpuCooler || type === 'CPU Cooler'
       })
 
       if (hasCase) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'cases')
+        const index = categories.findIndex(({ name }) => name === 'cases')
         categories.splice(index, 1)
       }
 
       if (hasPowerSupply) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'powersupplies')
+        const index = categories.findIndex(({ name }) => name === 'powersupplies')
         categories.splice(index, 1)
       }
 
       if (hasMotherboard) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'motherboards')
+        const index = categories.findIndex(({ name }) => name === 'motherboards')
         categories.splice(index, 1)
       }
 
       if (hasCpu) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'cpus')
+        const index = categories.findIndex(({ name }) => name === 'cpus')
         categories.splice(index, 1)
       }
 
       if (hasCpuCooler) {
-        const index = categories.findIndex(({ name }: PlainObject) => name === 'cpucoolers')
+        const index = categories.findIndex(({ name }) => name === 'cpucoolers')
         categories.splice(index, 1)
       }
 
@@ -206,21 +204,18 @@ export default defineComponent({
       }
     },
 
-    partsOfCategory (partTypeNames: string[]): Parts.BaseInterface[] {
-      return (this.parts as Parts.BaseInterface[])
+    partsOfCategory (partType: string): Parts.BaseInterface[] {
+      return this.parts
         .map((item, index) => ({ ...item, originalIndex: index }))
-        .filter(item => {
-          const type: string = (item as Parts.BaseInterface)['Part Type'] + ''
-          return partTypeNames.includes(type)
-        })
+        .filter(item => partType === item.type)
     },
 
     getPartPrice (part: PlainObject): number {
       if (!part.isNewPart || part.isPartOfCase) return 0
 
       return part.isNewUsedPart
-        ? Math.floor(part.Price * 1.25 / 3)
-        : part.Price
+        ? Math.floor(part.price * 1.25 / 3)
+        : part.price
     },
   },
 })

@@ -1,16 +1,14 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
 
 const caseFitsPowersupply = (build: BuildModelInterface): ValidationFunctionReturn => {
-  const parts = build.parts?.filter((part: PlainObject) => part.isBeingKept) || []
+  const parts = build.parts?.filter(part => part.isBeingKept) || []
 
-  const computerCase = parts.find((part: any) => part['Part Type'] === 'Case')
-
-  const powerSupply = parts.find((part: any) => part['Part Type'] === 'Power Supply')
-
-  if (!computerCase || !powerSupply) return true
+  const computerCase = parts.find(part => part.type === 'Case')
+  const powerSupply = parts.find(part => part.type === 'Power Supply')
 
   return (
-    computerCase[`PSU ${powerSupply.Size}`] ||
+    (!computerCase || !powerSupply) ||
+    computerCase.supportedPowersupplies.includes(powerSupply.sizeType) ||
     'The power supply will not fit in the case.'
   )
 }

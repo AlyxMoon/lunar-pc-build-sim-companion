@@ -1,7 +1,4 @@
-
-export * from './parts.d.ts'
-
-export as namespace Types
+export * as Parts from './parts'
 
 export interface PlainObject {
   [key: string]: any,
@@ -37,11 +34,26 @@ export interface ImportExportData {
   playerLevel?: number,
 }
 
+export interface CategoryInterface {
+  name: string,
+  displayName: string,
+  partType: string,
+  icon: string,
+  iconBackColor: string,
+  headers: {
+    name: string,
+    displayName?: string,
+    filter?: string,
+  }[],
+}
+
 export interface ModelInterface {
   [key: string]: any,
   _attributes: PlainObject,
+  attributes: PlainObject,
   _hasErrors: boolean,
   _errors: StringArray,
+  id: string,
 
   defaults: () => PlainObject,
   fieldAliases: () => StringMap,
@@ -54,19 +66,25 @@ export interface ModelInterface {
 }
 
 export interface BuildModelInterface extends ModelInterface {
-  id?: string,
-  name?: string,
-  jobType?: string,
-  budget?: number,
-  estimatedScore?: estimatedScore,
-  objectives?: string[],
-  parts?: PlainObject[],
+  name: string,
+  jobType: string,
+  budget: number,
+  estimatedScore: estimatedScore,
+  objectives: string[],
+  parts: Parts.BaseInterface[],
+}
+
+export interface PartModelInterface extends ModelInterface, Parts.BaseInterface {
+  attributes: Parts.BaseInterface,
+  _attributes: Parts.BaseInterface,
 }
 
 export interface ProgramRequirementsModelInterface extends ModelInterface {
-  cpuScore?: number,
-  gpuScore?: number,
-  gpuVram?: number,
-  memory?: number,
-  storage?: number,
+  name: string,
+  type: string,
+  cpuScore: number,
+  gpuScore: number,
+  gpuVram: number,
+  memory: number,
+  storage: number,
 }

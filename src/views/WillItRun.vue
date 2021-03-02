@@ -19,12 +19,12 @@
 </template>
 
 <script lang="ts">
-import { ProgramRequirementsModelInterface } from '@/typings/interface'
+import { ProgramRequirementsModelInterface } from '@/typings'
 
 import { defineComponent } from 'vue'
 import { mapActions, mapState } from 'vuex'
 
-import generateBuild from '@/lib/util/generateBuildMeetsProgramRequirements'
+import { generateBuildMeetsProgramRequirements } from '@/lib/calculations'
 import DataTable from '@/components/DataTable/index.vue'
 
 export default defineComponent({
@@ -58,7 +58,7 @@ export default defineComponent({
     ...mapActions(['createBuild']),
 
     generateBuild (program: ProgramRequirementsModelInterface): void {
-      const build = generateBuild(program, this.parts, {
+      const build = generateBuildMeetsProgramRequirements(program, this.parts, {
         playerLevel: this.playerLevel,
       })
 

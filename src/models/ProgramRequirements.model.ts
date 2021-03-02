@@ -1,4 +1,4 @@
-import { DisplayFunctionMap, MutationFunctionMap, ProgramRequirementsModelInterface, StringArray, StringMap } from '@/typings/interface'
+import { DisplayFunctionMap, ProgramRequirementsModelInterface, StringMap } from '@/typings'
 import BaseModel from './_BaseModel'
 
 /* eslint-disable @typescript-eslint/camelcase */
@@ -43,46 +43,15 @@ const specsMap: StringMap = {
 }
 
 class ProgramRequirements extends BaseModel implements ProgramRequirementsModelInterface {
-  fieldAliases (): StringMap {
-    return {
-      Name: 'name',
-      Level: 'level',
-      'Is Game': 'isGame',
-      Type: 'type',
-      'Storage (GB)': 'storage',
-      'RAM (GB)': 'memory',
-      'CPU score': 'cpuScore',
-      'GPU score': 'gpuScore',
-      VRAM: 'gpuVram',
-      Benchmark: 'benchmark',
-    }
-  }
+  id!: string
 
-  keepAttributes (): StringArray {
-    return [
-      'name',
-      'level',
-      'type',
-      'storage',
-      'memory',
-      'cpuScore',
-      'gpuScore',
-      'gpuVram',
-      'benchmark',
-    ]
-  }
-
-  mutations (): MutationFunctionMap {
-    return {
-      level: Number,
-      storage: Number,
-      memory: Number,
-      cpuScore: Number,
-      gpuScore: Number,
-      gpuVram: Number,
-      benchmark: Number,
-    }
-  }
+  name!: string
+  type!: string
+  cpuScore!: number
+  gpuScore!: number
+  gpuVram!: number
+  memory!: number
+  storage!: number
 
   displayFilters (): DisplayFunctionMap {
     return {

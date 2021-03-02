@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { BuildModelInterface, PlainObject } from '@/typings/interface'
+import { PlainObject, BuildModelInterface, Parts } from '@/typings'
 
 import { defineComponent } from 'vue'
 import { mapActions, mapState } from 'vuex'

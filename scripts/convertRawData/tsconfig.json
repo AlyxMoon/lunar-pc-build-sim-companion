@@ -16,10 +16,11 @@
     "baseUrl": "../..",
     "paths": {
       "@models/*": ["./src/models/*"],
-      "@/typings/interface": [
-        "./src/typings/interface/index.d.ts"
-      ]
+      "@/typings": ["./src/typings/index.d.ts"],
     },
+    "typeRoots": [
+      "./src/typings"
+    ],
     "types": [
       "webpack-env",
       "jest"

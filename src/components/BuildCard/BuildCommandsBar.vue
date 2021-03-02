@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { BuildModelInterface } from '@/typings/interface'
+import { BuildModelInterface, Parts } from '@/typings'
 import { defineComponent } from 'vue'
 
 import BuildModel from '@/models/Build.model'

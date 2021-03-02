@@ -1,15 +1,14 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
 
 const caseFitsCpuCooler = (attributes: BuildModelInterface): ValidationFunctionReturn => {
-  const parts: PlainObject[] = attributes.parts?.filter((part: PlainObject) => part.isBeingKept) || []
+  const parts = attributes.parts?.filter(part => part.isBeingKept) || []
 
-  const computerCase = parts.find((part) => part['Part Type'] === 'Case')
-  const cooler = parts.find(part => part['Part Type'].startsWith('CPU Cooler'))
-
-  if (!computerCase || !cooler) return true
+  const computerCase = parts.find(part => part.type === 'Case')
+  const cooler = parts.find(part => part.type === 'CPU Cooler')
 
   return (
-    Number(computerCase['Max CPU Fan Height']) >= cooler.Size ||
+    (!computerCase || !cooler) ||
+    computerCase.maxLengthCpuFan >= cooler.size ||
     'The CPU Cooler does not fit in the case.'
   )
 }

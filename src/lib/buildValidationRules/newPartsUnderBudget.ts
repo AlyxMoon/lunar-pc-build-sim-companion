@@ -1,4 +1,4 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
 
 const newPartsUnderBudget = (build: BuildModelInterface): ValidationFunctionReturn => {
   if (!build.budget) return true
@@ -7,8 +7,8 @@ const newPartsUnderBudget = (build: BuildModelInterface): ValidationFunctionRetu
     if (!part.isNewPart || part.isPartOfCase) return sum
 
     const partPrice = part.isNewUsedPart
-      ? Math.floor(part.Price * 1.25 / 3)
-      : part.Price
+      ? Math.floor((part.Price || part.price) * 1.25 / 3)
+      : (part.Price || part.price)
 
     return sum + partPrice
   }, 0) || 0

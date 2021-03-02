@@ -1,5 +1,5 @@
 import BuildModel from '@/models/Build.model'
-import { PlainObject } from '@/typings/interface'
+import { PlainObject } from '@/typings'
 
 export const UPDATE_PLAYER_LEVEL = (state: PlainObject, level: number): void => {
   state.playerLevel = level

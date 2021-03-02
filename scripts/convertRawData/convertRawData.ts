@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import { PlainObject } from '@/typings/interface'
-import ModelProgramRequirements from '../../src/models/ProgramRequirements.model'
-import mutate from './mutate'
+import { PlainObject } from '@/typings'
+import { mutateField, mutatePart } from './mutate'
 
 const {
   existsSync,
@@ -18,17 +17,17 @@ declare const __dirname: string
 const partCategories = [
   'casefans',
   'cases',
-  'cpu-coolers',
+  'cpucoolers',
   'cpus',
   'gpus',
   'memory',
   'motherboards',
-  'power-supplies',
+  'powersupplies',
   'storage',
 ]
 
-const otherFiles = [
-  ['program-requirements', ModelProgramRequirements],
+const otherCategories = [
+  'programrequirements',
 ]
 
 const splitStringByCommas = (string = ''): string[] => {
@@ -51,13 +50,16 @@ const convertRawData = (raw: string, category: string): PlainObject => {
 
     for (const col in row) {
       if (category) {
-        formatted[headers[col]] = mutate(row[col], headers[col], category)
+        const newFieldAndVal = mutateField(row[col], headers[col], category)
+        if (!newFieldAndVal) continue
+
+        formatted[newFieldAndVal[0]] = newFieldAndVal[1]
       } else {
         formatted[headers[col]] = row[col]
       }
     }
 
-    return formatted
+    return category in mutatePart ? mutatePart[category](formatted) : formatted
   })
 }
 
@@ -82,19 +84,14 @@ const main = async (): Promise<void> => {
     await promisify(writeFile)(formattedFilePath, formattedData, 'utf-8')
   }
 
-  for (const [file, Model] of otherFiles) {
-    const rawFilePath = join(__dirname, `data/${file}.csv`)
-    const formattedFilePath = join(finalDirectory, '..', file + '.json')
+  for (const category of otherCategories) {
+    const rawFilePath = join(__dirname, `data/${category}.csv`)
+    const formattedFilePath = join(finalDirectory, '..', category + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
-    const rows = convertRawData(rawData, '')
+    const formattedData = JSON.stringify(convertRawData(rawData, category))
 
-    const data = rows.map(row => {
-      const model = new (Model as any)(row)
-      return model.attributes
-    })
-
-    await promisify(writeFile)(formattedFilePath, JSON.stringify(data), 'utf-8')
+    await promisify(writeFile)(formattedFilePath, formattedData, 'utf-8')
   }
 }
 

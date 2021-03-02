@@ -1,16 +1,15 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionReturn } from '@/typings/interface'
+import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
 
 const caseFitsGpu = (attributes: BuildModelInterface): ValidationFunctionReturn => {
-  const parts: PlainObject[] = attributes.parts?.filter((part: PlainObject) => part.isBeingKept) || []
+  const parts = attributes.parts?.filter(part => part.isBeingKept) || []
 
-  const computerCase = parts.find((part) => part['Part Type'] === 'Case')
-  const gpus = parts.filter((part) => ['GPU', 'GPU - Water'].includes(part['Part Type']))
-
-  if (!computerCase || !gpus.length) return true
+  const computerCase = parts.find(part => part.type === 'Case')
+  const gpus = parts.filter(part => part.type === 'GPU')
 
   return (
-    gpus.every((part: PlainObject) => {
-      return Number(computerCase['Max GPU length']) >= part.Length
+    (!computerCase || !gpus.length) ||
+    gpus.every(part => {
+      return computerCase.maxLengthGpu >= part.length
     }) || 'The GPU does not fit in the case.'
   )
 }

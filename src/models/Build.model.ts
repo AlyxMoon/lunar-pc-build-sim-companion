@@ -1,4 +1,4 @@
-import { BuildModelInterface, PlainObject, ValidationFunctionArray } from '@/typings/interface'
+import { BuildModelInterface, PlainObject, ValidationFunctionArray, Parts } from '@/typings'
 import BaseModel from './_BaseModel'
 import {
   caseFitsCpuCooler,
@@ -14,8 +14,20 @@ import {
   psuProvidesEnoughWattage,
 } from '@/lib/buildValidationRules'
 
+import {
+  calculateCpuStats,
+  calculateGpuStats,
+} from '@/lib/calculations'
+
 class BuildModel extends BaseModel implements BuildModelInterface {
-  budget?: number
+  id!: string
+
+  name!: string
+  budget!: number
+  jobType!: string
+  objectives!: string[]
+  estimatedScore!: number
+  parts!: Parts.BaseInterface[]
 
   defaults (): PlainObject {
     return {
@@ -29,81 +41,41 @@ class BuildModel extends BaseModel implements BuildModelInterface {
   }
 
   runBenchmark (): number {
-    const cpu = this.findPartOfType('CPU')
-
-    const gpus = (this.findPartOfType('GPU') || []).sort((a: any, b: any) => {
-      return a['Base Core Freq'] - b['Base Core Freq']
-    })
-
-    const memory = (this.findPartOfType('Memory') || [])
+    const cpu = this.findPartOfType('CPU') as Parts.CpuInterface
+    const gpus = this.findPartOfType('GPU') as Parts.GpuInterface[]
+    const memory = this.findPartOfType('Memory') as Parts.MemoryInterface[]
 
     if (!cpu || !gpus.length || !memory.length) {
       return (this.attributes.estimatedScore = 0)
     }
 
-    const memoryChannels = Math.min(cpu['Max Memory Channels'], memory.length)
-    const memorySpeed = memory[0].Frequency
+    gpus.sort((a, b) => a.baseCoreFreq - b.baseCoreFreq)
 
-    const cpuScore = Math.floor((
-      (cpu.CoreClockMultiplier * cpu.Frequency) +
-      (cpu.MemChannelsMultiplier * memoryChannels) +
-      (cpu.MemClockMultiplier * memorySpeed) +
-      cpu.FinalAdjustment
-    ) * 298)
+    const memoryChannels = Math.min(cpu.maxMemChannels, memory.length)
+    const memorySpeed = memory[0].frequency
 
-    const gpuBaseCoreFreq = gpus[0]['Base Core Freq']
-    const gpuBaseMemFreq = gpus[0]['Base Mem Freq']
-    const calcType = gpus.length === 1 ? 'Single' : 'Dual'
-    const gpu = gpus[0]
+    const { score: cpuScore } = calculateCpuStats(cpu, memorySpeed, memoryChannels)
+    const { scoreSingle, scoreDual } = calculateGpuStats(gpus[0])
 
-    const gpuCoreClockMult1 = gpu[`GT1 ${calcType} Core Clock Multiplier`]
-    const gpuCoreClockMult2 = gpu[`GT2 ${calcType} Core Clock Multiplier`]
-
-    const gpuMemClockMult1 = gpu[`GT1 ${calcType} Mem Clock Multiplier`]
-    const gpuMemClockMult2 = gpu[`GT2 ${calcType} Mem Clock Multiplier`]
-
-    const gpuAdjust1 = gpu[`GT1 ${calcType} Benchmark Adjustment`]
-    const gpuAdjust2 = gpu[`GT2 ${calcType} Benchmark Adjustment`]
-
-    const gpuScore = Math.floor(164 / (
-      0.5 / (
-        (gpuCoreClockMult1 * gpuBaseCoreFreq) +
-        (gpuMemClockMult1 * gpuBaseMemFreq) +
-        gpuAdjust1
-      ) +
-      0.5 / (
-        (gpuCoreClockMult2 * gpuBaseCoreFreq) +
-        (gpuMemClockMult2 * gpuBaseMemFreq) +
-        gpuAdjust2
-      )
-    ))
-
-    this.attributes.estimatedScore = Math.floor(1 / (
-      (0.85 / gpuScore) +
+    this.estimatedScore = Math.floor(1 / (
+      (0.85 / (gpus.length === 1 ? scoreSingle : scoreDual)) +
       (0.15 / cpuScore)
     ))
 
-    return this.attributes.estimatedScore
+    return this.estimatedScore
   }
 
   findPartOfType (
     type: string,
     { limit = true } = {},
-  ): PlainObject {
-    const parts = this.attributes.parts.filter((part: PlainObject) => {
-      const partType = part['Part Type']
-      if (type === 'GPU') return ['GPU', 'GPU - Water'].includes(partType)
-      return type === partType
-    })
+  ): Parts.BaseInterface | Parts.BaseInterface[] {
+    const parts = this.parts.filter(part => part.type === type) ?? []
 
     if (type === 'GPU') {
       return limit ? parts.slice(0, 2) : parts
     }
 
-    if (
-      ['Case Fan', 'Memory'].includes(type) ||
-      type.startsWith('Storage')
-    ) return parts
+    if (['Case Fan', 'Memory', 'Storage'].includes(type)) return parts
 
     return parts[0]
   }

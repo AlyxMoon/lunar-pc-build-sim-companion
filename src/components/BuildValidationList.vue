@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { PlainObject } from '@/typings/interface'
+import { PlainObject } from '@/typings'
 import Accordion from '@/components/Accordion.vue'
 
 export default {

@@ -1,39 +1,23 @@
-import { DisplayFunctionMap, ModelInterface, MutationFunctionMap, PlainObject, StringArray, StringMap, ValidationFunctionArray } from '@/typings'
+import { CollectionInterface, MutationFunctionMap, PlainObject, StringArray, StringMap, ValidationFunctionArray } from '@/typings'
 
 import { reactive } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
+
+import BaseModel from './_BaseModel'
 
 const reservedAttributes = [
   '_attributes',
   'attributes',
 ]
 
-class BaseModel implements ModelInterface {
-  id!: string
-
-  _attributes = {} as PlainObject
-  _hasErrors = false
-  _errors = [] as StringArray
-
-  get attributes (): PlainObject {
-    return this._attributes
-  }
-
-  get hasErrors (): boolean {
-    return this._hasErrors
-  }
-
-  get errors (): StringArray {
-    return this._errors.slice()
-  }
+class BaseCollection implements CollectionInterface {
+  models!: BaseModel[]
 
   constructor (
-    data: PlainObject | BaseModel = {},
+    models: BaseModel[] = [],
     { ignoreId = false }: { ignoreId?: boolean } = {},
   ) {
-    const activeAttributes = data instanceof BaseModel
-      ? this.deepCopy(data.attributes)
-      : this.deepCopy(data)
+    const activeAttributes = this.deepCopy(models)
 
     if (ignoreId) delete activeAttributes.id
 
