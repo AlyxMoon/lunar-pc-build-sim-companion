@@ -130,7 +130,7 @@ export default defineComponent({
     },
     searchField: {
       type: [String, Array],
-      default: 'Full Part Name',
+      default: 'nameFull',
     },
   },
   emits: ['selected'],
@@ -200,7 +200,7 @@ export default defineComponent({
           for (const field of fieldsToSearch) {
             if (anyFieldHasSearch) break
 
-            const valueRaw = item[field].toLowerCase()
+            const valueRaw = (item[field] || '').toLowerCase()
             const valueDisplayed = item.get
               ? item.get(field, true).toLowerCase()
               : ''
