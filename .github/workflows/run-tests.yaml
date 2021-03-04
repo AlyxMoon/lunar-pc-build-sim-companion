@@ -1,0 +1,27 @@
+name: Run Unit Tests and Coverage Report
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+      - name: Install and Test
+        run: |
+          npm install
+          npm run test:unit
+      - name: Add coverage report to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./tests/coverage/lcov.info

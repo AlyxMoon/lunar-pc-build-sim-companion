@@ -1,5 +1,7 @@
 # Lunar's PC Building Simulator Companion
 
+[![Coverage Status](https://coveralls.io/repos/github/AlyxMoon/lunar-pc-build-sim-companion/badge.svg?branch=main)](https://coveralls.io/github/AlyxMoon/lunar-pc-build-sim-companion?branch=main)
+
 This is a web-hosted companion app for PC Building Simulator. Intended to help look up parts, keep track of client projects, and plan out builds. It's a hobby project right now so I'm not spending too much time on documentation. If you have any questions or want to help you are welcome to reach out.
 
 
