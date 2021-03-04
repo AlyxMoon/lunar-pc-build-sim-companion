@@ -32,6 +32,17 @@ export default {
 }
 </script>
 
+<style lang="scss">
+main.mode-light .accordion {
+  --accordion-border-color: #111111;
+}
+
+main.mode-dark .accordion {
+  --accordion-border-color: #EEEEEE;
+}
+
+</style>
+
 <style lang="scss" scoped>
 .accordion {
   margin: 10px 0;
@@ -41,7 +52,7 @@ export default {
 
   &-header {
     padding: 10px 20px;
-    border: 1px solid black;
+    border: 1px solid var(--accordion-border-color);
 
     display: flex;
     align-items: center;

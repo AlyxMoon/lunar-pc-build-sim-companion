@@ -11,6 +11,12 @@ $colorInfo: #00BCFF;
 $colorError: #DC0000;
 $colorDanger: $colorError;
 
+$backgroundColorLightMode: #EEEEEE;
+$backgroundColorDarkMode: #222222;
+
+$textColorLightMode: #111111;
+$textColorDarkMode: #EEEEEE;
+
 $breakpoints: (
   "sm": 35em,
   "md": 48em,

@@ -3,7 +3,7 @@
     <AppNavbar />
   </header>
 
-  <main>
+  <main :class="mainClasses">
     <section>
       <router-view />
     </section>
@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { mapState } from 'vuex'
 
 import AppFooter from '@/components/layout/Footer.vue'
 import AppNavbar from '@/components/layout/Navbar.vue'
@@ -23,6 +24,18 @@ export default defineComponent({
   components: {
     AppFooter,
     AppNavbar,
+  },
+
+  computed: {
+    ...mapState({
+      colorMode: 'colorMode',
+    }),
+
+    mainClasses (): string[] {
+      return [
+        `mode-${this.colorMode}`,
+      ]
+    },
   },
 
   created () {

@@ -18,6 +18,7 @@ export default createStore({
       paths: [
         'builds',
         'playerLevel',
+        'colorMode',
       ],
       rehydrated: store => {
         const builds: BuildModel[] = store.state.builds || []

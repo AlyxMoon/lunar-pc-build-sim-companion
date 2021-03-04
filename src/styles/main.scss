@@ -2,6 +2,24 @@
 @import './inputs.scss';
 @import './typography.scss';
 
+main {
+  background-color: var(--main-background-color);
+  color: var(--main-text-color);
+
+  transition-duration: 0.3s;
+  transition-property: background-color, color;
+
+  &.mode-light {
+    --main-background-color: #{$backgroundColorLightMode};
+    --main-text-color: #{$textColorLightMode};
+  }
+
+  &.mode-dark {
+    --main-background-color: #{$backgroundColorDarkMode};
+    --main-text-color: #{$textColorDarkMode};
+  }
+}
+
 .modal-wrapper {
   position: fixed;
   top: 0;

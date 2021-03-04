@@ -175,6 +175,8 @@ const state = {
   },
   builds: [],
   playerLevel: 1,
+
+  colorMode: 'light',
 }
 
 export default state

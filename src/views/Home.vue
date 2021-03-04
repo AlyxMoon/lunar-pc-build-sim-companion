@@ -40,6 +40,17 @@
     <p class="help">
       Use this as an app-wide filter for parts. Any parts above this level will not be displayed in the relevant tables.
     </p>
+
+    <label for="color-mode">
+      Color Mode
+      <select
+        v-model="colorMode"
+        name="color-mode"
+      >
+        <option value="light">Light Mode</option>
+        <option value="dark">Dark Mode</option>
+      </select>
+    </label>
   </div>
 
   <BuildValidationList />
@@ -70,6 +81,16 @@ export default defineComponent({
 
       set (value: number): void {
         this.$store.commit('UPDATE_PLAYER_LEVEL', value)
+      },
+    },
+
+    colorMode: {
+      get (): string {
+        return this.$store.state.colorMode || ''
+      },
+
+      set (value: string): void {
+        this.$store.commit('UPDATE_COLOR_MODE', value)
       },
     },
   },

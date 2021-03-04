@@ -5,6 +5,10 @@ export const UPDATE_PLAYER_LEVEL = (state: PlainObject, level: number): void => 
   state.playerLevel = level
 }
 
+export const UPDATE_COLOR_MODE = (state: PlainObject, mode: string): void => {
+  state.colorMode = mode
+}
+
 export const CREATE_BUILD = (state: PlainObject, build: BuildModel): void => {
   state.builds.push(build)
 }
