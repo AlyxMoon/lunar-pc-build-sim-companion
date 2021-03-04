@@ -1,10 +1,10 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
+import { BuildModelInterface, Parts, ValidationFunctionReturn } from '@/typings'
 
-const motherboardFitsCpu = (attributes: BuildModelInterface): ValidationFunctionReturn => {
-  const parts = attributes.parts?.filter(part => part.isBeingKept) || []
+const motherboardFitsCpu = (build: BuildModelInterface): ValidationFunctionReturn => {
+  const parts = build.parts.filter(part => part.isBeingKept)
 
-  const cpu = parts.find(part => part.type === 'CPU')
-  const cooler = parts.find(part => part.type === 'CPU Cooler')
+  const cpu = parts.find(part => part.type === 'CPU') as Parts.CpuInterface | undefined
+  const cooler = parts.find(part => part.type === 'CPU Cooler') as Parts.CpuCoolerInterface | undefined
 
   return (
     (!cpu || !cooler) ||

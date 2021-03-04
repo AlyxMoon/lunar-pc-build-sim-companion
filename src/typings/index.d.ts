@@ -1,3 +1,5 @@
+import * as Parts from './parts'
+
 export * as Parts from './parts'
 
 export interface PlainObject {
