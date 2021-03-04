@@ -1,10 +1,15 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
+import { BuildModelInterface, Parts, ValidationFunctionReturn } from '@/typings'
 
-const psuProvidesEnoughWattage = (attributes: BuildModelInterface): ValidationFunctionReturn => {
-  const parts = attributes.parts?.filter(part => part.isBeingKept) || []
+const psuProvidesEnoughWattage = (build: BuildModelInterface): ValidationFunctionReturn => {
+  const parts = build.parts.filter(part => part.isBeingKept)
 
-  const powerSupply = parts.find(part => part.type === 'Power Supply')
-  const poweredParts = parts.filter(part => 'wattage' in part && part.type !== 'Power Supply')
+  const powerSupply = parts.find(part => {
+    return part.type === 'Power Supply'
+  }) as Parts.PowerSupplyInterface | undefined
+
+  const poweredParts = parts.filter(part => {
+    return 'wattage' in part && part.type !== 'Power Supply'
+  }) as (Parts.CpuInterface | Parts.GpuInterface)[]
 
   if (!powerSupply || !poweredParts.length) return true
 

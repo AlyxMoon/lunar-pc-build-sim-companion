@@ -1,10 +1,15 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
+import { BuildModelInterface, Parts, ValidationFunctionReturn } from '@/typings'
 
 const motherboardFitsCpu = (build: BuildModelInterface): ValidationFunctionReturn => {
-  const parts = build.parts?.filter(part => part.isBeingKept) || []
+  const parts = build.parts.filter(part => part.isBeingKept)
 
-  const cpu = parts.find(part => part.type === 'CPU')
-  const motherboard = parts.find(part => part.type === 'Motherboard')
+  const cpu = parts.find(part => {
+    return part.type === 'CPU'
+  }) as Parts.CpuInterface | undefined
+
+  const motherboard = parts.find(part => {
+    return part.type === 'Motherboard'
+  }) as Parts.MotherboardInterface | undefined
 
   if (!cpu || !motherboard) return true
 
