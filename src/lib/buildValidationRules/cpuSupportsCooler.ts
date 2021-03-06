@@ -1,6 +1,6 @@
 import { BuildModelInterface, Parts, ValidationFunctionReturn } from '@/typings'
 
-const motherboardFitsCpu = (build: BuildModelInterface): ValidationFunctionReturn => {
+const cpuSupportsCooler = (build: BuildModelInterface): ValidationFunctionReturn => {
   const parts = build.parts.filter(part => part.isBeingKept)
 
   const cpu = parts.find(part => part.type === 'CPU') as Parts.CpuInterface | undefined
@@ -13,4 +13,4 @@ const motherboardFitsCpu = (build: BuildModelInterface): ValidationFunctionRetur
   )
 }
 
-export default motherboardFitsCpu
+export default cpuSupportsCooler

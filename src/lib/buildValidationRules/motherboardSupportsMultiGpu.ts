@@ -1,11 +1,14 @@
 
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
+import { BuildModelInterface, Parts, ValidationFunctionReturn } from '@/typings'
 
-const motherboardSupportsMultiGpu = (attributes: BuildModelInterface): ValidationFunctionReturn => {
-  const parts = attributes.parts?.filter(part => part.isBeingKept) || []
+const motherboardSupportsMultiGpu = (build: BuildModelInterface): ValidationFunctionReturn => {
+  const parts = build.parts.filter(part => part.isBeingKept)
 
-  const motherboard = parts.find(part => part.type === 'Motherboard')
-  const gpus = parts.filter(part => part.type === 'GPU')
+  const motherboard = parts.find(part => {
+    return part.type === 'Motherboard'
+  }) as Parts.MotherboardInterface | undefined
+
+  const gpus = parts.filter(part => part.type === 'GPU') as Parts.GpuInterface[]
 
   if (!motherboard || gpus.length < 2) return true
 

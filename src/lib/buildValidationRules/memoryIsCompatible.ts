@@ -1,9 +1,10 @@
-import { BuildModelInterface, ValidationFunctionReturn } from '@/typings'
+import { BuildModelInterface, Parts, ValidationFunctionReturn } from '@/typings'
 
-const memoryIsCompatible = (attributes: BuildModelInterface): ValidationFunctionReturn => {
-  const parts = attributes.parts?.filter(part => part.isBeingKept) || []
+const memoryIsCompatible = (build: BuildModelInterface): ValidationFunctionReturn => {
+  const memory = build.parts.filter(part => {
+    return part.isBeingKept && part.type === 'Memory'
+  }) as Parts.MemoryInterface[]
 
-  const memory = parts.filter(part => part.type === 'Memory')
   if (!memory.length) return true
 
   return (
