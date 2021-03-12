@@ -12,8 +12,11 @@ const generateBuildMeets3dmarkScore = async (
     limit: number,
     usePlayerLevel: boolean,
     useBudget: boolean,
+    slowDownProcess: boolean,
   },
 ): Promise<BuildModelInterface[]> => {
+  if (args.slowDownProcess) await new Promise(resolve => setTimeout(resolve, 50))
+
   const gpus: Parts.GpuInterface[] = availablePartsByCategory.gpus.filter((part: Parts.GpuInterface) => {
     const meetsLevel = !args.usePlayerLevel || part.level <= args.playerLevel
     const meetsBudget = !args.useBudget || part.price <= args.budget
@@ -47,6 +50,8 @@ const generateBuildMeets3dmarkScore = async (
 
   const validCombinations: BuildModelInterface[] = []
 
+  let iterations = 0
+
   for (const gpu of gpus) {
     for (const cpu of cpus) {
       for (const mem of memory) {
@@ -66,6 +71,11 @@ const generateBuildMeets3dmarkScore = async (
           validCombinations.push(new BuildModel({
             parts: [gpu, cpu, mem],
           }))
+        }
+
+        if (args.slowDownProcess && ++iterations > 500) {
+          iterations = 0
+          await new Promise(resolve => setTimeout(resolve, 50))
         }
 
         if (validCombinations.length >= args.limit) break

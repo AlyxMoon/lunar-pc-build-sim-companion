@@ -123,7 +123,7 @@
 
 <script lang="ts">
 import { BuildModelInterface } from '@/typings'
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { mapState } from 'vuex'
 
 import BuildModel from '@/models/Build.model'
@@ -173,10 +173,7 @@ export default defineComponent({
       if (!this.checkInputsValid()) return
       this.calculating = true
 
-      // Calculation was a bit much and the button wasn't updating correctly
-      // for this.calculating. This brief pause gives the view a chance to update.
-      // probably a better way. That's always the way of it, eh?
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await nextTick()
 
       const newBuilds = await generateBuildMeets3dmarkScore(
         this.parts,
@@ -187,6 +184,7 @@ export default defineComponent({
           limit: this.buildGenerationInfo.limit || 1000,
           useBudget: this.buildGenerationInfo.useBudget,
           usePlayerLevel: this.buildGenerationInfo.usePlayerLevel,
+          slowDownProcess: true,
         },
       )
 
