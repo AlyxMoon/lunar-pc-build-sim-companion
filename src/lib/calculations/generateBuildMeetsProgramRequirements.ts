@@ -19,7 +19,7 @@ const generateBuildMeetsProgramRequirements = (
   }
 
   const cpu: Parts.CpuInterface = availablePartsByCategory.cpus.reduce((
-    best: Parts.CpuInterface | null,
+    best: Parts.CpuInterface,
     part: Parts.CpuInterface,
   ) => {
     return (

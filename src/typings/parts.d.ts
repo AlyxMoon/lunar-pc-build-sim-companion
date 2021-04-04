@@ -4,6 +4,7 @@ export interface BaseInterface {
   name: string,
   nameFull: string,
   type: string,
+  moddedPartHEM: boolean,
   manufacturer: string,
   level: number,
   levelPercent: number,

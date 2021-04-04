@@ -52,7 +52,9 @@ Case Fan,be quiet!,Shadow Wings 2 140mm,,Y,19,6,27,70,1.1,,,49.8,140,0,0.58,,Pre
 Case Fan,be quiet!,Silent Wings 3 120mm,,Y,7,2,27,1,1.1,,,50.5,120,0,1.79,,Prefabs/CoolingSystems/AirCoolers/Bequiet/FAN_bequiet_SILENTWINGS_120mm,be quiet! Silent Wings 3 120mm
 Case Fan,be quiet!,Silent Wings 3 140mm,,Y,8,3,27,1,1.1,,,59.5,140,0,1.08,,Prefabs/CoolingSystems/AirCoolers/Bequiet/FAN_bequiet_SILENTWINGS_140mm,be quiet! Silent Wings 3 140mm
 Case Fan,Cooler Master,MasterCase H500P 200mm RGB,,,10,3,3,1,1.0,,RGB,90,200,0,0.88,,Prefabs/CoolingSystems/AirCoolers/Cosmos/BuiltIn_200,Cooler Master MasterCase H500P 200mm RGB
+Case Fan,CORSAIR,HD120 PRO RGB LED,Y,Y,110,10,21,40,,,RGB,105,120,0,2.5,,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_HD_120mm,CORSAIR HD120 PRO RGB LED
 Case Fan,CORSAIR,HD120 RGB LED,,Y,30,10,18,40,1.0,,RGB,54.4,120,0,2.25,,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_HD_120mm,CORSAIR HD120 RGB LED
+Case Fan,CORSAIR,HD140 PRO RGB LED,Y,Y,140,11,22,40,,,RGB,145,140,0,2.3,,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_HD_140mm,CORSAIR HD140 PRO RGB LED
 Case Fan,CORSAIR,HD140 RGB LED,,Y,33,11,18,40,1.0,,RGB,74,140,0,1.85,,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_HD_140mm,CORSAIR HD140 RGB LED
 Case Fan,CORSAIR,iCUE QL120 RGB 120mm PWM (Black),,Y,30,10,30,1,1.10,PC,RGB,41.8,120,0,2,,v1_10_0/Prefabs/CoolingSystems/AirCoolers/Corsair/FAN_Corsair_iCUE_QL120_RGB_PWM_Single_Fan,CORSAIR iCUE QL120 RGB 120mm PWM (Black)
 Case Fan,CORSAIR,iCUE QL120 RGB 120mm PWM (White),,Y,30,10,30,1,1.10,PC,RGB,41.8,120,0,2,,v1_10_0/Prefabs/CoolingSystems/AirCoolers/Corsair/FAN_Corsair_iCUE_QL120_RGB_PWM_Single_Fan_White,CORSAIR iCUE QL120 RGB 120mm PWM (White)
@@ -63,15 +65,23 @@ Case Fan,CORSAIR,LL140 RGB LED,,Y,38,13,18,80,1.0,,RGB,52,140,0,1.52,,Prefabs/Co
 Case Fan,CORSAIR,ML120,,Y,25,8,2,1,1.0,,,75,120,0,4.2,,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_ML120mmPWM_Premium,CORSAIR ML120
 Case Fan,CORSAIR,ML140,,Y,28,9,2,1,1.0,,,97,140,0,3,,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_ML140mmPMWPremium,CORSAIR ML140
 Case Fan,CORSAIR,SP120 RGB LED,,Y,35,12,10,1,1.0,,RGB,52,120,0,1.61,,Prefabs/CoolingSystems/AirCoolers/Corsair/Corsair_LL120_RGB,CORSAIR SP120 RGB LED
+Case Fan,Cryorig,QF120 - Extreme Performance,Y,Y,100,35,31,90,,,,130,120,0,2.3,,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_QF_120,Cryorig QF120 - Extreme Performance
 Case Fan,Cryorig,QF120 - Performance,,Y,12,4,30,1,1.0,,,83,120,0,3.33,,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_QF_120,Cryorig QF120 - Performance
+Case Fan,Cryorig,QF140 - Extreme Performance,Y,Y,145,50,32,25,,,,175,140,0,2.5,,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_QF_140,Cryorig QF140 - Extreme Performance
 Case Fan,Cryorig,QF140 - Performance,,Y,15,5,30,1,1.0,,,128,140,0,2.12,,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_QF_140,Cryorig QF140 - Performance
 Case Fan,Cryorig,XF140,,Y,20,7,29,1,1.0,,,76,Mixed,0,1.44,,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_XF_140,Cryorig XF140
 Case Fan,Cryorig,XT140,,Y,60,20,29,1,1.0,,,65,Mixed,0,1.49,,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_XT_140,Cryorig XT140
+Case Fan,Cryorig,XTE140,Y,Y,185,20,29,75,,,,185,Mixed,0,5,,Prefabs/CoolingSystems/AirCoolers/Cryorig/CryoRig_XT_140,Cryorig XTE140
 Case Fan,Deepcool,RF 120,,Y,20,7,14,25,1.0,,RGB,56.5,120,0,,,Prefabs/CoolingSystems/AirCoolers/Deepcool/FAN_DeepCool_RF120,Deepcool RF 120
 Case Fan,Deepcool,RF 140,,Y,25,8,14,25,1.0,,RGB,64.13,140,0,,,Prefabs/CoolingSystems/AirCoolers/Deepcool/FAN_DeepCool_RF140,Deepcool RF 140
+Case Fan,Delta Electronics,PFR0912XHE,Y,Y,175,75,33,1,,,,150,90,0,2.5,,Prefabs/Generic/Generic_CaseFan_90mm,Delta Electronics PFR0912XHE
+Case Fan,Delta Electronics,PFR0912XHE (120mm Adapted),Y,Y,220,65,33,45,,,,185,120,0,3,,Prefabs/Generic/Generic_120_CaseFan_01,Delta Electronics PFR0912XHE (120mm Adapted)
+Case Fan,Delta Electronics,PFR0912XHE (140mm Adapted),Y,Y,250,65,33,75,,,,215,140,0,3.2,,Prefabs/Generic/Generic_140_CaseFan_01,Delta Electronics PFR0912XHE (140mm Adapted)
 Case Fan,EKWB,EK-Vardar EVO 120ER RGB,,Y,30,10,25,30,1.0,,RGB,77,120,0,3.16,,Prefabs/CoolingSystems/AirCoolers/EKWB/EKVardar EVO 120ER RGB,EKWB EK-Vardar EVO 120ER RGB
 Case Fan,EKWB,EK-Vardar EVO 140S BB,,Y,30,10,25,1,1.0,,,98,140,0,3.15,,Prefabs/CoolingSystems/AirCoolers/EKWB/EKVadar_EVO_140S_BB,EKWB EK-Vardar EVO 140S BB
 Case Fan,EKWB,EK-Vardar F4-120ER,,Y,25,8,25,1,1.0,,,77,120,0,3.16,,Prefabs/CoolingSystems/AirCoolers/EKWB/EK-Vardar F4-120ER,EKWB EK-Vardar F4-120ER
+Case Fan,EKWB,EK-Vardar PRO 140S BB,Y,Y,80,10,26,45,,,,140,140,0,3.5,,Prefabs/CoolingSystems/AirCoolers/EKWB/EKVadar_EVO_140S_BB,EKWB EK-Vardar PRO 140S BB
+Case Fan,EKWB,EK-Vardar PRO-120ER,Y,Y,60,8,26,25,,,,100,120,0,3.3,,Prefabs/CoolingSystems/AirCoolers/EKWB/EK-Vardar F4-120ER,EKWB EK-Vardar PRO-120ER
 Case Fan,Fractal Design,Dynamic X2 GP-12,,Y,13,4,21,1,1.0,,,52,120,0,0.88,,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FD_Dynamic_GP_12,Fractal Design Dynamic X2 GP-12
 Case Fan,Fractal Design,Dynamic X2 GP-12 (Black),,Y,13,4,21,1,1.0,,,52,120,0,0.88,,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FD_Dynamic_GP_12_Black,Fractal Design Dynamic X2 GP-12 (Black)
 Case Fan,Fractal Design,Dynamic X2 GP-14,,Y,15,5,21,1,1.0,,,68,140,0,0.71,,Prefabs/CoolingSystems/AirCoolers/FractalDesign/FD_Dynamic_GP_14,Fractal Design Dynamic X2 GP-14
@@ -106,6 +116,8 @@ Case Fan,Mortoni,Heat Away Pro RGB 120,,Y,12,4,10,50,1.7,PC,RGB,42,120,0,1.2,,v1
 Case Fan,Mortoni,Heat Away RGB 120,,Y,10,3,10,1,1.6,PC,RGB,40,120,0,1.61,,Prefabs/Generic/FAN_Mortoni_120RGB,Mortoni Heat Away RGB 120
 Case Fan,Mortoni,Heat Away RGB 140,,Y,10,3,10,1,1.6,PC,RGB,60,140,0,1.61,,Prefabs/Generic/FAN_Mortoni_140RGB,Mortoni Heat Away RGB 140
 Case Fan,MSI,120mm,,,40,13,8,1,1.7,PC,,50,120,0,2,,v1_7_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_120,MSI 120mm
+Case Fan,MSI,120mm ARGB (Black Logo),,,20,7,8,1,1.10.5,PC,RGB,50,120,0,2,,v1_10_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_120mm_ARGB,MSI 120mm ARGB (Black Logo)
+Case Fan,MSI,120mm ARGB (Silver Logo),,,20,7,8,1,1.10.5,PC,RGB,50,120,0,2,,v1_10_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_Logo_120mm_ARGB,MSI 120mm ARGB (Silver Logo)
 Case Fan,MSI,120mm RGB,,,40,13,8,1,1.7,PC,RGB,50,120,0,2,,v1_7_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_RGB_120,MSI 120mm RGB
 Case Fan,MSI,200mm,,,40,13,8,1,1.7,PC,,90,200,0,2,,v1_7_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_200,MSI 200mm
 Case Fan,MSI,MAG MAX F20A-1,,Y,40,13,8,1,1.7,PC,RGB,90,200,0,2,,v1_7_0/Prefabs/CoolingSystems/AirCoolers/MSI/FAN_MSI_RGB_200,MSI MAG MAX F20A-1

@@ -150,6 +150,7 @@ export default defineComponent({
 
   computed: {
     ...mapState({
+      allowModdedPartsHEM: 'allowModdedPartsHEM',
       playerLevel: 'playerLevel',
     }),
 
@@ -183,6 +184,10 @@ export default defineComponent({
     parsedItems (): any[] {
       const filtered = this.items.slice().filter((item: any) => {
         let valid = true
+
+        if (valid && !this.allowModdedPartsHEM) {
+          valid = valid && !item.moddedPartHEM
+        }
 
         if (valid && this.checkPlayerLevel) {
           const level = item.Level || item.level || 1
@@ -231,6 +236,10 @@ export default defineComponent({
     searchQuery (): void {
       this.pagination.page = 0
     },
+  },
+
+  created () {
+    console.log(this.headers)
   },
 
   methods: {

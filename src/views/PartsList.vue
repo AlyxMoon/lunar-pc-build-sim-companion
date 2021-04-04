@@ -2,7 +2,7 @@
   <h1>Parts List</h1>
 
   <Accordion
-    v-for="category of categories"
+    v-for="(category, index) of categories"
     :key="category.name"
   >
     <template #header>
@@ -22,20 +22,21 @@
 
     <template #content>
       <DataTable
-        :headers="category.headers"
+        :headers="headers[index]"
         :items="parts[category.name]"
       />
     </template>
   </Accordion>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { mapGetters, mapState } from 'vuex'
 
-import Accordion from '@/components/Accordion'
-import DataTable from '@/components/DataTable'
+import Accordion from '@/components/Accordion.vue'
+import DataTable from '@/components/DataTable/index.vue'
 
-export default {
+export default defineComponent({
   name: 'PagePartsList',
   components: {
     Accordion,
@@ -47,8 +48,12 @@ export default {
       categories: 'categories',
       parts: 'parts',
     }),
+
+    ...mapGetters({
+      headers: 'modifiedCategoryHeaders',
+    }),
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

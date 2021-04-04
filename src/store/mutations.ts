@@ -5,6 +5,10 @@ export const UPDATE_PLAYER_LEVEL = (state: PlainObject, level: number): void => 
   state.playerLevel = level
 }
 
+export const UPDATE_ALLOW_MODDED_PARTS_HEM = (state: PlainObject, allow: boolean): void => {
+  state.allowModdedPartsHEM = allow
+}
+
 export const UPDATE_COLOR_MODE = (state: PlainObject, mode: string): void => {
   state.colorMode = mode
 }

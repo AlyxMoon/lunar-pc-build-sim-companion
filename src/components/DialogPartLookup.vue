@@ -14,8 +14,8 @@
 
         <div class="modal-body">
           <DataTable
-            v-if="!!activeCategory"
-            :headers="activeCategory.headers"
+            v-if="!!activeCategoryHeaders"
+            :headers="activeCategoryHeaders"
             :items="parts[partType]"
             :include-action="true"
             @selected="$emit('selected', $event)"
@@ -29,7 +29,7 @@
 <script lang="ts">
 import { PlainObject } from '@/typings'
 import { defineComponent } from 'vue'
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 import DataTable from '@/components/DataTable/index.vue'
 
@@ -52,10 +52,16 @@ export default defineComponent({
       parts: 'parts',
     }),
 
-    activeCategory (): PlainObject | void {
+    ...mapGetters({
+      headers: 'modifiedCategoryHeaders',
+    }),
+
+    activeCategoryHeaders (): PlainObject[] | void {
       if (!this.partType) return
 
-      return this.categories.find(({ name }: { name: string }) => name === this.partType)
+      const index = this.categories.findIndex(({ name }: { name: string }) => name === this.partType)
+
+      return this.headers[index]
     },
   },
 })

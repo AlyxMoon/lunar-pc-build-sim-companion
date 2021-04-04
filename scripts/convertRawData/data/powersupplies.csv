@@ -1,4 +1,6 @@
 Part Type,Manufacturer,Part Name,HEM,In Shop,Price,Sell Price,Level,Level %,Steam Version,Platform Lock,Wattage,Length,Type,Size,Asset Path,Full Part Name
+Power Supply,ADATA,XPG Core Reactor 1050W,Y,Y,170,40,28,85,,PC,1050,140,Modular,ATX,v1_8_0/Prefabs/PSU/ADATA/PSU_ADATA_XPG_Core_Reactor_850W,ADATA XPG Core Reactor 1050W
+Power Supply,ADATA,XPG Core Reactor 1150W,Y,Y,195,40,28,95,,PC,1150,140,Modular,ATX,v1_8_0/Prefabs/PSU/ADATA/PSU_ADATA_XPG_Core_Reactor_850W,ADATA XPG Core Reactor 1150W
 Power Supply,ADATA,XPG Core Reactor 650W,,Y,80,27,28,1,1.8,PC,650,140,Modular,ATX,v1_8_0/Prefabs/PSU/ADATA/PSU_ADATA_XPG_Core_Reactor_650W_ms,ADATA XPG Core Reactor 650W
 Power Supply,ADATA,XPG Core Reactor 750W,,Y,100,33,28,1,1.8,PC,750,140,Modular,ATX,v1_8_0/Prefabs/PSU/ADATA/PSU_ADATA_XPG_Core_Reactor_750W_ms,ADATA XPG Core Reactor 750W
 Power Supply,ADATA,XPG Core Reactor 850W,,Y,120,40,28,1,1.8,PC,850,140,Modular,ATX,v1_8_0/Prefabs/PSU/ADATA/PSU_ADATA_XPG_Core_Reactor_850W,ADATA XPG Core Reactor 850W
@@ -6,8 +8,23 @@ Power Supply,Antec,High Current Gamer 650W,,Y,100,33,27,30,1.0,,650,140,Modular,
 Power Supply,Antec,High Current Gamer 750W,,Y,125,42,27,40,1.0,,750,140,Modular,ATX,Prefabs/PSU/Antec/PSU_Antec_750_Gold,Antec High Current Gamer 750W
 Power Supply,Antec,High Current Gamer 850W,,Y,150,50,27,50,1.2,,850,140,Modular,ATX,Prefabs/PSU/Antec/PSU_Antec_850_Gold,Antec High Current Gamer 850W
 Power Supply,Antec,High Current Gamer Extreme Series 1000W,,Y,250,83,27,70,1.8,PC,1000,160,Modular,ATX,v1_8_0/Prefabs/PSU/Antec/PSU_Antec_High_Current_Gamer_Extreme_1000,Antec High Current Gamer Extreme Series 1000W
+Power Supply,Antec,High Current Gamer Extreme Series 1200W,Y,Y,265,67,28,60,,PC,850,160,Modular,ATX,v1_8_0/Prefabs/PSU/Antec/PSU_Antec_High_Current_Gamer_Extreme_850,Antec High Current Gamer Extreme Series 1200W
+Power Supply,Antec,High Current Gamer Extreme Series 1550W,Y,Y,325,83,28,70,,PC,1550,160,Modular,ATX,v1_8_0/Prefabs/PSU/Antec/PSU_Antec_High_Current_Gamer_Extreme_1000,Antec High Current Gamer Extreme Series 1550W
 Power Supply,Antec,High Current Gamer Extreme Series 850W,,Y,200,67,27,60,1.8,PC,850,160,Modular,ATX,v1_8_0/Prefabs/PSU/Antec/PSU_Antec_High_Current_Gamer_Extreme_850,Antec High Current Gamer Extreme Series 850W
 Power Supply,Cooler Master,MasterWatt Maker 1200 MIJ,,Y,999,333,23,1,1.0,,1200,224,Modular,ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 1200 MIJ
+Power Supply,Cooler Master,MasterWatt Maker 1600 MIJ,Y,Y,1350,773,28,35,,,1600,224,Modular,ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 1600 MIJ
+Power Supply,Cooler Master,MasterWatt Maker 2000 MIJ,Y,Y,1650,953,27,85,,,2000,224,Modular,ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 2000 MIJ
+Power Supply,Cooler Master,MasterWatt Maker 2400 MIJ,Y,Y,1950,1150,30,65,,,2400,224,Modular,ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 2400 MIJ
+Power Supply,Cooler Master,MasterWatt Maker 2800 MIJ,Y,Y,2350,1350,30,90,,,2800,224,Modular,ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 2800 MIJ
+Power Supply,Cooler Master,MasterWatt Maker 3200 MIJ Extreme,Y,Y,2750,1659,31,35,,,3200,250,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 3200 MIJ Extreme
+Power Supply,Cooler Master,MasterWatt Maker 3600 MIJ Extreme,Y,Y,3450,2150,31,85,,,3600,250,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 3600 MIJ Extreme
+Power Supply,Cooler Master,MasterWatt Maker 4000 MIJ Extreme,Y,Y,3850,2550,32,35,,,4000,265,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 4000 MIJ Extreme
+Power Supply,Cooler Master,MasterWatt Maker 4400 MIJ Extreme,Y,Y,4350,2850,32,65,,,4400,265,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 4400 MIJ Extreme
+Power Supply,Cooler Master,MasterWatt Maker 4800 MIJ Extreme,Y,Y,5000,3550,32,95,,,4800,275,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 4800 MIJ Extreme
+Power Supply,Cooler Master,MasterWatt Maker 5000 MIJ Extreme,Y,Y,5250,3785,33,15,,,5000,275,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 5000 MIJ Extreme
+Power Supply,Cooler Master,MasterWatt Maker 5200 MIJ Extreme,Y,,5500,4085,33,35,,,5200,285,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 5200 MIJ Extreme
+Power Supply,Cooler Master,MasterWatt Maker 5400 MIJ Extreme,Y,Y,5750,4185,33,55,,,5400,300,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 5400 MIJ Extreme
+Power Supply,Cooler Master,MasterWatt Maker 5600 MIJ Extreme,Y,Y,6000,4385,33,75,,,5600,300,Modular,E-ATX,Prefabs/PSU/CoolerMaster/CM_MasterWatt_Maker_1200,Cooler Master MasterWatt Maker 5600 MIJ Extreme
 Power Supply,Cooler Master,MWE 450 Bronze - V2,,Y,50,17,22,70,1.6,PC,450,140,Non-Modular,ATX,Prefabs/PSU/CoolerMaster/PSU_CoolerMaster_V450_Bronze,Cooler Master MWE 450 Bronze - V2
 Power Supply,Cooler Master,MWE 450 White - V2,,Y,55,18,22,70,1.6,PC,450,140,Non-Modular,ATX,Prefabs/PSU/CoolerMaster/PSU_CoolerMaster_V450_White,Cooler Master MWE 450 White - V2
 Power Supply,Cooler Master,MWE 500 Bronze - V2,,Y,55,18,22,70,1.6,PC,500,140,Non-Modular,ATX,Prefabs/PSU/CoolerMaster/PSU_CoolerMaster_V500_Bronze,Cooler Master MWE 500 Bronze - V2
@@ -50,16 +67,24 @@ Power Supply,EVGA,SuperNOVA 1050 GS,,Y,180,60,20,70,1.0,,1050,170,Modular,ATX,Pr
 Power Supply,EVGA,SuperNOVA 1200 P2,,Y,300,100,23,25,1.0,,1200,200,Modular,ATX,Prefabs/PSU/EVGA/EVGA_SuperNova_1200_P2_80Platinum,EVGA SuperNOVA 1200 P2
 Power Supply,EVGA,SuperNOVA 1300 G2,,Y,270,90,25,1,1.0,,1300,200,Modular,ATX,Prefabs/PSU/EVGA/EVGA_SuperNova_1300_G2_80Gold,EVGA SuperNOVA 1300 G2
 Power Supply,EVGA,SuperNOVA 1600 T2,,Y,450,150,30,85,1.0,,1600,225,Modular,ATX,Prefabs/PSU/EVGA/EVGA_1600_T2_80Titanium,EVGA SuperNOVA 1600 T2
+Power Supply,EVGA,SuperNOVA 2000 T2,Y,,550,150,30,90,,,2000,225,Modular,ATX,Prefabs/PSU/EVGA/EVGA_1600_T2_80Titanium,EVGA SuperNOVA 2000 T2
+Power Supply,EVGA,SuperNOVA 2400 T2,Y,,850,354,30,91,,,2400,225,Modular,ATX,Prefabs/PSU/EVGA/EVGA_1600_T2_80Titanium,EVGA SuperNOVA 2400 T2
+Power Supply,EVGA,SuperNOVA 2800 T2,Y,,1250,453,30,95,,,2800,225,Modular,ATX,Prefabs/PSU/EVGA/EVGA_1600_T2_80Titanium,EVGA SuperNOVA 2800 T2
+Power Supply,EVGA,SuperNOVA 3000 T2,Y,,1675,681,30,95,,,3000,225,Modular,ATX,Prefabs/PSU/EVGA/EVGA_1600_T2_80Titanium,EVGA SuperNOVA 3000 T2
 Power Supply,EVGA,SuperNOVA 550 G3,,Y,100,33,9,1,1.0,,550,150,Modular,ATX,Prefabs/PSU/EVGA/EVGA_SuperNova_550_G3_80Gold,EVGA SuperNOVA 550 G3
 Power Supply,EVGA,SuperNOVA 650 P2,,Y,130,43,12,10,1.0,,650,165,Modular,ATX,Prefabs/PSU/EVGA/EVGA_SuperNova_650_P2,EVGA SuperNOVA 650 P2
 Power Supply,EVGA,SuperNOVA 750 T2,,Y,150,50,17,40,1.0,,750,180,Modular,ATX,Prefabs/PSU/EVGA/EVGA_SuperNova_750_T2,EVGA SuperNOVA 750 T2
 Power Supply,EVGA,SuperNOVA 850 T2,,Y,230,77,19,55,1.0,,850,180,Modular,ATX,Prefabs/PSU/EVGA/EVGA_SuperNova_850_T2,EVGA SuperNOVA 850 T2
+Power Supply,Fractal Design,Ion SFX-L Gold 1050W,Y,Y,235,95,28,30,,PC,1050,125,Modular,SFX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_SFX-L_Gold_650W,Fractal Design Ion SFX-L Gold 1050W
+Power Supply,Fractal Design,Ion SFX-L Gold 1250W,Y,Y,265,115,29,30,,PC,1250,125,Modular,SFX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_SFX-L_Gold_650W,Fractal Design Ion SFX-L Gold 1250W
 Power Supply,Fractal Design,Ion SFX-L Gold 500W,,Y,100,33,26,30,1.9,PC,500,125,Modular,SFX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_SFX-L_Gold_500W,Fractal Design Ion SFX-L Gold 500W
 Power Supply,Fractal Design,Ion SFX-L Gold 650W,,Y,115,38,26,30,1.9,PC,650,125,Modular,SFX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_SFX-L_Gold_650W,Fractal Design Ion SFX-L Gold 650W
+Power Supply,Fractal Design,Ion SFX-L Gold 850W,Y,Y,165,75,27,30,,PC,850,125,Modular,SFX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_SFX-L_Gold_650W,Fractal Design Ion SFX-L Gold 850W
 Power Supply,Fractal Design,Ion+ Platinum 560W,,Y,100,33,26,30,1.9,PC,560,150,Modular,ATX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_Plus_Platinum_560W,Fractal Design Ion+ Platinum 560W
 Power Supply,Fractal Design,Ion+ Platinum 660W,,Y,120,40,26,30,1.9,PC,660,150,Modular,ATX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_Plus_Platinum_660W,Fractal Design Ion+ Platinum 660W
 Power Supply,Fractal Design,Ion+ Platinum 760W,,Y,130,43,26,30,1.9,PC,760,150,Modular,ATX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_Plus_Platinum_760W,Fractal Design Ion+ Platinum 760W
 Power Supply,Fractal Design,Ion+ Platinum 860W,,Y,140,47,26,30,1.9,PC,860,150,Modular,ATX,v1_9_0/Prefabs/PSU/FractalDesign/PSU_FractalDesign_Ion_Plus_Platinum_860W,Fractal Design Ion+ Platinum 860W
+Power Supply,FSP,Dagger Pro 1000W,Y,Y,260,80,20,40,,PC,1000,100,Modular,SFX,Prefabs/PSU/FSP/PSU_FSP_Dagger_Pro_650,FSP Dagger Pro 1000W
 Power Supply,FSP,Dagger Pro 550W,,Y,115,38,6,40,1.4,PC,550,100,Modular,SFX,Prefabs/PSU/FSP/PSU_FSP_Dagger_Pro_550,FSP Dagger Pro 550W
 Power Supply,FSP,Dagger Pro 650W,,Y,115,38,6,40,1.4,PC,650,100,Modular,SFX,Prefabs/PSU/FSP/PSU_FSP_Dagger_Pro_650,FSP Dagger Pro 650W
 Power Supply,FSP,Hydro G 650,,Y,100,33,13,40,1.4,PC,650,170,Modular,ATX,Prefabs/PSU/FSP/PSU_FSP_HYDROG_650_STOCK,FSP Hydro G 650
@@ -71,9 +96,12 @@ Power Supply,FSP,Hydro PTM 650W,,Y,125,42,8,40,1.4,PC,650,170,Modular,ATX,Prefab
 Power Supply,FSP,Hydro PTM 650W (Red),,Y,125,42,8,40,1.6,PC,650,170,Modular,ATX,Prefabs/PSU/FSP/PSU_FSP_HYDROG_PTM_650_STOCK,FSP Hydro PTM 650W (Red)
 Power Supply,FSP,Hydro PTM 750W,,Y,140,47,8,40,1.4,PC,750,170,Modular,ATX,Prefabs/PSU/FSP/PSU_FSP_HYDROG_PTM_750_Blue_STOCK,FSP Hydro PTM 750W
 Power Supply,FSP,Hydro PTM 750W (Red),,Y,140,47,8,40,1.6,PC,750,170,Modular,ATX,Prefabs/PSU/FSP/PSU_FSP_HYDROG_PTM_750_STOCK,FSP Hydro PTM 750W (Red)
+Power Supply,GamerStorm,DQ1050-M,Y,Y,165,65,25,25,,,1050,160,Modular,ATX,Prefabs/PSU/Deepcool/Deepcool_DQ750-M,GamerStorm DQ1050-M
+Power Supply,GamerStorm,DQ1050-MW,Y,Y,165,65,25,25,,,1050,160,Modular,ATX,Prefabs/PSU/Deepcool/Deepcool_DQ650-M,GamerStorm DQ1050-MW
 Power Supply,GamerStorm,DQ650-M,,Y,100,33,24,25,1.0,,650,160,Modular,ATX,Prefabs/PSU/Deepcool/Deepcool_DQ650-M,GamerStorm DQ650-M
 Power Supply,GamerStorm,DQ750-M,,Y,120,40,24,25,1.0,,750,160,Modular,ATX,Prefabs/PSU/Deepcool/Deepcool_DQ750-M,GamerStorm DQ750-M
 Power Supply,GamerStorm,DQ850-M,,Y,150,50,24,25,1.0,,850,160,Modular,ATX,Prefabs/PSU/Deepcool/Deepcool_DQ850-M,GamerStorm DQ850-M
+Power Supply,GIGABYTE,AORUS P1200W,Y,Y,285,105,16,45,,,1200,160,Modular,ATX,Prefabs/PSU/Gigabyte/PSU_Gigabyte_AorusP850W,GIGABYTE AORUS P1200W
 Power Supply,GIGABYTE,AORUS P750W,,Y,120,40,14,60,1.0,,750,160,Modular,ATX,Prefabs/PSU/Gigabyte/PSU_Gigabyte_AorusP750W,GIGABYTE AORUS P750W
 Power Supply,GIGABYTE,AORUS P850W,,Y,150,50,14,60,1.0,,850,160,Modular,ATX,Prefabs/PSU/Gigabyte/PSU_Gigabyte_AorusP850W,GIGABYTE AORUS P850W
 Power Supply,Shean,Powerking 250,,Y,20,7,1,1,1.0,,250,140,Modular,ATX,Prefabs/Generic/PSU,Shean Powerking 250
@@ -87,7 +115,10 @@ Power Supply,SilverStone,ET650-B,,Y,60,20,11,1,1.0,,650,140,Non-Modular,ATX,Pref
 Power Supply,SilverStone,ET650-G,,Y,85,28,13,72,1.0,,650,140,Non-Modular,ATX,Prefabs/PSU/SilverStone/ET650-G,SilverStone ET650-G
 Power Supply,SilverStone,ET700-MG,,Y,90,30,21,1,1.8,PC,700,165,Modular,ATX,v1_8_0/Prefabs/PSU/SilverStone/PSU_Silverstone_ET700_MG,SilverStone ET700-MG
 Power Supply,SilverStone,ET750-G,,Y,95,32,17,18,1.0,,750,140,Non-Modular,ATX,Prefabs/PSU/SilverStone/ET750-G,SilverStone ET750-G
+Power Supply,SilverStone,NJ1200,Y,Y,285,75,23,35,,,1200,160,Modular,ATX,Prefabs/PSU/SilverStone/NJ520,SilverStone NJ1200
+Power Supply,SilverStone,NJ1320,Y,Y,300,95,24,35,,,1320,160,Modular,ATX,Prefabs/PSU/SilverStone/NJ520,SilverStone NJ1320
 Power Supply,SilverStone,NJ520,,Y,140,47,7,79,1.0,,520,160,Modular,ATX,Prefabs/PSU/SilverStone/NJ520,SilverStone NJ520
+Power Supply,SilverStone,NJ820,Y,Y,225,75,14,35,,,820,160,Modular,ATX,Prefabs/PSU/SilverStone/NJ520,SilverStone NJ820
 Power Supply,SilverStone,ST1000-PT,,Y,205,68,20,24,1.0,,1000,180,Modular,ATX,Prefabs/PSU/SilverStone/ST1000-PT,SilverStone ST1000-PT
 Power Supply,SilverStone,ST1100-TI,,Y,280,93,21,10,1.0,,1100,180,Modular,ATX,Prefabs/PSU/SilverStone/ST1100-TI,SilverStone ST1100-TI
 Power Supply,SilverStone,ST1200-PT,,Y,260,87,22,32,1.0,,1200,180,Modular,ATX,Prefabs/PSU/SilverStone/ST1200-PT,SilverStone ST1200-PT
@@ -102,5 +133,9 @@ Power Supply,SilverStone,ST80F-TI,,Y,160,53,18,30,1.0,,800,150,Modular,ATX,Prefa
 Power Supply,SilverStone,ST85F-PT,,Y,150,50,19,1,1.0,,850,140,Modular,ATX,Prefabs/PSU/SilverStone/ST85F-PT,SilverStone ST85F-PT
 Power Supply,SilverStone,SX500-G,,Y,115,38,12,50,1.0,,500,100,Modular,SFX,Prefabs/PSU/SilverStone/PSU_Silverstone_SX500G,SilverStone SX500-G
 Power Supply,SilverStone,SX650-G,,Y,125,42,12,50,1.0,,650,100,Modular,SFX,Prefabs/PSU/SilverStone/PSU_Silverstone_SX650G,SilverStone SX650-G
+Power Supply,SilverStone,SX850-G,Y,Y,175,65,15,50,,,850,100,Modular,SFX,Prefabs/PSU/SilverStone/PSU_Silverstone_SX650G,SilverStone SX850-G
+Power Supply,Thermaltake,Smart Pro RGB 550W,Y,Y,80,35,13,25,,,550,170,Modular,ATX,Prefabs/PSU/Thermaltake/Thermaltake_SmartProRBGPSU,Thermaltake Smart Pro RGB 550W
+Power Supply,Thermaltake,Smart Pro RGB 650W,Y,Y,90,45,13,15,,,650,170,Modular,ATX,Prefabs/PSU/Thermaltake/Thermaltake_SmartProRBGPSU,Thermaltake Smart Pro RGB 650W
 Power Supply,Thermaltake,Smart Pro RGB 850W,,Y,110,37,26,1,1.0,,850,170,Modular,ATX,Prefabs/PSU/Thermaltake/Thermaltake_SmartProRBGPSU,Thermaltake Smart Pro RGB 850W
 Power Supply,Thermaltake,Toughpower iRGB PLUS 1200W,,Y,270,90,29,1,1.0,,1200,180,Modular,ATX,Prefabs/PSU/Thermaltake/Thermaltake_Toughpower_iRGBPlus,Thermaltake Toughpower iRGB PLUS 1200W
+Power Supply,Thermaltake,Toughpower iRGB PLUS 1500W,Y,Y,320,125,29,45,,,1500,180,Modular,ATX,Prefabs/PSU/Thermaltake/Thermaltake_Toughpower_iRGBPlus,Thermaltake Toughpower iRGB PLUS 1500W

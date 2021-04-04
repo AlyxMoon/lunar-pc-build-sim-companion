@@ -3,11 +3,20 @@ Storage - HDD,Mortoni,EZStore 120GB,,Y,20,7,1,1,1.0,,,HDD,120,160,,,Prefabs/Gene
 Storage - HDD,Mortoni,EZStore 250GB,,Y,30,10,1,1,1.0,,,HDD,250,150,,,Prefabs/Generic/HDD,Mortoni EZStore 250GB
 Storage - HDD,Mortoni,EZStore 320GB,,Y,40,13,1,1,1.0,,,HDD,320,150,,,Prefabs/Generic/HDD,Mortoni EZStore 320GB
 Storage - HDD,Mortoni,EZStore 500GB,,Y,50,17,1,1,1.0,,,HDD,500,140,,,Prefabs/Generic/HDD,Mortoni EZStore 500GB
+Storage - HDD,Mortoni,EZStore Ultimate 1TB,Y,,95,35,1,1,,,,HDD,1000,270,,,Prefabs/Generic/HDD,Mortoni EZStore Ultimate 1TB
+Storage - HDD,Mortoni,EZStore Ultimate 2TB,Y,,125,35,1,1,,,,HDD,2000,285,,,Prefabs/Generic/HDD,Mortoni EZStore Ultimate 2TB
+Storage - HDD,Mortoni,EZStore Ultimate 500GB,Y,,65,25,1,1,,,,HDD,500,265,,,Prefabs/Generic/HDD,Mortoni EZStore Ultimate 500GB
 Storage - HDD,Seagate,BarraCuda 1TB 64MB Cache,,Y,60,20,3,1,1.0,,,HDD,1000,210,,,Prefabs/HDD/Seagate/Seagate_Barracuda_1TB,Seagate BarraCuda 1TB 64MB Cache
 Storage - HDD,Seagate,BarraCuda 2TB 64MB Cache,,Y,70,23,3,1,1.0,,,HDD,2000,210,,,Prefabs/HDD/Seagate/Seagate_Barracuda_2TB,Seagate BarraCuda 2TB 64MB Cache
 Storage - HDD,Seagate,BarraCuda 3TB 64MB Cache,,Y,90,30,3,1,1.0,,,HDD,3000,210,,,Prefabs/HDD/Seagate/Seagate_Barracuda_3TB,Seagate BarraCuda 3TB 64MB Cache
 Storage - HDD,Seagate,BarraCuda 4TB 256MB Cache,,Y,130,43,3,1,1.0,,,HDD,4000,190,,,Prefabs/HDD/Seagate/Seagate_Barracuda_4TB,Seagate BarraCuda 4TB 256MB Cache
 Storage - HDD,Seagate,BarraCuda 500GB 32MB Cache,,Y,50,17,3,1,1.0,,,HDD,500,210,,,Prefabs/HDD/Seagate/Seagate_Barracuda_500GB,Seagate BarraCuda 500GB 32MB Cache
+Storage - HDD,Seagate,BarraCuda Pro 10TB 256MB Cache,Y,Y,380,86,17,1,,,,HDD,10000,480,,,Prefabs/HDD/Seagate/Seagate_Barracuda_4TB,Seagate BarraCuda Pro 10TB 256MB Cache
+Storage - HDD,Seagate,BarraCuda Pro 12TB 256MB Cache,Y,Y,460,40,20,1,,,,HDD,12000,480,,,Prefabs/HDD/Seagate/Seagate_Barracuda_4TB,Seagate BarraCuda Pro 12TB 256MB Cache
+Storage - HDD,Seagate,BarraCuda Pro 14TB 256MB Cache,Y,Y,550,100,20,1,,,,HDD,14000,480,,,Prefabs/HDD/Seagate/Seagate_Barracuda_4TB,Seagate BarraCuda Pro 14TB 256MB Cache
+Storage - HDD,Seagate,BarraCuda Pro 6TB 256MB Cache,Y,Y,220,40,12,1,,,,HDD,6000,480,,,Prefabs/HDD/Seagate/Seagate_Barracuda_4TB,Seagate BarraCuda Pro 6TB 256MB Cache
+Storage - HDD,Seagate,BarraCuda Pro 8TB 256MB Cache,Y,Y,270,40,15,1,,,,HDD,8000,480,,,Prefabs/HDD/Seagate/Seagate_Barracuda_4TB,Seagate BarraCuda Pro 8TB 256MB Cache
+Storage - HDD,Seagate,Exos X10 16TB 256MB Cache,Y,Y,630,150,22,1,,,,HDD,16000,500,,,Prefabs/HDD/Seagate/Seagate_Barracuda_4TB,Seagate Exos X10 16TB 256MB Cache
 Storage - M.2,ADATA,XPG GAMMIX S11 M.2 240GB,,Y,130,43,19,1,1.0,,,M.2,240,1950,,,Prefabs/SSD/XPG/XPG_GAMMIX_S11_PCIe,ADATA XPG GAMMIX S11 M.2 240GB
 Storage - M.2,ADATA,XPG GAMMIX S11 M.2 480GB,,Y,210,70,19,1,1.0,,,M.2,480,1950,,,Prefabs/SSD/XPG/XPG_GAMMIX_S11_PCIe,ADATA XPG GAMMIX S11 M.2 480GB
 Storage - M.2,ADATA,XPG GAMMIX S11 M.2 960GB,,Y,400,133,19,1,1.0,,,M.2,960,1950,,,Prefabs/SSD/XPG/XPG_GAMMIX_S11_PCIe,ADATA XPG GAMMIX S11 M.2 960GB
@@ -23,9 +32,20 @@ Storage - M.2,CORSAIR,Force Series - MP500 M.2 120GB,,Y,150,50,29,1,1.0,,,M.2,12
 Storage - M.2,CORSAIR,Force Series - MP500 M.2 240GB,,Y,200,67,29,15,1.0,,,M.2,240,2700,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP500 M.2 240GB
 Storage - M.2,CORSAIR,Force Series - MP500 M.2 480GB,,Y,300,100,29,30,1.0,,,M.2,480,2700,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP500 M.2 480GB
 Storage - M.2,CORSAIR,Force Series - MP500 M.2 960GB,,Y,500,167,29,45,1.0,,,M.2,960,2650,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP500 M.2 960GB
+Storage - M.2,CORSAIR,Force Series - MP510 M.2 1920GB,Y,,600,100,30,85,,,,M.2,1920,2750,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP510 M.2 1920GB
+Storage - M.2,CORSAIR,Force Series - MP510 M.2 240GB,Y,,250,65,30,1,,,,M.2,240,1050,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP510 M.2 240GB
+Storage - M.2,CORSAIR,Force Series - MP510 M.2 480GB,Y,,325,85,30,25,,,,M.2,480,2000,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP510 M.2 480GB
+Storage - M.2,CORSAIR,Force Series - MP510 M.2 960GB,Y,,425,100,30,50,,,,M.2,960,3000,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP510 M.2 960GB
 Storage - M.2,CORSAIR,Force Series - MP600 M.2 1TB,,Y,370,123,20,1,1.6,PC,,M.2,1000,4600,Y,0.064,Prefabs/SSD/CORSAIR/SSD_Corsair_MP600_Force_Gen4_PCIe_M2,CORSAIR Force Series - MP600 M.2 1TB
+Storage - M.2,CORSAIR,Force Series - MP600 M.2 1TB (No Heatsink),Y,Y,360,103,20,1,,PC,,M.2,1000,4300,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP600 M.2 1TB (No Heatsink)
 Storage - M.2,CORSAIR,Force Series - MP600 M.2 2TB,,Y,440,147,20,1,1.6,PC,,M.2,2000,4600,Y,0.064,Prefabs/SSD/CORSAIR/SSD_Corsair_MP600_Force_Gen4_PCIe_M2,CORSAIR Force Series - MP600 M.2 2TB
+Storage - M.2,CORSAIR,Force Series - MP600 M.2 2TB (No Heatsink),Y,Y,430,127,20,1,,PC,,M.2,2000,4300,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP600 M.2 2TB (No Heatsink)
 Storage - M.2,CORSAIR,Force Series - MP600 M.2 512GB,,Y,240,80,20,1,1.6,PC,,M.2,512,3800,Y,0.064,Prefabs/SSD/CORSAIR/SSD_Corsair_MP600_Force_Gen4_PCIe_M2,CORSAIR Force Series - MP600 M.2 512GB
+Storage - M.2,CORSAIR,Force Series - MP600 M.2 512GB (No Heatsink),Y,Y,230,60,20,1,,PC,,M.2,512,3750,,,Prefabs/SSD/CORSAIR/CORSAIR_ForceSeries_MP500_960GB_M2_SSD,CORSAIR Force Series - MP600 M.2 512GB (No Heatsink)
+Storage - M.2,CORSAIR,Force Series - MP610 M.2 1TB,Y,Y,585,323,29,55,,PC,,M.2,1000,5900,Y,0.064,Prefabs/SSD/CORSAIR/SSD_Corsair_MP600_Force_Gen4_PCIe_M2,CORSAIR Force Series - MP610 M.2 1TB
+Storage - M.2,CORSAIR,Force Series - MP610 M.2 2TB,Y,Y,835,665,29,85,,PC,,M.2,2000,5900,Y,0.064,Prefabs/SSD/CORSAIR/SSD_Corsair_MP600_Force_Gen4_PCIe_M2,CORSAIR Force Series - MP610 M.2 2TB
+Storage - M.2,GIGABYTE,AORUS NVMe Gen4 MAX SSD 1TB,Y,Y,455,280,27,70,,PC,,M.2,1000,5500,Y,0.06,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_M2_Aorus_NVMe_Gen4,GIGABYTE AORUS NVMe Gen4 MAX SSD 1TB
+Storage - M.2,GIGABYTE,AORUS NVMe Gen4 MAX SSD 2TB,Y,Y,635,405,27,85,,PC,,M.2,2000,5400,Y,0.06,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_M2_Aorus_NVMe_Gen4,GIGABYTE AORUS NVMe Gen4 MAX SSD 2TB
 Storage - M.2,GIGABYTE,AORUS NVMe Gen4 SSD 1TB,,Y,240,80,22,70,1.6,PC,,M.2,1000,4700,Y,0.049,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_M2_Aorus_NVMe_Gen4,GIGABYTE AORUS NVMe Gen4 SSD 1TB
 Storage - M.2,GIGABYTE,AORUS NVMe Gen4 SSD 2TB,,Y,410,137,22,70,1.6,PC,,M.2,2000,4700,Y,0.049,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_M2_Aorus_NVMe_Gen4,GIGABYTE AORUS NVMe Gen4 SSD 2TB
 Storage - M.2,GIGABYTE,AORUS RGB M.2 NVMe SSD 256GB,,Y,80,27,22,50,1.6,PC,RGB,M.2,256,1875,Y,0.024,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_M2_Aorus_RGB_NVMe,GIGABYTE AORUS RGB M.2 NVMe SSD 256GB
@@ -33,6 +53,7 @@ Storage - M.2,GIGABYTE,AORUS RGB M.2 NVMe SSD 512GB,,Y,140,47,22,50,1.6,PC,RGB,M
 Storage - M.2,GIGABYTE,GIGABYTE M.2 PCIe SSD 128GB,,Y,30,10,22,10,1.6,PC,,M.2,128,800,,,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_M2_PCIe_128GB,GIGABYTE GIGABYTE M.2 PCIe SSD 128GB
 Storage - M.2,GIGABYTE,GIGABYTE M.2 PCIe SSD 256GB,,Y,60,20,22,10,1.6,PC,,M.2,256,1000,,,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_M2_PCIe_256GB,GIGABYTE GIGABYTE M.2 PCIe SSD 256GB
 Storage - M.2,GIGABYTE,GIGABYTE M.2 PCIe SSD 512GB,,Y,120,40,22,50,1.6,PC,,M.2,512,1200,,,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_M2_PCIe_512GB,GIGABYTE GIGABYTE M.2 PCIe SSD 512GB
+Storage - M.2,Intel,Optane 800P 118GB,Y,Y,140,65,19,1,,,,M.2,118,640,,,Prefabs/SSD/PATRIOT/PATRIOT_Scorch_M2_PCIE_256GB,Intel Optane 800P 118GB
 Storage - M.2,Kingston,A2000 NVMe PCIe SSD 1000GB,,Y,125,42,30,1,1.8,PC,,M.2,1000,2100,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_A2000_NVMe_PCIe_SSD_1000GB,Kingston A2000 NVMe PCIe SSD 1000GB
 Storage - M.2,Kingston,A2000 NVMe PCIe SSD 250GB,,Y,50,17,30,1,1.8,PC,,M.2,250,2100,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_A2000_NVMe_PCIe_SSD_250GB,Kingston A2000 NVMe PCIe SSD 250GB
 Storage - M.2,Kingston,A2000 NVMe PCIe SSD 500GB,,Y,80,27,30,1,1.8,PC,,M.2,500,2100,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_A2000_NVMe_PCIe_SSD_500GB,Kingston A2000 NVMe PCIe SSD 500GB
@@ -53,6 +74,13 @@ Storage - M.2,Patriot,Viper VPR100 M.2 1TB,,Y,350,117,17,20,1.6,PC,RGB,M.2,1000,
 Storage - M.2,Patriot,Viper VPR100 M.2 256GB,,Y,150,50,17,20,1.6,PC,RGB,M.2,256,2200,Y,0.028,Prefabs/SSD/PATRIOT/SSD_Patriot_Viper_VPR100_M2,Patriot Viper VPR100 M.2 256GB
 Storage - M.2,Patriot,Viper VPR100 M.2 2TB,,Y,420,140,17,20,1.6,PC,RGB,M.2,2000,3100,Y,0.028,Prefabs/SSD/PATRIOT/SSD_Patriot_Viper_VPR100_M2,Patriot Viper VPR100 M.2 2TB
 Storage - M.2,Patriot,Viper VPR100 M.2 512GB,,Y,230,77,17,20,1.6,PC,RGB,M.2,512,2700,Y,0.028,Prefabs/SSD/PATRIOT/SSD_Patriot_Viper_VPR100_M2,Patriot Viper VPR100 M.2 512GB
+Storage - M.2,Sabrent,Rocket Q 1TB NVMe M.2,Y,Y,250,85,27,50,,,,M.2,1000,3100,,,Prefabs/SSD/PATRIOT/PATRIOT_Scorch_M2_PCIE_512GB,Sabrent Rocket Q 1TB NVMe M.2
+Storage - M.2,Sabrent,Rocket Q 2TB NVMe M.2,Y,Y,450,150,27,50,,,,M.2,2000,2900,,,Prefabs/SSD/PATRIOT/PATRIOT_Scorch_M2_PCIE_512GB,Sabrent Rocket Q 2TB NVMe M.2
+Storage - M.2,Sabrent,Rocket Q 4TB NVMe M.2,Y,Y,850,250,28,50,,,,M.2,4000,3000,,,Prefabs/SSD/PATRIOT/PATRIOT_Scorch_M2_PCIE_512GB,Sabrent Rocket Q 4TB NVMe M.2
+Storage - M.2,Sabrent,Rocket Q 8TB NVMe M.2,Y,Y,2000,53,30,50,,,,M.2,8000,2900,,,Prefabs/SSD/PATRIOT/PATRIOT_Scorch_M2_PCIE_512GB,Sabrent Rocket Q 8TB NVMe M.2
+Storage - M.2,Seagate,Firecuda 510 M.2 1000GB,Y,Y,370,53,20,25,,,,M.2,1000,3200,,,Prefabs/SSD/PATRIOT/PATRIOT_Scorch_M2_PCIE_512GB,Seagate Firecuda 510 M.2 1000GB
+Storage - M.2,Seagate,Firecuda 510 M.2 2000GB,Y,Y,450,53,20,50,,,,M.2,2000,3200,,,Prefabs/SSD/PATRIOT/PATRIOT_Scorch_M2_PCIE_512GB,Seagate Firecuda 510 M.2 2000GB
+Storage - M.2,Seagate,Firecuda 510 M.2 500GB,Y,Y,220,53,20,1,,,,M.2,500,3200,,,Prefabs/SSD/PATRIOT/PATRIOT_Scorch_M2_PCIE_512GB,Seagate Firecuda 510 M.2 500GB
 Storage - M.2,Team Group,CARDEA M.2 240GB,,Y,140,47,26,1,1.0,,,M.2,240,2000,Y,0.054,Prefabs/SSD/TeamGroup/TeamGroup_CARDEA_PCIe_M2_SSD,Team Group CARDEA M.2 240GB
 Storage - M.2,Team Group,CARDEA M.2 480GB,,Y,220,73,26,1,1.0,,,M.2,480,2000,Y,0.054,Prefabs/SSD/TeamGroup/TeamGroup_CARDEA_PCIe_M2_SSD,Team Group CARDEA M.2 480GB
 Storage - SSD,ADATA,Ultimate SU650 120GB,,Y,80,27,4,1,1.0,,,SSD,120,485,,,Prefabs/SSD/ADATA/SSD_Ultimate_SU650,ADATA Ultimate SU650 120GB
@@ -67,6 +95,8 @@ Storage - SSD,CORSAIR,Force Series - LE200 120GB,,Y,90,30,8,1,1.0,,,SSD,120,525,
 Storage - SSD,CORSAIR,Force Series - LE200 240GB,,Y,105,35,8,1,1.0,,,SSD,240,525,,,Prefabs/SSD/CORSAIR/Corsair_ForceSeries_LE200_120GB_SATASSD,CORSAIR Force Series - LE200 240GB
 Storage - SSD,CORSAIR,Force Series - LE200 480GB,,Y,190,63,8,15,1.0,,,SSD,480,525,,,Prefabs/SSD/CORSAIR/Corsair_ForceSeries_LE200_120GB_SATASSD,CORSAIR Force Series - LE200 480GB
 Storage - SSD,CORSAIR,Force Series - LE200 960GB,,Y,350,117,8,30,1.0,,,SSD,960,525,,,Prefabs/SSD/CORSAIR/Corsair_ForceSeries_LE200_120GB_SATASSD,CORSAIR Force Series - LE200 960GB
+Storage - SSD,GIGABYTE,SmartSSD 2TB,Y,Y,950,355,27,15,,PC,,SSD,2000,3200,,,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_UD_PRO,GIGABYTE SmartSSD 2TB
+Storage - SSD,GIGABYTE,SmartSSD 4TB,Y,Y,1550,50,27,85,,PC,,SSD,4000,2900,,,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_UD_PRO,GIGABYTE SmartSSD 4TB
 Storage - SSD,GIGABYTE,SSD 120GB,,Y,35,12,13,1,1.6,PC,,SSD,120,440,,,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_SSD,GIGABYTE SSD 120GB
 Storage - SSD,GIGABYTE,SSD 1TB,,Y,90,30,13,1,1.6,PC,,SSD,1000,525,,,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_SSD,GIGABYTE SSD 1TB
 Storage - SSD,GIGABYTE,SSD 240GB,,Y,40,13,13,1,1.6,PC,,SSD,240,460,,,Prefabs/SSD/GIGABYTE/SSD_Gigabyte_SSD,GIGABYTE SSD 240GB
@@ -77,6 +107,7 @@ Storage - SSD,GIGABYTE,UD PRO 512GB,,Y,150,50,13,15,1.6,PC,,SSD,512,515,,,Prefab
 Storage - SSD,HyperX,FURY RGB 240GB,,Y,100,33,11,40,1.5,PC,RGB,SSD,240,530,,,Prefabs/SSD/HyperX/SSD_HyperX_FURY_RGB_SSD,HyperX FURY RGB 240GB
 Storage - SSD,HyperX,FURY RGB 480GB,,Y,180,60,11,40,1.5,PC,RGB,SSD,480,530,,,Prefabs/SSD/HyperX/SSD_HyperX_FURY_RGB_SSD,HyperX FURY RGB 480GB
 Storage - SSD,HyperX,FURY RGB 960GB,,Y,310,103,11,40,1.5,PC,RGB,SSD,960,530,,,Prefabs/SSD/HyperX/SSD_HyperX_FURY_RGB_SSD,HyperX FURY RGB 960GB
+Storage - SSD,Intel,Optane 900P 280GB,Y,Y,390,55,15,1,,,,SSD,280,2000,,,Prefabs/Generic/SSD,Intel Optane 900P 280GB
 Storage - SSD,Kingston,A400 SATA SSD 120GB,,Y,30,10,30,1,1.8,PC,,SSD,120,535,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_A400,Kingston A400 SATA SSD 120GB
 Storage - SSD,Kingston,A400 SATA SSD 240GB,,Y,50,17,30,1,1.8,PC,,SSD,240,535,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_A400,Kingston A400 SATA SSD 240GB
 Storage - SSD,Kingston,A400 SATA SSD 480GB,,Y,75,25,30,1,1.8,PC,,SSD,480,535,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_A400,Kingston A400 SATA SSD 480GB
@@ -85,12 +116,16 @@ Storage - SSD,Kingston,KC600 SATA SSD 1024GB,,Y,90,30,30,1,1.8,PC,,SSD,1024,535,
 Storage - SSD,Kingston,KC600 SATA SSD 2048GB,,Y,110,37,30,1,1.8,PC,,SSD,2048,535,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_KC600,Kingston KC600 SATA SSD 2048GB
 Storage - SSD,Kingston,KC600 SATA SSD 256GB,,Y,50,17,30,1,1.8,PC,,SSD,256,525,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_KC600,Kingston KC600 SATA SSD 256GB
 Storage - SSD,Kingston,KC600 SATA SSD 512GB,,Y,75,25,30,1,1.8,PC,,SSD,512,535,,,v1_8_0/Prefabs/SSD/Kingston/SSD_Kingston_KC600,Kingston KC600 SATA SSD 512GB
+Storage - SSD,NIMBUS Data,ExaDrive DC100,Y,Y,20000,10750,31,95,,,,SSD,100000,540,,,Prefabs/Generic/HDD,NIMBUS Data ExaDrive DC100
+Storage - SSD,NIMBUS Data,ExaDrive DC50,Y,Y,10000,6750,31,50,,,,SSD,50000,540,,,Prefabs/Generic/HDD,NIMBUS Data ExaDrive DC50
 Storage - SSD,Patriot,Burst 120GB,,Y,90,30,14,1,1.0,,,SSD,120,550,,,Prefabs/SSD/PATRIOT/PATRIOT_Burst_SATAIII,Patriot Burst 120GB
 Storage - SSD,Patriot,Burst 240GB,,Y,105,35,14,1,1.0,,,SSD,240,525,,,Prefabs/SSD/PATRIOT/PATRIOT_Burst_SATAIII,Patriot Burst 240GB
 Storage - SSD,Patriot,Burst 480GB,,Y,190,63,14,1,1.0,,,SSD,480,550,,,Prefabs/SSD/PATRIOT/PATRIOT_Burst_SATAIII,Patriot Burst 480GB
 Storage - SSD,Shean,Mega 120GB,,Y,80,27,1,1,1.0,,,SSD,120,480,,,Prefabs/Generic/SSD,Shean Mega 120GB
 Storage - SSD,Shean,Mega 250GB,,Y,110,37,1,1,1.0,,,SSD,250,480,,,Prefabs/Generic/SSD,Shean Mega 250GB
 Storage - SSD,Shean,Mega 60GB,,Y,60,20,1,1,1.0,,,SSD,60,480,,,Prefabs/Generic/SSD,Shean Mega 60GB
+Storage - SSD,Shean,Ultimate 1000GB,Y,,295,27,1,1,,,,SSD,1000,500,,,Prefabs/Generic/SSD,Shean Ultimate 1000GB
+Storage - SSD,Shean,Ultimate 500GB,Y,,175,27,1,1,,,,SSD,500,550,,,Prefabs/Generic/SSD,Shean Ultimate 500GB
 Storage - SSD,Team Group,T-FORCE Delta MAX 1TB,,Y,150,50,24,30,1.8,PC,RGB,SSD,1000,560,,,v1_8_0/Prefabs/SSD/TeamGroup/SSD_T-Force_Delta_Max,Team Group T-FORCE Delta MAX 1TB
 Storage - SSD,Team Group,T-FORCE Delta MAX 250GB,,Y,80,27,24,30,1.8,PC,RGB,SSD,250,560,,,v1_8_0/Prefabs/SSD/TeamGroup/SSD_T-Force_Delta_Max,Team Group T-FORCE Delta MAX 250GB
 Storage - SSD,Team Group,T-FORCE Delta MAX 500GB,,Y,110,37,24,30,1.8,PC,RGB,SSD,500,560,,,v1_8_0/Prefabs/SSD/TeamGroup/SSD_T-Force_Delta_Max,Team Group T-FORCE Delta MAX 500GB

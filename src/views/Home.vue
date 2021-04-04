@@ -37,6 +37,16 @@
         name="player-level"
       >
     </label>
+
+    <label for="allow-modded-parts-hem">
+      Allow HEM Parts
+      <input
+        v-model="allowModdedPartsHEM"
+        type="checkbox"
+        name="allow-modded-parts-hem"
+      >
+    </label>
+
     <p class="help">
       Use this as an app-wide filter for parts. Any parts above this level will not be displayed in the relevant tables.
     </p>
@@ -81,6 +91,16 @@ export default defineComponent({
 
       set (value: number): void {
         this.$store.commit('UPDATE_PLAYER_LEVEL', value)
+      },
+    },
+
+    allowModdedPartsHEM: {
+      get (): boolean {
+        return this.$store.state.allowModdedPartsHEM || false
+      },
+
+      set (value: boolean): void {
+        this.$store.commit('UPDATE_ALLOW_MODDED_PARTS_HEM', value)
       },
     },
 

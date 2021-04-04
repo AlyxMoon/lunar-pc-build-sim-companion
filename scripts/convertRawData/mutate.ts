@@ -13,6 +13,7 @@ type ObjectPartAliasAndMutation = {
 
 const propertiesForAllParts: ObjectPartAliasAndMutation = {
   'Part Type': value => ['type', value],
+  'HEM': value => ['moddedPartHEM', value === 'Y'],
   'Manufacturer': value => ['manufacturer', value],
   'Part Name': value => ['name', value],
   'Full Part Name': value => ['nameFull', value],
