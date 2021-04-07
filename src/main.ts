@@ -24,6 +24,6 @@ createApp(App)
   .use(router)
   .use(pageTracker, {
     gtag: window.gtag,
-    prefix: 'Lunar\'s PCBS Companion | ',
+    titlePrefix: 'Lunar\'s PCBS Companion | ',
   })
   .mount('#app')
