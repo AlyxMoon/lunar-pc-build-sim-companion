@@ -47,24 +47,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style lang="scss">
-* {
-  box-sizing: border-box;
-}
-
-main {
-  height: calc(100vh - 50px);
-  padding: 0 20px;
-
-  display: flex;
-  flex-direction: column;
-
-  overflow-y: scroll;
-}
-
-main > section {
-  flex-shrink: 0;
-  min-height: 100vh;
-}
-</style>

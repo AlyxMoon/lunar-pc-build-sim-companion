@@ -1,3 +1,6 @@
+
+import { defineAsyncComponent } from 'vue'
+
 import { createRouter, createWebHistory } from 'vue-router'
 
 import ActiveBuilds from '../views/ActiveBuilds.vue'
@@ -6,6 +9,8 @@ import Home from '../views/Home.vue'
 import Overclocking from '../views/Overclocking.vue'
 import PartsList from '../views/PartsList.vue'
 import WillItRun from '../views/WillItRun.vue'
+
+const PrivacyPolicy = defineAsyncComponent(() => import('@/views/PrivacyPolicy.vue'))
 
 const routes = [
   {
@@ -38,6 +43,13 @@ const routes = [
     name: 'WillItRun',
     component: WillItRun,
   },
+
+  {
+    path: '/privacy-policy',
+    name: 'PrivacyPolicy',
+    component: PrivacyPolicy,
+  },
+
   {
     path: '/:pathMath(.*)*',
     redirect: { name: 'Home' },
