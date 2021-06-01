@@ -1,16 +1,32 @@
 <template>
   <footer>
-    <p>
-      This is not an official app. If you have any questions/comments/concerns about the app feel free to leave an issue in the Github Repo or contact me. A link to my Discord server is below, you can find me there.
-    </p>
-    <a
-      v-for="link in links"
-      :key="link.href"
-      :href="link.href"
-      target="_blank"
-    >
-      - {{ link.text }}
-    </a>
+    <div class="container">
+      <p>
+        This is not an official app. If you have any questions/comments/concerns about the app feel free to leave an issue in the Github Repo or contact me. A link to my Discord server is below, you can find me there.
+      </p>
+
+      <ul>
+        <li>
+          <router-link
+            :to="{ name: 'PrivacyPolicy' }"
+          >
+            Privacy Policy
+          </router-link>
+        </li>
+
+        <li
+          v-for="link in links"
+          :key="link.href"
+        >
+          <a
+            :href="link.href"
+            target="_blank"
+          >
+            {{ link.text }}
+          </a>
+        </li>
+      </ul>
+    </div>
   </footer>
 </template>
 
@@ -52,32 +68,35 @@ footer {
   flex-shrink: 0;
 
   min-height: 100px;
-  width: calc(100% + 40px);
-  margin: 20px -20px 0;
-  padding: 10px 30px;
+  margin: 20px 0 0;
+  padding: 20px 3%;
+
+  background-color: $colorPrimary;
+  border-top: 3px solid $colorPrimaryAccent;
+  color: white;
+}
+
+.container {
+  height: 100%;
 
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+}
 
-  background-color: $colorPrimary;
-  border-top: 3px solid $colorPrimaryAccent;
-  color: white;
+a {
+  margin-bottom: 5px;
 
-  a {
-    margin-bottom: 5px;
+  color: #DDDDDD;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: right;
 
-    color: #DDDDDD;
-    font-size: 1rem;
-    text-decoration: none;
-    text-align: right;
+  transition-duration: 0.2s;
 
-    transition-duration: 0.2s;
-
-    &:hover {
-      color: $colorPrimaryAccent;
-    }
+  &:hover {
+    color: $colorPrimaryAccent;
   }
 }
 </style>

@@ -1,31 +1,33 @@
 <template>
   <nav>
-    <router-link
-      class="logo-wrapper"
-      to="/"
-    >
-      <img src="@/assets/logo.png">
-      <span>Home</span>
-    </router-link>
-
-    <div
-      class="link-wrapper"
-      :class="{ open: navbarOpen }"
-    >
+    <div class="container">
       <router-link
-        v-for="route in routes"
-        :key="route.name"
-        :to="{ name: route.name }"
+        class="logo-wrapper"
+        to="/"
       >
-        {{ route.title }}
+        <img src="@/assets/logo.png">
+        <span>Home</span>
       </router-link>
-    </div>
 
-    <div
-      class="expand"
-      @click="navbarOpen = !navbarOpen"
-    >
-      <FontAwesomeIcon icon="bars" />
+      <div
+        class="link-wrapper"
+        :class="{ open: navbarOpen }"
+      >
+        <router-link
+          v-for="route in routes"
+          :key="route.name"
+          :to="{ name: route.name }"
+        >
+          {{ route.title }}
+        </router-link>
+      </div>
+
+      <div
+        class="expand"
+        @click="navbarOpen = !navbarOpen"
+      >
+        <FontAwesomeIcon icon="bars" />
+      </div>
     </div>
   </nav>
 </template>
@@ -50,121 +52,124 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 nav {
-  position: relative;
-
   height: 50px;
   width: 100%;
   padding: 0 30px;
 
+  background-color: $colorPrimary;
+  border-bottom: 3px solid $colorPrimaryAccent;
+}
+
+.container {
+  height: 100%;
+  position: relative;
+
   display: flex;
   align-items: center;
   flex-direction: row;
+}
 
-  background-color: $colorPrimary;
-  border-bottom: 3px solid $colorPrimaryAccent;
+.logo-wrapper {
+  display: flex;
+  align-items: center;
 
-  .logo-wrapper {
+  img {
+    height: 30px;
+    width: 30px;
+
+    margin-right: 10px;
+  }
+}
+
+a {
+  color: #DDDDDD;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: right;
+
+  transition-duration: 0.2s;
+
+  @include md {
+    text-align: center;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+
+  @include lg {
+    font-size: 1.2em;
+  }
+
+  &:hover, &.router-link-active {
+    color: $colorPrimaryAccent;
+  }
+}
+
+.link-wrapper {
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-end;
+
+  user-select: none;
+
+  @include smAndBelow {
+    display: grid;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 150px;
+
+    max-height: 0;
+    padding: 0 20px;
+
+    grid-template-columns: auto;
+    grid-row-gap: 15px;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    background-color: #232031;
+
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+
+    transition:
+      max-height 0.5s,
+      padding 0.5s,
+      visibility 1s 0.5s;
+
+    &.open {
+      max-height: 200px;
+      padding: 20px;
+
+      pointer-events: all;
+      visibility: visible;
+    }
+  }
+
+  @include md {
     display: flex;
-    align-items: center;
+  }
+}
 
-    img {
-      height: 30px;
-      width: 30px;
+.expand {
+  width: 40px;
+  margin-left: auto;
+  color: #DDDDDD;
 
-      margin-right: 10px;
-    }
+  font-size: 1.5rem;
+
+  cursor: pointer;
+  transition-duration: 0.2s;
+
+  &:hover {
+    color: #A22744;
   }
 
-  a {
-    color: #DDDDDD;
-    font-size: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    text-align: right;
-
-    transition-duration: 0.2s;
-
-    @include md {
-      text-align: center;
-
-      &:not(:last-child) {
-        margin-right: 20px;
-      }
-    }
-
-    @include lg {
-      font-size: 1.2em;
-    }
-
-    &:hover, &.router-link-active {
-      color: $colorPrimaryAccent;
-    }
-  }
-
-  .link-wrapper {
-    flex-grow: 1;
-    align-items: center;
-    justify-content: flex-end;
-
-    user-select: none;
-
-    @include smAndBelow {
-      display: grid;
-      position: absolute;
-      top: 50px;
-      right: 0;
-      width: 150px;
-
-      max-height: 0;
-      padding: 0 20px;
-
-      grid-template-columns: auto;
-      grid-row-gap: 15px;
-      justify-content: flex-start;
-      align-items: flex-end;
-
-      background-color: #232031;
-
-      overflow: hidden;
-      pointer-events: none;
-      visibility: hidden;
-
-      transition:
-        max-height 0.5s,
-        padding 0.5s,
-        visibility 1s 0.5s;
-
-      &.open {
-        max-height: 200px;
-        padding: 20px;
-
-        pointer-events: all;
-        visibility: visible;
-      }
-    }
-
-    @include md {
-      display: flex;
-    }
-  }
-
-  .expand {
-    width: 40px;
-    margin-left: auto;
-    color: #DDDDDD;
-
-    font-size: 1.5rem;
-
-    cursor: pointer;
-    transition-duration: 0.2s;
-
-    &:hover {
-      color: #A22744;
-    }
-
-    @include md {
-      display: none;
-    }
+  @include md {
+    display: none;
   }
 }
 </style>
