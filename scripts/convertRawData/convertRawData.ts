@@ -1,18 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
-import { PlainObject } from '@/typings'
-import { mutateField, mutatePart } from './mutate'
-
-const {
+import type { PlainObject } from '@/typings'
+import { mutateField, mutatePart } from './mutate.ts'
+import {
   existsSync,
   mkdir,
   readFile,
   writeFile,
-} = require('fs')
-const { join } = require('path')
-const { promisify } = require('util')
-
-declare const __dirname: string
+} from 'node:fs'
+import { join } from 'node:path'
+import { promisify } from 'node:util'
 
 const partCategories = [
   'casefans',
@@ -64,7 +59,7 @@ const convertRawData = (raw: string, category: string): PlainObject => {
 }
 
 const main = async (): Promise<void> => {
-  const dataDirectory = join(__dirname, '../../src/assets/data')
+  const dataDirectory = join(import.meta.dirname, '../../src/assets/data')
   const finalDirectory = join(dataDirectory, 'parts')
 
   if (!existsSync(dataDirectory)) {
@@ -75,7 +70,7 @@ const main = async (): Promise<void> => {
   }
 
   for (const category of partCategories) {
-    const rawFilePath = join(__dirname, `data/${category}.csv`)
+    const rawFilePath = join(import.meta.dirname, `data/${category}.csv`)
     const formattedFilePath = join(finalDirectory, category + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
@@ -85,7 +80,7 @@ const main = async (): Promise<void> => {
   }
 
   for (const category of otherCategories) {
-    const rawFilePath = join(__dirname, `data/${category}.csv`)
+    const rawFilePath = join(import.meta.dirname, `data/${category}.csv`)
     const formattedFilePath = join(finalDirectory, '..', category + '.json')
 
     const rawData = await promisify(readFile)(rawFilePath, 'utf-8')
@@ -95,4 +90,4 @@ const main = async (): Promise<void> => {
   }
 }
 
-main()
+await main()

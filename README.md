@@ -5,5 +5,42 @@
 This is a web-hosted companion app for PC Building Simulator. Intended to help look up parts, keep track of client projects, and plan out builds. It's a hobby project right now so I'm not spending too much time on documentation. If you have any questions or want to help you are welcome to reach out.
 
 
+### Local development
+
+Use Node 24 LTS and Yarn Classic 1.22.22 through Corepack:
+
+```sh
+corepack yarn@1.22.22 install --frozen-lockfile
+corepack yarn@1.22.22 convert-raw-data
+corepack yarn@1.22.22 serve
+```
+
+The converter still reads the CSV files in `scripts/convertRawData/data`. It runs
+with Node 24's built-in TypeScript support and generates ignored JSON under
+`src/assets/data`. Run it before building or checking types.
+
+```sh
+corepack yarn@1.22.22 build
+corepack yarn@1.22.22 typecheck
+corepack yarn@1.22.22 test:unit
+corepack yarn@1.22.22 lint --no-fix
+corepack yarn@1.22.22 preview
+```
+
+The production build writes `dist` with the base path
+`/pc-build-sim-companion/`. Preview it at
+`http://localhost:4173/pc-build-sim-companion/`.
+The deployment command remains `yarn convert-raw-data && yarn build`.
+Unit tests run once under Vitest and write LCOV coverage to `tests/coverage`.
+The lint command checks TypeScript, Vue components, scripts and tool configs
+with ESLint 9; pass `--fix` explicitly to apply fixes.
+Set `VUE_APP_ENABLE_ANALYTICS=true` and `VUE_APP_ANALYTICS_CODE` at build time
+to include the existing tag-manager snippet. Without both settings it is omitted.
+
+The TypeScript configuration keeps `useDefineForClassFields` disabled because
+the models install reactive property accessors in their base constructor.
+Vuex 4's declaration path is mapped explicitly because its package exports do
+not expose those declarations to TypeScript's bundler resolution.
+
 ### Notes on validation rules
 One goal I have is to check all possible errors that might happen when picking out parts for a build. These rules can be found in `src/lib/buildValidationRules`. The general naming convention I'm going with is to have it rule start with the part type and then state the rule. In the case of part compatibility, the part that holds the other part goes first (i.e. a CPU goes on a motherboard, so that check would be motherboardFitsCpu).

@@ -1,4 +1,4 @@
-import { Parts } from '@/typings'
+import type { Parts } from '@/typings'
 
 const calculateGpuStats = (
   part: Parts.GpuInterface,

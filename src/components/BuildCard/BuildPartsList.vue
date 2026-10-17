@@ -36,7 +36,7 @@
 
         <select
           :value="newOldStatusLabel(item)"
-          @change="changePartStatus(item.originalIndex, $event.target.value)"
+          @change="changePartStatus(item.originalIndex, ($event.target as HTMLSelectElement).value)"
         >
           <option
             v-if="item.type === 'Case Fan'"
@@ -204,7 +204,7 @@ export default defineComponent({
       }
     },
 
-    partsOfCategory (partType: string): Parts.BaseInterface[] {
+    partsOfCategory (partType: string): (Parts.BaseInterface & { originalIndex: number })[] {
       return this.parts
         .map((item, index) => ({ ...item, originalIndex: index }))
         .filter(item => partType === item.type)

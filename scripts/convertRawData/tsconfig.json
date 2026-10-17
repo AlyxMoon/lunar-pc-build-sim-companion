@@ -1,40 +1,12 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "../../dist",
-    "strict": true,
-    "importHelpers": true,
-    "experimentalDecorators": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false,
-    "rootDir": "../..",
-    "baseUrl": "../..",
-    "paths": {
-      "@/typings": ["./src/typings/index.d.ts"],
-      "@/*": ["../../src/*"]
-    },
-    "typeRoots": [
-      "../../src/typings"
-    ],
+    "allowImportingTsExtensions": true,
     "types": [
-      "webpack-env",
-      "jest"
-    ],
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+      "node"
     ]
   },
   "include": [
-    "./*.ts",
-    "./data/*.json",
-    "../../src/**/*.ts"
-  ],
+    "./*.ts"
+  ]
 }

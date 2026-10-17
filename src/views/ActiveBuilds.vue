@@ -39,7 +39,8 @@
 import { PlainObject, BuildModelInterface, Parts } from '@/typings'
 
 import { defineComponent } from 'vue'
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
+import type BuildModel from '@/models/Build.model'
 
 import BuildCard from '@/components/BuildCard/index.vue'
 import DialogPartLookup from '@/components/DialogPartLookup.vue'
@@ -56,9 +57,9 @@ export default defineComponent({
   }),
 
   computed: {
-    ...mapState({
-      builds: 'builds',
-    }),
+    builds (): BuildModel[] {
+      return this.$store.state.builds
+    },
   },
 
   methods: {

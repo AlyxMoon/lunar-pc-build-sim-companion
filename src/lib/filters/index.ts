@@ -1,12 +1,11 @@
-import { defineComponent } from 'vue'
 import currency from './currency'
 
-const filtersMixin = defineComponent({
+const filtersMixin = {
   data: () => ({
     displayFilters: {
       currency,
     },
   }),
-})
+}
 
 export default filtersMixin
