@@ -1,7 +1,6 @@
 import { DisplayFunctionMap, ProgramRequirementsModelInterface, StringMap } from '@/typings'
 import BaseModel from './_BaseModel'
 
-/* eslint-disable @typescript-eslint/camelcase */
 const nameMap: StringMap = {
   adobe_photoshop: 'Adobe Photoshop CC',
   adobe_premiere: 'Adobe Premiere Pro CC',
@@ -34,7 +33,6 @@ const nameMap: StringMap = {
   tanks: 'World of Tanks',
   warcraft: 'World of Warcraft',
 }
-/* eslint-enable @typescript-eslint/camelcase */
 
 const specsMap: StringMap = {
   min: 'Minimum',
