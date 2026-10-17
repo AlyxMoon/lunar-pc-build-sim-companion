@@ -24,7 +24,7 @@
 import { PlainObject } from '@/typings'
 
 export default {
-  name: 'Accordion',
+  name: 'AppAccordion',
 
   data: (): PlainObject => ({
     show: false,

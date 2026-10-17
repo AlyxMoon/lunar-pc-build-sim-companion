@@ -99,19 +99,19 @@
               @selected="selectBuild"
             >
               <template #column-1="{ item }">
-                {{ displayFilters.currency(item.parts.reduce((sum, part) => sum + part.price, 0)) }}
+                {{ displayFilters.currency(buildPrice(item)) }}
               </template>
 
               <template #column-2="{ item }">
-                {{ item.parts.find(part => part.type === 'GPU').nameFull }}
+                {{ partName(item, 'GPU') }}
               </template>
 
               <template #column-3="{ item }">
-                {{ item.parts.find(part => part.type === 'CPU').nameFull }}
+                {{ partName(item, 'CPU') }}
               </template>
 
               <template #column-4="{ item }">
-                {{ item.parts.find(part => part.type === 'Memory').nameFull }}
+                {{ partName(item, 'Memory') }}
               </template>
             </DataTable>
           </template>
@@ -169,6 +169,14 @@ export default defineComponent({
   },
 
   methods: {
+    buildPrice (build: BuildModelInterface): number {
+      return build.parts.reduce((sum, part) => sum + part.price, 0)
+    },
+
+    partName (build: BuildModelInterface, type: string): string {
+      return build.parts.find(part => part.type === type)!.nameFull
+    },
+
     async beginCalculation (): Promise<void> {
       if (!this.checkInputsValid()) return
       this.calculating = true

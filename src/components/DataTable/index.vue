@@ -2,7 +2,7 @@
   <div class="table-wrapper">
     <div class="table-header">
       <SearchBar
-        v-model:searchQuery="searchQuery"
+        v-model:search-query="searchQuery"
       />
     </div>
 
@@ -105,7 +105,7 @@
 
 <script lang="ts">
 import { PlainObject } from '@/typings'
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { mapState } from 'vuex'
 
 import SearchBar from './DataTableSearchBar.vue'
@@ -117,11 +117,11 @@ export default defineComponent({
   },
   props: {
     headers: {
-      type: Array,
+      type: Array as PropType<PlainObject[]>,
       default: (): PlainObject[] => [],
     },
     items: {
-      type: Array,
+      type: Array as PropType<PlainObject[]>,
       default: (): PlainObject[] => [],
     },
     includeAction: {

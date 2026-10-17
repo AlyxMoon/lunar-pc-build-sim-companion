@@ -51,7 +51,7 @@ export interface CaseFanInterface extends BaseInterface {
 export interface CpuInterface extends BaseInterface {
   frequency: number,
   coreCount: number,
-  socket: value,
+  socket: string,
   wattage: number,
   canOverclock: boolean,
   defaultMemSpeed: number,
@@ -94,8 +94,6 @@ export interface GpuInterface extends BaseInterface {
   length: number,
   wattage: number,
   multi: string,
-  baseCoreFreq: number,
-  baseMemFreq: number,
   multCoreSingle1: number,
   multMemSingle1: number,
   multAdjustSingle1: number,
@@ -160,15 +158,15 @@ export interface StorageInterface extends BaseInterface {
 }
 
 export interface ByCategoryInterface {
-  cpus: Cpu[],
-  gpus: Gpu[],
-  memory: Memory[],
+  cpus: CpuInterface[],
+  gpus: GpuInterface[],
+  memory: MemoryInterface[],
 }
 
 export interface ByAllCategoriesInterface {
-  cpus: Cpu[],
-  gpus: Gpu[],
-  memory: Memory[],
+  cpus: CpuInterface[],
+  gpus: GpuInterface[],
+  memory: MemoryInterface[],
   cases: CaseInterface[],
   casefans: CaseFanInterface[],
   cpucoolers: CpuCoolerInterface[],

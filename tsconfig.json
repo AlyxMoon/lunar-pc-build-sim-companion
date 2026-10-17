@@ -1,26 +1,26 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ES2022",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
     "resolveJsonModule": true,
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "allowJs": true,
-    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env",
-      "jest"
+      "vite/client"
     ],
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "vuex": [
+        "./node_modules/vuex/types/index.d.ts"
       ]
     },
     "lib": [
@@ -28,14 +28,15 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/unit/**/*.ts",
+    "*.mts"
   ],
   "exclude": [
     "node_modules"

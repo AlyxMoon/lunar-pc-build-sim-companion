@@ -32,7 +32,7 @@ export interface AppState {
 
 export interface ImportExportData {
   [key: string]: any,
-  builds?: Model[],
+  builds?: ModelInterface[],
   playerLevel?: number,
 }
 
@@ -71,7 +71,7 @@ export interface BuildModelInterface extends ModelInterface {
   name: string,
   jobType: string,
   budget: number,
-  estimatedScore: estimatedScore,
+  estimatedScore: number,
   objectives: string[],
   parts: Parts.BaseInterface[],
 }

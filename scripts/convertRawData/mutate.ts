@@ -1,12 +1,11 @@
-import { Parts } from '@/typings'
+import type { Parts } from '@/typings'
 
-import calculateCpuStats from '../../src/lib/calculations/calculateCpuStats'
-import calculateGpuStats from '../../src/lib/calculations/calculateGpuStats'
+import calculateCpuStats from '../../src/lib/calculations/calculateCpuStats.ts'
+import calculateGpuStats from '../../src/lib/calculations/calculateGpuStats.ts'
 
 type ValueTypes = string | number | boolean | string[] | number[]
 type PartType = Record<string, ValueTypes>
 
-/* eslint-disable quote-props, @typescript-eslint/explicit-function-return-type */
 type ObjectPartAliasAndMutation = {
   [key: string]: (value: string) => [string, ValueTypes],
 }
@@ -183,7 +182,6 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
   },
 }
 
-/* eslint-enable quote-props, @typescript-eslint/explicit-function-return-type */
 
 export const mutateField = (
   value: any,
