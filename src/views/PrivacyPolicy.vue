@@ -21,7 +21,7 @@
     While the switch is off, the app does not request the tag-manager script or send analytics page views.
   </p>
   <p>
-    When you opt in, the app loads Google Tag Manager through metrics.allisterbytes.com for Google Analytics.
+    When you opt in, the app loads Google Tag Manager from Google (googletagmanager.com) for Google Analytics.
     The app sends a page view with the page address and title when analytics starts and when you navigate between pages.
     Analytics may use cookies and collect information such as your browser, device, language and approximate location inferred from your IP address.
     Your saved builds and player options are not included in the app's page-view events.

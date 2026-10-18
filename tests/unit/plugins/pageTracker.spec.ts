@@ -78,7 +78,7 @@ describe('Consent-controlled tag manager', () => {
     expect(scripts).toHaveLength(1)
     expect(scripts[0]).toMatchObject({
       async: true,
-      src: 'https://metrics.allisterbytes.com/gtm.js?id=GTM-TEST',
+      src: 'https://www.googletagmanager.com/gtm.js?id=GTM-TEST',
     })
     expect(window.dataLayer?.[0]).toMatchObject({ event: 'gtm.js', 'gtm.start': expect.any(Number) })
     expect(pageViews()).toEqual([{
