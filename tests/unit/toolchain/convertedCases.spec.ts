@@ -1,13 +1,12 @@
-import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
-import { beforeAll, describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { caseFitsMotherboard } from '@/lib/buildValidationRules'
 import BuildModel from '@/models/Build.model'
 import type { Parts } from '@/typings'
 
 describe('Converted case motherboard support', () => {
-  let cases: Parts.CaseInterface[]
-  let motherboards: Parts.MotherboardInterface[]
+  const cases: Parts.CaseInterface[] = JSON.parse(readFileSync('src/assets/data/parts/cases.json', 'utf8'))
+  const motherboards: Parts.MotherboardInterface[] = JSON.parse(readFileSync('src/assets/data/parts/motherboards.json', 'utf8'))
   const rows = readFileSync('scripts/convertRawData/data/cases.csv', 'utf8')
     .trim().split(/\r?\n/)
     .map(row => row.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
@@ -15,14 +14,6 @@ describe('Converted case motherboard support', () => {
   const headers = rows.shift()!
   const nameColumn = headers.indexOf('Full Part Name')
   const microAtxColumn = headers.indexOf('Micro-ATX')
-
-  beforeAll(() => {
-    execFileSync(process.execPath, ['scripts/convertRawData/convertRawData.ts'], {
-      timeout: 30000,
-    })
-    cases = JSON.parse(readFileSync('src/assets/data/parts/cases.json', 'utf8'))
-    motherboards = JSON.parse(readFileSync('src/assets/data/parts/motherboards.json', 'utf8'))
-  }, 35000)
 
   it('preserves the Micro-ATX CSV flag for every case without introducing Micro-ITX', () => {
     expect(nameColumn).toBeGreaterThanOrEqual(0)

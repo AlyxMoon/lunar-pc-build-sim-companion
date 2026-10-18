@@ -6,6 +6,7 @@ export default mergeConfig(
   defineConfig({
     test: {
       environment: 'node',
+      globalSetup: ['tests/unit/globalSetup.ts'],
       include: ['tests/unit/**/*.spec.ts'],
       coverage: {
         provider: 'v8',
