@@ -13,6 +13,10 @@ export const UPDATE_COLOR_MODE = (state: PlainObject, mode: string): void => {
   state.colorMode = mode
 }
 
+export const UPDATE_ANALYTICS_ENABLED = (state: PlainObject, enabled: boolean): void => {
+  state.analyticsEnabled = enabled
+}
+
 export const CREATE_BUILD = (state: PlainObject, build: BuildModel): void => {
   state.builds.push(build)
 }

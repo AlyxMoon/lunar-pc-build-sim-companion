@@ -33,11 +33,10 @@ describe('Production HTML', { timeout: 60_000 }, () => {
     expect(html).not.toContain('dataLayer')
   })
 
-  it('includes the existing tag manager when both deployment settings are provided', async () => {
+  it('does not inject a tag-manager request even when analytics is configured', async () => {
     const html = await buildHtml('true', 'GTM-TEST')
-    expect(html).toContain('https://metrics.allisterbytes.com/gtm.js?id=')
-    expect(html).toContain('GTM-TEST')
-    expect(html).toContain('dataLayer')
+    expect(html).not.toContain('gtm.js')
+    expect(html).not.toContain('dataLayer')
   })
 
   it.each([

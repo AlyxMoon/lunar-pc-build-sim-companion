@@ -35,7 +35,15 @@ Unit tests run once under Vitest and write LCOV coverage to `tests/coverage`.
 The lint command checks TypeScript, Vue components, scripts and tool configs
 with ESLint 9; pass `--fix` explicitly to apply fixes.
 Set `VUE_APP_ENABLE_ANALYTICS=true` and `VUE_APP_ANALYTICS_CODE` at build time
-to include the existing tag-manager snippet. Without both settings it is omitted.
+to make analytics available. The tag-manager script is requested only after the
+visitor enables analytics on Settings; the choice defaults to off and is saved
+in local storage. Turning it off saves the choice and reloads the page to stop
+the loaded scripts. Without both deployment settings the script is never loaded.
+The app pushes `page_view` events to the tag manager's `dataLayer` for the current
+page after opt-in and each successful route change, with `page_path`,
+`page_location` and `page_title`. The container must handle this custom event
+to forward views to Analytics; automatic page-view tracking should not duplicate
+these events. Container configuration is managed outside this repository.
 
 The TypeScript configuration keeps `useDefineForClassFields` disabled because
 the models install reactive property accessors in their base constructor.
