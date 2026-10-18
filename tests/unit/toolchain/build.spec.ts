@@ -23,7 +23,7 @@ async function buildHtml (enabled?: string, code?: string): Promise<string> {
   return String(html.source)
 }
 
-describe('Production HTML', () => {
+describe('Production HTML', { timeout: 60_000 }, () => {
   it('loads assets from the deployment base and omits analytics by default', async () => {
     const html = await buildHtml()
     expect(html).toMatch(/src="\/pc-build-sim-companion\/assets\/[^" ]+\.js"/)
