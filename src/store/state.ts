@@ -176,6 +176,7 @@ const state = {
   builds: [],
   playerLevel: 1,
   allowModdedPartsHEM: false,
+  analyticsEnabled: false,
 
   colorMode: 'light',
 }

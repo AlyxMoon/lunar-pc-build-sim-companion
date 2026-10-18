@@ -19,6 +19,7 @@ export default createStore({
       fetchBeforeUse: true,
       paths: [
         'allowModdedPartsHEM',
+        'analyticsEnabled',
         'builds',
         'colorMode',
         'playerLevel',

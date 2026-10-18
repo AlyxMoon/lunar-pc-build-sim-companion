@@ -27,42 +27,6 @@
     >
   </div>
 
-  <div>
-    <h5>General Options</h5>
-
-    <label for="player-level">
-      Player Level
-      <input
-        v-model="playerLevel"
-        name="player-level"
-      >
-    </label>
-
-    <label for="allow-modded-parts-hem">
-      Allow HEM Parts
-      <input
-        v-model="allowModdedPartsHEM"
-        type="checkbox"
-        name="allow-modded-parts-hem"
-      >
-    </label>
-
-    <p class="help">
-      Use this as an app-wide filter for parts. Any parts above this level will not be displayed in the relevant tables.
-    </p>
-
-    <label for="color-mode">
-      Color Mode
-      <select
-        v-model="colorMode"
-        name="color-mode"
-      >
-        <option value="light">Light Mode</option>
-        <option value="dark">Dark Mode</option>
-      </select>
-    </label>
-  </div>
-
   <BuildValidationList />
 </template>
 
@@ -82,38 +46,6 @@ export default defineComponent({
   data: (): PlainObject => ({
     handlingImport: false,
   }),
-
-  computed: {
-    playerLevel: {
-      get (): number {
-        return this.$store.state.playerLevel || 0
-      },
-
-      set (value: number): void {
-        this.$store.commit('UPDATE_PLAYER_LEVEL', value)
-      },
-    },
-
-    allowModdedPartsHEM: {
-      get (): boolean {
-        return this.$store.state.allowModdedPartsHEM || false
-      },
-
-      set (value: boolean): void {
-        this.$store.commit('UPDATE_ALLOW_MODDED_PARTS_HEM', value)
-      },
-    },
-
-    colorMode: {
-      get (): string {
-        return this.$store.state.colorMode || ''
-      },
-
-      set (value: string): void {
-        this.$store.commit('UPDATE_COLOR_MODE', value)
-      },
-    },
-  },
 
   methods: {
     ...mapActions(['exportPlayerData', 'importPlayerData']),

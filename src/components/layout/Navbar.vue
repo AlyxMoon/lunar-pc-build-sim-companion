@@ -43,6 +43,7 @@ export default defineComponent({
       { name: 'ActiveBuilds', title: 'Active Builds' },
       { name: 'PartsList', title: 'Parts List' },
       { name: 'WillItRun', title: 'Will It Run' },
+      { name: 'Settings', title: 'Settings' },
     ],
 
     navbarOpen: false,

@@ -13,17 +13,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-declare global {
-  interface Window { gtag: any }
-}
-
 createApp(App)
   .mixin(filtersMixin)
   .component('FontAwesomeIcon', FontAwesomeIcon)
   .use(store)
   .use(router)
   .use(pageTracker, {
-    gtag: window.gtag,
+    store,
+    enabled: import.meta.env.VUE_APP_ENABLE_ANALYTICS === 'true',
+    containerId: import.meta.env.VUE_APP_ANALYTICS_CODE || '',
     titlePrefix: 'Lunar\'s PCBS Companion | ',
   })
   .mount('#app')

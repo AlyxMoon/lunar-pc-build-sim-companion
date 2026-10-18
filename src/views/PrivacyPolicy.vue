@@ -1,39 +1,43 @@
 <template>
   <h1>Privacy Policy</h1>
 
-  <h6>Last updated {{ lastUpdated }}</h6>
+  <h6>Last updated October 18, 2026</h6>
 
   <hr>
 
+  <h2>Your browser's storage</h2>
   <p>
-    Wow, I was looking up how to set up a privacy policy and TOS. That search returned a whole lot of sites saying a whole lot of words that fly right over my head. I thought using a generator would help but considering how verbose and dense those get I couldn't be bothered to read through it all. I can't very well put up a privacy policy I haven't bothered to read myself.
+    This app saves your builds, player level, color mode, HEM parts preference and analytics choice in your browser's local storage.
+    These settings stay on this browser until you change them or clear the site's storage. Clearing storage also resets analytics to off.
   </p>
 
+  <h2>Optional analytics</h2>
   <p>
-    I am not a lawyer and I am terrible at legalese. So screw it, here's my quick privacy policy rundown. If you have any questions on things feel free to reach out. There are some links in the footer, or you can email me at <a href="mailto:allisterbytes@gmail.com">allisterbytes@gmail.com</a>
+    Analytics is off by default, including on your first visit. You can turn on Enable Analytics on the
+    <router-link :to="{ name: 'Settings' }">
+      Settings page
+    </router-link>, which is linked from the navbar.
+    Your choice is saved in this browser and applies across the site's pages.
+    While the switch is off, the app does not request the tag-manager script or send analytics page views.
+  </p>
+  <p>
+    When you opt in, the app loads Google Tag Manager through metrics.allisterbytes.com for Google Analytics.
+    The app sends a page view with the page address and title when analytics starts and when you navigate between pages.
+    Analytics may use cookies and collect information such as your browser, device, language and approximate location inferred from your IP address.
+    Your saved builds and player options are not included in the app's page-view events.
+  </p>
+  <p>
+    You can turn analytics off at any time in Settings. The app saves your choice and reloads the page to stop analytics scripts that have already loaded.
+    Turning it off stops future collection by this app; it does not delete information already collected or existing analytics cookies.
+    You can remove cookies and local storage using your browser's site-data controls.
   </p>
 
-  <ul>
-    <li>I am using Google Analytics for tracking.</li>
-    <li>I am not currently, but plan to, use Google Adsense.</li>
-    <li>Both of these items I will add add options for disabling. Google Analytics will be enabled by default, Adsense will be opt-in</li>
-    <li>There will be cookies used for Analytics and Adsense, as well as tracking your decision to enable/disable them</li>
-    <li>This app uses the browser local storage as well. This storage is used only for data related to the app, such as what options are selected (player level, color mode, etc.) and your builds.</li>
-  </ul>
+  <h2>Advertising</h2>
+  <p>This site shows no ads.</p>
 
-  <h3>Notes on Google Analytics</h3>
+  <h2>Contact</h2>
   <p>
-    I use Google Analytics for tracking page views. There's a bunch of fun ways to view that data but that's essentially it. By using it, Google does store information but none of it is personally identifiable. It includes stuff such as:
-  </p>
-  <ul>
-    <li>What kind of browser you are using</li>
-    <li>What your screen size is</li>
-    <li>The geographic location associated with your IP</li>
-    <li>The language set in your browser</li>
-  </ul>
-
-  <p>
-    If you'd rather not have that information tracked I totally understand. You are welcome to turn off the analytics tracking. There will be an option on this page and on the options page to switch that.
+    For privacy questions, email <a href="mailto:allisterbytes@gmail.com">allisterbytes@gmail.com</a>.
   </p>
 </template>
 
@@ -42,13 +46,5 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'PagePrivacyPolicy',
-
-  data: (): {
-    lastUpdated: string,
-    contactEmail: string,
-  } => ({
-    lastUpdated: 'April 07, 2021',
-    contactEmail: 'allisterbytes@gmail.com',
-  }),
 })
 </script>

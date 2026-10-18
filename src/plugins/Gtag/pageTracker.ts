@@ -1,62 +1,71 @@
-import { App } from 'vue'
-import { Router } from 'vue-router'
+import type { App } from 'vue'
+import type { Router } from 'vue-router'
+import type { Store } from 'vuex'
+import type { AppState } from '@/typings'
+
+declare global {
+  interface Window {
+    dataLayer?: Record<string, unknown>[],
+  }
+}
 
 class PageTracker {
-  gtag: Function = (): void => {}
-
   install (
     app: App,
     options: {
-      gtag: Function,
-      useComponentNameAsFallback?: boolean,
+      store: Store<AppState>,
+      enabled: boolean,
+      containerId: string,
       titlePrefix?: string,
-      changePageTitle?: boolean,
     },
   ): void {
-    if (!app.config.globalProperties.$router) return
-    const {
-      gtag,
-      useComponentNameAsFallback = true,
-      titlePrefix = '',
-      changePageTitle = true,
-    } = options
+    const router: Router = app.config.globalProperties.$router
+    if (!router) return
 
-    this.gtag = gtag || ((): void => {})
+    const { store, enabled, containerId, titlePrefix = '' } = options
+    let ready = false
+    let loaded = false
+    let stopping = false
 
-    this.setUpRouteWatcher(
-      app.config.globalProperties.$router,
-      { changePageTitle, titlePrefix, useComponentNameAsFallback },
-    )
+    const trackPage = (): void => {
+      if (!ready || stopping || !enabled || !containerId || store.state.analyticsEnabled !== true) return
 
-    app.provide('gtag', gtag)
-  }
-
-  setUpRouteWatcher (
-    router: Router,
-    options: {
-      useComponentNameAsFallback: boolean,
-      titlePrefix: string,
-      changePageTitle: boolean,
-    },
-  ): void {
-    const {
-      useComponentNameAsFallback,
-      titlePrefix,
-      changePageTitle,
-    } = options
-
-    router.afterEach(to => {
-      const pageName = titlePrefix + (
-        to.meta.title ||
-        to[useComponentNameAsFallback ? 'name' : 'path']
-      )
-
-      if (changePageTitle) {
-        document.title = pageName
+      window.dataLayer = window.dataLayer || []
+      if (!loaded) {
+        loaded = true
+        window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
+        const script = document.createElement('script')
+        script.async = true
+        script.src = `https://metrics.allisterbytes.com/gtm.js?id=${encodeURIComponent(containerId)}`
+        document.head.appendChild(script)
       }
 
-      this.gtag('set', 'page', pageName)
-      this.gtag('send', 'pageview')
+      window.dataLayer.push({
+        event: 'page_view',
+        page_path: router.currentRoute.value.fullPath,
+        page_location: window.location.href,
+        page_title: document.title,
+      })
+    }
+
+    router.afterEach((to, _from, failure) => {
+      if (failure) return
+      document.title = titlePrefix + String(to.meta.title || to.name || to.path)
+      trackPage()
+    })
+
+    void router.isReady().then(() => {
+      ready = true
+      trackPage()
+    })
+
+    store.subscribe(() => {
+      if (store.state.analyticsEnabled === true) {
+        if (!loaded) trackPage()
+      } else if (loaded && !stopping) {
+        stopping = true
+        window.location.reload()
+      }
     })
   }
 }
