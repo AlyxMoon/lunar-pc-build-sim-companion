@@ -38,7 +38,7 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     ...propertiesForAllParts,
     'Size': value => ['sizeType', value],
     'Mini-ITX': value => ['Mini-ITX', value === 'Y'],
-    'Micro-ATX': value => ['Micro-ITX', value === 'Y'],
+    'Micro-ATX': value => ['Micro-ATX', value === 'Y'],
     'S-ATX': value => ['S-ATX', value === 'Y'],
     'E-ATX': value => ['E-ATX', value === 'Y'],
     'XL-ATX': value => ['XL-ATX', value === 'Y'],
@@ -200,7 +200,6 @@ export const mutatePart: Record<string, (part: PartType) => PartType> = {
 
     const motherboardSizes = [
       'Mini-ITX',
-      'Micro-ITX',
       'Micro-ATX',
       'S-ATX',
       'E-ATX',
