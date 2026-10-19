@@ -154,25 +154,25 @@
             </button>
             <input
               type="text"
+              aria-label="New objective"
               v-model="tempFields.objectives"
             >
           </div>
 
           <ul class="objectives-list">
-            <template
+            <li
               v-for="(item, i) in activeBuild.objectives"
               :key="i"
             >
               <button
                 class="pure-button danger"
+                title="Remove Objective"
                 @click="removeObjective(i)"
               >
                 <FontAwesomeIcon icon="times" />
               </button>
-              <li>
-                {{ item }}
-              </li>
-            </template>
+              <span>{{ item }}</span>
+            </li>
           </ul>
         </template>
       </Accordion>
@@ -461,13 +461,17 @@ article {
   margin: 10px 0;
   padding: 0 10px;
 
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-gap: 5px 10px;
-  justify-content: flex-start;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 
   list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
   button {
     font-size: 0.9rem;
