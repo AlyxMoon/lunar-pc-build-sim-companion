@@ -9,6 +9,7 @@
     "lint": "eslint src tests/unit scripts *.mts *.mjs",
     "convert-raw-data": "node scripts/convertRawData/convertRawData.ts",
     "preview": "vite preview",
+    "audit-build": "node scripts/audit/audit.mjs",
     "typecheck": "vue-tsc --noEmit && tsc --noEmit --project scripts/convertRawData/tsconfig.json"
   },
   "dependencies": {
@@ -32,9 +33,12 @@
     "vue-tsc": "^3.3.13",
     "@eslint/js": "^9.39.5",
     "@vitest/coverage-v8": "4.1.12",
+    "axe-core": "^4.14.0",
     "eslint": "^9.39.5",
     "eslint-plugin-vue": "^10.11.1",
     "globals": "^17.13.0",
+    "lighthouse": "^13.5.0",
+    "puppeteer-core": "^25.14.0",
     "typescript-eslint": "^8.71.2",
     "vitest": "4.1.12",
     "vue-eslint-parser": "^10.3.0"
