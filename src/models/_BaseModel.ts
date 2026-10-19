@@ -99,6 +99,7 @@ class BaseModel implements ModelInterface {
 
   validate (): boolean {
     this._errors = []
+    this._hasErrors = false
 
     const validations: Function[] = this.validations()
 
@@ -106,17 +107,17 @@ class BaseModel implements ModelInterface {
       const result: any = fn(this.attributes, this)
 
       if (typeof result === 'boolean') {
-        this._hasErrors = this._hasErrors && result
+        this._hasErrors = this._hasErrors || !result
       }
 
       if (typeof result === 'string') {
-        this._hasErrors = false
+        this._hasErrors = true
         this._errors.push(result)
       }
 
       if (Array.isArray(result)) {
         const [valid, message] = result
-        this._hasErrors = this._hasErrors && valid
+        this._hasErrors = this._hasErrors || !valid
         if (message) this._errors.push(message)
       }
     })
@@ -128,7 +129,7 @@ class BaseModel implements ModelInterface {
     let newVal: any
 
     if (value === null || value === undefined) {
-      newVal = null
+      newVal = value
     } else if (Array.isArray(value)) {
       newVal = value.map(val => this.deepCopy(val))
     } else if (typeof value === 'object') {
@@ -140,7 +141,7 @@ class BaseModel implements ModelInterface {
       newVal = value
     }
 
-    return value
+    return newVal
   }
 
   clone (): this {
