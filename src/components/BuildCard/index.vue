@@ -326,7 +326,7 @@ export default defineComponent({
   },
 
   created (): void {
-    this.activeBuild = this.build
+    this.activeBuild = new BuildModel(this.build)
     this.activeBuild.runBenchmark()
   },
 })
