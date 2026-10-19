@@ -13,6 +13,7 @@
       </router-link>
 
       <div
+        id="navbar-links"
         class="link-wrapper"
         :class="{ open: navbarOpen }"
       >
@@ -25,12 +26,16 @@
         </router-link>
       </div>
 
-      <div
+      <button
+        type="button"
         class="expand"
+        aria-label="Menu"
+        aria-controls="navbar-links"
+        :aria-expanded="navbarOpen"
         @click="navbarOpen = !navbarOpen"
       >
         <FontAwesomeIcon icon="bars" />
-      </div>
+      </button>
     </div>
   </nav>
 </template>
@@ -161,6 +166,10 @@ a {
 .expand {
   width: 40px;
   margin-left: auto;
+  padding: 0;
+
+  border: 0;
+  background: none;
   color: #DDDDDD;
 
   font-size: 1.5rem;

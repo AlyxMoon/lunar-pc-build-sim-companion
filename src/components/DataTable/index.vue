@@ -18,20 +18,26 @@
               v-for="header in headers"
               :key="header.name"
               scope="col"
+              :aria-sort="ariaSortFor(header.name)"
               @click="toggleSort(header.name)"
             >
-              <template v-if="'displayName' in header">
-                {{ header.displayName }}
-              </template>
-              <template v-else>
-                {{ header.name }}
-              </template>
+              <button
+                type="button"
+                class="sort-button"
+              >
+                <template v-if="'displayName' in header">
+                  {{ header.displayName }}
+                </template>
+                <template v-else>
+                  {{ header.name }}
+                </template>
 
-              <FontAwesomeIcon
-                v-if="sortBy === header.name"
-                :class="{ ascending: !sortDesc }"
-                icon="chevron-down"
-              />
+                <FontAwesomeIcon
+                  v-if="sortBy === header.name"
+                  :class="{ ascending: !sortDesc }"
+                  icon="chevron-down"
+                />
+              </button>
             </th>
           </tr>
         </thead>
@@ -243,6 +249,11 @@ export default defineComponent({
   },
 
   methods: {
+    ariaSortFor (name: string): string {
+      if (this.sortBy !== name) return 'none'
+      return this.sortDesc ? 'descending' : 'ascending'
+    },
+
     toggleSort (name: string): void {
       if (this.sortBy === name) {
         if (!this.sortDesc) {
@@ -330,6 +341,18 @@ table {
       }
     }
   }
+}
+
+.sort-button {
+  padding: 0;
+
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  white-space: nowrap;
+
+  cursor: pointer;
 }
 
 </style>
