@@ -30,9 +30,9 @@
 
   &.info {
     background-color: $colorInfo;
-    color: white;
+    // White is 2.2:1 on this cyan, under the 3:1 minimum for a non-text icon.
+    color: black;
 
-    // White text on this cyan needs a much deeper hover shade than green or red to reach 4.5:1.
     &:hover {
       border-color: black;
       background-color: color.adjust($colorInfo, $lightness: -20%);
