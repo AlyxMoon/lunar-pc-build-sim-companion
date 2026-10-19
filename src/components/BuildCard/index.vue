@@ -17,6 +17,7 @@
         type="text"
         v-else
         v-model="activeBuild.name"
+        aria-label="Build name"
       >
 
       <div
@@ -86,6 +87,7 @@
           type="text"
           v-else
           v-model="activeBuild.budget"
+          aria-label="Budget"
         >
       </div>
 
@@ -100,6 +102,7 @@
         type="text"
         v-else
         v-model="activeBuild.jobType"
+        aria-label="Job type"
       >
 
       <h4>Estimated 3Dmark Score</h4>

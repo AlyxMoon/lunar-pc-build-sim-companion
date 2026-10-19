@@ -177,7 +177,19 @@ export default defineComponent({
     }),
   },
 
+  mounted (): void {
+    window.addEventListener('keydown', this.closeOnEscape)
+  },
+
+  beforeUnmount (): void {
+    window.removeEventListener('keydown', this.closeOnEscape)
+  },
+
   methods: {
+    closeOnEscape (event: KeyboardEvent): void {
+      if (event.key === 'Escape') this.$emit('cancel')
+    },
+
     buildPrice (build: BuildModelInterface): number {
       return build.parts.reduce((sum, part) => sum + part.price, 0)
     },
