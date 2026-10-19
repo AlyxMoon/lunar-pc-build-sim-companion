@@ -214,6 +214,7 @@ import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
 import BuildModel from '@/models/Build.model'
+import partCost from '@/lib/partCost'
 
 import Accordion from '@/components/Accordion.vue'
 import BuildCommandsBar from './BuildCommandsBar.vue'
@@ -256,15 +257,7 @@ export default defineComponent({
 
     totalCostNewParts (): number {
       if (!this.activeBuild) return 0
-      return this.activeBuild.parts.reduce((sum: number, item) => {
-        if (!item.isNewPart || item.isPartOfCase) return sum
-
-        const partPrice = item.isNewUsedPart
-          ? Math.floor(item.price * 1.25 / 3)
-          : item.price
-
-        return sum + partPrice
-      }, 0)
+      return this.activeBuild.parts.reduce((sum: number, item) => sum + partCost(item), 0)
     },
   },
 
