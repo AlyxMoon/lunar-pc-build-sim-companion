@@ -107,7 +107,7 @@ a {
   }
 
   &:hover, &.router-link-active {
-    color: $colorPrimaryAccent;
+    color: $colorPrimaryAccentText;
   }
 }
 

@@ -10,10 +10,14 @@
       <table class="pure-table pure-table-horizontal">
         <thead>
           <tr>
-            <th v-if="includeAction" />
+            <th
+              v-if="includeAction"
+              scope="col"
+            />
             <th
               v-for="header in headers"
               :key="header.name"
+              scope="col"
               @click="toggleSort(header.name)"
             >
               <template v-if="'displayName' in header">

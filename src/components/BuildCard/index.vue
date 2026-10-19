@@ -1,7 +1,7 @@
 <template>
   <article :class="{ expanded }">
     <div class="card-title">
-      <h4
+      <h2
         v-if="!editing"
         class="clickable"
         @click="expanded = !expanded"
@@ -12,7 +12,7 @@
         />
 
         {{ activeBuild.name }}
-      </h4>
+      </h2>
       <input
         type="text"
         v-else
@@ -68,7 +68,7 @@
     </div>
 
     <div class="card-subtitle">
-      <h5>Used / Budget</h5>
+      <h3>Used / Budget</h3>
 
       <div class="budget-group">
         <span>
@@ -89,7 +89,7 @@
         >
       </div>
 
-      <h5>Job Type</h5>
+      <h3>Job Type</h3>
 
       <span
         v-if="!editing"
@@ -102,7 +102,7 @@
         v-model="activeBuild.jobType"
       >
 
-      <h6>Estimated 3Dmark Score</h6>
+      <h4>Estimated 3Dmark Score</h4>
       <span :key="build.estimatedScore">
         {{ build.estimatedScore }}
       </span>
@@ -116,10 +116,10 @@
 
       <Accordion>
         <template #header>
-          <h6>
+          <h4>
             <span class="badge error">{{ activeBuild.errors.length }}</span>
             Errors With Build
-          </h6>
+          </h4>
         </template>
         <template #content>
           <ul v-if="!!activeBuild.errors.length">
@@ -138,10 +138,10 @@
 
       <Accordion>
         <template #header>
-          <h6>
+          <h4>
             <span class="badge info">{{ activeBuild.objectives.length }}</span>
             Objectives
-          </h6>
+          </h4>
         </template>
         <template #content>
           <div class="input-group">
@@ -179,10 +179,10 @@
 
       <Accordion>
         <template #header>
-          <h6>
+          <h4>
             <span class="badge info">{{ activeBuild.parts.length }}</span>
             Parts
-          </h6>
+          </h4>
         </template>
         <template #content>
           <BuildPartsList
@@ -348,7 +348,7 @@ article {
 
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
 
-    .card-title h4 svg {
+    .card-title h2 svg {
       transform: rotate(90deg);
     }
   }
@@ -378,13 +378,14 @@ article {
     color: white;
     font-size: 1.2rem;
 
-    h4 {
+    h2 {
       margin: 0;
 
       flex-shrink: 1;
       display: flex;
       align-items: center;
 
+      font-size: 1.5rem;
       overflow: hidden;
     }
 
@@ -418,13 +419,22 @@ article {
     color: black;
     font-size: 1.1rem;
 
-    h5 {
+    h3 {
       margin: 0;
       justify-content: flex-end;
+      font-size: 1.3rem;
+    }
+
+    h4 {
+      font-size: 1.1rem;
     }
   }
 
   .card-body {
+    h4 {
+      font-size: 1.1rem;
+    }
+
     .input-group {
       padding: 0 10px;
       input {

@@ -15,9 +15,9 @@
           :icon="category.icon"
         />
       </div>
-      <h3>
+      <h2>
         {{ category.displayName || category.name }}
-      </h3>
+      </h2>
     </template>
 
     <template #content>
@@ -69,5 +69,9 @@ export default defineComponent({
   border: 1px solid black;
   color: white;
   font-size: 18px;
+}
+
+h2 {
+  font-size: 1.8rem;
 }
 </style>
