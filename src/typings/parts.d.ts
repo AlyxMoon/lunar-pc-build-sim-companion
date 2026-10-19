@@ -152,7 +152,7 @@ export interface StorageInterface extends BaseInterface {
   lighting: string,
   sizeGb: number,
   transferSpeed: number,
-  includesHeatsink: false,
+  includesHeatsink: boolean,
   heatsinkThickness: number,
   typeSecondary: string,
 }

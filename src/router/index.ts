@@ -1,6 +1,4 @@
 
-import { defineAsyncComponent } from 'vue'
-
 import { createRouter, createWebHistory } from 'vue-router'
 
 import ActiveBuilds from '../views/ActiveBuilds.vue'
@@ -11,7 +9,7 @@ import PartsList from '../views/PartsList.vue'
 import Settings from '../views/Settings.vue'
 import WillItRun from '../views/WillItRun.vue'
 
-const PrivacyPolicy = defineAsyncComponent(() => import('@/views/PrivacyPolicy.vue'))
+const PrivacyPolicy = () => import('@/views/PrivacyPolicy.vue')
 
 const routes = [
   {
@@ -57,7 +55,7 @@ const routes = [
   },
 
   {
-    path: '/:pathMath(.*)*',
+    path: '/:pathMatch(.*)*',
     redirect: { name: 'Home' },
   },
 ]
