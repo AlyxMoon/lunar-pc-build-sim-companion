@@ -1,6 +1,13 @@
 <template>
   <h1>Will It Run</h1>
 
+  <p
+    v-if="generationError"
+    role="alert"
+  >
+    {{ generationError }}
+  </p>
+
   <DataTable
     :headers="headers"
     :items="programRequirements"
@@ -34,6 +41,7 @@ export default defineComponent({
   },
 
   data: () => ({
+    generationError: '',
     headers: [
       { name: 'actions', displayName: '' },
       { name: 'name', displayName: 'Name' },
@@ -62,6 +70,12 @@ export default defineComponent({
         playerLevel: this.playerLevel,
       })
 
+      if ('error' in build) {
+        this.generationError = build.error
+        return
+      }
+
+      this.generationError = ''
       this.createBuild(build)
       this.$router.push({ name: 'ActiveBuilds' })
     },
