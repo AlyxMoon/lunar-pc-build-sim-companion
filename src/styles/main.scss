@@ -21,6 +21,10 @@ main {
   }
 }
 
+:where(main.mode-dark) a {
+  color: $linkColorDarkMode;
+}
+
 .modal-wrapper {
   position: fixed;
   top: 0;

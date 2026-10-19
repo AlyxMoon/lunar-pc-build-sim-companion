@@ -1,7 +1,9 @@
 <template>
   <h1>Privacy Policy</h1>
 
-  <h6>Last updated October 18, 2026</h6>
+  <p class="last-updated">
+    Last updated October 18, 2026
+  </p>
 
   <hr>
 
@@ -48,3 +50,12 @@ export default defineComponent({
   name: 'PagePrivacyPolicy',
 })
 </script>
+
+<style lang="scss" scoped>
+.last-updated {
+  margin: 0;
+
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+</style>

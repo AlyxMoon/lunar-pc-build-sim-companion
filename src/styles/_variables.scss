@@ -6,7 +6,9 @@ $colorSecondary: #385590;
 $colorSecondaryAccent: #E97816;
 $colorTertiary: #DDE7FD;
 
-$colorSuccess: #00A668;
+$colorPrimaryAccentText: #FF7A3D;
+
+$colorSuccess: #007A4D;
 $colorInfo: #00BCFF;
 $colorError: #DC0000;
 $colorDanger: $colorError;
@@ -16,6 +18,8 @@ $backgroundColorDarkMode: #222222;
 
 $textColorLightMode: #111111;
 $textColorDarkMode: #EEEEEE;
+
+$linkColorDarkMode: $colorInfo;
 
 $contentWidthMax: 97%;
 $contentWidthSm: 40em;
