@@ -6,12 +6,18 @@
         class="clickable"
         @click="expanded = !expanded"
       >
-        <FontAwesomeIcon
-          class="clickable"
-          icon="chevron-right"
-        />
+        <button
+          type="button"
+          class="card-toggle"
+          :aria-expanded="expanded"
+        >
+          <FontAwesomeIcon
+            class="clickable"
+            icon="chevron-right"
+          />
 
-        {{ activeBuild.name }}
+          {{ activeBuild.name }}
+        </button>
       </h2>
       <input
         type="text"
@@ -390,6 +396,23 @@ article {
 
       font-size: 1.5rem;
       overflow: hidden;
+
+      .card-toggle {
+        min-width: 0;
+        max-width: 100%;
+        padding: 0;
+
+        display: flex;
+        align-items: center;
+
+        border: 0;
+        background: none;
+        color: inherit;
+        font: inherit;
+        text-align: left;
+
+        cursor: pointer;
+      }
     }
 
     .pure-button-group {
