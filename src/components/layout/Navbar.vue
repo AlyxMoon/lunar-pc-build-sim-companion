@@ -12,20 +12,6 @@
         <span>Home</span>
       </router-link>
 
-      <div
-        id="navbar-links"
-        class="link-wrapper"
-        :class="{ open: navbarOpen }"
-      >
-        <router-link
-          v-for="route in routes"
-          :key="route.name"
-          :to="{ name: route.name }"
-        >
-          {{ route.title }}
-        </router-link>
-      </div>
-
       <button
         type="button"
         class="expand"
@@ -36,15 +22,35 @@
       >
         <FontAwesomeIcon icon="bars" />
       </button>
+
+      <div
+        id="navbar-links"
+        class="link-wrapper"
+        :class="{ open: navbarOpen }"
+        :inert="linksInert"
+      >
+        <router-link
+          v-for="route in routes"
+          :key="route.name"
+          :to="{ name: route.name }"
+        >
+          {{ route.title }}
+        </router-link>
+      </div>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useMediaQuery } from '@/lib/useMediaQuery'
 
 export default defineComponent({
   name: 'AppNavbar',
+
+  setup () {
+    return { narrow: useMediaQuery('(max-width: 47.9em)') }
+  },
 
   data: () => ({
     routes: [
@@ -56,6 +62,12 @@ export default defineComponent({
 
     navbarOpen: false,
   }),
+
+  computed: {
+    linksInert (): true | undefined {
+      return this.narrow && !this.navbarOpen ? true : undefined
+    },
+  },
 })
 </script>
 
@@ -97,6 +109,7 @@ a {
   text-decoration: none;
   text-align: right;
 
+  transition-property: color;
   transition-duration: 0.2s;
 
   @include md {
@@ -130,8 +143,7 @@ a {
     right: 0;
     width: 150px;
 
-    max-height: 0;
-    padding: 0 20px;
+    padding: 20px;
 
     grid-template-columns: auto;
     grid-row-gap: 15px;
@@ -140,18 +152,21 @@ a {
 
     background-color: #232031;
 
-    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
     pointer-events: none;
     visibility: hidden;
 
     transition:
-      max-height 0.5s,
-      padding 0.5s,
+      opacity 0.5s,
+      transform 0.5s,
       visibility 1s 0.5s;
 
     &.open {
-      max-height: 200px;
-      padding: 20px;
+      opacity: 1;
+      transform: none;
+
+      transition: none;
 
       pointer-events: all;
       visibility: visible;

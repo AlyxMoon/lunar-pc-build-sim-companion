@@ -1,11 +1,16 @@
 <template>
   <teleport to="body">
-    <aside
+    <div
       class="modal-wrapper"
       @click="$emit('cancel')"
     >
       <div
+        ref="dialog"
         class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Add Parts to Meet 3Dmark Score"
+        tabindex="-1"
         @click.stop
       >
         <div class="modal-title">
@@ -126,17 +131,18 @@
           </template>
         </div>
       </div>
-    </aside>
+    </div>
   </teleport>
 </template>
 
 <script lang="ts">
 import { BuildModelInterface } from '@/typings'
-import { defineComponent, nextTick } from 'vue'
+import { defineComponent, nextTick, ref } from 'vue'
 import { mapState } from 'vuex'
 
 import BuildModel from '@/models/Build.model'
 import { generateBuildMeets3dmarkScore } from '@/lib/calculations'
+import { useModalFocus } from '@/lib/useModalFocus'
 
 import DataTable from '@/components/DataTable/index.vue'
 
@@ -155,6 +161,12 @@ export default defineComponent({
   },
 
   emits: ['cancel', 'addPartsToBuild'],
+
+  setup () {
+    const dialog = ref<HTMLElement | null>(null)
+    useModalFocus(dialog)
+    return { dialog }
+  },
 
   data: () => ({
     buildGenerationInfo: {
