@@ -32,7 +32,7 @@ describe('Home newcomer content and backups', () => {
     const build = new BuildModel({ id: 'saved', name: 'Saved build', budget: 1500 })
     const state = { builds: [build], playerLevel: 24, colorMode: 'dark', allowModdedPartsHEM: true, analyticsEnabled: false }
     const store = createStore({ state, actions, mutations })
-    const expected = JSON.parse(JSON.stringify(state))
+    const expected = JSON.parse(JSON.stringify({ builds: state.builds, playerLevel: state.playerLevel }))
     const anchor = { setAttribute: vi.fn(), click: vi.fn(), remove: vi.fn() }
     vi.stubGlobal('document', { createElement: () => anchor, body: { appendChild: vi.fn() } })
     vi.stubGlobal('alert', vi.fn())
@@ -53,16 +53,33 @@ describe('Home newcomer content and backups', () => {
     } as unknown as InstanceType<typeof Home>
     await Home.methods!.exportPlayerData.call(context)
     file.text = decodeURIComponent(anchor.setAttribute.mock.calls.find(([key]) => key === 'href')![1].split(',')[1])
+    expect(JSON.parse(file.text)).toEqual(expected)
     store.commit('SET_ALL_BUILDS', [])
     store.commit('UPDATE_PLAYER_LEVEL', 1)
     store.commit('UPDATE_COLOR_MODE', 'light')
     store.commit('UPDATE_ALLOW_MODDED_PARTS_HEM', false)
     store.commit('UPDATE_ANALYTICS_ENABLED', true)
     Home.methods!.handleFileInput.call(context)
-    expect(JSON.parse(JSON.stringify(store.state))).toEqual(expected)
+    expect(JSON.parse(JSON.stringify(store.state))).toEqual({
+      ...expected, colorMode: 'light', allowModdedPartsHEM: false, analyticsEnabled: true,
+    })
     expect(store.state.builds[0]).toBeInstanceOf(BuildModel)
     expect(context.handlingImport).toBe(false)
     expect(context.$refs.importData).toMatchObject({ value: '' })
     expect(alert).toHaveBeenCalledWith('Import successful!')
+  })
+
+  it('ignores tracking and appearance settings in an imported file', async () => {
+    const store = createStore({
+      state: { builds: [], playerLevel: 1, colorMode: 'light', allowModdedPartsHEM: false, analyticsEnabled: false },
+      actions,
+      mutations,
+    })
+    await store.dispatch('importPlayerData', {
+      builds: [], playerLevel: 24, colorMode: 'invalid', allowModdedPartsHEM: true, analyticsEnabled: true,
+    })
+    expect(store.state).toEqual({
+      builds: [], playerLevel: 24, colorMode: 'light', allowModdedPartsHEM: false, analyticsEnabled: false,
+    })
   })
 })
