@@ -3,6 +3,7 @@ import { createSSRApp, h } from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import { createStore } from 'vuex'
 import BuildPartsList from '@/components/BuildCard/BuildPartsList.vue'
+import BuildCard from '@/components/BuildCard/index.vue'
 import BuildModel from '@/models/Build.model'
 import newPartsUnderBudget from '@/lib/buildValidationRules/newPartsUnderBudget'
 import filtersMixin from '@/lib/filters'
@@ -41,6 +42,13 @@ describe('BuildPartsList', () => {
     const html = await renderToString(app)
     const prices = [...html.matchAll(/<dd\s+data-v-[^>]*>(.*?)<\/dd>/gs)].map(match => match[1].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim())
     expect(prices).toEqual(['$100', '$41 (New: $100)', '$0 (New: $100)', '$0 (New: $100)', '$0 (New: $100)'])
+    const cardApp = createSSRApp({ render: () => h(BuildCard, { build }) })
+    cardApp.mixin(filtersMixin).use(createStore({
+      state: { categories: [{ name: 'casefans', displayName: 'Case Fans', partType: 'Case Fan' }] },
+    })).component('FontAwesomeIcon', { render: () => null })
+    const cardHtml = await renderToString(cardApp)
+    const budgetGroup = cardHtml.match(/class="budget-group"[^>]*>(.*?)<\/div>/s)![1]
+    expect(budgetGroup.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()).toBe('$141 / $141')
     expect(newPartsUnderBudget(build)).toBe(true)
     build.budget = 140
     expect(newPartsUnderBudget(build)).toBe('You are over budget.')
