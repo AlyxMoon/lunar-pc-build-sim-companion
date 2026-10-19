@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use './variables' as *;
 
 
@@ -23,7 +24,7 @@
 
     &:hover {
       border-color: black;
-      background-color: lighten($colorDanger, 5);
+      background-color: color.adjust($colorDanger, $lightness: -5%);
     }
   }
 
@@ -31,9 +32,10 @@
     background-color: $colorInfo;
     color: white;
 
+    // White text on this cyan needs a much deeper hover shade than green or red to reach 4.5:1.
     &:hover {
       border-color: black;
-      background-color: lighten($colorInfo, 5);
+      background-color: color.adjust($colorInfo, $lightness: -20%);
     }
   }
 
@@ -43,7 +45,7 @@
 
     &:hover {
       border-color: black;
-      background-color: lighten($colorSuccess, 5);
+      background-color: color.adjust($colorSuccess, $lightness: -5%);
     }
   }
 }
