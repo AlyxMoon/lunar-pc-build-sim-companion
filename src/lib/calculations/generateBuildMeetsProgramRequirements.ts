@@ -1,11 +1,12 @@
 import { Parts, ProgramRequirementsModelInterface } from '@/typings'
 import BuildModel from '@/models/Build.model'
+import { socketsAreCompatible } from '@/lib/buildValidationRules/motherboardFitsCpu'
 
 const generateBuildMeetsProgramRequirements = (
   program: ProgramRequirementsModelInterface,
   availablePartsByCategory: Parts.ByAllCategoriesInterface,
   { playerLevel }: { playerLevel: number },
-): BuildModel => {
+): BuildModel | { error: string } => {
   const attributes: {
     name: string,
     objectives: string[],
@@ -18,8 +19,8 @@ const generateBuildMeetsProgramRequirements = (
     parts: [],
   }
 
-  const cpu: Parts.CpuInterface = availablePartsByCategory.cpus.reduce((
-    best: Parts.CpuInterface,
+  const cpu = availablePartsByCategory.cpus.reduce((
+    best: Parts.CpuInterface | undefined,
     part: Parts.CpuInterface,
   ) => {
     return (
@@ -27,10 +28,12 @@ const generateBuildMeetsProgramRequirements = (
       part.score >= program.cpuScore &&
       (best?.price ?? Infinity) >= part.price
     ) ? part : best
-  })
+  }, undefined)
 
-  const gpu: Parts.GpuInterface = availablePartsByCategory.gpus.reduce((
-    best: Parts.GpuInterface,
+  if (!cpu) return { error: 'No matching part for category: CPU.' }
+
+  const gpu = availablePartsByCategory.gpus.reduce((
+    best: Parts.GpuInterface | undefined,
     part: Parts.GpuInterface,
   ) => {
     return (
@@ -39,10 +42,12 @@ const generateBuildMeetsProgramRequirements = (
       part.vramGb >= program.gpuVram &&
       (best?.price ?? Infinity) >= part.price
     ) ? part : best
-  })
+  }, undefined)
 
-  const memory: Parts.MemoryInterface = availablePartsByCategory.memory.reduce((
-    best: Parts.MemoryInterface,
+  if (!gpu) return { error: 'No matching part for category: GPU.' }
+
+  const memory = availablePartsByCategory.memory.reduce((
+    best: Parts.MemoryInterface | undefined,
     part: Parts.MemoryInterface,
   ) => {
     return (
@@ -50,10 +55,12 @@ const generateBuildMeetsProgramRequirements = (
       part.sizeGb >= program.memory &&
       (best?.price ?? Infinity) >= part.price
     ) ? part : best
-  })
+  }, undefined)
 
-  const storage: Parts.StorageInterface = availablePartsByCategory.storage.reduce((
-    best: Parts.StorageInterface,
+  if (!memory) return { error: 'No matching part for category: Memory.' }
+
+  const storage = availablePartsByCategory.storage.reduce((
+    best: Parts.StorageInterface | undefined,
     part: Parts.StorageInterface,
   ) => {
     return (
@@ -61,21 +68,25 @@ const generateBuildMeetsProgramRequirements = (
       part.sizeGb >= program.storage &&
       (best?.price ?? Infinity) >= part.price
     ) ? part : best
-  })
+  }, undefined)
 
-  const motherboard: Parts.MotherboardInterface = availablePartsByCategory.motherboards.reduce((
-    best: Parts.MotherboardInterface,
+  if (!storage) return { error: 'No matching part for category: Storage.' }
+
+  const motherboard = availablePartsByCategory.motherboards.reduce((
+    best: Parts.MotherboardInterface | undefined,
     part: Parts.MotherboardInterface,
   ) => {
     return (
       part.level <= playerLevel &&
-      part.socket >= cpu.socket &&
+      socketsAreCompatible(cpu.socket, part.socket) &&
       (best?.price ?? Infinity) >= part.price
     ) ? part : best
-  })
+  }, undefined)
+
+  if (!motherboard) return { error: 'No matching part for category: Motherboard.' }
 
   const cpuCooler = availablePartsByCategory.cpucoolers.reduce((
-    best: Parts.CpuCoolerInterface,
+    best: Parts.CpuCoolerInterface | undefined,
     part: Parts.CpuCoolerInterface,
   ) => {
     return (
@@ -83,10 +94,12 @@ const generateBuildMeetsProgramRequirements = (
       part.supportedCpus.includes(cpu.socket) &&
       (best?.price ?? Infinity) >= part.price
     ) ? part : best
-  })
+  }, undefined)
 
-  const powerSupply: Parts.PowerSupplyInterface = availablePartsByCategory.powersupplies.reduce((
-    best: Parts.PowerSupplyInterface,
+  if (!cpuCooler) return { error: 'No matching part for category: CPU Cooler.' }
+
+  const powerSupply = availablePartsByCategory.powersupplies.reduce((
+    best: Parts.PowerSupplyInterface | undefined,
     part: Parts.PowerSupplyInterface,
   ) => {
     return (
@@ -94,10 +107,12 @@ const generateBuildMeetsProgramRequirements = (
       part.wattage >= (cpu.wattage + gpu.wattage) &&
       (best?.price ?? Infinity) >= part.price
     ) ? part : best
-  })
+  }, undefined)
 
-  const computerCase: Parts.CaseInterface = availablePartsByCategory.cases.reduce((
-    best: Parts.CaseInterface,
+  if (!powerSupply) return { error: 'No matching part for category: Power Supply.' }
+
+  const computerCase = availablePartsByCategory.cases.reduce((
+    best: Parts.CaseInterface | undefined,
     part: Parts.CaseInterface,
   ) => {
     return (
@@ -109,7 +124,9 @@ const generateBuildMeetsProgramRequirements = (
       part.maxLengthCpuFan >= cpuCooler.length &&
       (best?.price ?? Infinity) >= part.price
     ) ? part : best
-  })
+  }, undefined)
+
+  if (!computerCase) return { error: 'No matching part for category: Case.' }
 
   const caseFans: Parts.CaseFanInterface[] = [1, 2, 3].reduce((
     fans: Parts.CaseFanInterface[],

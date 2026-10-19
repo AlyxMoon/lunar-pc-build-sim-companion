@@ -1,5 +1,22 @@
 import { BuildModelInterface, Parts, ValidationFunctionReturn } from '@/typings'
 
+export const socketsAreCompatible = (cpuSocket: string, motherboardSocket: string): boolean => {
+  const isSkyOrKabyCpu = (
+    cpuSocket.endsWith('(Skylake)') ||
+    cpuSocket.endsWith('(Kaby Lake)')
+  )
+
+  const isSkyOrKabyMotherboard = (
+    motherboardSocket.endsWith('(Skylake)') ||
+    motherboardSocket.endsWith('(Kaby Lake)')
+  )
+
+  return (
+    (isSkyOrKabyCpu && isSkyOrKabyMotherboard) ||
+    (!isSkyOrKabyCpu && motherboardSocket === cpuSocket)
+  )
+}
+
 const motherboardFitsCpu = (build: BuildModelInterface): ValidationFunctionReturn => {
   const parts = build.parts.filter(part => part.isBeingKept)
 
@@ -13,21 +30,7 @@ const motherboardFitsCpu = (build: BuildModelInterface): ValidationFunctionRetur
 
   if (!cpu || !motherboard) return true
 
-  const isSkyOrKabyCpu = (
-    cpu.socket.endsWith('(Skylake)') ||
-    cpu.socket.endsWith('(Kaby Lake)')
-  )
-
-  const isSkyOrKabyMotherboard = (
-    motherboard.socket.endsWith('(Skylake)') ||
-    motherboard.socket.endsWith('(Kaby Lake)')
-  )
-
-  return (
-    (isSkyOrKabyCpu && isSkyOrKabyMotherboard) ||
-    (!isSkyOrKabyCpu && motherboard.socket === cpu.socket) ||
-    'The cpu will not fit in the motherboard.'
-  )
+  return socketsAreCompatible(cpu.socket, motherboard.socket) || 'The cpu will not fit in the motherboard.'
 }
 
 export default motherboardFitsCpu
