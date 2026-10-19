@@ -29,7 +29,7 @@
     <h2 id="data-and-rules">
       Data and Build Rules
     </h2>
-    <p>Back up or restore your builds and settings, or read the build validation rules.</p>
+    <p>Back up or restore your builds and player level, or read the build validation rules.</p>
 
     <h3>App Data</h3>
 
