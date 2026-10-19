@@ -15,6 +15,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
+import { useSystemDarkMode } from '@/lib/useSystemDarkMode'
 
 import AppFooter from '@/components/layout/Footer.vue'
 import AppNavbar from '@/components/layout/Navbar.vue'
@@ -26,6 +27,10 @@ export default defineComponent({
     AppNavbar,
   },
 
+  setup () {
+    return { systemDarkMode: useSystemDarkMode() }
+  },
+
   computed: {
     ...mapState({
       colorMode: 'colorMode',
@@ -33,7 +38,7 @@ export default defineComponent({
 
     mainClasses (): string[] {
       return [
-        `mode-${this.colorMode}`,
+        `mode-${this.colorMode === 'system' ? (this.systemDarkMode ? 'dark' : 'light') : this.colorMode}`,
       ]
     },
   },
