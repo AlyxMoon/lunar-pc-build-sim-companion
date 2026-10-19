@@ -21,6 +21,7 @@ describe('Navbar menu button', () => {
     expect(html).toMatch(/<button[^>]*aria-controls="navbar-links"/)
     expect(html).toContain('id="navbar-links"')
     expect(html).not.toMatch(/<div[^>]*class="expand"/)
+    expect(html.indexOf('class="expand"')).toBeLessThan(html.indexOf('id="navbar-links"'))
   })
 })
 

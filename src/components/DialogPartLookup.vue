@@ -1,11 +1,16 @@
 <template>
   <teleport to="body">
-    <aside
+    <div
       class="modal-wrapper"
       @click="$emit('cancel')"
     >
       <div
+        ref="dialog"
         class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Part Lookup"
+        tabindex="-1"
         @click.stop
       >
         <div class="modal-title">
@@ -22,14 +27,16 @@
           />
         </div>
       </div>
-    </aside>
+    </div>
   </teleport>
 </template>
 
 <script lang="ts">
 import { PlainObject } from '@/typings'
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { mapGetters, mapState } from 'vuex'
+
+import { useModalFocus } from '@/lib/useModalFocus'
 
 import DataTable from '@/components/DataTable/index.vue'
 
@@ -45,6 +52,12 @@ export default defineComponent({
     },
   },
   emits: ['cancel', 'selected'],
+
+  setup () {
+    const dialog = ref<HTMLElement | null>(null)
+    useModalFocus(dialog)
+    return { dialog }
+  },
 
   computed: {
     ...mapState({

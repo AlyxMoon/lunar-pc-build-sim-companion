@@ -12,20 +12,6 @@
         <span>Home</span>
       </router-link>
 
-      <div
-        id="navbar-links"
-        class="link-wrapper"
-        :class="{ open: navbarOpen }"
-      >
-        <router-link
-          v-for="route in routes"
-          :key="route.name"
-          :to="{ name: route.name }"
-        >
-          {{ route.title }}
-        </router-link>
-      </div>
-
       <button
         type="button"
         class="expand"
@@ -36,15 +22,35 @@
       >
         <FontAwesomeIcon icon="bars" />
       </button>
+
+      <div
+        id="navbar-links"
+        class="link-wrapper"
+        :class="{ open: navbarOpen }"
+        :inert="linksInert"
+      >
+        <router-link
+          v-for="route in routes"
+          :key="route.name"
+          :to="{ name: route.name }"
+        >
+          {{ route.title }}
+        </router-link>
+      </div>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useMediaQuery } from '@/lib/useMediaQuery'
 
 export default defineComponent({
   name: 'AppNavbar',
+
+  setup () {
+    return { narrow: useMediaQuery('(max-width: 47.9em)') }
+  },
 
   data: () => ({
     routes: [
@@ -56,6 +62,12 @@ export default defineComponent({
 
     navbarOpen: false,
   }),
+
+  computed: {
+    linksInert (): true | undefined {
+      return this.narrow && !this.navbarOpen ? true : undefined
+    },
+  },
 })
 </script>
 
@@ -152,6 +164,11 @@ a {
     &.open {
       max-height: 200px;
       padding: 20px;
+
+      transition:
+        max-height 0.5s,
+        padding 0.5s,
+        visibility 0s;
 
       pointer-events: all;
       visibility: visible;
