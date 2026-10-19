@@ -5,7 +5,12 @@
   >
     <div
       class="accordion-header"
+      role="button"
+      tabindex="0"
+      :aria-expanded="show"
       @click="show = !show"
+      @keydown.enter.prevent="show = !show"
+      @keydown.space.prevent="show = !show"
     >
       <slot name="header" />
 
