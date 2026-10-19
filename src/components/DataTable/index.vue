@@ -249,7 +249,7 @@ export default defineComponent({
   },
 
   methods: {
-    ariaSortFor (name: string): string {
+    ariaSortFor (name: string): 'none' | 'ascending' | 'descending' {
       if (this.sortBy !== name) return 'none'
       return this.sortDesc ? 'descending' : 'ascending'
     },
