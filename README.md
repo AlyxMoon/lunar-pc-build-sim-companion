@@ -23,7 +23,7 @@ with Node 24's built-in TypeScript support and generates ignored JSON under
 corepack yarn@1.22.22 build
 corepack yarn@1.22.22 typecheck
 corepack yarn@1.22.22 test:unit
-corepack yarn@1.22.22 lint --no-fix
+corepack yarn@1.22.22 lint
 corepack yarn@1.22.22 preview
 ```
 
@@ -31,6 +31,10 @@ The production build writes `dist` with the base path
 `/pc-build-sim-companion/`. Preview it at
 `http://localhost:4173/pc-build-sim-companion/`.
 The deployment command remains `yarn convert-raw-data && yarn build`.
+The live site is https://apps.allisterbytes.com/pc-build-sim-companion/.
+Deep links rely on the host serving `index.html` for application routes under
+`/pc-build-sim-companion/`.
+Build Planner and Overclocking are currently placeholder pages.
 Unit tests run once under Vitest and write LCOV coverage to `tests/coverage`.
 The lint command checks TypeScript, Vue components, scripts and tool configs
 with ESLint 9; pass `--fix` explicitly to apply fixes.
