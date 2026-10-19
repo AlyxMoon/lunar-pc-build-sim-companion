@@ -276,6 +276,8 @@ dl {
     border: 2px solid #E6E6E6;
 
     &.action {
+      display: grid;
+      align-items: stretch;
       padding: 0;
       border: 0;
     }
