@@ -1,8 +1,9 @@
 <template>
   <dl>
-    <template
+    <div
       v-for="category in categories"
       :key="category.name"
+      class="part-category"
     >
       <dt>
         <button
@@ -18,42 +19,52 @@
         v-for="(item, i) in partsOfCategory(category.partType)"
         :key="`${i}-${item.nameFull}`"
       >
-        <button
-          class="pure-button danger"
-          title="Remove Part"
-          @click="$emit('removePart', item.originalIndex)"
-        >
-          <FontAwesomeIcon icon="times" />
-        </button>
-
-        <button
-          class="pure-button"
-          title="Add another of the same part"
-          @click="$emit('copyPart', item)"
-        >
-          <FontAwesomeIcon icon="copy" />
-        </button>
-
-        <select
-          :value="newOldStatusLabel(item)"
-          @change="changePartStatus(item.originalIndex, ($event.target as HTMLSelectElement).value)"
-        >
-          <option
-            v-if="item.type === 'Case Fan'"
-            value="New - Comes With Case"
+        <dd class="action">
+          <button
+            class="pure-button danger"
+            title="Remove Part"
+            @click="$emit('removePart', item.originalIndex)"
           >
-            New - Comes With Case
-          </option>
-          <option
-            v-for="option in partStatusOptions"
-            :key="option"
-            :value="option"
-          >
-            {{ option }}
-          </option>
-        </select>
+            <FontAwesomeIcon icon="times" />
+          </button>
+        </dd>
 
-        <div />
+        <dd class="action">
+          <button
+            class="pure-button"
+            title="Add another of the same part"
+            @click="$emit('copyPart', item)"
+          >
+            <FontAwesomeIcon icon="copy" />
+          </button>
+        </dd>
+
+        <dd class="action">
+          <select
+            :value="newOldStatusLabel(item)"
+            :aria-label="`Status of ${item.nameFull}`"
+            @change="changePartStatus(item.originalIndex, ($event.target as HTMLSelectElement).value)"
+          >
+            <option
+              v-if="item.type === 'Case Fan'"
+              value="New - Comes With Case"
+            >
+              New - Comes With Case
+            </option>
+            <option
+              v-for="option in partStatusOptions"
+              :key="option"
+              :value="option"
+            >
+              {{ option }}
+            </option>
+          </select>
+        </dd>
+
+        <dd
+          class="action spacer"
+          aria-hidden="true"
+        />
 
         <dd>
           {{ displayFilters.currency(getPartPrice(item)) }}
@@ -66,7 +77,7 @@
           {{ item.nameFull }}
         </dd>
       </template>
-    </template>
+    </div>
   </dl>
 </template>
 
@@ -237,6 +248,10 @@ dl {
     grid-gap: 5px 3px;
   }
 
+  .part-category {
+    display: contents;
+  }
+
   dt {
     grid-column-start: 1;
     grid-column-end: 5;
@@ -259,6 +274,13 @@ dl {
     align-items: center;
 
     border: 2px solid #E6E6E6;
+
+    &.action {
+      display: grid;
+      align-items: stretch;
+      padding: 0;
+      border: 0;
+    }
 
     &.part-name {
       @include smAndBelow {

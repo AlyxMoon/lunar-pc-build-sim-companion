@@ -95,8 +95,7 @@ svg.clickable {
 
   &.info {
     background-color: $colorInfo;
-    color: #FFFFFF;
-    text-shadow: 0 0 5px #555555;
+    color: $colorPrimary;
   }
 
   &.error {

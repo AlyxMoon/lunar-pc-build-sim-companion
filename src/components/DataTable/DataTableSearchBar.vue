@@ -1,6 +1,7 @@
 <template>
   <input
     type="search"
+    aria-label="Search"
     placeholder="search..."
     :value="searchQuery"
     @input="updateSearchQuery($event.target.value)"
