@@ -90,4 +90,9 @@ div {
 h2 {
   font-size: 1.3rem;
 }
+
+p label {
+  display: inline;
+  margin: 0;
+}
 </style>

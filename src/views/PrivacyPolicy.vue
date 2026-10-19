@@ -53,6 +53,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .last-updated {
+  margin: 0;
+
   font-size: 1.1rem;
   font-weight: bold;
 }
