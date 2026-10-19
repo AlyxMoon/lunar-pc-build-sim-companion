@@ -32,7 +32,7 @@ export const removeBuild = (
 export const exportPlayerData = (
   context: ActionContext<AppState, AppState>,
 ): void => {
-  const fieldsToSave = ['builds', 'playerLevel']
+  const fieldsToSave = ['builds', 'playerLevel', 'allowModdedPartsHEM', 'colorMode', 'analyticsEnabled']
 
   const data: ImportExportData = {}
   for (const field of fieldsToSave) {
@@ -60,5 +60,17 @@ export const importPlayerData = (
 
   if ('playerLevel' in data) {
     context.commit('UPDATE_PLAYER_LEVEL', data.playerLevel)
+  }
+
+  if ('allowModdedPartsHEM' in data) {
+    context.commit('UPDATE_ALLOW_MODDED_PARTS_HEM', data.allowModdedPartsHEM)
+  }
+
+  if ('colorMode' in data) {
+    context.commit('UPDATE_COLOR_MODE', data.colorMode)
+  }
+
+  if ('analyticsEnabled' in data) {
+    context.commit('UPDATE_ANALYTICS_ENABLED', data.analyticsEnabled)
   }
 }

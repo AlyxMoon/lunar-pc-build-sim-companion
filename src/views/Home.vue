@@ -2,11 +2,36 @@
   <h1>Home</h1>
 
   <p>
-    This is a companion app for PC Building Simulator. It's actively in development so check back in occasionally for updates. I'll add more of a description later.
+    Plan your PC Building Simulator builds, check which parts work together, and find parts for your next job.
   </p>
 
-  <div>
-    <h2>App Data</h2>
+  <nav aria-label="Get started">
+    <ul>
+      <li>
+        <router-link to="/builds">
+          Active Builds
+        </router-link> - start a build and keep track of its parts and budget.
+      </li>
+      <li>
+        <router-link to="/will-it-run">
+          Will It Run
+        </router-link> - find parts that meet a program's requirements.
+      </li>
+      <li>
+        <router-link to="/parts">
+          Parts List
+        </router-link> - browse the available parts.
+      </li>
+    </ul>
+  </nav>
+
+  <section aria-labelledby="data-and-rules">
+    <h2 id="data-and-rules">
+      Data and Build Rules
+    </h2>
+    <p>Back up or restore your builds and settings, or read the build validation rules.</p>
+
+    <h3>App Data</h3>
 
     <p>Want to save the data in the app? This will save it to a json file which can be imported later.</p>
     <button
@@ -28,9 +53,8 @@
       :disabled="handlingImport"
       @change="handleFileInput"
     >
-  </div>
-
-  <BuildValidationList />
+    <BuildValidationList />
+  </section>
 </template>
 
 <script lang="ts">
@@ -83,12 +107,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-div {
+section {
   margin-top: 40px;
 }
 
 h2 {
   font-size: 1.3rem;
+}
+
+li {
+  margin-bottom: 1rem;
 }
 
 p label {
