@@ -169,7 +169,7 @@ a {
   transition-duration: 0.2s;
 
   &:hover {
-    color: #A22744;
+    color: $colorPrimaryAccentText;
   }
 
   @include md {
