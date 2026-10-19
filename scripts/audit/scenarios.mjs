@@ -124,7 +124,7 @@ const steps = {
 
   async openDialog3dmark (page) {
     await clickByText(page, 'button', 'Add parts to meet 3Dmark score')
-    await page.waitForSelector('[role="dialog"][aria-label="Add Parts to Meet 3Dmark score"]')
+    await page.waitForSelector('[role="dialog"][aria-label="Add Parts to Meet 3Dmark Score"]')
   },
 
   async runCalculation (page) {

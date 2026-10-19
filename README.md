@@ -30,6 +30,26 @@ corepack yarn@1.22.22 preview
 The production build writes `dist` with the base path
 `/pc-build-sim-companion/`. Preview it at
 `http://localhost:4173/pc-build-sim-companion/`.
+
+To audit the production build for accessibility and SEO, build first and then run
+the audit. It does not build anything itself, so `dist` must be fresh:
+
+```sh
+corepack yarn@1.22.22 build
+corepack yarn@1.22.22 audit-build
+```
+
+The audit serves `dist` on port 4791 and drives headless Chrome with
+puppeteer-core. It runs axe (WCAG 2.0 and 2.1 A and AA rules) on every route,
+and on the states the page does not show at load: the phone menu open, a build
+card expanded with its accordions open, the card in edit mode, the 3Dmark
+generator dialog before and after a calculation, and the part lookup dialog.
+Each runs in light and dark mode at desktop (1280 px) and phone (390 px) widths,
+measured at rest. Lighthouse SEO and accessibility run on every route at both
+form factors. It prints one line per check and exits 1 on any violation or any
+Lighthouse score under 1.0, and it stops the server it started. Chrome is read
+from `CHROME_PATH`, defaulting to `C:/Program Files/Google/Chrome/Application/chrome.exe`.
+The run takes about three minutes and is not one of the checks run at task close.
 The deployment command remains `yarn convert-raw-data && yarn build`.
 The live site is https://apps.allisterbytes.com/pc-build-sim-companion/.
 Deep links rely on the host serving `index.html` for application routes under

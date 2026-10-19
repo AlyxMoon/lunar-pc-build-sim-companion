@@ -130,6 +130,11 @@ async function stopPreview ({ child }) {
   }
 }
 
+/**
+ * Runs axe on the page at rest. The pointer is moved off the page and the CSS
+ * transitions it started are allowed to finish, so a colour caught mid-fade or
+ * under the pointer is not measured.
+ */
 async function axeCheck (browser, seedParts, axeSource, scenario, width, mode) {
   const label = `${scenario.name} | ${width} | ${mode} | axe`
   const page = await browser.newPage()
@@ -147,6 +152,8 @@ async function axeCheck (browser, seedParts, axeSource, scenario, width, mode) {
       await step(page)
     }
 
+    await page.mouse.move(-1, -1)
+    await page.evaluate(() => Promise.allSettled(document.getAnimations().map(animation => animation.finished)))
     await page.addScriptTag({ content: axeSource })
     const violations = await page.evaluate(async tags => {
       const run = await window.axe.run(document, { runOnly: { type: 'tag', values: tags } })
@@ -154,10 +161,11 @@ async function axeCheck (browser, seedParts, axeSource, scenario, width, mode) {
         id,
         impact,
         targets: nodes.map(node => node.target.join(' ')),
+        summary: (nodes[0]?.failureSummary ?? '').replace(/\s+/g, ' ').trim(),
       }))
     }, AXE_TAGS)
 
-    record(label, violations.map(v => `${v.id} (${v.impact}) at ${v.targets.slice(0, 3).join(', ')}`))
+    record(label, violations.map(v => `${v.id} (${v.impact}) at ${v.targets.slice(0, 3).join(', ')}: ${v.summary}`))
   } catch (error) {
     record(label, [`error: ${error.message}`])
   } finally {
