@@ -82,9 +82,10 @@
 </template>
 
 <script lang="ts">
-import { PlainObject, Parts, CategoryInterface } from '@/typings'
+import { PlainObject, Parts } from '@/typings'
 import { defineComponent, PropType } from 'vue'
 import { mapState } from 'vuex'
+import partCost from '@/lib/partCost'
 
 export default defineComponent({
   name: 'BuildPartsList',
@@ -119,50 +120,6 @@ export default defineComponent({
       categories: 'categories',
     }),
 
-    filteredCategories (): CategoryInterface[] {
-      const categories = this.categories.slice() as CategoryInterface[]
-
-      let hasCase = false
-      let hasPowerSupply = false
-      let hasMotherboard = false
-      let hasCpu = false
-      let hasCpuCooler = false
-
-      this.parts.forEach(({ type }) => {
-        hasCase = hasCase || type === 'Case'
-        hasPowerSupply = hasPowerSupply || type === 'Power Supply'
-        hasMotherboard = hasMotherboard || type === 'Motherboard'
-        hasCpu = hasCpu || type === 'CPU'
-        hasCpuCooler = hasCpuCooler || type === 'CPU Cooler'
-      })
-
-      if (hasCase) {
-        const index = categories.findIndex(({ name }) => name === 'cases')
-        categories.splice(index, 1)
-      }
-
-      if (hasPowerSupply) {
-        const index = categories.findIndex(({ name }) => name === 'powersupplies')
-        categories.splice(index, 1)
-      }
-
-      if (hasMotherboard) {
-        const index = categories.findIndex(({ name }) => name === 'motherboards')
-        categories.splice(index, 1)
-      }
-
-      if (hasCpu) {
-        const index = categories.findIndex(({ name }) => name === 'cpus')
-        categories.splice(index, 1)
-      }
-
-      if (hasCpuCooler) {
-        const index = categories.findIndex(({ name }) => name === 'cpucoolers')
-        categories.splice(index, 1)
-      }
-
-      return categories
-    },
   },
 
   methods: {
@@ -221,13 +178,7 @@ export default defineComponent({
         .filter(item => partType === item.type)
     },
 
-    getPartPrice (part: PlainObject): number {
-      if (!part.isNewPart || part.isPartOfCase) return 0
-
-      return part.isNewUsedPart
-        ? Math.floor(part.price * 1.25 / 3)
-        : part.price
-    },
+    getPartPrice: partCost,
   },
 })
 </script>
