@@ -5,7 +5,7 @@ import tseslint from 'typescript-eslint'
 import vue from 'eslint-plugin-vue'
 
 export default defineConfig([
-  globalIgnores(['dist/**', 'tests/coverage/**', 'src/assets/data/**', '.local-toolchain/**']),
+  globalIgnores(['dist/**', 'tests/coverage/**', 'src/assets/data/**']),
   {
     files: ['**/*.{js,mjs,ts,mts,vue}'],
     extends: [js.configs.recommended, tseslint.configs.recommended],

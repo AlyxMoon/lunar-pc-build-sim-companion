@@ -26,8 +26,7 @@
     "lib": [
       "esnext",
       "dom",
-      "dom.iterable",
-      "scripthost"
+      "dom.iterable"
     ],
     "useDefineForClassFields": false
   },

@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createSSRApp } from 'vue'
 import type { Component } from 'vue'
-import { renderToString } from '@vue/server-renderer'
+import { renderToString } from 'vue/server-renderer'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import Settings from '@/views/Settings.vue'
 import Navbar from '@/components/layout/Navbar.vue'

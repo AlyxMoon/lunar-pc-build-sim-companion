@@ -144,29 +144,12 @@ class BaseModel implements ModelInterface {
     return newVal
   }
 
-  clone (): this {
-    return new (this.constructor as any)(this.attributes, { ignoreId: true })
-  }
-
   runSingleFieldAlias (field = ''): string {
     const aliases: { [key: string]: string } = this.fieldAliases()
 
     return field in aliases
       ? aliases[field]
       : field
-  }
-
-  runFieldAliases (attributes: PlainObject): PlainObject {
-    const aliases: { [key: string]: string } = this.fieldAliases()
-
-    for (const [oldName, newName] of Object.entries(aliases)) {
-      if (oldName in attributes) {
-        attributes[newName] = attributes[oldName]
-        delete attributes[oldName]
-      }
-    }
-
-    return attributes
   }
 
   runMutations (): void {
