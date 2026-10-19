@@ -7,7 +7,7 @@
       >
         <img
           src="@/assets/logo.png"
-          alt="Lunar's PCBS Companion logo"
+          alt=""
         >
         <span>Home</span>
       </router-link>
