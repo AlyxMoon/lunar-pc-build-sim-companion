@@ -178,7 +178,7 @@ export default defineComponent({
       const { perPage, page } = this.pagination
       const total = this.parsedItems.length
 
-      return page === Math.floor(total / perPage)
+      return page >= Math.max(0, Math.ceil(total / perPage) - 1)
     },
 
     parsedItems (): any[] {
@@ -236,10 +236,6 @@ export default defineComponent({
     searchQuery (): void {
       this.pagination.page = 0
     },
-  },
-
-  created () {
-    console.log(this.headers)
   },
 
   methods: {
