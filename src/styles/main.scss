@@ -1,7 +1,7 @@
-@import './buttons.scss';
-@import './inputs.scss';
-@import './layout.scss';
-@import './typography.scss';
+@use './buttons.scss';
+@use './inputs.scss';
+@use './layout.scss';
+@use './typography.scss';
 
 main {
   background-color: var(--main-background-color);

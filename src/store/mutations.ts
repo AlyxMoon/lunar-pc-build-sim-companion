@@ -35,7 +35,3 @@ export const REMOVE_BUILD = (state: PlainObject, index: number): void => {
 export const SET_ALL_BUILDS = (state: PlainObject, builds: BuildModel[]): void => {
   state.builds = builds
 }
-
-export const CLEAR_ALL_BUILDS = (state: PlainObject): void => {
-  state.builds = []
-}
