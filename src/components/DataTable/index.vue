@@ -235,8 +235,8 @@ export default defineComponent({
       if (!this.sortBy) return filtered
 
       return filtered.sort((a: any, b: any) => {
-        if (a[this.sortBy] < b[this.sortBy]) return this.sortDesc ? -1 : 1
-        if (a[this.sortBy] > b[this.sortBy]) return this.sortDesc ? 1 : -1
+        if (a[this.sortBy] < b[this.sortBy]) return this.sortDesc ? 1 : -1
+        if (a[this.sortBy] > b[this.sortBy]) return this.sortDesc ? -1 : 1
         return 0
       })
     },
