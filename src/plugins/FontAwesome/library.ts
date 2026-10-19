@@ -4,9 +4,7 @@ import {
   faChevronDown,
   faChevronLeft,
   faChevronRight,
-  faChevronUp,
   faCopy,
-  faPaste,
   faPen,
   faSave,
   faSpinner,
@@ -27,9 +25,7 @@ library.add(faBars)
 library.add(faChevronDown)
 library.add(faChevronLeft)
 library.add(faChevronRight)
-library.add(faChevronUp)
 library.add(faCopy)
-library.add(faPaste)
 library.add(faPen)
 library.add(faSave)
 library.add(faSpinner)

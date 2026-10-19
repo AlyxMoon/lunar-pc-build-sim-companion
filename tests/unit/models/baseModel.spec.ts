@@ -37,18 +37,14 @@ describe('BaseModel', () => {
     expect(model.hasErrors).toBe(false)
   })
 
-  it('constructs and clones builds without modifying or sharing their source attributes', () => {
+  it('constructs copies of builds without modifying or sharing their source attributes', () => {
     const source = { id: 'saved', startingParts: [{ type: 'Storage' }], objectives: ['Original'] }
     const build = new BuildModel(source)
     expect(source.startingParts).toEqual([{ type: 'Storage' }])
     const copy = new BuildModel(build)
-    const clone = build.clone()
     expect(copy.id).toBe(build.id)
-    expect(clone.id).not.toBe(build.id)
-    for (const draft of [copy, clone]) {
-      draft.parts[0].isBeingKept = true
-      draft.objectives.push('Edited')
-    }
+    copy.parts[0].isBeingKept = true
+    copy.objectives.push('Edited')
     expect(build.parts[0].isBeingKept).toBe(false)
     expect(build.objectives).toEqual(['Original'])
   })
