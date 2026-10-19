@@ -7,6 +7,9 @@ const filterCurrency = (value: any): any => {
 
   let num = value + ''
 
+  const sign = num.startsWith('-') ? '-' : ''
+  if (sign) num = num.slice(1)
+
   const indexDecimal = num.indexOf('.')
   const valDecimal = indexDecimal !== -1 ? num.slice(indexDecimal + 1) : ''
 
@@ -26,7 +29,7 @@ const filterCurrency = (value: any): any => {
     parsedChunks.push(num.slice(firstChunk + (i * 3), firstChunk + (i * 3) + 3))
   }
 
-  return `$${parsedChunks.join(',')}${valDecimal ? '.' + valDecimal : ''}`
+  return `${sign}$${parsedChunks.join(',')}${valDecimal ? '.' + valDecimal : ''}`
 }
 
 export default filterCurrency

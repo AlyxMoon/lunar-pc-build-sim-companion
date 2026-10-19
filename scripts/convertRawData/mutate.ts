@@ -78,7 +78,6 @@ const fieldsToKeepAndModifyByCategory: Record<string, ObjectPartAliasAndMutation
     'Height': value => ['length', Number(value)],
     'Size': value => ['size', Number(value)],
     'Slots': value => ['slots', Number(value)],
-    'Thickness': value => ['thickness', Number(value)],
     'Air Pressure': value => ['airPressure', Number(value)],
   },
 
