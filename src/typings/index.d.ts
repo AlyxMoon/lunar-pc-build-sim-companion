@@ -76,11 +76,6 @@ export interface BuildModelInterface extends ModelInterface {
   parts: Parts.BaseInterface[],
 }
 
-export interface PartModelInterface extends ModelInterface, Parts.BaseInterface {
-  attributes: Parts.BaseInterface,
-  _attributes: Parts.BaseInterface,
-}
-
 export interface ProgramRequirementsModelInterface extends ModelInterface {
   name: string,
   type: string,
