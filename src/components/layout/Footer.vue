@@ -86,17 +86,20 @@ footer {
 }
 
 a {
+  display: inline-block;
+  min-height: 24px;
   margin-bottom: 5px;
 
   color: #DDDDDD;
   font-size: 1rem;
+  line-height: 24px;
   text-decoration: none;
   text-align: right;
 
   transition-duration: 0.2s;
 
   &:hover {
-    color: $colorPrimaryAccent;
+    color: $colorPrimaryAccentText;
   }
 }
 </style>

@@ -5,7 +5,10 @@
         class="logo-wrapper"
         to="/"
       >
-        <img src="@/assets/logo.png">
+        <img
+          src="@/assets/logo.png"
+          alt="Lunar's PCBS Companion logo"
+        >
         <span>Home</span>
       </router-link>
 
@@ -104,7 +107,7 @@ a {
   }
 
   &:hover, &.router-link-active {
-    color: $colorPrimaryAccent;
+    color: $colorPrimaryAccentText;
   }
 }
 
