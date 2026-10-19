@@ -13,17 +13,19 @@
         </div>
 
         <div class="modal-body">
-          <h6>
+          <h3 class="summary">
             Current estimated 3Dmark score:
             {{ build.estimatedScore || 'N/A (not enough parts to calculate)' }}
-          </h6>
+          </h3>
 
-          <h6>
+          <h3 class="summary">
             Current budget:
             {{ displayFilters.currency(build.budget || 0) }}
-          </h6>
+          </h3>
 
-          <h5>How this works</h5>
+          <h3 class="section">
+            How this works
+          </h3>
           <p>
             For now, I'm keeping this simple. It won't take into consideration any current parts you have added to the build, it'll just generate a list of parts based on the desired 3dmark score and budget. Any required support parts (such as motherboard) won't be taken into consideration yet.
             Also, only one part of each type will be considered for the moment (no multi-GPU for example).
@@ -37,22 +39,27 @@
             <li>GPU (most impact)</li>
           </ul>
 
-          <h5>Options</h5>
+          <h3 class="section">
+            Options
+          </h3>
           <form class="form-vertical">
-            <label>Desired 3Dmark Score</label>
+            <label for="desired-3dmark-score">Desired 3Dmark Score</label>
             <input
+              id="desired-3dmark-score"
               type="text"
               v-model="buildGenerationInfo.desiredScore"
             >
 
-            <label>Consider budget</label>
+            <label for="consider-budget">Consider budget</label>
             <input
+              id="consider-budget"
               type="checkbox"
               v-model="buildGenerationInfo.useBudget"
             >
 
-            <label>Consider player level</label>
+            <label for="consider-player-level">Consider player level</label>
             <input
+              id="consider-player-level"
               type="checkbox"
               v-model="buildGenerationInfo.usePlayerLevel"
             >
@@ -79,7 +86,9 @@
           </button>
 
           <template v-if="calculatedAtLeastOnce">
-            <h4>Builds</h4>
+            <h3 class="section-large">
+              Builds
+            </h3>
 
             <p v-if="!generatedBuilds.length">
               There were no builds found with the given criteria
@@ -228,8 +237,17 @@ export default defineComponent({
 
   padding: 5px 10px;
 
-  h6 {
+  h3.summary {
     margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+
+  h3.section {
+    font-size: 1.3rem;
+  }
+
+  h3.section-large {
+    font-size: 1.5rem;
   }
 
   button {
