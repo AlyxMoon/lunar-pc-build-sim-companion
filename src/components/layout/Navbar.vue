@@ -109,6 +109,7 @@ a {
   text-decoration: none;
   text-align: right;
 
+  transition-property: color;
   transition-duration: 0.2s;
 
   @include md {
@@ -142,8 +143,7 @@ a {
     right: 0;
     width: 150px;
 
-    max-height: 0;
-    padding: 0 20px;
+    padding: 20px;
 
     grid-template-columns: auto;
     grid-row-gap: 15px;
@@ -152,23 +152,21 @@ a {
 
     background-color: #232031;
 
-    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
     pointer-events: none;
     visibility: hidden;
 
     transition:
-      max-height 0.5s,
-      padding 0.5s,
+      opacity 0.5s,
+      transform 0.5s,
       visibility 1s 0.5s;
 
     &.open {
-      max-height: 200px;
-      padding: 20px;
+      opacity: 1;
+      transform: none;
 
-      transition:
-        max-height 0.5s,
-        padding 0.5s,
-        visibility 0s;
+      transition: none;
 
       pointer-events: all;
       visibility: visible;
