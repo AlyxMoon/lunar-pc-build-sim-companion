@@ -37,6 +37,7 @@
       v-model="colorMode"
       name="color-mode"
     >
+      <option value="system">System</option>
       <option value="light">Light Mode</option>
       <option value="dark">Dark Mode</option>
     </select>
@@ -90,7 +91,7 @@ export default defineComponent({
     },
     colorMode: {
       get (): string {
-        return this.$store.state.colorMode || 'light'
+        return this.$store.state.colorMode || 'system'
       },
       set (value: string): void {
         this.$store.commit('UPDATE_COLOR_MODE', value)

@@ -178,7 +178,7 @@ const state = {
   allowModdedPartsHEM: false,
   analyticsEnabled: false,
 
-  colorMode: 'light',
+  colorMode: 'system',
 }
 
 export default state
