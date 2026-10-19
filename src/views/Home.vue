@@ -22,7 +22,7 @@
       type="file"
       accept=".json, .txt"
       ref="importData"
-      :disable="handlingImport"
+      :disabled="handlingImport"
       @change="handleFileInput"
     >
   </div>
@@ -38,7 +38,7 @@ import { mapActions } from 'vuex'
 import BuildValidationList from '@/components/BuildValidationList.vue'
 
 export default defineComponent({
-  name: 'PageActiveBuild',
+  name: 'PageHome',
   components: {
     BuildValidationList,
   },
@@ -51,13 +51,18 @@ export default defineComponent({
     ...mapActions(['exportPlayerData', 'importPlayerData']),
 
     handleFileInput (): void {
-      this.handlingImport = true
+      const importData = this.$refs.importData as HTMLInputElement
+      const file = importData.files?.[0]
+      if (!file) return
 
+      this.handlingImport = true
       const reader = new FileReader()
-      const importData = this.$refs.importData as PlainObject
+      reader.onloadend = (): void => {
+        importData.value = ''
+        this.handlingImport = false
+      }
 
       reader.onload = (event): void => {
-        importData.value = null
         try {
           const stuff = JSON.parse(event.target?.result as string)
           this.importPlayerData(stuff)
@@ -66,10 +71,9 @@ export default defineComponent({
           console.error('could not parse JSON, was the file correct?', error)
         }
 
-        this.handlingImport = false
       }
 
-      reader.readAsText(importData.files[0])
+      reader.readAsText(file)
     },
   },
 })

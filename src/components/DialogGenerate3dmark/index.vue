@@ -150,7 +150,7 @@ export default defineComponent({
   data: () => ({
     buildGenerationInfo: {
       desiredScore: 0,
-      useBudget: true,
+      useBudget: false,
       usePlayerLevel: true,
       limit: 1000,
     },
@@ -178,6 +178,7 @@ export default defineComponent({
     },
 
     async beginCalculation (): Promise<void> {
+      this.errorMessage = ''
       if (!this.checkInputsValid()) return
       this.calculating = true
 
@@ -190,7 +191,7 @@ export default defineComponent({
           budget: this.build.budget || 0,
           playerLevel: this.playerLevel || 0,
           limit: this.buildGenerationInfo.limit || 1000,
-          useBudget: this.buildGenerationInfo.useBudget,
+          useBudget: this.buildGenerationInfo.useBudget && this.build.budget > 0,
           usePlayerLevel: this.buildGenerationInfo.usePlayerLevel,
           slowDownProcess: true,
         },

@@ -42,7 +42,7 @@ export const exportPlayerData = (
   const dataForExport = encodeURIComponent(JSON.stringify(data, null, 0))
 
   const pseudoEl = document.createElement('a')
-  pseudoEl.setAttribute('href', `data:text/json;chartset=utf-8,${dataForExport}`)
+  pseudoEl.setAttribute('href', `data:text/json;charset=utf-8,${dataForExport}`)
   pseudoEl.setAttribute('download', 'export.json')
   document.body.appendChild(pseudoEl)
   pseudoEl.click()
