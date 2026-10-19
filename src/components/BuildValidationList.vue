@@ -12,7 +12,7 @@
         Whenever you make a change to a build (in active builds), these validation rules will run. If there's an error, it'll show up in the errors section in the build card.
       </p>
 
-      <h6>Implemented</h6>
+      <h3>Implemented</h3>
       <ul>
         <li
           v-for="rule in implemented"
@@ -22,7 +22,7 @@
         </li>
       </ul>
 
-      <h6>Not Implemented</h6>
+      <h3>Not Implemented</h3>
       <ul>
         <li
           v-for="rule in notImplemented"
@@ -77,6 +77,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+h3 {
+  font-size: 1.1rem;
+}
 </style>

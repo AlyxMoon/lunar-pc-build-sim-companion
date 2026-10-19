@@ -43,7 +43,7 @@ export default defineComponent({
   data: () => ({
     generationError: '',
     headers: [
-      { name: 'actions', displayName: '' },
+      { name: 'actions', displayName: 'Actions' },
       { name: 'name', displayName: 'Name' },
       { name: 'type', displayName: 'Type' },
       { name: 'cpuScore', displayName: 'CPU score' },

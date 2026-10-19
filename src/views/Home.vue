@@ -6,7 +6,7 @@
   </p>
 
   <div>
-    <h5>App Data</h5>
+    <h2>App Data</h2>
 
     <p>Want to save the data in the app? This will save it to a json file which can be imported later.</p>
     <button
@@ -17,8 +17,11 @@
       Export Data
     </button>
 
-    <p>Want to import data you previously exported? Got it here.</p>
+    <p>
+      <label for="import-data">Want to import data you previously exported? Got it here.</label>
+    </p>
     <input
+      id="import-data"
       type="file"
       accept=".json, .txt"
       ref="importData"
@@ -82,5 +85,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 div {
   margin-top: 40px;
+}
+
+h2 {
+  font-size: 1.3rem;
 }
 </style>
