@@ -5,7 +5,10 @@
         class="logo-wrapper"
         to="/"
       >
-        <img src="@/assets/logo.png">
+        <img
+          src="@/assets/logo.png"
+          alt=""
+        >
         <span>Home</span>
       </router-link>
 
