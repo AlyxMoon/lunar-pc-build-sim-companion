@@ -36,9 +36,8 @@ const SEED_PART_FILES = [
 ]
 
 /**
- * Takes the first purchasable, unmodded entries of each shipped part file.
- * The files come from convert-raw-data, so the build run before the audit
- * is the one that wrote them.
+ * Takes the first purchasable, unmodded entries of each shipped part file
+ * that convert-raw-data writes.
  */
 export function loadSeedParts (root) {
   return SEED_PART_FILES.flatMap(({ file, count }) => {
