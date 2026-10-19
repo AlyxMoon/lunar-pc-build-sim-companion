@@ -1,6 +1,6 @@
 ﻿import { describe, expect, it } from 'vitest'
 import { createSSRApp, h } from 'vue'
-import { renderToString } from '@vue/server-renderer'
+import { renderToString } from 'vue/server-renderer'
 import { createStore } from 'vuex'
 import DataTable from '@/components/DataTable/index.vue'
 import Dialog from '@/components/DialogGenerate3dmark/index.vue'
