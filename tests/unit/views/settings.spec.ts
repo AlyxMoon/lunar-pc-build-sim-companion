@@ -38,6 +38,31 @@ async function render (component: Component, store: Awaited<ReturnType<typeof lo
 }
 
 describe('Settings and persistence', () => {
+  it('defaults to System and offers all colour mode choices', async () => {
+    const store = await loadStore()
+    expect(store.state.colorMode).toBe('system')
+    const html = await render(Settings, store)
+    expect(html).toContain('value="system" selected')
+    expect(html).toContain('>System</option>')
+    expect(html).toContain('value="light"')
+    expect(html).toContain('value="dark"')
+  })
+
+  it.each(['light', 'dark', 'system'])('preserves a saved %s choice and persists changes', async mode => {
+    saved.set('vuex', JSON.stringify({ colorMode: mode }))
+    let store = await loadStore()
+    expect(store.state.colorMode).toBe(mode)
+    store.commit('UPDATE_PLAYER_LEVEL', 2)
+    store = await loadStore()
+    expect(store.state.colorMode).toBe(mode)
+    for (const choice of ['light', 'dark', 'system']) {
+      store.commit('UPDATE_COLOR_MODE', choice)
+      store = await loadStore()
+      expect(store.state.colorMode).toBe(choice)
+      expect(await render(Settings, store)).toContain(`value="${choice}" selected`)
+    }
+  })
+
   it('starts analytics off for new and existing visitors without a saved choice', async () => {
     let store = await loadStore()
     expect(store.state.analyticsEnabled).toBe(false)
