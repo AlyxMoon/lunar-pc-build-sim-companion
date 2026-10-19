@@ -96,10 +96,8 @@ class BuildModel extends BaseModel implements BuildModelInterface {
     ]
   }
 
+  /** Keeps old exported builds with startingParts/newParts importable. */
   beforeCreate (attributes: PlainObject): void {
-    // apply migration to handle change of how parts are handled
-    // can remove this in about a month 2021-02-01
-
     const startingParts: PlainObject[] = attributes.startingParts || []
     const newParts: PlainObject[] = attributes.newParts || []
 

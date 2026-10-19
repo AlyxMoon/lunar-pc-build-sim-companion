@@ -2,7 +2,7 @@
   <h1>Home</h1>
 
   <p>
-    This is a companion app for PC Building Simulator. It's actively in development so check back in occassionally for updates. I'll add more of a description later.
+    This is a companion app for PC Building Simulator. It's actively in development so check back in occasionally for updates. I'll add more of a description later.
   </p>
 
   <div>
