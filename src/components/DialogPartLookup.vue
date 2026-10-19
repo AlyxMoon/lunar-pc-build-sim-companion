@@ -64,6 +64,20 @@ export default defineComponent({
       return this.headers[index]
     },
   },
+
+  mounted (): void {
+    window.addEventListener('keydown', this.closeOnEscape)
+  },
+
+  beforeUnmount (): void {
+    window.removeEventListener('keydown', this.closeOnEscape)
+  },
+
+  methods: {
+    closeOnEscape (event: KeyboardEvent): void {
+      if (event.key === 'Escape') this.$emit('cancel')
+    },
+  },
 })
 </script>
 

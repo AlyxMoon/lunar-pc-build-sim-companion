@@ -47,3 +47,23 @@ describe('BuildCard saved build isolation', () => {
     expect(store.state.builds[0].parts[0].isBeingKept).toBe(true)
   })
 })
+
+describe('BuildCard edit mode', () => {
+  it('labels the name, budget and job type inputs', async () => {
+    const store = createStore({
+      state: { builds: [new BuildModel({ id: 'saved', name: 'Original', budget: 1000, jobType: 'Gaming' })] },
+    })
+    const EditingCard = {
+      ...BuildCard,
+      data: () => ({ activeBuild: new BuildModel(), editing: true, tempFields: {}, confirmRemove: false, expanded: false }),
+    }
+    const app = createSSRApp({
+      render: () => h(EditingCard, { build: store.state.builds[0] }),
+    })
+    app.mixin(filtersMixin).use(store).component('FontAwesomeIcon', {})
+    const html = await renderToString(app)
+    expect(html).toContain('aria-label="Build name"')
+    expect(html).toContain('aria-label="Budget"')
+    expect(html).toContain('aria-label="Job type"')
+  })
+})
